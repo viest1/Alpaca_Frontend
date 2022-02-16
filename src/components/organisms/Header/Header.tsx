@@ -13,7 +13,7 @@ function Header() {
   };
   const personB: Person = {
     name: 'Tom',
-    age: 88,
+    age: 50,
     isDeveloper: true
   };
   return (
