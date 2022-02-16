@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Header() {
-
   interface Person {
     name: string;
     age: number;
@@ -12,7 +11,16 @@ function Header() {
     age: 122,
     isDeveloper: true
   };
-  return <div>Hello Alpaca {personA.name}</div>;
+  const personB: Person = {
+    name: 'Tom',
+    age: 88,
+    isDeveloper: true
+  };
+  return (
+    <div>
+      Hello Alpaca {personA.name} {personB}
+    </div>
+  );
 }
 
 export default Header;
