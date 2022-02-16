@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Button() {
+
   interface Person {
     name: string;
     age: number;
@@ -13,4 +14,5 @@ function Button() {
   };
   return <div>Hello Alpaca {personA.name}</div>;
 }
+
 export default Button;

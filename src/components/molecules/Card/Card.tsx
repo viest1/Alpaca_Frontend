@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 function Card() {
   interface Person {
     name: string;
