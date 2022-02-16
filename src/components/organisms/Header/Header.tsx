@@ -16,9 +16,14 @@ function Header() {
     age: 50,
     isDeveloper: true
   };
+  const personC: Person = {
+    name: 'Anna',
+    age: 23,
+    isDeveloper: true
+  };
   return (
     <div>
-      Hello Alpaca {personA.name} {personB}
+      Hello Alpaca {personA.name} {personB} {personC}
     </div>
   );
 }
