@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../../organisms/Header/Header';
 
 function HomePage() {
   // Example
@@ -14,7 +15,12 @@ function HomePage() {
   //   isDeveloper: true
   // };
 
-  return <div>Hello Alpaca</div>;
+  return (
+    <div>
+      <Header />
+      Hello Alpaca
+    </div>
+  );
 }
 
 export default HomePage;
