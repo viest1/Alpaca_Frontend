@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   body{
     margin:0;
+    font-family: OpenSans, sans-serif;
   }
   html{
     margin:0;
