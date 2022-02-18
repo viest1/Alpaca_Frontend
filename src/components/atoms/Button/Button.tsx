@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Button() {
-
   interface Person {
     name: string;
     age: number;

@@ -10,7 +10,7 @@ import Header from '../../organisms/Header/Header';
 
 // <div className={'box'}>Services</div>
 
-function Services() {
+function Menu() {
   return (
     <div>
       <Header />
@@ -19,4 +19,4 @@ function Services() {
   );
 }
 
-export default Services;
+export default Menu;
