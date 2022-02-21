@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../../organisms/Header/Header';
+import HeroSection from '../../organisms/HeroSection/HeroSection';
 
 function HomePage() {
   // Example
@@ -18,7 +19,7 @@ function HomePage() {
   return (
     <div>
       <Header />
-      Hello Alpaca
+      <HeroSection />
     </div>
   );
 }
