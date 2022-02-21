@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
 import CompanyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
 import NavLink from '../../atoms/NavLink/NavLink';
+import Contact from '../../molecules/Contact/Contact';
 
 interface StyledDivProps {
   isOpenMenu: boolean;
@@ -12,7 +13,8 @@ interface StyledDivProps {
 const Container = styled.div<StyledDivProps>`
   background: ${({ theme }) => theme.color.main1};
   color: ${({ theme }) => theme.color.main2};
-  font-size: ${({ theme }) => theme.fontSizeInter.xl};
+  font-size: ${({ theme }) => theme.fontSizeInter.ml};
+  padding-left: 1rem;
   border: 2px solid black;
   min-height: ${({ isOpenMenu }) => (isOpenMenu ? '100vh' : 'auto')};
 `;
@@ -29,6 +31,7 @@ const FlexOpen = styled.div`
   justify-content: space-between;
   border: 1px solid grey;
   padding: 0.3rem 1rem;
+  margin-left: -1rem;
 `;
 
 const StyledP = styled.p`
@@ -38,39 +41,41 @@ const StyledP = styled.p`
   right: -43px;
   font-weight: bold;
 `;
+const StyledSlogan = styled.p`
+  font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
+  position: absolute;
+  bottom: 13rem;
+  display: block;
+  margin: 0 auto 7rem 13rem;
+  font-weight: bold;
+`;
+const StyledMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem 0 1rem 2rem;
+`;
 
 const data = [
   {
     path: 'aboutUs',
-    text: 'About us',
+    text: 'ABOUT US',
     id: 1
   },
   {
     path: 'plans',
-    text: 'Plans',
+    text: 'PLANS',
     id: 2
   },
   {
     path: 'login',
-    text: 'Login',
+    text: 'LOGIN',
     id: 3
   },
   {
-    path: 'signup',
-    text: 'Sign up',
+    path: 'signUp',
+    text: 'SIGN UP',
     id: 4
-  },
-  {
-    path: 'aboutUs',
-    text: 'About us',
-    id: 5
-  },
-  {
-    path: '/',
-    text: '',
-    image: CompanyLogo,
-    alt: 'Logo',
-    id: 6
   }
 ];
 
@@ -99,18 +104,20 @@ function Header() {
               <StyledP>live outside the box</StyledP>
             </div>
             <div>
-              <GrClose onClick={handleOpenMenu} />
+              <GrClose onClick={handleOpenMenu} fontSize={48} />
             </div>
           </FlexOpen>
-          {data.map((item) => (
-            <NavLink
-              key={item.id}
-              path={item.path}
-              text={item.text}
-              image={item.image}
-              alt={item.alt}
-            />
-          ))}
+          <StyledMenu>
+            {data.map((item) => (
+              <NavLink key={item.id} path={item.path} text={item.text} />
+            ))}
+          </StyledMenu>
+          <StyledMenu>
+            <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
+            <StyledSlogan>live outside the box</StyledSlogan>
+          </StyledMenu>
+
+          <Contact />
         </>
       )}
     </Container>
