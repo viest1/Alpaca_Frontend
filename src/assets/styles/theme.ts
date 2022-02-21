@@ -1,5 +1,12 @@
 export const theme = {
-  color: { main1: '#eae2b7', main2: '#001523', main3: '#9e0059', main4: '#fcbf49' },
+  color: {
+    main1: '#eae2b7',
+    main2: '#001523',
+    main3: '#9e0059',
+    main4: '#fcbf49',
+    main5: '#2A9D8F',
+    main6: '#FF0054'
+  },
   fontSizeInter: {
     xxl: '5.61rem',
     xl: '4.209rem',

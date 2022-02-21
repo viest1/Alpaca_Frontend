@@ -9,7 +9,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 80vh;
   h3 {
     color: ${({ theme }) => theme.color.main1};
     text-align: center;
@@ -35,6 +34,8 @@ const ContainerList = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
+  gap: 2rem;
+  margin: 2.4rem 0;
   p {
     font-size: ${({ theme }) => theme.fontSizeOpenSans.xs};
   }

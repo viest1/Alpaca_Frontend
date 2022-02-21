@@ -22,13 +22,17 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 1.75;
     color: #000000;
     box-sizing: border-box;
+    margin:0;
   }
   button{
     font-family: 'Inter', sans-serif;
     font-weight: 400;
   }
 
-  p {margin-bottom: 1rem;}
+  //p {margin-bottom: 1rem;} it is necessary?
+  p{
+    margin:0;
+  }
 
   h1, h2, h3, h4, h5 {
     margin: 3rem 0 1.38rem;
