@@ -1,25 +1,18 @@
 import React from 'react';
 import Header from '../../organisms/Header/Header';
 import HeroSection from '../../organisms/HeroSection/HeroSection';
+import SectionProductDesc1 from '../../organisms/SectionProductDesc1/SectionProductDesc1';
+import SectionProductDesc2 from '../../organisms/SectionProductDesc2/SectionProductDesc2';
+import SectionProductDesc3 from '../../organisms/SectionProductDesc3/SectionProductDesc3';
 
 function HomePage() {
-  // Example
-  // interface Person {
-  //   name: string;
-  //   age: number;
-  //   isDeveloper: boolean;
-  // }
-  //
-  // const personA: Person = {
-  //   name: 'John',
-  //   age: 122,
-  //   isDeveloper: true
-  // };
-
   return (
     <div>
       <Header />
       <HeroSection />
+      <SectionProductDesc1 />
+      <SectionProductDesc2 />
+      <SectionProductDesc3 />
     </div>
   );
 }
