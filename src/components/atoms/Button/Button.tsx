@@ -1,21 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonStyle = styled.button`
+const ButtonStyle = styled.button<ButtonInterface>`
   padding: 1.3rem 2rem;
-  background: ${({ theme }) => theme.color.main3};
+  background: ${({ theme, background }) => background || theme.color.main3};
   font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
   border-radius: 0.6rem;
-  color: ${({ theme }) => theme.color.main1};
-  border: none;
+  color: ${({ theme, color }) => color || theme.color.main1};
+  border: ${({ border }) => border || 'none'};
   outline: none;
   width: 300px;
   text-transform: uppercase;
   font-weight: bold;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    color: white;
+    background: ${({ theme }) => theme.color.main5};
+  }
 `;
 
 interface ButtonInterface {
-  text: string;
+  text?: string;
   color?: string;
   background?: string;
   type?: 'button' | 'submit';
@@ -24,7 +30,7 @@ interface ButtonInterface {
 
 function Button({ text, color, background, type, border }: ButtonInterface) {
   return (
-    <ButtonStyle type={type} style={{ color, background, border }}>
+    <ButtonStyle type={type} color={color} background={background} border={border}>
       {text}
     </ButtonStyle>
   );
@@ -34,7 +40,8 @@ Button.defaultProps = {
   color: undefined,
   background: undefined,
   type: 'button',
-  border: undefined
+  border: undefined,
+  text: undefined
 };
 
 export default Button;

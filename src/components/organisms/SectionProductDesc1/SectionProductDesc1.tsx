@@ -11,7 +11,7 @@ const Container = styled.div`
   flex-direction: column;
   margin-bottom: 2rem;
   h5 {
-    font-weight: 800;
+    font-weight: 900;
     text-align: center;
     width: 90%;
     margin: 2rem auto;
@@ -28,35 +28,57 @@ export const Box = styled.div`
   margin: auto;
   width: 90%;
   max-width: 330px;
-  min-width: 250px;
+  min-width: 280px;
   background: white;
+
   p {
     margin: 0;
     text-align: right;
     padding-right: 0.5rem;
   }
+
   p:first-child {
     margin-bottom: 1rem;
     text-align: left;
     padding-right: 0;
   }
+
+  p:nth-child(2) {
+    font-size: ${({ theme }) => theme.fontSizeOpenSans.xs};
+    color: #7b42f6;
+  }
+
+  p:last-child {
+    font-weight: 800;
+    font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
+    color: grey;
+  }
 `;
 
 const Testimonials = styled.div`
+  padding: 0 1rem;
   margin: 2rem 0 4rem 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  @media (max-width: 399px) {
+    padding: 0;
+  }
 `;
 
 export const OneTestimonial = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+  justify-content: space-between;
+  p {
+    font-weight: 500;
+  }
 `;
 
 export const PRight = styled.p`
   text-align: right;
+  font-size: ${({ theme }) => theme.fontSizeOpenSans.xs};
 `;
 
 export const TextTestimonial = styled.div`
@@ -73,10 +95,10 @@ export const ContainerPhoto = styled.div`
   justify-content: center;
 `;
 
-const FlexPhoto = styled.div`
+export const FlexPhoto = styled.div`
   width: 30%;
   display: flex;
-  justify-content: center;
+  //justify-content: center;
   align-items: center;
 `;
 
@@ -115,24 +137,26 @@ function SectionProductDesc1() {
       </Box>
       <Testimonials>
         <OneTestimonial>
-          <FlexPhoto style={{ width: '30%' }}>
+          <FlexPhoto>
             <ContainerPhoto>Photo</ContainerPhoto>
           </FlexPhoto>
           <TextTestimonial>
-            <p>"Lorem ipsum dolor sit amet.</p>
-            <p>At vero..."</p>
-            <PRight>Lorem ipsum.</PRight>
-            <PRight>Lorem ipsum dolor sit amet.</PRight>
+            <p>"Lorem ipsum dolor sit </p>
+            <p>Amet at vero..."</p>
+            <PRight>Lorem ipsum</PRight>
+            <PRight>Lorem ipsum dolor sit amet</PRight>
           </TextTestimonial>
         </OneTestimonial>
         <OneTestimonial>
           <TextTestimonial>
-            <p>"Lorem ipsum dolor sit amet.</p>
-            <p>At vero..."</p>
-            <PRight>Lorem ipsum.</PRight>
-            <PRight>Lorem ipsum dolor sit amet.</PRight>
+            <p>"Lorem ipsum dolor sit</p>
+            <p>Amet at vero..."</p>
+            <PRight>Lorem ipsum</PRight>
+            <PRight>Lorem ipsum dolor sit amet</PRight>
           </TextTestimonial>
-          <ContainerPhoto>Photo</ContainerPhoto>
+          <FlexPhoto style={{ justifyContent: 'flex-end' }}>
+            <ContainerPhoto>Photo</ContainerPhoto>
+          </FlexPhoto>
         </OneTestimonial>
       </Testimonials>
       <div>
