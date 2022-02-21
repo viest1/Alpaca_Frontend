@@ -11,6 +11,17 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const BigLogo = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.color.main2};
+  img {
+    width: 21rem;
+    display: flex;
+    margin: -1rem 0 0 2rem;
+    height: auto;
+  }
+`;
+
 const ContainerNavText = styled.div`
   padding: 0.2rem;
 `;
@@ -19,21 +30,34 @@ const ContainerNavText = styled.div`
 interface Props {
   path: string;
   text?: string | undefined;
-  image: string | undefined;
-  alt: string | undefined;
+  image?: string | undefined;
+  alt?: string | undefined;
+  bigLogo?: boolean | undefined;
 }
 
-function NavLink({ path, text, image, alt }: Props) {
+function NavLink({ path, text, image, alt, bigLogo }: Props) {
   return (
-    <StyledLink to={path}>
-      {image && <img src={image} alt={alt} />}
-      {text && <ContainerNavText>{text}</ContainerNavText>}
-    </StyledLink>
+    <div>
+      {bigLogo ? (
+        <BigLogo to={path}>
+          {image && <img src={image} alt={alt} />}
+          {text && <ContainerNavText>{text}</ContainerNavText>}
+        </BigLogo>
+      ) : (
+        <StyledLink to={path}>
+          {image && <img src={image} alt={alt} />}
+          {text && <ContainerNavText>{text}</ContainerNavText>}
+        </StyledLink>
+      )}
+    </div>
   );
 }
 
 NavLink.defaultProps = {
-  text: undefined
+  text: undefined,
+  bigLogo: false,
+  alt: undefined,
+  image: undefined
 };
 
 export default NavLink;
