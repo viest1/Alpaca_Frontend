@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {
   ContainerPhoto,
+  FlexPhoto,
   OneTestimonial,
   PRight,
   TextTestimonial
@@ -58,14 +59,16 @@ function SectionProductDesc2() {
         <img src={ManFlight} alt="Man Who booking Flight" />
         <img src={KidneyBackground} alt="background" />
       </ContainerIllustration>
-      <OneTestimonial>
+      <OneTestimonial style={{ padding: '1rem' }}>
         <TextTestimonial>
-          <p>"Lorem ipsum dolor sit amet.</p>
-          <p>At vero..."</p>
-          <PRight>Lorem ipsum.</PRight>
-          <PRight>Lorem ipsum dolor sit amet.</PRight>
+          <p>"Lorem ipsum dolor sit</p>
+          <p>Amet at vero..."</p>
+          <PRight>Lorem ipsum</PRight>
+          <PRight>Lorem ipsum dolor sit amet</PRight>
         </TextTestimonial>
-        <ContainerPhoto>Photo</ContainerPhoto>
+        <FlexPhoto style={{ justifyContent: 'flex-end' }}>
+          <ContainerPhoto>Photo</ContainerPhoto>
+        </FlexPhoto>
       </OneTestimonial>
       <div>
         <Button text="Choose a Plan" color="#001523" background="#fcbf49" />

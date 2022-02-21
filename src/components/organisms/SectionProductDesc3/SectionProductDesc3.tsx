@@ -103,8 +103,7 @@ function SectionProductDesc3() {
       <Box>
         <p>
           "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, aut cumque
-          cupiditate eaque eligendi incidunt libero, maiores nesciunt nihil praesentium, rerum vero
-          voluptatem? Consectetur error fugiat labore officiis porro vel!"
+          cupiditate eaque eligendi incidunt libero, maiores nesciunt nihil praesentium!"
         </p>
         <p>Lorem ipsum</p>
         <p>Golor sit amet</p>
