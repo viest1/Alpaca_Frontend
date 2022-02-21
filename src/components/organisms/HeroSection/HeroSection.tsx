@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MdCheckCircleOutline } from 'react-icons/md';
+import Button from '../../atoms/Button/Button';
 
 const Container = styled.div`
   padding: 0 3rem 3.5rem 3rem;
@@ -77,7 +78,7 @@ function HeroSection() {
         ))}
       </ContainerList>
       <div>
-        <button type="button">Let's Try It!</button>
+        <Button text={"Let's Try It!"} />
       </div>
     </Container>
   );

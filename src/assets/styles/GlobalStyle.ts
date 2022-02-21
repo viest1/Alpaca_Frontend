@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   button{
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
   }
 
