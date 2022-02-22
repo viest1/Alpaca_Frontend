@@ -44,7 +44,7 @@ const StyledP = styled.p`
 const StyledSlogan = styled.p`
   font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
   position: absolute;
-  bottom: 13rem;
+  bottom: 6rem;
   display: block;
   margin: 0 auto 7rem 13rem;
   font-weight: bold;
