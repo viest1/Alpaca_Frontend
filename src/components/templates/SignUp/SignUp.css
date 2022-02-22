@@ -1,20 +1,41 @@
-#sign-up{
+.sign-up{
 
-    height:20px;
-    margin: 10px 0 18px  0;
+   
+}
+.container{
+  padding:0 3rem;  
 }
 input{
     width: 100%;
   
 }
-.img {
-    border: 5px solid #555;
-    border-radius: 50%;
-}
+
 .new-contact{
     text-align: center;
 }
-h2 {
+h4 {
     text-align: center
 }
-
+.first-div{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.btn {
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+.btn1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+.photo{
+    margin: 0 auto;
+   
+}
+.flex-container{
+    display:flex;
+   flex-direction:column;
+   gap:0.5rem;
+}

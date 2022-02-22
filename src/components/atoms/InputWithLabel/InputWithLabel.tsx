@@ -8,6 +8,7 @@ const Container = styled.div`
   input {
     display: block;
     border-radius: 0.8rem;
+    padding: 1rem 1rem;
   }
   input:focus {
     border: 2px solid ${({ theme }) => theme.color.main6};
