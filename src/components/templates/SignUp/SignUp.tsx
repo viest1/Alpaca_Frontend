@@ -47,7 +47,16 @@ function SignUp() {
             <Button background="blue" text="Upload Photo" />
           </div>
         </div>
-        <div className="second-div">
+
+      </div>
+      <div>
+        <h2 className="billing">Billing Information</h2>
+        <div>
+          <label htmlFor="id">
+            Id:
+            <input type="id" name="id" />
+          </label>
+      <div className="second-div">
           <h4>Contact Information</h4>
           <div className="flex-container">
             <InputWithLabel label="Name" name="name" placeholder="Give your Name" />

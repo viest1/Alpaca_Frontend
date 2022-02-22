@@ -11,28 +11,38 @@ const StyledContact = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
-  p {
-    text-align: center;
-  }
+`;
+const StyledContactWord = styled.div`
+  display: flex;
+  margin: auto;
+  font-weight: bold;
 `;
 const StyledTeleEmail = styled.div`
   display: flex;
-  gap: 2rem;
-  font-size: ${({ theme }) => theme.fontSizeInter.s};
+  gap: 0.6rem;
+  font-size: ${({ theme }) => theme.fontSizeOpenSans.xxxs};
+  margin: auto;
+  &: hover {
+    cursor: pointer;
+  }
 `;
 const StyledSocialNetWorks = styled.div`
   display: flex;
   gap: 4rem;
-  margin: 0 0 7rem 6rem;
+  margin: auto;
+  &: hover {
+    cursor: pointer;
+  }
 `;
 
 function Contact() {
   return (
     <StyledContact>
-      <p>CONTACT</p>
+      <StyledContactWord>CONTACT</StyledContactWord>
       <StyledTeleEmail>
         <MdLocalPhone fontSize={30} />
         <StyledTeleEmail>{dataContact.telephone}</StyledTeleEmail>
+        <br />
         <MdEmail fontSize={30} />
         <StyledTeleEmail>{dataContact.email}</StyledTeleEmail>
       </StyledTeleEmail>

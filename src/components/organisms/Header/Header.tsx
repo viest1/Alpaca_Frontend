@@ -13,8 +13,7 @@ interface StyledDivProps {
 const Container = styled.div<StyledDivProps>`
   background: ${({ theme }) => theme.color.main1};
   color: ${({ theme }) => theme.color.main2};
-  font-size: ${({ theme }) => theme.fontSizeInter.ml};
-  padding-left: 1rem;
+  font-size: ${({ theme }) => theme.fontSizeInter.m};
   border: 2px solid black;
   min-height: ${({ isOpenMenu }) => (isOpenMenu ? '100vh' : 'auto')};
 `;
@@ -25,13 +24,12 @@ const Flex = styled.div`
   padding: 0.3rem 1rem 0 1rem;
   align-items: center;
 `;
-
 const FlexOpen = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border: 1px solid grey;
-  padding: 0.3rem 1rem;
-  margin-left: -1rem;
+  padding: 0 1rem;
 `;
 
 const StyledP = styled.p`
@@ -42,18 +40,23 @@ const StyledP = styled.p`
   font-weight: bold;
 `;
 const StyledSlogan = styled.p`
-  font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
+  font-size: ${({ theme }) => theme.fontSizeOpenSans.xxs};
+  display: flex;
   position: absolute;
-  bottom: 6rem;
-  display: block;
-  margin: 0 auto 7rem 13rem;
+  bottom: 1.5rem;
+  left: 50%;
+  margin: auto;
   font-weight: bold;
 `;
 const StyledMenu = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   margin: 2rem 0 1rem 2rem;
+`;
+const StyledLogoSlogan = styled.div`
+  display: flex;
+  position: relative;
+  justify-content: center;
 `;
 
 const data = [
@@ -93,7 +96,11 @@ function Header() {
             <NavLink path="/" image={CompanyLogo} alt="Logo" />
             <StyledP>live outside the box</StyledP>
           </div>
-          <div>{!isOpenMenu && <GiHamburgerMenu fontSize={48} onClick={handleOpenMenu} />}</div>
+          <div>
+            {!isOpenMenu && (
+              <GiHamburgerMenu fontSize={48} cursor="pointer" onClick={handleOpenMenu} />
+            )}
+          </div>
         </Flex>
       )}
       {isOpenMenu && (
@@ -104,7 +111,7 @@ function Header() {
               <StyledP>live outside the box</StyledP>
             </div>
             <div>
-              <GrClose onClick={handleOpenMenu} fontSize={48} />
+              <GrClose onClick={handleOpenMenu} cursor="pointer" fontSize={48} />
             </div>
           </FlexOpen>
           <StyledMenu>
@@ -112,10 +119,11 @@ function Header() {
               <NavLink key={item.id} path={item.path} text={item.text} />
             ))}
           </StyledMenu>
-          <StyledMenu>
+          <br />
+          <StyledLogoSlogan>
             <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
             <StyledSlogan>live outside the box</StyledSlogan>
-          </StyledMenu>
+          </StyledLogoSlogan>
 
           <Contact />
         </>
