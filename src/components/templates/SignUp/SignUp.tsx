@@ -47,7 +47,6 @@ function SignUp() {
             <Button background="blue" text="Upload Photo" />
           </div>
         </div>
-
       </div>
       <div>
         <h2 className="billing">Billing Information</h2>

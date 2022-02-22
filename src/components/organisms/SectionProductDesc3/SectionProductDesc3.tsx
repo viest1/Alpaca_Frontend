@@ -68,7 +68,8 @@ const data = [
       'nemo quisquam tempora tenetur voluptatum! Consequuntur, cumque deleniti dicta esse\n' +
       'laudantium, magni non perferendis quasi quo recusandae ullam voluptatem? Aliquam\n' +
       'corporis deleniti iusto.',
-    signature: 'Lorem ipsum'
+    signature: 'Lorem ipsum',
+    id: 1
   },
   {
     photo: 'Photo',
@@ -78,7 +79,8 @@ const data = [
       'nemo quisquam tempora tenetur voluptatum! Consequuntur, cumque deleniti dicta esse\n' +
       'laudantium, magni non perferendis quasi quo recusandae ullam voluptatem? Aliquam\n' +
       'corporis deleniti iusto.',
-    signature: 'Lorem ipsum'
+    signature: 'Lorem ipsum',
+    id: 2
   },
   {
     photo: 'Photo',
@@ -88,11 +90,12 @@ const data = [
       'nemo quisquam tempora tenetur voluptatum! Consequuntur, cumque deleniti dicta esse\n' +
       'laudantium, magni non perferendis quasi quo recusandae ullam voluptatem? Aliquam\n' +
       'corporis deleniti iusto.',
-    signature: 'Lorem ipsum'
+    signature: 'Lorem ipsum',
+    id: 3
   }
 ];
 
-function SectionProductDesc3() {
+function SectionProductDesc3(): JSX.Element {
   return (
     <Container>
       <div>
@@ -131,16 +134,14 @@ function SectionProductDesc3() {
         </h5>
       </SecuritySection>
       <div>
-        <Testimonial>
-          {data.map((item) => (
-            <>
-              <ContainerPhoto>{item.photo}</ContainerPhoto>
-              <h5>{item.title}</h5>
-              <StyledPTestimonial>{item.text}</StyledPTestimonial>
-              <p style={{ marginLeft: 'auto' }}>{item.signature}</p>
-            </>
-          ))}
-        </Testimonial>
+        {data.map((item) => (
+          <Testimonial key={item.id}>
+            <ContainerPhoto>{item.photo}</ContainerPhoto>
+            <h5>{item.title}</h5>
+            <StyledPTestimonial>{item.text}</StyledPTestimonial>
+            <p style={{ marginLeft: 'auto' }}>{item.signature}</p>
+          </Testimonial>
+        ))}
         <div />
         <div />
       </div>
