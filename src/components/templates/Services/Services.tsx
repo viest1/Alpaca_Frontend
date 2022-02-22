@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Services() {
+function Services(): JSX.Element {
   return (
     <div>
       <div>Services</div>
