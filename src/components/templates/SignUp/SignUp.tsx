@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../../organisms/Header/Header';
 import Button from '../../atoms/Button/Button';
 import './SignUp.css';
+import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 
 function SignUp() {
   //   <form
@@ -28,35 +29,36 @@ function SignUp() {
         <img className="img" src="" alt="" />
         <Button background="blue" text="Upload Photo" />
       </div>
-      <div className="contact">
-        <h2 className="contact-info">Contact information</h2>
-        <div>
-          <label htmlFor="name">
-            Name:
-            <input type="name" name="name" />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="surname">
-            Surname:
-            <input type="surname" name="surname" />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="email">
-            Email:
-            <input type="email" name="email" />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            Password:
-            <input type="password" name="password" />
-          </label>
-        </div>
+
+      <h2>Contact information</h2>
+      <InputWithLabel label="name" name="name" placeholder="Give your Name" />
+      {/* <div> */}
+      {/*   <label htmlFor="name"> */}
+      {/*     Name: */}
+      {/*     <input type="name" name="name" /> */}
+      {/*   </label> */}
+      {/* </div> */}
+      <div>
+        <label htmlFor="surname">
+          Surname:
+          <input type="text" name="surname" />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="email">
+          Email:
+          <input type="email" name="email" />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="password">
+          Password:
+          <input type="password" name="password" />
+        </label>
         <div>
           <input type="submit" value="Log in" />
         </div>
+
       </div>
       <div>
         <h2 className="billing">Billing Information</h2>
