@@ -58,7 +58,6 @@ function SignUp() {
         <div>
           <input type="submit" value="Log in" />
         </div>
-
       </div>
       <div>
         <h2 className="billing">Billing Information</h2>

@@ -47,7 +47,7 @@ const ContainerIllustration = styled.div`
   }
 `;
 
-function SectionProductDesc2() {
+function SectionProductDesc2(): JSX.Element {
   return (
     <Container>
       <div>

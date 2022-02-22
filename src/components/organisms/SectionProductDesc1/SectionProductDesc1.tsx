@@ -98,7 +98,6 @@ export const ContainerPhoto = styled.div`
 export const FlexPhoto = styled.div`
   width: 30%;
   display: flex;
-  //justify-content: center;
   align-items: center;
 `;
 
@@ -114,7 +113,7 @@ const TextAndKidneyBackground = styled.div`
   }
 `;
 
-function SectionProductDesc1() {
+function SectionProductDesc1(): JSX.Element {
   return (
     <Container>
       <TextAndKidneyBackground>
