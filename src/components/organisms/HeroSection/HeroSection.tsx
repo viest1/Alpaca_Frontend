@@ -79,7 +79,7 @@ function HeroSection() {
         ))}
       </ContainerList>
       <div>
-        <Button text={"Let's Try It!"} />
+        <Button background="red" text={"Let's Try It!"} />
       </div>
     </Container>
   );
