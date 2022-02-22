@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../../organisms/Header/Header';
 import './SignUp.css';
+import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 
 function SignUp() {
   //   <form
@@ -27,16 +28,17 @@ function SignUp() {
         <img src="" alt="" />
       </div>
       <h2>Contact information</h2>
-      <div>
-        <label htmlFor="name">
-          Name:
-          <input type="name" name="name" />
-        </label>
-      </div>
+      <InputWithLabel label="name" name="name" placeholder="Give your Name" />
+      {/* <div> */}
+      {/*   <label htmlFor="name"> */}
+      {/*     Name: */}
+      {/*     <input type="name" name="name" /> */}
+      {/*   </label> */}
+      {/* </div> */}
       <div>
         <label htmlFor="surname">
           Surname:
-          <input type="surname" name="surname" />
+          <input type="text" name="surname" />
         </label>
       </div>
       <div>
