@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Services() {
+function Contact(): JSX.Element {
   return (
     <div>
       <div>Contact</div>
@@ -8,4 +8,4 @@ function Services() {
   );
 }
 
-export default Services;
+export default Contact;

@@ -26,5 +26,14 @@ export const theme = {
     xs: '0.833rem',
     xxs: '0.694rem',
     xxxs: '0.5793rem'
-  }
+  },
+  breakpoint: {
+    s: '440px',
+    m: '980px',
+    l: '1440px'
+  },
+  up: (breakpoint: string) => `@media (min-width: calc(${breakpoint} + 0.02px))`,
+  down: (breakpoint: string) => `@media (max-width: ${breakpoint})`,
+  between: (breakpoint: string, breakpoint2: string) =>
+    `@media (min-width: calc(${breakpoint} + 0.02px)) and (max-width: ${breakpoint2})`
 };

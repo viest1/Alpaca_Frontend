@@ -21,7 +21,7 @@ const BigLogo = styled(Link)`
 
 const ContainerNavText = styled.div`
   padding: 0.2rem;
-  &: hover {
+  &:hover {
     cursor: pointer;
     color: ${({ theme }) => theme.color.main4};
   }
@@ -54,6 +54,7 @@ function NavLink({ path, text, image, alt, bigLogo }: Props) {
   );
 }
 
+// Default Props when optional props are not provided
 NavLink.defaultProps = {
   text: undefined,
   bigLogo: false,

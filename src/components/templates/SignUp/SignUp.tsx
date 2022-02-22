@@ -55,22 +55,23 @@ function SignUp() {
             Id:
             <input type="id" name="id" />
           </label>
-      <div className="second-div">
-          <h4>Contact Information</h4>
-          <div className="flex-container">
-            <InputWithLabel label="Name" name="name" placeholder="Give your Name" />
-            <InputWithLabel label="Surname" name="surname" />
-            <InputWithLabel label="Email" name="email" />
-            <InputWithLabel label="Password" name="password" />
+          <div className="second-div">
+            <h4>Contact Information</h4>
+            <div className="flex-container">
+              <InputWithLabel label="Name" name="name" placeholder="Give your Name" />
+              <InputWithLabel label="Surname" name="surname" />
+              <InputWithLabel label="Email" name="email" />
+              <InputWithLabel label="Password" name="password" />
+            </div>
           </div>
-        </div>
 
-        <div className="flex-container">
-          <h4 className="billing">Billing Information</h4>
-          <InputWithLabel label="Id" name="id" />
-          <InputWithLabel label="Tax Number" name="taxnumber" />
-          <div className="btn1">
-            <Button background="#2A9D8F" text="Create Account" />
+          <div className="flex-container">
+            <h4 className="billing">Billing Information</h4>
+            <InputWithLabel label="Id" name="id" />
+            <InputWithLabel label="Tax Number" name="taxnumber" />
+            <div className="btn1">
+              <Button background="#2A9D8F" text="Create Account" />
+            </div>
           </div>
         </div>
       </div>

@@ -3,12 +3,20 @@ import styled from 'styled-components';
 import { MdCheckCircleOutline } from 'react-icons/md';
 import Button from '../../atoms/Button/Button';
 
-const Container = styled.div`
-  padding: 0 3rem 3.5rem 3rem;
+const Background = styled.div`
   background: ${({ theme }) => theme.color.main2};
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+const Container = styled.div`
+  padding: 0 3rem 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 440px) {
+    max-width: 550px;
+  }
   h3 {
     color: ${({ theme }) => theme.color.main1};
     text-align: center;
@@ -69,22 +77,24 @@ const dataHeroSection = [
 
 function HeroSection() {
   return (
-    <Container>
-      <div>
-        <h3>From freelancers to freelancer</h3>
-      </div>
-      <ContainerList>
-        {dataHeroSection.map((item) => (
-          <ContainerIconAndText key={item.id}>
-            <div>{item.icon}</div>
-            <p>{item.text}</p>
-          </ContainerIconAndText>
-        ))}
-      </ContainerList>
-      <div>
-        <Button background="red" text={"Let's Try It!"} />
-      </div>
-    </Container>
+    <Background>
+      <Container>
+        <div>
+          <h3>From freelancers to freelancer</h3>
+        </div>
+        <ContainerList>
+          {dataHeroSection.map((item) => (
+            <ContainerIconAndText key={item.id}>
+              <div>{item.icon}</div>
+              <p>{item.text}</p>
+            </ContainerIconAndText>
+          ))}
+        </ContainerList>
+        <div>
+          <Button background="red" text={"Let's Try It!"} />
+        </div>
+      </Container>
+    </Background>
   );
 }
 
