@@ -4,6 +4,8 @@ import Button from '../../atoms/Button/Button';
 import { RedSpan } from '../../atoms/RedSpan/RedSpan';
 import { PurpleSpan } from '../../atoms/PurpleSpan/PurpleSpan';
 import KidneyBackground2 from '../../../assets/illustrations/KidneyTextBackground2.png';
+import face1 from '../../../assets/images/face1small.jpg';
+import face2 from '../../../assets/images/face2small.jpg';
 
 const Container = styled.div`
   padding: 1rem;
@@ -69,7 +71,7 @@ const Testimonials = styled.div`
 export const OneTestimonial = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.2rem;
   justify-content: space-between;
   p {
     font-weight: 500;
@@ -93,12 +95,17 @@ export const ContainerPhoto = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
 `;
 
 export const FlexPhoto = styled.div`
   width: 30%;
   display: flex;
-  //justify-content: center;
   align-items: center;
 `;
 
@@ -114,7 +121,7 @@ const TextAndKidneyBackground = styled.div`
   }
 `;
 
-function SectionProductDesc1() {
+function SectionProductDesc1(): JSX.Element {
   return (
     <Container>
       <TextAndKidneyBackground>
@@ -138,7 +145,9 @@ function SectionProductDesc1() {
       <Testimonials>
         <OneTestimonial>
           <FlexPhoto>
-            <ContainerPhoto>Photo</ContainerPhoto>
+            <ContainerPhoto>
+              <img src={face1} alt="face" />
+            </ContainerPhoto>
           </FlexPhoto>
           <TextTestimonial>
             <p>"Lorem ipsum dolor sit </p>
@@ -155,7 +164,9 @@ function SectionProductDesc1() {
             <PRight>Lorem ipsum dolor sit amet</PRight>
           </TextTestimonial>
           <FlexPhoto style={{ justifyContent: 'flex-end' }}>
-            <ContainerPhoto>Photo</ContainerPhoto>
+            <ContainerPhoto>
+              <img src={face2} alt="face" />
+            </ContainerPhoto>
           </FlexPhoto>
         </OneTestimonial>
       </Testimonials>

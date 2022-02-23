@@ -26,11 +26,18 @@ interface ButtonInterface {
   background?: string;
   type?: 'button' | 'submit';
   border?: string;
+  onClick?: () => void;
 }
 
-function Button({ text, color, background, type, border }: ButtonInterface) {
+function Button({ text, color, background, type, border, onClick }: ButtonInterface) {
   return (
-    <ButtonStyle type={type} color={color} background={background} border={border}>
+    <ButtonStyle
+      type={type}
+      color={color}
+      background={background}
+      border={border}
+      onClick={onClick}
+    >
       {text}
     </ButtonStyle>
   );
@@ -41,7 +48,8 @@ Button.defaultProps = {
   background: undefined,
   type: 'button',
   border: undefined,
-  text: undefined
+  text: undefined,
+  onClick: undefined
 };
 
 export default Button;

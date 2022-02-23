@@ -11,8 +11,6 @@ export default function useForm(initial = {}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialValues]);
 
-  // TODO
-
   interface ChangeEvent {
     value: string | number | File;
     name: string;

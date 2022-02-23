@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background: white;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
     line-height: 1.75;
     color: #000000;
@@ -25,11 +25,16 @@ export const GlobalStyle = createGlobalStyle`
     margin:0;
   }
   button{
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
   }
 
-  //p {margin-bottom: 1rem;} it is necessary?
+  input, select{
+    font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+  }
+
+    //p {margin-bottom: 1rem;} it is necessary?
   p{
     margin:0;
   }

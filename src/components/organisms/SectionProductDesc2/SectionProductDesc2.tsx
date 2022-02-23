@@ -11,6 +11,7 @@ import Button from '../../atoms/Button/Button';
 import { RedSpan } from '../../atoms/RedSpan/RedSpan';
 import ManFlight from '../../../assets/illustrations/ManBookingFlight.png';
 import KidneyBackground from '../../../assets/illustrations/KidneyTextBackground.png';
+import face3 from '../../../assets/images/face3small.jpg';
 
 const Container = styled.div`
   padding: 1rem;
@@ -47,7 +48,7 @@ const ContainerIllustration = styled.div`
   }
 `;
 
-function SectionProductDesc2() {
+function SectionProductDesc2(): JSX.Element {
   return (
     <Container>
       <div>
@@ -67,7 +68,9 @@ function SectionProductDesc2() {
           <PRight>Lorem ipsum dolor sit amet</PRight>
         </TextTestimonial>
         <FlexPhoto style={{ justifyContent: 'flex-end' }}>
-          <ContainerPhoto>Photo</ContainerPhoto>
+          <ContainerPhoto>
+            <img src={face3} alt="face" />
+          </ContainerPhoto>
         </FlexPhoto>
       </OneTestimonial>
       <div>

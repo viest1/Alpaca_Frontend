@@ -4,6 +4,9 @@ import { Box } from '../SectionProductDesc1/SectionProductDesc1';
 import Button from '../../atoms/Button/Button';
 import { RedSpan } from '../../atoms/RedSpan/RedSpan';
 import Security from '../../../assets/illustrations/Security.png';
+import face4 from '../../../assets/images/face4small.jpg';
+import face5 from '../../../assets/images/face5small.jpg';
+import face6 from '../../../assets/images/face6small.jpg';
 
 const Container = styled.div`
   padding: 0 2rem 2rem 2rem;
@@ -39,6 +42,12 @@ const ContainerPhoto = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  img {
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+  }
 `;
 
 const SecuritySection = styled.div`
@@ -61,38 +70,41 @@ const StyledPTestimonial = styled.p`
 
 const data = [
   {
-    photo: 'Photo',
+    photo: face4,
     title: 'Golor sit amet',
     text:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut cupiditate debitis hic\n' +
       'nemo quisquam tempora tenetur voluptatum! Consequuntur, cumque deleniti dicta esse\n' +
       'laudantium, magni non perferendis quasi quo recusandae ullam voluptatem? Aliquam\n' +
       'corporis deleniti iusto.',
-    signature: 'Lorem ipsum'
+    signature: 'Lorem ipsum',
+    id: 1
   },
   {
-    photo: 'Photo',
+    photo: face5,
     title: 'Golor sit amet',
     text:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut cupiditate debitis hic\n' +
       'nemo quisquam tempora tenetur voluptatum! Consequuntur, cumque deleniti dicta esse\n' +
       'laudantium, magni non perferendis quasi quo recusandae ullam voluptatem? Aliquam\n' +
       'corporis deleniti iusto.',
-    signature: 'Lorem ipsum'
+    signature: 'Lorem ipsum',
+    id: 2
   },
   {
-    photo: 'Photo',
+    photo: face6,
     title: 'Golor sit amet',
     text:
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut cupiditate debitis hic\n' +
       'nemo quisquam tempora tenetur voluptatum! Consequuntur, cumque deleniti dicta esse\n' +
       'laudantium, magni non perferendis quasi quo recusandae ullam voluptatem? Aliquam\n' +
       'corporis deleniti iusto.',
-    signature: 'Lorem ipsum'
+    signature: 'Lorem ipsum',
+    id: 3
   }
 ];
 
-function SectionProductDesc3() {
+function SectionProductDesc3(): JSX.Element {
   return (
     <Container>
       <div>
@@ -131,16 +143,16 @@ function SectionProductDesc3() {
         </h5>
       </SecuritySection>
       <div>
-        <Testimonial>
-          {data.map((item) => (
-            <>
-              <ContainerPhoto>{item.photo}</ContainerPhoto>
-              <h5>{item.title}</h5>
-              <StyledPTestimonial>{item.text}</StyledPTestimonial>
-              <p style={{ marginLeft: 'auto' }}>{item.signature}</p>
-            </>
-          ))}
-        </Testimonial>
+        {data.map((item) => (
+          <Testimonial key={item.id}>
+            <ContainerPhoto>
+              <img src={item.photo} alt="face" />
+            </ContainerPhoto>
+            <h5>{item.title}</h5>
+            <StyledPTestimonial>{item.text}</StyledPTestimonial>
+            <p style={{ marginLeft: 'auto' }}>{item.signature}</p>
+          </Testimonial>
+        ))}
         <div />
         <div />
       </div>

@@ -3,12 +3,20 @@ import styled from 'styled-components';
 import { MdCheckCircleOutline } from 'react-icons/md';
 import Button from '../../atoms/Button/Button';
 
-const Container = styled.div`
-  padding: 0 3rem 3.5rem 3rem;
+const Background = styled.div`
   background: ${({ theme }) => theme.color.main2};
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+const Container = styled.div`
+  padding: 0 3rem 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 440px) {
+    max-width: 550px;
+  }
   h3 {
     color: ${({ theme }) => theme.color.main1};
     text-align: center;
@@ -50,38 +58,43 @@ const ContainerIconAndText = styled.div`
 const dataHeroSection = [
   {
     text: 'Take your business everywhere you goand feel safe that all your data is at one place',
-    icon: <MdCheckCircleOutline fontSize={36} />
+    icon: <MdCheckCircleOutline fontSize={36} />,
+    id: 1
   },
   {
     text: 'You can manage your clients, appointments and messages in one place',
-    icon: <MdCheckCircleOutline fontSize={36} />
+    icon: <MdCheckCircleOutline fontSize={36} />,
+    id: 2
   },
   {
     text:
       'We know that it takes time until you make a life out of it. So try it for ' +
       'free and grow until you decide to take your next step',
-    icon: <MdCheckCircleOutline fontSize={36} />
+    icon: <MdCheckCircleOutline fontSize={36} />,
+    id: 3
   }
 ];
 
 function HeroSection() {
   return (
-    <Container>
-      <div>
-        <h3>From freelancers to freelancer</h3>
-      </div>
-      <ContainerList>
-        {dataHeroSection.map((item) => (
-          <ContainerIconAndText>
-            <div>{item.icon}</div>
-            <p>{item.text}</p>
-          </ContainerIconAndText>
-        ))}
-      </ContainerList>
-      <div>
-        <Button background="red" text={"Let's Try It!"} />
-      </div>
-    </Container>
+    <Background>
+      <Container>
+        <div>
+          <h3>From freelancers to freelancer</h3>
+        </div>
+        <ContainerList>
+          {dataHeroSection.map((item) => (
+            <ContainerIconAndText key={item.id}>
+              <div>{item.icon}</div>
+              <p>{item.text}</p>
+            </ContainerIconAndText>
+          ))}
+        </ContainerList>
+        <div>
+          <Button background="red" text={"Let's Try It!"} />
+        </div>
+      </Container>
+    </Background>
   );
 }
 

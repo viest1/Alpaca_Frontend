@@ -1,8 +1,18 @@
 import React from 'react';
-import Header from '../../organisms/Header/Header';
+import styled from 'styled-components';
 import Button from '../../atoms/Button/Button';
 import './SignUp.css';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
+
+const ContainerPhoto = styled.div`
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  background: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 function SignUp() {
   //   <form
@@ -22,43 +32,18 @@ function SignUp() {
   // >
 
   return (
-    <div id="sign-up">
-      <Header />
-      <div>
-        <h1 className="new-contact">CREATE NEW ACCOUNT</h1>
-        <img className="img" src="" alt="" />
-        <Button background="blue" text="Upload Photo" />
-      </div>
-
-      <h2>Contact information</h2>
-      <InputWithLabel label="name" name="name" placeholder="Give your Name" />
-      {/* <div> */}
-      {/*   <label htmlFor="name"> */}
-      {/*     Name: */}
-      {/*     <input type="name" name="name" /> */}
-      {/*   </label> */}
-      {/* </div> */}
-      <div>
-        <label htmlFor="surname">
-          Surname:
-          <input type="text" name="surname" />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="email">
-          Email:
-          <input type="email" name="email" />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input type="password" name="password" />
-        </label>
-        <div>
-          <input type="submit" value="Log in" />
+    <div className="sign-up">
+      <div className="container">
+        <div className="first-div">
+          <h3 className="new-contact">CREATE NEW ACCOUNT</h3>
+          <ContainerPhoto className="photo">
+            <p>Photo</p>
+            <img className="img" src="" alt="" />
+          </ContainerPhoto>
+          <div className="btn">
+            <Button background="blue" text="Upload Photo" />
+          </div>
         </div>
-
       </div>
       <div>
         <h2 className="billing">Billing Information</h2>
@@ -67,14 +52,25 @@ function SignUp() {
             Id:
             <input type="id" name="id" />
           </label>
+          <div className="second-div">
+            <h4>Contact Information</h4>
+            <div className="flex-container">
+              <InputWithLabel label="Name" name="name" placeholder="Give your Name" />
+              <InputWithLabel label="Surname" name="surname" />
+              <InputWithLabel label="Email" name="email" />
+              <InputWithLabel label="Password" name="password" />
+            </div>
+          </div>
+
+          <div className="flex-container">
+            <h4 className="billing">Billing Information</h4>
+            <InputWithLabel label="Id" name="id" />
+            <InputWithLabel label="Tax Number" name="taxnumber" />
+            <div className="btn1">
+              <Button background="#2A9D8F" text="Create Account" />
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="taxnumber">
-            Tax Number:
-            <input type="taxnumber" name="taxnumber" />
-          </label>
-        </div>
-        <Button background=" #2A9D8F" text="Create Account" />
       </div>
     </div>
   );

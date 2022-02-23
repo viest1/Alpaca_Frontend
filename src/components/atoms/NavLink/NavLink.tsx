@@ -15,15 +15,16 @@ const BigLogo = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.color.main2};
   img {
-    width: 21rem;
-    display: flex;
-    margin: -1rem 0 0 2rem;
-    height: auto;
+    width: 15rem;
   }
 `;
 
 const ContainerNavText = styled.div`
   padding: 0.2rem;
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.color.main4};
+  }
 `;
 
 // ? - optional
@@ -53,6 +54,7 @@ function NavLink({ path, text, image, alt, bigLogo }: Props) {
   );
 }
 
+// Default Props when optional props are not provided
 NavLink.defaultProps = {
   text: undefined,
   bigLogo: false,
