@@ -68,18 +68,12 @@ function HomePage(): JSX.Element {
   return (
     <div>
       <HeroSection />
-<<<<<<< HEAD
-      <SectionProductDesc1 />
-      <SectionProductDesc2 />
-      <SectionProductDesc3 />
-      <Footer />
-=======
       <ContainerSections>
         <SectionProductDesc1 />
         <SectionProductDesc2 />
         <SectionProductDesc3 />
+        <Footer />
       </ContainerSections>
->>>>>>> fb7fcb2d3e85873784b4aca110c9daf80c8d5a1a
     </div>
   );
 }
