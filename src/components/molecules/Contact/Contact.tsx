@@ -12,11 +12,17 @@ const StyledContact = styled.div`
   justify-content: center;
   gap: 2rem;
 `;
-const StyledContactWord = styled.div`
+
+//= =====================
+// THIS IS THE STYLE I DELETED
+// FROM THE FOOTER CONTACT TITLE
+//= =====================
+/* const StyledContactWord = styled.div`
   display: flex;
   margin: auto;
   font-weight: bold;
-`;
+`; */
+
 const StyledTeleEmail = styled.div`
   display: flex;
   gap: 0.6rem;
@@ -38,7 +44,6 @@ const StyledSocialNetWorks = styled.div`
 function Contact() {
   return (
     <StyledContact>
-      <StyledContactWord>CONTACT</StyledContactWord>
       <StyledTeleEmail>
         <MdLocalPhone fontSize={30} />
         <StyledTeleEmail>{dataContact.telephone}</StyledTeleEmail>
