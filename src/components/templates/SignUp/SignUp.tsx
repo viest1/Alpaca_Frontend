@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import Header from '../../organisms/Header/Header';
 import Button from '../../atoms/Button/Button';
 import './SignUp.css';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
@@ -35,7 +33,6 @@ function SignUp() {
 
   return (
     <div className="sign-up">
-      <Header />
       <div className="container">
         <div className="first-div">
           <h3 className="new-contact">CREATE NEW ACCOUNT</h3>

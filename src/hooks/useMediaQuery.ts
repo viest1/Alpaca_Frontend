@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 // import { useMediaQuery } from 'PATH'
 //
 // export default function Component() {
-//   const matches = useMediaQuery('(min-width: 768px)')
+//   const desktopVersion = useMediaQuery('(min-width: 968px)')
 //
 //   return (
 //     <div>
