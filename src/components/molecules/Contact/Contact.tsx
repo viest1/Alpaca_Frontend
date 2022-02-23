@@ -10,6 +10,7 @@ const StyledContact = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 2rem;
 `;
 
@@ -23,11 +24,22 @@ const StyledContact = styled.div`
   font-weight: bold;
 `; */
 
-const StyledTeleEmail = styled.div`
+const TelAndEmailContainer = styled.div`
   display: flex;
-  gap: 0.6rem;
-  font-size: ${({ theme }) => theme.fontSizeOpenSans.xxxs};
-  margin: auto;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+`;
+
+/// =================
+// SINCE THE CONTAINER EmailAndPhoneContainer WAS USED SEVERAL TIMES
+// I RENAMED IT TO JUST CONTAINER AND USED THE NAME FOR
+// THE BIGGER CONTAINER WHICH INCLUDES ALL
+//= =======================
+const Container = styled.div`
+  display: flex;
+  padding: 0.1rem;
+  font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
   &: hover {
     cursor: pointer;
   }
@@ -44,22 +56,29 @@ const StyledSocialNetWorks = styled.div`
 function Contact() {
   return (
     <StyledContact>
-      <StyledTeleEmail>
-        <MdLocalPhone fontSize={30} />
-        <StyledTeleEmail>{dataContact.telephone}</StyledTeleEmail>
-        <br />
-        <MdEmail fontSize={30} />
-        <StyledTeleEmail>{dataContact.email}</StyledTeleEmail>
-      </StyledTeleEmail>
+      <TelAndEmailContainer>
+        <Container>
+          <Container>
+            <MdLocalPhone fontSize={30} />
+          </Container>
+          <Container>{dataContact.telephone}</Container>
+        </Container>
+        <Container>
+          <Container>
+            <MdEmail fontSize={30} />
+          </Container>
+          <Container>{dataContact.email}</Container>
+        </Container>
+      </TelAndEmailContainer>
       <StyledSocialNetWorks>
         <Link to="/">
-          <MdOutlineFacebook color="black" />
+          <MdOutlineFacebook color="black" fontSize={50}/>
         </Link>
         <Link to="/">
-          <SiTwitter color="black" />
+          <SiTwitter color="black" fontSize={50} />
         </Link>
         <Link to="/">
-          <IoLogoInstagram color="black" />
+          <IoLogoInstagram color="black" fontSize={50}/>
         </Link>
       </StyledSocialNetWorks>
     </StyledContact>

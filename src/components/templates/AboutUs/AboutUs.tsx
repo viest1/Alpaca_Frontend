@@ -13,7 +13,7 @@ const MainContainer = styled.div`
   flex-direction: column;
 `;
 
-const OpeningTextContainer = styled.div`
+export const OpeningTextContainer = styled.div`
   padding: 0 1.5rem 1.5rem 1.5rem;
   max-width: 800px;
   margin: 0 auto;
