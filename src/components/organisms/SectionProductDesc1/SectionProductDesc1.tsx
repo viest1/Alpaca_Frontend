@@ -6,6 +6,7 @@ import { PurpleSpan } from '../../atoms/PurpleSpan/PurpleSpan';
 import KidneyBackground2 from '../../../assets/illustrations/KidneyTextBackground2.png';
 import face1 from '../../../assets/images/face1small.jpg';
 import face2 from '../../../assets/images/face2small.jpg';
+import useMediaQuery from '../../../hooks/useMediaQuery';
 
 const Container = styled.div`
   padding: 1rem;
@@ -16,10 +17,22 @@ const Container = styled.div`
     font-weight: 900;
     text-align: center;
     width: 90%;
+    max-width: 450px;
+    margin: 2rem auto;
+  }
+  h3 {
+    font-weight: 900;
+    text-align: center;
+    width: 90%;
+    max-width: 650px;
     margin: 2rem auto;
   }
   > div:last-child {
     margin: 0 auto;
+  }
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    width: 90%;
+    max-width: 1200px;
   }
 `;
 
@@ -29,7 +42,7 @@ export const Box = styled.div`
   border-radius: 0.8rem;
   margin: auto;
   width: 90%;
-  max-width: 330px;
+  max-width: 360px;
   min-width: 280px;
   background: white;
 
@@ -66,6 +79,12 @@ const Testimonials = styled.div`
   @media (max-width: 399px) {
     padding: 0;
   }
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    margin: 0;
+    > div:last-child {
+      margin: 2rem auto 0 auto;
+    }
+  }
 `;
 
 export const OneTestimonial = styled.div`
@@ -85,6 +104,11 @@ export const PRight = styled.p`
 
 export const TextTestimonial = styled.div`
   width: 70%;
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    margin-right: auto;
+    width: 210px;
+    text-align: right;
+  }
 `;
 
 export const ContainerPhoto = styled.div`
@@ -119,60 +143,140 @@ const TextAndKidneyBackground = styled.div`
     transform: translateX(-50%);
     z-index: -1;
   }
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    img:last-child {
+      top: -38px;
+    }
+  }
+`;
+
+// Desktop Version
+
+const ContainerFlex = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3rem;
+  width: 100%;
+  > div {
+    width: 40%;
+  }
+  > div:first-child {
+    width: 400px;
+  }
 `;
 
 function SectionProductDesc1(): JSX.Element {
+  const desktopVersion = useMediaQuery('(min-width: 1060px)');
+  console.log(desktopVersion);
   return (
     <Container>
-      <TextAndKidneyBackground>
-        <h5>
-          Manage <RedSpan>files</RedSpan>, <RedSpan>messages</RedSpan> and all your{' '}
-          <RedSpan>customers</RedSpan> info in <PurpleSpan>one place</PurpleSpan>
-        </h5>
-        <div>
-          <img src={KidneyBackground2} alt="kidney background" />
-        </div>
-      </TextAndKidneyBackground>
-      <Box>
-        <p>
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, aut cumque
-          cupiditate eaque eligendi incidunt libero, maiores nesciunt nihil praesentium, rerum vero
-          !"
-        </p>
-        <p>Lorem ipsum</p>
-        <p>Golor sit amet</p>
-      </Box>
-      <Testimonials>
-        <OneTestimonial>
-          <FlexPhoto>
-            <ContainerPhoto>
-              <img src={face1} alt="face" />
-            </ContainerPhoto>
-          </FlexPhoto>
-          <TextTestimonial>
-            <p>"Lorem ipsum dolor sit </p>
-            <p>Amet at vero..."</p>
-            <PRight>Lorem ipsum</PRight>
-            <PRight>Lorem ipsum dolor sit amet</PRight>
-          </TextTestimonial>
-        </OneTestimonial>
-        <OneTestimonial>
-          <TextTestimonial>
-            <p>"Lorem ipsum dolor sit</p>
-            <p>Amet at vero..."</p>
-            <PRight>Lorem ipsum</PRight>
-            <PRight>Lorem ipsum dolor sit amet</PRight>
-          </TextTestimonial>
-          <FlexPhoto style={{ justifyContent: 'flex-end' }}>
-            <ContainerPhoto>
-              <img src={face2} alt="face" />
-            </ContainerPhoto>
-          </FlexPhoto>
-        </OneTestimonial>
-      </Testimonials>
-      <div>
-        <Button text="Start Free Trial" background="#001523" color="#fcbf49" />
-      </div>
+      {!desktopVersion ? (
+        <>
+          <TextAndKidneyBackground>
+            <h5>
+              Manage <RedSpan>files</RedSpan>, <RedSpan>messages</RedSpan> and all your{' '}
+              <RedSpan>customers</RedSpan> info in <PurpleSpan>one place</PurpleSpan>
+            </h5>
+            <div>
+              <img src={KidneyBackground2} alt="kidney background" />
+            </div>
+          </TextAndKidneyBackground>
+          <Box>
+            <p>
+              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, aut cumque
+              cupiditate eaque eligendi incidunt libero, maiores nesciunt nihil praesentium, rerum
+              vero !"
+            </p>
+            <p>Lorem ipsum</p>
+            <p>Golor sit amet</p>
+          </Box>
+          <Testimonials>
+            <OneTestimonial>
+              <FlexPhoto>
+                <ContainerPhoto>
+                  <img src={face1} alt="face" />
+                </ContainerPhoto>
+              </FlexPhoto>
+              <TextTestimonial>
+                <p>"Lorem ipsum dolor sit </p>
+                <p>Amet at vero..."</p>
+                <PRight>Lorem ipsum</PRight>
+                <PRight>Lorem ipsum dolor sit amet</PRight>
+              </TextTestimonial>
+            </OneTestimonial>
+            <OneTestimonial>
+              <TextTestimonial>
+                <p>"Lorem ipsum dolor sit</p>
+                <p>Amet at vero..."</p>
+                <PRight>Lorem ipsum</PRight>
+                <PRight>Lorem ipsum dolor sit amet</PRight>
+              </TextTestimonial>
+              <FlexPhoto style={{ justifyContent: 'flex-end' }}>
+                <ContainerPhoto>
+                  <img src={face2} alt="face" />
+                </ContainerPhoto>
+              </FlexPhoto>
+            </OneTestimonial>
+          </Testimonials>
+          <div>
+            <Button text="Start Free Trial" background="#001523" color="#fcbf49" />
+          </div>
+        </>
+      ) : (
+        <>
+          <div>
+            <h3>
+              Manage <RedSpan>files</RedSpan>, <RedSpan>messages</RedSpan> and all your{' '}
+              <RedSpan>customers</RedSpan> info in <PurpleSpan>one place</PurpleSpan>
+            </h3>
+          </div>
+          <ContainerFlex>
+            <Testimonials>
+              <OneTestimonial>
+                <TextTestimonial>
+                  <p>"Lorem ipsum dolor sit </p>
+                  <PRight>Lorem ipsum dolor</PRight>
+                </TextTestimonial>
+                <FlexPhoto>
+                  <ContainerPhoto>
+                    <img src={face1} alt="face" />
+                  </ContainerPhoto>
+                </FlexPhoto>
+              </OneTestimonial>
+              <OneTestimonial>
+                <FlexPhoto style={{ justifyContent: 'flex-end' }}>
+                  <ContainerPhoto>
+                    <img src={face2} alt="face" />
+                  </ContainerPhoto>
+                </FlexPhoto>
+                <TextTestimonial>
+                  <p>"Lorem ipsum dolor sit</p>
+                  <PRight>Lorem ipsum</PRight>
+                </TextTestimonial>
+              </OneTestimonial>
+              <div>
+                <Button text="Start Free Trial" background="#001523" color="#fcbf49" />
+              </div>
+            </Testimonials>
+            <TextAndKidneyBackground>
+              <div>
+                <img src={KidneyBackground2} alt="kidney background" />
+              </div>
+              <Box>
+                <p>
+                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, aut cumque
+                  cupiditate eaque eligendi incidunt libero, maiores nesciunt nihil praesentium,
+                  rerum vero !"
+                </p>
+                <p>Lorem ipsum</p>
+                <p>Golor sit amet</p>
+              </Box>
+            </TextAndKidneyBackground>
+          </ContainerFlex>
+        </>
+      )}
     </Container>
   );
 }

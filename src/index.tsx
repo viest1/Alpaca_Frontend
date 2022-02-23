@@ -4,6 +4,7 @@ import App from './view/App';
 import reportWebVitals from './reportWebVitals';
 import GeneralProvider from './providers/GeneralProvider';
 import 'sanitize.css/sanitize.css';
+import 'flag-icons/css/flag-icons.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
