@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 // import { Link } from 'react-router-dom'; // Link to create the
 import Contact from '../../molecules/Contact/Contact';
-import mobileFooterWave from '../../../assets/illustrations/mobileFooterWave.png';
+import mobileFooterWave from '../../../assets/illustrations/mobileFooterWaveBlue.png';
 
 // 1. html aufbauen
 
