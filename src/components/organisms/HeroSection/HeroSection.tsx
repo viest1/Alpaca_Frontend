@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import { MdCheckCircleOutline } from 'react-icons/md';
 import Button from '../../atoms/Button/Button';
 import womenOnTheWay from '../../../assets/illustrations/WomanOnTheWay.png';
+import waveMobile from '../../../assets/illustrations/wave.svg';
 
 const Background = styled.div`
   background: ${({ theme }) => theme.color.main2};
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  padding: 0 0 3rem 0;
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     padding: 0 0 3rem 0;
   }
@@ -34,6 +37,9 @@ const Container = styled.div`
   h3 {
     color: ${({ theme }) => theme.color.main1};
     text-align: center;
+    ${({ theme }) => theme.up(theme.breakpoint.m)} {
+      margin-top: 1.5rem;
+    }
   }
   button {
     padding: 1.3rem 2rem;
@@ -92,6 +98,15 @@ const ContainerIconAndText = styled.div`
   align-items: center;
 `;
 
+const Wave = styled.img`
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    display: none;
+  }
+`;
+
 const dataHeroSection = [
   {
     text: 'Take your business everywhere you goand feel safe that all your data is at one place',
@@ -136,6 +151,7 @@ function HeroSection() {
           </div>
         </div>
       </Container>
+      <Wave src={waveMobile} alt="wave" />
     </Background>
   );
 }

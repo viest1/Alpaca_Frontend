@@ -15,9 +15,16 @@ const Container = styled.div`
   margin-bottom: 2rem;
   gap: 2rem;
   h5 {
-    font-weight: bold;
+    width: 80%;
+    max-width: 700px;
+    margin: 1rem auto;
+    font-weight: 900;
     text-align: center;
+    ${({ theme }) => theme.up(theme.breakpoint.m)} {
+      font-size: ${({ theme }) => theme.fontSizeInter.ml};
+    }
   }
+
   > div:last-child {
     margin: 3rem auto 0 auto;
   }
@@ -53,6 +60,9 @@ const ContainerPhoto = styled.div`
 const SecuritySection = styled.div`
   position: relative;
   height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   img:last-child {
     width: 420px;
     position: absolute;
@@ -66,6 +76,50 @@ const SecuritySection = styled.div`
 const StyledPTestimonial = styled.p`
   font-size: ${({ theme }) => theme.fontSizeOpenSans.xs};
   font-weight: 600;
+`;
+
+const ContainerFlex = styled.div`
+  > div:last-child {
+    display: none;
+  }
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    > div:first-child {
+      width: 50%;
+      margin: 0;
+      padding: 2rem;
+    }
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    > div:last-child {
+      width: 300px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 235px;
+        height: auto;
+        outline: 3px solid grey;
+        outline-offset: 10px;
+        box-shadow: 0 0 8px black;
+        border-radius: 0.6rem;
+      }
+    }
+  }
+`;
+
+const ContainerTestimonials = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    flex-direction: row;
+    h5 {
+      font-size: ${({ theme }) => theme.fontSizeInter.m};
+    }
+  }
 `;
 
 const data = [
@@ -112,14 +166,19 @@ function SectionProductDesc3(): JSX.Element {
           Adjust your <RedSpan>earning</RedSpan> to your<RedSpan> work performance</RedSpan>
         </h5>
       </div>
-      <Box>
-        <p>
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, aut cumque
-          cupiditate eaque eligendi incidunt libero, maiores nesciunt nihil praesentium!"
-        </p>
-        <p>Lorem ipsum</p>
-        <p>Golor sit amet</p>
-      </Box>
+      <ContainerFlex>
+        <Box>
+          <p>
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, aut cumque
+            cupiditate eaque eligendi incidunt libero, maiores nesciunt nihil praesentium!"
+          </p>
+          <p>Lorem ipsum</p>
+          <p>Golor sit amet</p>
+        </Box>
+        <div>
+          <img src={face5} alt="face" />
+        </div>
+      </ContainerFlex>
       <SecuritySection>
         <div>
           <img src={Security} alt="security illustration" />
@@ -142,7 +201,7 @@ function SectionProductDesc3(): JSX.Element {
           </span>
         </h5>
       </SecuritySection>
-      <div>
+      <ContainerTestimonials>
         {data.map((item) => (
           <Testimonial key={item.id}>
             <ContainerPhoto>
@@ -153,9 +212,7 @@ function SectionProductDesc3(): JSX.Element {
             <p style={{ marginLeft: 'auto' }}>{item.signature}</p>
           </Testimonial>
         ))}
-        <div />
-        <div />
-      </div>
+      </ContainerTestimonials>
       <div>
         <Button text="Signup" background="#fcbf49" color="#001523" border="2px solid #001523" />
       </div>
