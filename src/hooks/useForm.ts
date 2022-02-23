@@ -1,6 +1,12 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function useForm(initial = {}) {
+interface objectValues {
+  [key: string]: any;
+}
+
+const initValue: objectValues = {};
+
+export default function useForm(initial = initValue) {
   // create a state object for our inputs
   const [inputs, setInputs] = useState(initial);
   const initialValues = Object.values(initial).join('');
@@ -17,7 +23,7 @@ export default function useForm(initial = {}) {
     type: string;
   }
 
-  function handleChange(e: MouseEvent) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target) {
       let { value }: ChangeEvent = e.target as HTMLInputElement;
       const { name, type }: ChangeEvent = e.target as HTMLInputElement;
