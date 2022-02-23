@@ -34,9 +34,10 @@ interface Props {
   image?: string | undefined;
   alt?: string | undefined;
   bigLogo?: boolean | undefined;
+  onClick?: React.MouseEventHandler;
 }
 
-function NavLink({ path, text, image, alt, bigLogo }: Props) {
+function NavLink({ path, text, image, alt, bigLogo, onClick }: Props) {
   return (
     <div>
       {bigLogo ? (
@@ -45,7 +46,7 @@ function NavLink({ path, text, image, alt, bigLogo }: Props) {
           {text && <ContainerNavText>{text}</ContainerNavText>}
         </BigLogo>
       ) : (
-        <StyledLink to={path}>
+        <StyledLink to={path} onClick={onClick}>
           {image && <img src={image} alt={alt} />}
           {text && <ContainerNavText>{text}</ContainerNavText>}
         </StyledLink>
@@ -59,7 +60,8 @@ NavLink.defaultProps = {
   text: undefined,
   bigLogo: false,
   alt: undefined,
-  image: undefined
+  image: undefined,
+  onClick: undefined
 };
 
 export default NavLink;
