@@ -13,7 +13,7 @@ export const theme = {
     l: '3.157rem',
     ml: '2.369rem',
     m: '1.777rem',
-    ms: '1.333',
+    ms: '1.333rem',
     s: '1rem'
   },
   fontSizeOpenSans: {
