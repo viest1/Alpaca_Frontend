@@ -7588,7 +7588,7 @@
   "resolved" "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
   "version" "2.1.2"
 
-"sanitize.css@*":
+"sanitize.css@*", "sanitize.css@^13.0.0":
   "integrity" "sha512-ZRwKbh/eQ6w9vmTjkuG0Ioi3HBwPFce0O+v//ve+aOq1oeCy7jMV2qzzAlpsNuqpqCBjjriM1lbtZbF/Q8jVyA=="
   "resolved" "https://registry.npmjs.org/sanitize.css/-/sanitize.css-13.0.0.tgz"
   "version" "13.0.0"

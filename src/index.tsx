@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './view/App';
 import reportWebVitals from './reportWebVitals';
 import GeneralProvider from './providers/GeneralProvider';
+import 'sanitize.css/sanitize.css';
 
 ReactDOM.render(
   <React.StrictMode>

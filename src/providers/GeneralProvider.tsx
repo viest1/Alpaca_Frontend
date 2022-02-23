@@ -19,6 +19,8 @@ interface ContextType {
   setExample: Dispatch<SetStateAction<boolean>>;
   example2: boolean;
   setExample2: Dispatch<SetStateAction<boolean>>;
+  // clientArray: [];
+  // setClientArray: Dispatch<SetStateAction<string[]>>;
 }
 
 export const Context = createContext<ContextType>({
@@ -26,14 +28,22 @@ export const Context = createContext<ContextType>({
   setExample: () => undefined,
   example2: false,
   setExample2: () => undefined
+  // clientArray: [],
+  // setClientArray: Dispatch<SetStateAction<string[]>>,
 });
 
 function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
   const [example, setExample] = useState<boolean>(false);
   const [example2, setExample2] = useLocalStorage('localStorageExample', true);
+  // const [clientArray, setClientArray] = useState([]);
 
   const value = useMemo(() => {
-    return { example, setExample, example2, setExample2 };
+    return {
+      example,
+      setExample,
+      example2,
+      setExample2
+    };
   }, [example, setExample, example2, setExample2]);
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
