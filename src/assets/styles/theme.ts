@@ -29,7 +29,7 @@ export const theme = {
   },
   breakpoint: {
     s: '440px',
-    m: '980px',
+    m: '1060px',
     l: '1440px'
   },
   up: (breakpoint: string) => `@media (min-width: calc(${breakpoint} + 0.02px))`,

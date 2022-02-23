@@ -2,20 +2,34 @@ import React from 'react';
 import styled from 'styled-components';
 import { MdCheckCircleOutline } from 'react-icons/md';
 import Button from '../../atoms/Button/Button';
+import womenOnTheWay from '../../../assets/illustrations/WomanOnTheWay.png';
 
 const Background = styled.div`
   background: ${({ theme }) => theme.color.main2};
   display: flex;
   flex-direction: column;
   align-items: center;
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    padding: 0 0 3rem 0;
+  }
 `;
 const Container = styled.div`
   padding: 0 3rem 3.5rem 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media (min-width: 440px) {
-    max-width: 550px;
+  > div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  > div:first-child > div:last-child {
+    display: none;
+  }
+  > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   h3 {
     color: ${({ theme }) => theme.color.main1};
@@ -35,6 +49,29 @@ const Container = styled.div`
   }
   div:last-child {
     margin-bottom: 2.6rem;
+  }
+  ${({ theme }) => theme.up(theme.breakpoint.s)} {
+    max-width: 550px;
+  }
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    flex-direction: row;
+    gap: 5rem;
+    align-items: flex-start;
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 3rem;
+    h3 {
+      font-size: ${({ theme }) => theme.fontSizeInter.xl};
+    }
+    > div:first-child > div:last-child {
+      display: flex;
+      position: absolute;
+      bottom: -5.5rem;
+      img {
+        width: 450px;
+        height: auto;
+      }
+    }
   }
 `;
 
@@ -78,20 +115,25 @@ const dataHeroSection = [
 function HeroSection() {
   return (
     <Background>
-      <Container>
+      <Container style={{ position: 'relative' }}>
         <div>
-          <h3>From freelancers to freelancer</h3>
+          <h3 style={{ position: 'relative', zIndex: 1 }}>From freelancers to freelancer</h3>
+          <div>
+            <img src={womenOnTheWay} alt="women on the way" />
+          </div>
         </div>
-        <ContainerList>
-          {dataHeroSection.map((item) => (
-            <ContainerIconAndText key={item.id}>
-              <div>{item.icon}</div>
-              <p>{item.text}</p>
-            </ContainerIconAndText>
-          ))}
-        </ContainerList>
         <div>
-          <Button background="red" text={"Let's Try It!"} />
+          <ContainerList>
+            {dataHeroSection.map((item) => (
+              <ContainerIconAndText key={item.id}>
+                <div>{item.icon}</div>
+                <p>{item.text}</p>
+              </ContainerIconAndText>
+            ))}
+          </ContainerList>
+          <div>
+            <Button background="red" color="white" text={"Let's Try It!"} />
+          </div>
         </div>
       </Container>
     </Background>
