@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
@@ -6,6 +6,7 @@ import CompanyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
 import NavLink from '../../atoms/NavLink/NavLink';
 import Contact from '../../molecules/Contact/Contact';
 import useMediaQuery from '../../../hooks/useMediaQuery';
+import { Context } from '../../../providers/GeneralProvider';
 
 interface StyledDivProps {
   isOpenMenu: boolean;
@@ -161,9 +162,6 @@ const data = [
   }
 ];
 
-
-
-
 const dataDesktop = [
   {
     path: 'aboutUs',
@@ -214,8 +212,8 @@ interface HeaderI {
 }
 
 function Header({ displayTimeToLogout }: HeaderI) {
-  
-   useEffect(() => {
+  const { userData } = useContext(Context);
+  useEffect(() => {
     if (displayTimeToLogout) {
       console.log('displayTimeToLogout');
     } else {
@@ -230,27 +228,23 @@ function Header({ displayTimeToLogout }: HeaderI) {
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
   console.log(desktopVersion);
 
-
- 
-
-//   return (
-//     <Container isOpenMenu={isOpenMenu}>
-//       {!isOpenMenu && (
-//         <Flex>
-//           <div style={{ position: 'relative' }}>
-//             <NavLink path="/" image={CompanyLogo} alt="Logo" />
-//             <StyledP>live outside the box</StyledP>
-//           </div>
-//           <div>
+  //   return (
+  //     <Container isOpenMenu={isOpenMenu}>
+  //       {!isOpenMenu && (
+  //         <Flex>
+  //           <div style={{ position: 'relative' }}>
+  //             <NavLink path="/" image={CompanyLogo} alt="Logo" />
+  //             <StyledP>live outside the box</StyledP>
+  //           </div>
+  //           <div>
 
   // Testing AdminHeader
-  const adminLogIn = true;
-  if (adminLogIn) {
+  // const adminLogIn = true;
+  if (userData.token && userData.role === 'Freelancer') {
     return (
       <div>
         {!desktopVersion ? (
           <Container isOpenMenu={isOpenMenu}>
-
             {!isOpenMenu && (
               <Flex>
                 <div style={{ position: 'relative' }}>
