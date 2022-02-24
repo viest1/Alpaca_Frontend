@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './view/App';
 import reportWebVitals from './reportWebVitals';
 import GeneralProvider from './providers/GeneralProvider';
@@ -9,7 +10,9 @@ import 'flag-icons/css/flag-icons.min.css';
 ReactDOM.render(
   <React.StrictMode>
     <GeneralProvider>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </GeneralProvider>
   </React.StrictMode>,
   document.getElementById('root')

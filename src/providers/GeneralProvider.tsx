@@ -19,6 +19,24 @@ interface ContextType {
   setExample: Dispatch<SetStateAction<boolean>>;
   example2: boolean;
   setExample2: Dispatch<SetStateAction<boolean>>;
+  userData: {
+    token: string;
+    role: string;
+    email: string;
+    userId: string;
+    exp: any;
+    name: string;
+  };
+  setUserData: Dispatch<
+    SetStateAction<{
+      token: string;
+      role: string;
+      email: string;
+      userId: string;
+      exp: any;
+      name: string;
+    }>
+  >;
   // clientArray: [];
   // setClientArray: Dispatch<SetStateAction<string[]>>;
 }
@@ -27,7 +45,16 @@ export const Context = createContext<ContextType>({
   example: false,
   setExample: () => undefined,
   example2: false,
-  setExample2: () => undefined
+  setExample2: () => undefined,
+  userData: {
+    token: '',
+    role: '',
+    email: '',
+    name: '',
+    exp: '',
+    userId: ''
+  },
+  setUserData: () => undefined
   // clientArray: [],
   // setClientArray: Dispatch<SetStateAction<string[]>>,
 });
@@ -35,6 +62,14 @@ export const Context = createContext<ContextType>({
 function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
   const [example, setExample] = useState<boolean>(false);
   const [example2, setExample2] = useLocalStorage('localStorageExample', true);
+  const [userData, setUserData] = useLocalStorage('alpacaUserData', {
+    token: '',
+    role: '',
+    email: '',
+    name: '',
+    exp: '',
+    userId: ''
+  });
   // const [clientArray, setClientArray] = useState([]);
 
   const value = useMemo(() => {
@@ -42,9 +77,11 @@ function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
       example,
       setExample,
       example2,
-      setExample2
+      setExample2,
+      userData,
+      setUserData
     };
-  }, [example, setExample, example2, setExample2]);
+  }, [example, setExample, example2, setExample2, userData, setUserData]);
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }

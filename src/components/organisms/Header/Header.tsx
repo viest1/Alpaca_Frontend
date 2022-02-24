@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
@@ -87,11 +87,23 @@ const data = [
   }
 ];
 
-function Header() {
+interface HeaderI {
+  displayTimeToLogout: boolean;
+}
+
+function Header({ displayTimeToLogout }: HeaderI) {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const handleOpenMenu = () => {
     setIsOpenMenu((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (displayTimeToLogout) {
+      console.log('displayTimeToLogout');
+    } else {
+      console.log('NO - displayTimeToLogout');
+    }
+  }, [displayTimeToLogout]);
 
   return (
     <Container isOpenMenu={isOpenMenu}>
