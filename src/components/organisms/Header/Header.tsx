@@ -92,7 +92,47 @@ const ServicesAndLanguage = styled.div`
   justify-content: space-around;
   margin: auto;
 `;
+// Style AdminHeader
 
+const ContainerDesktopAdmin = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background: ${({ theme }) => theme.color.main7};
+  color: ${({ theme }) => theme.color.main8};
+  font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
+  padding: 0.2rem;
+`;
+
+const StyledMenuDesktopAdmin = styled.div`
+  display: flex;
+  margin: auto;
+  flex-direction: row;
+  gap: 2rem;
+  font-weight: bold;
+`;
+const CountryFlagAdmin = styled.div`
+  display: flex;
+  gap: 0.1rem;
+  margin: auto;
+  :hover {
+    cursor: pointer;
+  }
+`;
+const ServicesAndLanguageAdmin = styled.div`
+  display: flex;
+  position: relative;
+  padding-right: 32px;
+  gap: 1rem;
+  justify-content: space-around;
+  margin: 1rem;
+`;
+const StyledInput = styled.input`
+  position: relative;
+  height: 2rem;
+  width: 20rem;
+  margin: auto;
+  border-radius: 0.3rem;
+`;
 const data = [
   {
     path: 'aboutUs',
@@ -143,6 +183,28 @@ const dataDesktop = [
     id: 4
   }
 ];
+const dataHeaderAdmin = [
+  {
+    path: 'dashboard',
+    text: 'DASHBOARD',
+    id: 1
+  },
+  {
+    path: 'clients/projects',
+    text: 'CLIENTS/PROJECTS',
+    id: 2
+  },
+  {
+    path: 'settings',
+    text: 'SETTINGS',
+    id: 4
+  },
+  {
+    path: 'logout',
+    text: 'LOGOUT',
+    id: 7
+  }
+];
 
 function Header() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -152,6 +214,79 @@ function Header() {
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
   console.log(desktopVersion);
 
+  // Testing AdminHeader
+  const adminLogIn = true;
+  if (adminLogIn) {
+    return (
+      <div>
+        {!desktopVersion ? (
+          <Container isOpenMenu={isOpenMenu}>
+            {!isOpenMenu && (
+              <Flex>
+                <div style={{ position: 'relative' }}>
+                  <NavLink path="/" image={CompanyLogo} alt="Logo" />
+                  <StyledP>live outside the box</StyledP>
+                </div>
+                <div>
+                  {!isOpenMenu && (
+                    <GiHamburgerMenu fontSize={48} cursor="pointer" onClick={handleOpenMenu} />
+                  )}
+                </div>
+              </Flex>
+            )}
+            {isOpenMenu && (
+              <>
+                <FlexOpen>
+                  <div style={{ position: 'relative' }}>
+                    <NavLink path="/" image={CompanyLogo} alt="Logo" />
+                    <StyledP>live outside the box</StyledP>
+                  </div>
+                  <div>
+                    <GrClose onClick={handleOpenMenu} cursor="pointer" fontSize={48} />
+                  </div>
+                </FlexOpen>
+                <StyledMenu>
+                  {dataHeaderAdmin.map((item) => (
+                    <NavLink
+                      key={item.id}
+                      path={item.path}
+                      text={item.text}
+                      onClick={handleOpenMenu}
+                    />
+                  ))}
+                </StyledMenu>
+                <br />
+                <StyledLogoSlogan>
+                  <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
+                  <StyledSlogan>live outside the box</StyledSlogan>
+                </StyledLogoSlogan>
+                <Contact />
+              </>
+            )}
+          </Container>
+        ) : (
+          <ContainerDesktopAdmin>
+            <StyledLogoSlogan>
+              <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
+            </StyledLogoSlogan>
+            <StyledInput type="text" placeholder="" value="" />
+            <ServicesAndLanguageAdmin>
+              <StyledMenuDesktopAdmin>
+                {dataHeaderAdmin.map((item) => (
+                  <NavLink key={item.id} path={item.path} text={item.text} color="white" />
+                ))}
+              </StyledMenuDesktopAdmin>
+              <CountryFlagAdmin>
+                <span className="fi fi-de" />
+                <span>DE</span>
+              </CountryFlagAdmin>
+            </ServicesAndLanguageAdmin>
+          </ContainerDesktopAdmin>
+        )}
+      </div>
+    );
+  }
+  // STOP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   return (
     <div>
       {!desktopVersion ? (
@@ -182,7 +317,12 @@ function Header() {
               </FlexOpen>
               <StyledMenu>
                 {data.map((item) => (
-                  <NavLink key={item.id} path={item.path} text={item.text} onClick={handleOpenMenu} />
+                  <NavLink
+                    key={item.id}
+                    path={item.path}
+                    text={item.text}
+                    onClick={handleOpenMenu}
+                  />
                 ))}
               </StyledMenu>
               <br />
