@@ -9,6 +9,7 @@ import { theme } from '../assets/styles/theme';
 import MainContainerApp from '../components/templates/MainContainer/MainContainer';
 import AboutUs from '../components/templates/AboutUs/AboutUs';
 import Contact from '../components/templates/Contact/Contact';
+import LogIn from '../components/templates/Login/LogIn';
 
 function App(): JSX.Element {
   return (
@@ -23,6 +24,7 @@ function App(): JSX.Element {
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<LogIn />} />
           </Routes>
           {/* NOT LOGGED IN VIEW */}
 
