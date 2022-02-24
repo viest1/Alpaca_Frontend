@@ -79,6 +79,11 @@ const data = [
     path: 'signUp',
     text: 'SIGN UP',
     id: 4
+  },
+  {
+    path: 'contact',
+    text: 'CONTACT',
+    id: 5
   }
 ];
 
