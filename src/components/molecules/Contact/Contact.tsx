@@ -72,13 +72,13 @@ function Contact() {
       </TelAndEmailContainer>
       <StyledSocialNetWorks>
         <Link to="/">
-          <MdOutlineFacebook color="black" fontSize={50}/>
+          <MdOutlineFacebook color="black" fontSize={50} />
         </Link>
         <Link to="/">
           <SiTwitter color="black" fontSize={50} />
         </Link>
         <Link to="/">
-          <IoLogoInstagram color="black" fontSize={50}/>
+          <IoLogoInstagram color="black" fontSize={50} />
         </Link>
       </StyledSocialNetWorks>
     </StyledContact>
