@@ -8,6 +8,7 @@ import { dataContact } from '../../../dataContact/dataContact';
 
 const StyledContact = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;

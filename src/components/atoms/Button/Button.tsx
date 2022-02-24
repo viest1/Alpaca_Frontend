@@ -30,12 +30,14 @@ interface ButtonInterface {
   background?: string;
   type?: 'button' | 'submit';
   border?: string;
+  width?: string;
   onClick?: () => void;
   icon?: ReactElement;
   width?: string;
   padding?: string;
   fontSize?: string;
 }
+
 
 function Button({
   text,
@@ -65,6 +67,7 @@ function Button({
         <span>{text}</span>
       </ButtonStyle>
     </div>
+
   );
 }
 
@@ -74,6 +77,7 @@ Button.defaultProps = {
   type: 'button',
   border: undefined,
   text: undefined,
+  width: undefined,
   onClick: undefined,
   icon: undefined,
   width: undefined,

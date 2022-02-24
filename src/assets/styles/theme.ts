@@ -5,7 +5,9 @@ export const theme = {
     main3: '#9e0059',
     main4: '#fcbf49',
     main5: '#2A9D8F',
-    main6: '#FF0054'
+    main6: '#FF0054',
+    main7: '#1F313E',
+    main8: '#FFFFFF'
   },
   fontSizeInter: {
     xxl: '5.61rem',
