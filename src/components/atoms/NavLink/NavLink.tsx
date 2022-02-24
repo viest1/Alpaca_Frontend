@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.color.main2};
+  border-radius: 0.6rem;
+  height: 1rem;
   img {
     width: 140px;
     height: auto;
@@ -16,6 +18,9 @@ const BigLogo = styled(Link)`
   color: ${({ theme }) => theme.color.main2};
   img {
     width: 15rem;
+    @media (min-width: 1060px) {
+      width: 12rem;
+    }
   }
 `;
 
@@ -26,6 +31,16 @@ const ContainerNavText = styled.div`
     color: ${({ theme }) => theme.color.main4};
   }
 `;
+// Style desktopVersion
+const Container = styled.div<PropsStyled>`
+  border: ${({ border }) => border || 'none'};
+  border-radius: 0.6rem;
+  padding: 0 5px;
+  &: hover {
+    cursor: pointer;
+    border-color: ${({ theme }) => theme.color.main4};
+  }
+`;
 
 // ? - optional
 interface Props {
@@ -34,11 +49,14 @@ interface Props {
   image?: string | undefined;
   alt?: string | undefined;
   bigLogo?: boolean | undefined;
+  border?: string | undefined;
 }
-
-function NavLink({ path, text, image, alt, bigLogo }: Props) {
+interface PropsStyled {
+  border: string | undefined;
+}
+function NavLink({ path, text, image, alt, bigLogo, border }: Props) {
   return (
-    <div>
+    <Container border={border}>
       {bigLogo ? (
         <BigLogo to={path}>
           {image && <img src={image} alt={alt} />}
@@ -50,7 +68,7 @@ function NavLink({ path, text, image, alt, bigLogo }: Props) {
           {text && <ContainerNavText>{text}</ContainerNavText>}
         </StyledLink>
       )}
-    </div>
+    </Container>
   );
 }
 
@@ -59,7 +77,8 @@ NavLink.defaultProps = {
   text: undefined,
   bigLogo: false,
   alt: undefined,
-  image: undefined
+  image: undefined,
+  border: undefined
 };
 
 export default NavLink;

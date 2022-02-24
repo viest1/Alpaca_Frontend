@@ -4378,6 +4378,11 @@
     "locate-path" "^6.0.0"
     "path-exists" "^4.0.0"
 
+"flag-icons@^6.1.1":
+  "integrity" "sha512-7QJaPXelUF5yLKppUvfqx915oLm2q6DVM037vrBzww4DjwzyVPooq74SLfPPsYabbN3kMPbDQstYjHrx8kBUPg=="
+  "resolved" "https://registry.npmjs.org/flag-icons/-/flag-icons-6.1.1.tgz"
+  "version" "6.1.1"
+
 "flat-cache@^3.0.4":
   "integrity" "sha512-dm9s5Pw7Jc0GvMYbshN6zchCA9RgQlzzEZX3vylR9IqFfS8XciblUXOKfW6SiuJ0e13eDYZoZV5wdrev7P3Nwg=="
   "resolved" "https://registry.npmjs.org/flat-cache/-/flat-cache-3.0.4.tgz"
@@ -7020,7 +7025,7 @@
   "resolved" "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz"
   "version" "4.2.0"
 
-"postcss@^7.0.0 || ^8.0.1", "postcss@^8", "postcss@^8.0.0", "postcss@^8.0.2", "postcss@^8.0.3", "postcss@^8.0.9", "postcss@^8.1.0", "postcss@^8.1.2", "postcss@^8.1.4", "postcss@^8.2.14", "postcss@^8.2.15", "postcss@^8.2.2", "postcss@^8.3", "postcss@^8.3.3", "postcss@^8.3.5", "postcss@^8.4", "postcss@^8.4.4", "postcss@^8.4.5", "postcss@^8.4.6", "postcss@>= 8", "postcss@>=8":
+"postcss@^7.0.0 || ^8.0.1", "postcss@^8", "postcss@^8.0.0", "postcss@^8.0.2", "postcss@^8.0.3", "postcss@^8.0.9", "postcss@^8.1.0", "postcss@^8.1.2", "postcss@^8.1.4", "postcss@^8.2.14", "postcss@^8.2.15", "postcss@^8.2.2", "postcss@^8.3", "postcss@^8.3.3", "postcss@^8.3.5", "postcss@^8.4", "postcss@^8.4.4", "postcss@^8.4.5", "postcss@>= 8", "postcss@>=8":
   "integrity" "sha512-OovjwIzs9Te46vlEx7+uXB0PLijpwjXGKXjVGGPIGubGpq7uh5Xgf6D6FiJ/SzJMBosHDp6a2hiXOS97iBXcaA=="
   "resolved" "https://registry.npmjs.org/postcss/-/postcss-8.4.6.tgz"
   "version" "8.4.6"
