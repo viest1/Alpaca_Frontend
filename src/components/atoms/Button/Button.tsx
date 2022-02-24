@@ -16,7 +16,7 @@ const ButtonStyle = styled.button<ButtonInterface>`
   &:hover {
     cursor: pointer;
     color: white;
-    background: ${({ theme }) => theme.color.main5};
+    background: ${({ theme }) => theme.color.main6};
   }
   svg {
     margin-right: 1rem;
@@ -30,10 +30,11 @@ interface ButtonInterface {
   type?: 'button' | 'submit';
   border?: string;
   onClick?: () => void;
+  style?: React.CSSProperties;
   icon?: any;
 }
 
-function Button({ text, color, background, type, border, onClick, icon }: ButtonInterface) {
+function Button({ text, color, background, type, border, onClick, icon, style }: ButtonInterface) {
   return (
     <div>
       <ButtonStyle
@@ -42,6 +43,7 @@ function Button({ text, color, background, type, border, onClick, icon }: Button
         background={background}
         border={border}
         onClick={onClick}
+        style={style}
       >
         {icon && <span>{icon}</span>}
         <span>{text}</span>
@@ -57,7 +59,8 @@ Button.defaultProps = {
   border: undefined,
   text: undefined,
   onClick: undefined,
-  icon: undefined
+  icon: undefined,
+  style: undefined
 };
 
 export default Button;

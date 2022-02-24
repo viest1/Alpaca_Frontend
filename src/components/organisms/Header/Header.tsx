@@ -16,6 +16,7 @@ const Container = styled.div<StyledDivProps>`
   font-size: ${({ theme }) => theme.fontSizeInter.m};
   border: 2px solid black;
   min-height: ${({ isOpenMenu }) => (isOpenMenu ? '100vh' : 'auto')};
+  border: 2px solid red;
 `;
 
 const Flex = styled.div`
