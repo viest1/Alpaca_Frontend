@@ -121,7 +121,7 @@ function Header() {
           </FlexOpen>
           <StyledMenu>
             {data.map((item) => (
-              <NavLink key={item.id} path={item.path} text={item.text} />
+              <NavLink key={item.id} path={item.path} text={item.text} onClick={handleOpenMenu} />
             ))}
           </StyledMenu>
           <br />
