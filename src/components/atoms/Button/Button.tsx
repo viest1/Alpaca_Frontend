@@ -18,6 +18,9 @@ const ButtonStyle = styled.button<ButtonInterface>`
     color: white;
     background: ${({ theme }) => theme.color.main5};
   }
+  svg {
+    margin-right: 1rem;
+  }
 `;
 
 interface ButtonInterface {
@@ -27,19 +30,23 @@ interface ButtonInterface {
   type?: 'button' | 'submit';
   border?: string;
   onClick?: () => void;
+  icon?: any;
 }
 
-function Button({ text, color, background, type, border, onClick }: ButtonInterface) {
+function Button({ text, color, background, type, border, onClick, icon }: ButtonInterface) {
   return (
-    <ButtonStyle
-      type={type}
-      color={color}
-      background={background}
-      border={border}
-      onClick={onClick}
-    >
-      {text}
-    </ButtonStyle>
+    <div>
+      <ButtonStyle
+        type={type}
+        color={color}
+        background={background}
+        border={border}
+        onClick={onClick}
+      >
+        {icon && <span>{icon}</span>}
+        <span>{text}</span>
+      </ButtonStyle>
+    </div>
   );
 }
 
@@ -49,7 +56,8 @@ Button.defaultProps = {
   type: 'button',
   border: undefined,
   text: undefined,
-  onClick: undefined
+  onClick: undefined,
+  icon: undefined
 };
 
 export default Button;
