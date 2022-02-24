@@ -7,6 +7,8 @@ export const GlobalStyle = createGlobalStyle`
   *:after {
     box-sizing: inherit;
   }
+
+  
   
   #root{
     min-height: 100vh;

@@ -18,6 +18,9 @@ const ButtonStyle = styled.button<ButtonInterface>`
     color: white;
     background: ${({ theme }) => theme.color.main5};
   }
+  svg {
+    margin-right: 1rem;
+  }
 `;
 
 interface ButtonInterface {
@@ -28,8 +31,9 @@ interface ButtonInterface {
   border?: string;
   width?: string;
   onClick?: () => void;
+  icon?: any;
 }
-
+  
 function Button({ text, color, background, type, border, width, onClick }: ButtonInterface) {
   return (
     <ButtonStyle
@@ -40,7 +44,8 @@ function Button({ text, color, background, type, border, width, onClick }: Butto
       onClick={onClick}
       width={width}
     >
-      {text}
+        {icon && <span>{icon}</span>}
+        <span>{text}</span>
     </ButtonStyle>
   );
 }
@@ -53,6 +58,7 @@ Button.defaultProps = {
   text: undefined,
   width: undefined,
   onClick: undefined
+  icon: undefined
 };
 
 export default Button;

@@ -13,7 +13,7 @@ export const theme = {
     l: '3.157rem',
     ml: '2.369rem',
     m: '1.777rem',
-    ms: '1.333',
+    ms: '1.333rem',
     s: '1rem'
   },
   fontSizeOpenSans: {
@@ -29,7 +29,7 @@ export const theme = {
   },
   breakpoint: {
     s: '440px',
-    m: '980px',
+    m: '1060px',
     l: '1440px'
   },
   up: (breakpoint: string) => `@media (min-width: calc(${breakpoint} + 0.02px))`,

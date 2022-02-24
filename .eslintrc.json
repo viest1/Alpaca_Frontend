@@ -63,6 +63,8 @@
         "context": true,
         "expect": true,
         "jsdom": true,
-        "JSX": true
+        "JSX": true,
+        "window": true,
+        "Window": true
     }
 }

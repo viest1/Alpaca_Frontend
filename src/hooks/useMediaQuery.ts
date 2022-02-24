@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 // }
 
 function useMediaQuery(query: string): boolean {
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   const getMatches = (query: string): boolean => {
     // Prevents SSR issues
     if (typeof window !== 'undefined') {

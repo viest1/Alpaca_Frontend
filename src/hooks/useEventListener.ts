@@ -1,20 +1,38 @@
 import { RefObject, useEffect, useRef } from 'react';
 
+// interface WindowEventMap {
+//   'custom-event': CustomEvent<{ data: string }>;
+// }
+//
+// interface HTMLElementEventMap {
+//   'custom-event': CustomEvent<{ data: string }>;
+// }
+
+// eslint-disable-next-line no-undef
 function useEventListener<K extends keyof WindowEventMap>(
+  // eslint-disable-next-line no-unused-vars
   eventName: K,
+  // eslint-disable-next-line no-unused-vars,no-undef
   handler: (event: WindowEventMap[K]) => void
 ): void;
+// eslint-disable-next-line no-redeclare
 function useEventListener<
+  // eslint-disable-next-line no-undef
   K extends keyof HTMLElementEventMap,
   T extends HTMLElement = HTMLDivElement
+  // eslint-disable-next-line no-unused-vars,no-undef
 >(eventName: K, handler: (event: HTMLElementEventMap[K]) => void, element: RefObject<T>): void;
 
+// eslint-disable-next-line no-redeclare
 function useEventListener<
+  // eslint-disable-next-line no-undef
   KW extends keyof WindowEventMap,
+  // eslint-disable-next-line no-undef
   KH extends keyof HTMLElementEventMap,
   T extends HTMLElement | void = void
 >(
   eventName: KW | KH,
+  // eslint-disable-next-line no-unused-vars,no-undef
   handler: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
   element?: RefObject<T>
 ) {
@@ -44,6 +62,7 @@ function useEventListener<
     targetElement.addEventListener(eventName, eventListener);
 
     // Remove event listener on cleanup
+    // eslint-disable-next-line consistent-return
     return () => {
       targetElement.removeEventListener(eventName, eventListener);
     };
