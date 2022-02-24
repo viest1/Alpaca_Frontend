@@ -29,7 +29,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "npx eslint src/**/*.tsx",
-    "lint-fix": "npx eslint src/**/*.tsx --fix"
+    "lint-ts": "npx eslint src/**/*.ts",
+    "lint-fix": "npx eslint src/**/*.tsx --fix",
+    "lint-fix-ts": "npx eslint src/**/*.ts --fix"
   },
   "browserslist": {
     "production": [

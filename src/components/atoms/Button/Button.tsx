@@ -33,11 +33,9 @@ interface ButtonInterface {
   width?: string;
   onClick?: () => void;
   icon?: ReactElement;
-  width?: string;
   padding?: string;
   fontSize?: string;
 }
-
 
 function Button({
   text,
@@ -67,7 +65,6 @@ function Button({
         <span>{text}</span>
       </ButtonStyle>
     </div>
-
   );
 }
 
@@ -80,7 +77,6 @@ Button.defaultProps = {
   width: undefined,
   onClick: undefined,
   icon: undefined,
-  width: undefined,
   padding: undefined,
   fontSize: undefined
 };
