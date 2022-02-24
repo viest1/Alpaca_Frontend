@@ -1,10 +1,12 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useContext } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
 import './LogIn.css';
 import useForm from '../../../hooks/useForm';
+import { Context } from '../../../providers/GeneralProvider';
 
 const Container = styled.form`
   padding: 0 1rem;
@@ -30,10 +32,12 @@ const Line = styled.div`
 `;
 
 function LogIn() {
+  const { setUserData } = useContext(Context);
   interface FormLogin {
     email: string;
     password: string;
   }
+  const navigate = useNavigate();
 
   const initialValue: FormLogin = {
     email: '',
@@ -57,6 +61,8 @@ function LogIn() {
         });
         const resJSON = await res.json();
         console.log(resJSON);
+        setUserData(resJSON);
+        navigate('/');
       } catch (error: any) {
         console.log('FETCHING ERROR', error);
       }

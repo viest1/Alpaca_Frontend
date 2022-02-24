@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
@@ -161,6 +161,9 @@ const data = [
   }
 ];
 
+
+
+
 const dataDesktop = [
   {
     path: 'aboutUs',
@@ -206,13 +209,39 @@ const dataHeaderAdmin = [
   }
 ];
 
-function Header() {
+interface HeaderI {
+  displayTimeToLogout: boolean;
+}
+
+function Header({ displayTimeToLogout }: HeaderI) {
+  
+   useEffect(() => {
+    if (displayTimeToLogout) {
+      console.log('displayTimeToLogout');
+    } else {
+      console.log('NO - displayTimeToLogout');
+    }
+  }, [displayTimeToLogout]);
+
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const handleOpenMenu = () => {
     setIsOpenMenu((prev) => !prev);
   };
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
   console.log(desktopVersion);
+
+
+ 
+
+//   return (
+//     <Container isOpenMenu={isOpenMenu}>
+//       {!isOpenMenu && (
+//         <Flex>
+//           <div style={{ position: 'relative' }}>
+//             <NavLink path="/" image={CompanyLogo} alt="Logo" />
+//             <StyledP>live outside the box</StyledP>
+//           </div>
+//           <div>
 
   // Testing AdminHeader
   const adminLogIn = true;
@@ -221,6 +250,7 @@ function Header() {
       <div>
         {!desktopVersion ? (
           <Container isOpenMenu={isOpenMenu}>
+
             {!isOpenMenu && (
               <Flex>
                 <div style={{ position: 'relative' }}>
