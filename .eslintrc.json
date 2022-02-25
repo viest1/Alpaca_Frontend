@@ -44,7 +44,9 @@
         "no-plusplus": "off",
         "no-empty-function": ["warn", { "allow": ["arrowFunctions"] }],
         "react-hooks/exhaustive-deps": "warn",
-        "no-nested-ternary": "off"
+        "no-nested-ternary": "off",
+        "jsx-a11y/no-noninteractive-element-interactions": "off",
+        "jsx-a11y/click-events-have-key-events": "off"
     },
     "settings": {
         "import/resolver": {
