@@ -10,6 +10,8 @@ import { Context } from '../../../providers/GeneralProvider';
 
 const Container = styled.form`
   padding: 0 1rem;
+  max-width: 350px;
+  margin: 0 auto;
   h3 {
     text-align: center;
   }
@@ -27,6 +29,10 @@ const Container = styled.form`
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+  }
+
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    max-width: 350px;
   }
 `;
 
