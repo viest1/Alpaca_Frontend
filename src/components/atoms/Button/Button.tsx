@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const ButtonStyle = styled.button<ButtonInterface>`
@@ -32,17 +32,18 @@ interface ButtonInterface {
   border?: string;
   width?: string;
   onClick?: () => void;
-
+  padding?: string;
+  fontSize?: string;
   style?: React.CSSProperties;
   icon?: any;
 }
 
-function Button({ text, color, background, type, border, onClick, icon, style }: ButtonInterface) {
-
-  icon?: ReactElement;
-  padding?: string;
-  fontSize?: string;
-}
+// function Button({ text, color, background, type, border, onClick, icon, style }: ButtonInterface) {
+//
+//   icon?: ReactElement;
+//   padding?: string;
+//   fontSize?: string;
+// }
 
 function Button({
   text,
@@ -54,9 +55,9 @@ function Button({
   icon,
   width,
   padding,
-  fontSize
+  fontSize,
+  style
 }: ButtonInterface) {
-
   return (
     <div>
       <ButtonStyle
@@ -65,13 +66,10 @@ function Button({
         background={background}
         border={border}
         onClick={onClick}
-
         style={style}
-
         width={width}
         padding={padding}
         fontSize={fontSize}
-
       >
         {icon && <span>{icon}</span>}
         <span>{text}</span>
@@ -89,12 +87,9 @@ Button.defaultProps = {
   width: undefined,
   onClick: undefined,
   icon: undefined,
-
-  style: undefined
-
+  style: undefined,
   padding: undefined,
   fontSize: undefined
-
 };
 
 export default Button;
