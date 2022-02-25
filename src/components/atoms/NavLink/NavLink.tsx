@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${({ theme }) => theme.color.main2};
+  color: ${({ theme }) => theme.color.main8};
+  border-radius: 0.6rem;
+  height: 1rem;
   img {
     width: 140px;
     height: auto;
@@ -16,14 +18,28 @@ const BigLogo = styled(Link)`
   color: ${({ theme }) => theme.color.main2};
   img {
     width: 15rem;
+    @media (min-width: 1060px) {
+      width: 12rem;
+    }
   }
 `;
 
 const ContainerNavText = styled.div`
   padding: 0.2rem;
+  color: ${({ color }) => color || 'black'};
   &:hover {
     cursor: pointer;
     color: ${({ theme }) => theme.color.main4};
+  }
+`;
+// Style desktopVersion
+const Container = styled.div<PropsStyled>`
+  border: ${({ border }) => border || 'none'};
+  border-radius: 0.6rem;
+  padding: 0 5px;
+  &: hover {
+    cursor: pointer;
+    border-color: ${({ theme }) => theme.color.main4};
   }
 `;
 
@@ -34,12 +50,17 @@ interface Props {
   image?: string | undefined;
   alt?: string | undefined;
   bigLogo?: boolean | undefined;
+  border?: string | undefined;
   onClick?: React.MouseEventHandler;
+  color?: string | undefined;
+}
+interface PropsStyled {
+  border: string | undefined;
 }
 
-function NavLink({ path, text, image, alt, bigLogo, onClick }: Props) {
+function NavLink({ path, text, image, alt, bigLogo, border, onClick, color }: Props) {
   return (
-    <div>
+    <Container border={border}>
       {bigLogo ? (
         <BigLogo to={path}>
           {image && <img src={image} alt={alt} />}
@@ -48,10 +69,10 @@ function NavLink({ path, text, image, alt, bigLogo, onClick }: Props) {
       ) : (
         <StyledLink to={path} onClick={onClick}>
           {image && <img src={image} alt={alt} />}
-          {text && <ContainerNavText>{text}</ContainerNavText>}
+          {text && <ContainerNavText color={color}>{text}</ContainerNavText>}
         </StyledLink>
       )}
-    </div>
+    </Container>
   );
 }
 
@@ -61,7 +82,9 @@ NavLink.defaultProps = {
   bigLogo: false,
   alt: undefined,
   image: undefined,
-  onClick: undefined
+  border: undefined,
+  onClick: undefined,
+  color: undefined
 };
 
 export default NavLink;

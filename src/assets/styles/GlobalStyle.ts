@@ -65,4 +65,5 @@ export const GlobalStyle = createGlobalStyle`
   .box{
     padding:2rem;
   }
+  
 `;

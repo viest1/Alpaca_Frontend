@@ -62,7 +62,7 @@ function SignUp() {
     password: string;
     id: string;
     taxNumber: string;
-    identityCardNumber: string;
+    identityCardNumber: string | undefined;
   }
 
   const initialValue: FormSignUp = {
@@ -71,7 +71,7 @@ function SignUp() {
     password: '',
     id: '',
     taxNumber: '',
-    identityCardNumber: ''
+    identityCardNumber: undefined
   };
 
   const { handleChange, inputs } = useForm(initialValue);
