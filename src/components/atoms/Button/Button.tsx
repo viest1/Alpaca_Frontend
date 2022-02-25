@@ -31,7 +31,7 @@ interface ButtonInterface {
   type?: 'button' | 'submit';
   border?: string;
   width?: string;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler;
   padding?: string;
   fontSize?: string;
   style?: React.CSSProperties;

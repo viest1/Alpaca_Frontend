@@ -187,12 +187,12 @@ const dataDesktop = [
 ];
 const dataHeaderAdmin = [
   {
-    path: 'dashboard',
+    path: '/',
     text: 'DASHBOARD',
     id: 1
   },
   {
-    path: 'clients/projects',
+    path: 'clients',
     text: 'CLIENTS/PROJECTS',
     id: 2
   },

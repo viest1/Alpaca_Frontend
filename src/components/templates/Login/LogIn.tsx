@@ -16,6 +16,11 @@ const Container = styled.form`
   p {
     margin: 0.4rem 0 1rem 0;
     text-align: right;
+    display: inline-block;
+  }
+  p:hover {
+    cursor: pointer;
+    text-decoration: underline;
   }
   > div:last-child {
     display: flex;
@@ -23,6 +28,11 @@ const Container = styled.form`
     align-items: center;
     gap: 1rem;
   }
+`;
+
+const ContainerP = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const Line = styled.div`
@@ -61,8 +71,10 @@ function LogIn() {
         });
         const resJSON = await res.json();
         console.log(resJSON);
-        setUserData(resJSON);
-        navigate('/');
+        if (res.status === 200) {
+          setUserData(resJSON);
+          navigate('/');
+        }
       } catch (error: any) {
         console.log('FETCHING ERROR', error);
       }
@@ -70,12 +82,18 @@ function LogIn() {
     login();
   };
 
+  const handleNavigateToForgotPassword = () => {
+    navigate('/forgotPassword');
+  };
+
   return (
     <Container onSubmit={handleSubmit}>
       <h3>LOGIN</h3>
       <InputWithLabel label="Email" name="email" onChange={handleChange} />
       <InputWithLabel type="password" label="Password" name="password" onChange={handleChange} />
-      <p>I forgot my password</p>
+      <ContainerP>
+        <p onClick={handleNavigateToForgotPassword}>I forgot my password</p>
+      </ContainerP>
       <div>
         <Button type="submit" background="#2A9D8F" text="Login" />
         <Line />
