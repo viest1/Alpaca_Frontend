@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import Header from '../../organisms/Header/Header';
+import Footer from '../../organisms/Footer/Footer';
 
 interface MainContainer {
   displayTimeToLogout: boolean;
@@ -12,6 +13,7 @@ function MainContainerApp({ children, displayTimeToLogout }: MainContainer) {
     <>
       <Header displayTimeToLogout={displayTimeToLogout} />
       {children}
+      <Footer />
     </>
   );
 }

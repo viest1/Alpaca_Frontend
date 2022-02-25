@@ -226,7 +226,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
     setIsOpenMenu((prev) => !prev);
   };
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
-  console.log(desktopVersion);
+  console.log('We are on the size of Desktop Version?', desktopVersion);
 
   //   return (
   //     <Container isOpenMenu={isOpenMenu}>
