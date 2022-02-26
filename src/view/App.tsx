@@ -20,6 +20,11 @@ import Projects from '../components/templates/User_Projects/Projects';
 import VerifyEmail from '../components/molecules/VerifyEmail/VerifyEmail';
 import ForgotPassword from '../components/molecules/ForgotPassword/ForgotPassword';
 import ResetPassword from '../components/molecules/ResetPassword/ResetPassword';
+import Statistics from '../components/templates/Admin_Statistics/Statistics';
+import ClientDetail from '../components/organisms/ClientDetail/ClientDetails';
+import ProjectDetail from '../components/organisms/ProjectDetail/ProjectDetails';
+import Messages from '../components/templates/Messages/Messages';
+import NewProject from '../components/templates/Admin_NewProject/NewProject';
 
 function App(): JSX.Element {
   const [displayTimeToLogout, setDisplayTimeToLogout] = useState(false);
@@ -82,19 +87,27 @@ function App(): JSX.Element {
           <Routes>
             <Route path="/" element={<AdminDashboard />} />
             <Route path="/clients" element={<ClientsOrProjects />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/newClient" element={<NewClient />} />
+            <Route path="/client/:clientId" element={<ClientDetail />} /> {/* TODO */}
+            <Route path="/project/:projectId" element={<ProjectDetail />} /> {/* TODO */}
+            <Route path="/settings" element={<Settings />} /> {/* TODO */}
+            <Route path="/statistics" element={<Statistics />} /> {/* TODO */}
+            <Route path="/messages" element={<Messages />} /> {/* TODO */}
+            <Route path="/newClient" element={<NewClient />} /> {/* TODO */}
+            <Route path="/newProject/:clientId" element={<NewProject />} /> {/* TODO */}
           </Routes>
         ) : token && role === 'Client' ? (
           <Routes>
-            <Route path="/" element={<UserDashboard />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/" element={<UserDashboard />} /> {/* TODO */}
+            <Route path="/projects" element={<Projects />} /> {/* TODO */}
+            <Route path="/project/:projectId" element={<ProjectDetail />} /> {/* TODO */}
+            <Route path="/freelancer/:freelancerId" element={<ClientDetail />} /> {/* TODO */}
+            <Route path="/messages" element={<Messages />} /> {/* TODO */}
+            <Route path="/settings" element={<Settings />} /> {/* TODO */}
           </Routes>
         ) : (
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<Services />} />
+            <Route path="/services" element={<Services />} /> {/* TODO */}
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<SignUp />} />

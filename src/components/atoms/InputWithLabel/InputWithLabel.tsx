@@ -34,6 +34,22 @@ const TextContainer = styled.div`
   }
 `;
 
+const CheckboxContainer = styled.div`
+  display: flex;
+  align-items: center;
+  label {
+    font-weight: 600;
+    padding-left: 0.3rem;
+  }
+  input {
+    border-radius: 0.8rem;
+    padding: 0.7rem 1rem;
+    margin: 0.7rem 0 0.7rem 0;
+    font-size: 14px;
+    width: 25px;
+  }
+`;
+
 interface FormInput {
   name: string;
   label: string | undefined;
@@ -47,6 +63,8 @@ interface FormInput {
   cols?: number;
   rows?: number;
   maxlength?: number;
+  checked?: boolean;
+  id?: string;
 }
 
 function InputWithLabel({
@@ -61,8 +79,32 @@ function InputWithLabel({
   TextAreaWithLabel,
   cols,
   rows,
-  maxlength
+  maxlength,
+  checked,
+  id
 }: FormInput) {
+  if (type === 'radio' || type === 'checkbox') {
+    return (
+      <div>
+        <CheckboxContainer>
+          <label htmlFor={id || name} style={style}>
+            {label}
+          </label>
+          <input
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            id={id || name}
+            onChange={onChange}
+            value={value}
+            required={required}
+            checked={checked}
+          />
+        </CheckboxContainer>
+      </div>
+    );
+  }
+
   return (
     <div>
       {TextAreaWithLabel ? (
@@ -111,7 +153,9 @@ InputWithLabel.defaultProps = {
   TextAreaWithLabel: false,
   cols: undefined,
   rows: undefined,
-  maxlength: undefined
+  maxlength: undefined,
+  checked: undefined,
+  id: undefined
 };
 
 export default InputWithLabel;

@@ -7,6 +7,7 @@ import Button from '../../atoms/Button/Button';
 import './LogIn.css';
 import useForm from '../../../hooks/useForm';
 import { Context } from '../../../providers/GeneralProvider';
+import useError from '../../../hooks/useError';
 
 const Container = styled.form`
   padding: 0 1rem;
@@ -55,6 +56,7 @@ function LogIn() {
   };
 
   const { handleChange, inputs } = useForm(initialValue);
+  const { handleError } = useError();
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -75,8 +77,10 @@ function LogIn() {
           setUserData(resJSON);
           navigate('/');
         }
+        handleError(resJSON.message, res.status === 200);
       } catch (error: any) {
         console.log('FETCHING ERROR', error);
+        handleError();
       }
     };
     login();

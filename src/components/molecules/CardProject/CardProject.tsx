@@ -21,6 +21,7 @@ const Container = styled.div<Card>`
   > div:first-child {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 4px solid black;
     padding: 0.5rem 0 0.5rem 0;
     div:last-child {
@@ -65,10 +66,10 @@ const ContainerOptionsToClick = styled.div`
 interface client {
   projectData: {
     name: string;
-    phone: string;
     finished: string;
     website: string;
     dueData: string;
+    text: string;
   };
 }
 
@@ -103,16 +104,16 @@ function CardProject({ projectData }: client) {
           <p>{projectData.website}</p>
         </ElementData>
         <ElementData>
-          <span>Phone:</span>
-          <p>{projectData.phone}</p>
-        </ElementData>
-        <ElementData>
           <span>Due Data:</span>
           <p>{projectData.dueData}</p>
         </ElementData>
         <ElementData>
           <span>Finished:</span>
           <p>{projectData.finished}</p>
+        </ElementData>
+        <ElementData>
+          <span>Text:</span>
+          <p>{projectData.text}</p>
         </ElementData>
         <div>
           <BiArrowFromBottom onClick={handleCloseDetails} fontSize={24} />

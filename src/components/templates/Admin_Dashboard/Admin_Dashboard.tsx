@@ -97,21 +97,21 @@ const dummyProjectData = [
   {
     name: 'Super Website',
     website: 'superwebsite.de',
-    phone: '+49 112 1231 032',
+    text: 'Something About',
     dueData: '11-11-2022',
     finished: '32%'
   },
   {
     name: 'Worst Website',
     website: 'worstwebsite.de',
-    phone: '+49 112 1231 032',
+    text: 'Something About',
     dueData: '21-11-2022',
     finished: '66%'
   },
   {
     name: 'Average Website',
     website: 'averagewebsite.de',
-    phone: '+49 112 1231 032',
+    text: 'Something About',
     dueData: '13-11-2024',
     finished: '90%'
   }

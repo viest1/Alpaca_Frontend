@@ -21,6 +21,7 @@ const Container = styled.div<Card>`
   > div:first-child {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 4px solid black;
     padding: 0.5rem 0 0.5rem 0;
     div:last-child {
@@ -118,12 +119,12 @@ function CardClient({ clientData }: client) {
         </ElementData>
         <ElementData>
           <span>Projects:</span>
-          <p>{clientData.projects}</p>
+          <p>{clientData.projects.length}</p>
         </ElementData>
-        <ElementData>
-          <span>Finished:</span>
-          <p>{clientData.finished}</p>
-        </ElementData>
+        {/* <ElementData> */}
+        {/*   <span>Finished:</span> */}
+        {/*   <p>{clientData.finished}</p> */}
+        {/* </ElementData> */}
         <div>
           <BiArrowFromBottom onClick={handleCloseDetails} fontSize={24} />
         </div>

@@ -37,6 +37,20 @@ interface ContextType {
       name: string;
     }>
   >;
+  myError: {
+    message: string | undefined;
+    success: boolean;
+    successMessage: string | undefined;
+  };
+  setMyError: Dispatch<
+    SetStateAction<{
+      message: string;
+      success: boolean;
+      successMessage: string;
+    }>
+  >;
+  // eslint-disable-next-line no-unused-vars
+  // useError: (message?: string, condition?: boolean) => void;
   // clientArray: [];
   // setClientArray: Dispatch<SetStateAction<string[]>>;
 }
@@ -54,7 +68,14 @@ export const Context = createContext<ContextType>({
     exp: '',
     userId: ''
   },
-  setUserData: () => undefined
+  setUserData: () => undefined,
+  myError: {
+    message: '',
+    success: false,
+    successMessage: ''
+  },
+  setMyError: () => undefined
+  // useError: () => undefined
   // clientArray: [],
   // setClientArray: Dispatch<SetStateAction<string[]>>,
 });
@@ -70,7 +91,13 @@ function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
     exp: '',
     userId: ''
   });
+  const [myError, setMyError] = useState({
+    message: '',
+    success: false,
+    successMessage: ''
+  });
   // const [clientArray, setClientArray] = useState([]);
+  // eslint-disable-next-line default-param-last
 
   const value = useMemo(() => {
     return {
@@ -79,9 +106,11 @@ function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
       example2,
       setExample2,
       userData,
-      setUserData
+      setUserData,
+      myError,
+      setMyError
     };
-  }, [example, setExample, example2, setExample2, userData, setUserData]);
+  }, [example, setExample, example2, setExample2, userData, setUserData, myError, setMyError]);
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }
