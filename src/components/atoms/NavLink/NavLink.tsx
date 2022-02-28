@@ -80,7 +80,7 @@ NavLink.defaultProps = {
   bigLogo: false,
   alt: undefined,
   image: undefined,
-  border: undefined
+  border: undefined,
   onClick: undefined
 };
 

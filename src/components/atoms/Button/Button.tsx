@@ -33,8 +33,8 @@ interface ButtonInterface {
   onClick?: () => void;
   icon?: any;
 }
-  
-function Button({ text, color, background, type, border, width, onClick }: ButtonInterface) {
+
+function Button({ text, color, background, type, border, width, onClick, icon }: ButtonInterface) {
   return (
     <ButtonStyle
       type={type}
@@ -44,8 +44,8 @@ function Button({ text, color, background, type, border, width, onClick }: Butto
       onClick={onClick}
       width={width}
     >
-        {icon && <span>{icon}</span>}
-        <span>{text}</span>
+      {icon && <span>{icon}</span>}
+      <span>{text}</span>
     </ButtonStyle>
   );
 }
@@ -57,7 +57,7 @@ Button.defaultProps = {
   border: undefined,
   text: undefined,
   width: undefined,
-  onClick: undefined
+  onClick: undefined,
   icon: undefined
 };
 
