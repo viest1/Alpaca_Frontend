@@ -137,6 +137,9 @@ const StyledInput = styled.input`
   width: 20rem;
   margin: auto;
   border-radius: 0.3rem;
+  background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
+  background-repeat: no-repeat;
+  background-position: right center;
 `;
 
 // Style ClientHeader
@@ -191,6 +194,18 @@ const ButtonLogoutMobil = styled.button`
   background: none;
   font-size: ${({ theme }) => theme.fontSizeInter.m};
   top: 21rem;
+  border: none;
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.color.main4};
+  }
+`;
+const ButtonLogoutMobilAdmin = styled.button`
+  position: absolute;
+  color: ${({ theme }) => theme.color.main2};
+  background: none;
+  font-size: ${({ theme }) => theme.fontSizeInter.m};
+  top: 28rem;
   border: none;
   &:hover {
     cursor: pointer;
@@ -377,7 +392,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="" value="" />
+            <StyledInput type="text" placeholder="Search" value="" />
             <ServicesAndLanguageClient>
               <StyledMenuDesktopClient>
                 {dataHeaderClient.map((item) => (
@@ -438,9 +453,9 @@ function Header({ displayTimeToLogout }: HeaderI) {
                   <NavLink path="/newClient" text="NEW CUSTOMER" />
                   <NavLink path="/messages" text="MESSAGES" />
                   <NavLink path="/statistics" text="STATISTICS" />
-                  <ButtonLogoutMobil type="button" onClick={handleLogout}>
+                  <ButtonLogoutMobilAdmin type="button" onClick={handleLogout}>
                     LOGOUT
-                  </ButtonLogoutMobil>
+                  </ButtonLogoutMobilAdmin>
                 </StyledMenu>
                 <br />
                 <StyledLogoSlogan>
@@ -456,7 +471,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="" value="" />
+            <StyledInput type="text" placeholder="Search" value="" />
             <ServicesAndLanguageAdmin>
               <StyledMenuDesktopAdmin>
                 {dataHeaderAdmin.map((item) => (
