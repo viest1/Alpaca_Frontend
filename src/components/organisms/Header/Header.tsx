@@ -200,11 +200,6 @@ const dataHeaderAdmin = [
     path: 'settings',
     text: 'SETTINGS',
     id: 4
-  },
-  {
-    path: 'logout',
-    text: 'LOGOUT',
-    id: 7
   }
 ];
 
@@ -279,6 +274,10 @@ function Header({ displayTimeToLogout }: HeaderI) {
                       onClick={handleOpenMenu}
                     />
                   ))}
+                  <NavLink path="/" text="NEW CUSTOMER" />
+                  <NavLink path="/" text="MESSAGES" />
+                  <NavLink path="/" text="STATISTICS" />
+                  <NavLink path="/" text="LOGOUT" />
                 </StyledMenu>
                 <br />
                 <StyledLogoSlogan>
@@ -300,6 +299,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
                 {dataHeaderAdmin.map((item) => (
                   <NavLink key={item.id} path={item.path} text={item.text} color="white" />
                 ))}
+                <NavLink path="/" text="LOGOUT" color="white" />
               </StyledMenuDesktopAdmin>
               <CountryFlagAdmin>
                 <span className="fi fi-de" />
