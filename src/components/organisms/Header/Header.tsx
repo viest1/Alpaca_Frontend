@@ -137,6 +137,9 @@ const StyledInput = styled.input`
   width: 20rem;
   margin: auto;
   border-radius: 0.3rem;
+  background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
+  background-repeat: no-repeat;
+  background-position: right center;
 `;
 
 // Style ClientHeader
@@ -377,7 +380,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="" value="" />
+            <StyledInput type="text" placeholder="Search" value="" />
             <ServicesAndLanguageClient>
               <StyledMenuDesktopClient>
                 {dataHeaderClient.map((item) => (
@@ -456,7 +459,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="" value="" />
+            <StyledInput type="text" placeholder="Search" value="" />
             <ServicesAndLanguageAdmin>
               <StyledMenuDesktopAdmin>
                 {dataHeaderAdmin.map((item) => (
