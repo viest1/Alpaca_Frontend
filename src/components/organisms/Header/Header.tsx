@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
@@ -6,6 +6,7 @@ import CompanyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
 import NavLink from '../../atoms/NavLink/NavLink';
 import Contact from '../../molecules/Contact/Contact';
 import useMediaQuery from '../../../hooks/useMediaQuery';
+import { Context } from '../../../providers/GeneralProvider';
 
 interface StyledDivProps {
   isOpenMenu: boolean;
@@ -17,6 +18,7 @@ const Container = styled.div<StyledDivProps>`
   font-size: ${({ theme }) => theme.fontSizeInter.m};
   border: 2px solid black;
   min-height: ${({ isOpenMenu }) => (isOpenMenu ? '100vh' : 'auto')};
+  border: 2px solid red;
 `;
 
 const Flex = styled.div`
@@ -92,7 +94,47 @@ const ServicesAndLanguage = styled.div`
   justify-content: space-around;
   margin: auto;
 `;
+// Style AdminHeader
 
+const ContainerDesktopAdmin = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background: ${({ theme }) => theme.color.main7};
+  color: ${({ theme }) => theme.color.main8};
+  font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
+  padding: 0.2rem;
+`;
+
+const StyledMenuDesktopAdmin = styled.div`
+  display: flex;
+  margin: auto;
+  flex-direction: row;
+  gap: 2rem;
+  font-weight: bold;
+`;
+const CountryFlagAdmin = styled.div`
+  display: flex;
+  gap: 0.1rem;
+  margin: auto;
+  :hover {
+    cursor: pointer;
+  }
+`;
+const ServicesAndLanguageAdmin = styled.div`
+  display: flex;
+  position: relative;
+  padding-right: 32px;
+  gap: 1rem;
+  justify-content: space-around;
+  margin: 1rem;
+`;
+const StyledInput = styled.input`
+  position: relative;
+  height: 2rem;
+  width: 20rem;
+  margin: auto;
+  border-radius: 0.3rem;
+`;
 const data = [
   {
     path: 'aboutUs',
@@ -143,15 +185,133 @@ const dataDesktop = [
     id: 4
   }
 ];
+const dataHeaderAdmin = [
+  {
+    path: '/',
+    text: 'DASHBOARD',
+    id: 1
+  },
+  {
+    path: 'clients',
+    text: 'CLIENTS/PROJECTS',
+    id: 2
+  },
+  {
+    path: 'settings',
+    text: 'SETTINGS',
+    id: 4
+  }
+];
 
-function Header() {
+interface HeaderI {
+  displayTimeToLogout: boolean;
+}
+
+function Header({ displayTimeToLogout }: HeaderI) {
+  const { userData } = useContext(Context);
+  useEffect(() => {
+    if (displayTimeToLogout) {
+      console.log('displayTimeToLogout');
+    } else {
+      console.log('NO - displayTimeToLogout');
+    }
+  }, [displayTimeToLogout]);
+
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const handleOpenMenu = () => {
     setIsOpenMenu((prev) => !prev);
   };
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
-  console.log(desktopVersion);
+  console.log('We are on the size of Desktop Version?', desktopVersion);
 
+  //   return (
+  //     <Container isOpenMenu={isOpenMenu}>
+  //       {!isOpenMenu && (
+  //         <Flex>
+  //           <div style={{ position: 'relative' }}>
+  //             <NavLink path="/" image={CompanyLogo} alt="Logo" />
+  //             <StyledP>live outside the box</StyledP>
+  //           </div>
+  //           <div>
+
+  // Testing AdminHeader
+  // const adminLogIn = true;
+  if (userData.token && userData.role === 'Freelancer') {
+    return (
+      <div>
+        {!desktopVersion ? (
+          <Container isOpenMenu={isOpenMenu}>
+            {!isOpenMenu && (
+              <Flex>
+                <div style={{ position: 'relative' }}>
+                  <NavLink path="/" image={CompanyLogo} alt="Logo" />
+                  <StyledP>live outside the box</StyledP>
+                </div>
+                <div>
+                  {!isOpenMenu && (
+                    <GiHamburgerMenu fontSize={48} cursor="pointer" onClick={handleOpenMenu} />
+                  )}
+                </div>
+              </Flex>
+            )}
+            {isOpenMenu && (
+              <>
+                <FlexOpen>
+                  <div style={{ position: 'relative' }}>
+                    <NavLink path="/" image={CompanyLogo} alt="Logo" />
+                    <StyledP>live outside the box</StyledP>
+                  </div>
+                  <div>
+                    <GrClose onClick={handleOpenMenu} cursor="pointer" fontSize={48} />
+                  </div>
+                </FlexOpen>
+                <StyledMenu>
+                  {dataHeaderAdmin.map((item) => (
+                    <NavLink
+                      key={item.id}
+                      path={item.path}
+                      text={item.text}
+                      onClick={handleOpenMenu}
+                    />
+                  ))}
+                  <NavLink path="/" text="NEW CUSTOMER" />
+                  <NavLink path="/" text="MESSAGES" />
+                  <NavLink path="/" text="STATISTICS" />
+                  <NavLink path="/" text="LOGOUT" />
+                </StyledMenu>
+                <br />
+                <StyledLogoSlogan>
+                  <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
+                  <StyledSlogan>live outside the box</StyledSlogan>
+                </StyledLogoSlogan>
+                <Contact />
+              </>
+            )}
+          </Container>
+        ) : (
+          <ContainerDesktopAdmin>
+            <StyledLogoSlogan>
+              <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
+            </StyledLogoSlogan>
+            <StyledInput type="text" placeholder="" value="" />
+            <ServicesAndLanguageAdmin>
+              <StyledMenuDesktopAdmin>
+                {dataHeaderAdmin.map((item) => (
+                  <NavLink key={item.id} path={item.path} text={item.text} color="white" />
+                ))}
+                <NavLink path="/" text="LOGOUT" color="white" />
+              </StyledMenuDesktopAdmin>
+              <CountryFlagAdmin>
+                <span className="fi fi-de" />
+                <span>DE</span>
+              </CountryFlagAdmin>
+            </ServicesAndLanguageAdmin>
+          </ContainerDesktopAdmin>
+        )}
+      </div>
+    );
+  }
+  // STOP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   return (
     <div>
       {!desktopVersion ? (
