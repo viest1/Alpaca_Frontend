@@ -200,6 +200,18 @@ const ButtonLogoutMobil = styled.button`
     color: ${({ theme }) => theme.color.main4};
   }
 `;
+const ButtonLogoutMobilAdmin = styled.button`
+  position: absolute;
+  color: ${({ theme }) => theme.color.main2};
+  background: none;
+  font-size: ${({ theme }) => theme.fontSizeInter.m};
+  top: 28rem;
+  border: none;
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.color.main4};
+  }
+`;
 
 const data = [
   {
@@ -441,9 +453,9 @@ function Header({ displayTimeToLogout }: HeaderI) {
                   <NavLink path="/newClient" text="NEW CUSTOMER" />
                   <NavLink path="/messages" text="MESSAGES" />
                   <NavLink path="/statistics" text="STATISTICS" />
-                  <ButtonLogoutMobil type="button" onClick={handleLogout}>
+                  <ButtonLogoutMobilAdmin type="button" onClick={handleLogout}>
                     LOGOUT
-                  </ButtonLogoutMobil>
+                  </ButtonLogoutMobilAdmin>
                 </StyledMenu>
                 <br />
                 <StyledLogoSlogan>
