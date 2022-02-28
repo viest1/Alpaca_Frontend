@@ -3,8 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../../atoms/Button/Button';
 import useForm from '../../../hooks/useForm';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
+import useError from '../../../hooks/useError';
 
 function VerifyEmail() {
+  const { handleError } = useError();
   const { token } = useParams();
   const navigate = useNavigate();
   interface Form {
@@ -31,9 +33,13 @@ function VerifyEmail() {
         console.log(resJSON);
         if (res.status === 200) {
           navigate('/login');
+          handleError(resJSON.message, true);
+        } else {
+          handleError(resJSON.message);
         }
       } catch (error: any) {
         console.log('FETCHING ERROR', error);
+        handleError();
       }
     };
     resetPassword();

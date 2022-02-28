@@ -7,6 +7,7 @@ import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import { Context } from '../../../providers/GeneralProvider';
 import CardClient from '../../molecules/CardClient/CardClient';
 import CardProject from '../../molecules/CardProject/CardProject';
+import useError from '../../../hooks/useError';
 
 const ContainerFilterBy = styled.div`
   display: flex;
@@ -55,6 +56,7 @@ function ClientsOrProjects() {
   const [clients, setClients] = useState([]);
   const [projects, setProjects] = useState([]);
   const { userData } = useContext(Context);
+  const { handleError } = useError();
 
   const fetchClients = async () => {
     try {
@@ -72,9 +74,12 @@ function ClientsOrProjects() {
       // console.log(resJSON);
       if (res.status === 200) {
         setClients(resJSON);
+      } else {
+        handleError(resJSON.message);
       }
     } catch (error: any) {
       console.log('FETCHING ERROR', error);
+      handleError();
     }
   };
 
@@ -91,9 +96,12 @@ function ClientsOrProjects() {
       // console.log(resJSON);
       if (res.status === 200) {
         setProjects(resJSON);
+      } else {
+        handleError(resJSON.message);
       }
     } catch (error: any) {
       console.log('FETCHING ERROR', error);
+      handleError();
     }
   };
 

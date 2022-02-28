@@ -49,10 +49,8 @@ interface ContextType {
       successMessage: string;
     }>
   >;
-  // eslint-disable-next-line no-unused-vars
-  // useError: (message?: string, condition?: boolean) => void;
-  // clientArray: [];
-  // setClientArray: Dispatch<SetStateAction<string[]>>;
+  messages: never[];
+  setMessages: Dispatch<SetStateAction<never[]>>;
 }
 
 export const Context = createContext<ContextType>({
@@ -74,10 +72,9 @@ export const Context = createContext<ContextType>({
     success: false,
     successMessage: ''
   },
-  setMyError: () => undefined
-  // useError: () => undefined
-  // clientArray: [],
-  // setClientArray: Dispatch<SetStateAction<string[]>>,
+  setMyError: () => undefined,
+  messages: [],
+  setMessages: () => undefined
 });
 
 function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
@@ -96,6 +93,7 @@ function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
     success: false,
     successMessage: ''
   });
+  const [messages, setMessages] = useState([]);
   // const [clientArray, setClientArray] = useState([]);
   // eslint-disable-next-line default-param-last
 
@@ -108,9 +106,22 @@ function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
       userData,
       setUserData,
       myError,
-      setMyError
+      setMyError,
+      messages,
+      setMessages
     };
-  }, [example, setExample, example2, setExample2, userData, setUserData, myError, setMyError]);
+  }, [
+    example,
+    setExample,
+    example2,
+    setExample2,
+    userData,
+    setUserData,
+    myError,
+    setMyError,
+    messages,
+    setMessages
+  ]);
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }

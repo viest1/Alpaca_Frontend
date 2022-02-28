@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../atoms/Button/Button';
 import useForm from '../../../hooks/useForm';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
+import useError from '../../../hooks/useError';
 
 function VerifyEmail() {
+  const { handleError } = useError();
   const navigate = useNavigate();
   interface Form {
     email: string;
@@ -29,9 +31,13 @@ function VerifyEmail() {
         console.log(resJSON);
         if (res.status === 200) {
           navigate('/login');
+          handleError('You got a email with link to reset password', true);
+        } else {
+          handleError(resJSON.message, false);
         }
       } catch (error: any) {
         console.log('FETCHING ERROR', error);
+        handleError();
       }
     };
     sendLinkToResetPassword();
