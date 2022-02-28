@@ -25,6 +25,7 @@ import ClientDetail from '../components/organisms/ClientDetail/ClientDetails';
 import ProjectDetail from '../components/organisms/ProjectDetail/ProjectDetails';
 import Messages from '../components/templates/Messages/Messages';
 import NewProject from '../components/templates/Admin_NewProject/NewProject';
+import Logout from '../components/templates/Logout/Logout';
 
 function App(): JSX.Element {
   const [displayTimeToLogout, setDisplayTimeToLogout] = useState(false);
@@ -156,6 +157,7 @@ function App(): JSX.Element {
             <Route path="/project/:projectId" element={<ProjectDetail />} /> {/* TODO */}
             <Route path="/freelancer/:freelancerId" element={<ClientDetail />} /> {/* TODO */}
             <Route path="/messages" element={<Messages />} /> {/* TODO */}
+            <Route path="/logout" element={<Logout />} /> {/* TODO */}
             <Route path="/settings" element={<Settings />} /> {/* TODO */}
           </Routes>
         ) : (

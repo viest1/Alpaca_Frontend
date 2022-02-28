@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { SyntheticEvent, useContext } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
 import { RedSpan } from '../../atoms/RedSpan/RedSpan';
+import { Context } from '../../../providers/GeneralProvider';
+import useError from '../../../hooks/useError';
+
+import useForm from '../../../hooks/useForm';
 
 const PageContainer = styled.div`
-  background: black;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  padding: 2rem;
+  
   
 
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
@@ -38,13 +44,17 @@ export const TextContainer = styled.div`
   }
 `;
 
-const FormContainer = styled.div`
+const FormContainer = styled.form`
   display: block;
   margin: 0px auto;
   padding: 2rem;
   mix-width: 250px;
   max-width: 600px;
   flex-grow: 2;
+  border: solid 3px black;
+  border-radius: 10px;
+  background: black;
+
 
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     margin-right: 10rem;
@@ -54,14 +64,61 @@ const FormContainer = styled.div`
 `;
 
 function Contact(): JSX.Element {
+  const { setUserData } = useContext(Context);
+  interface ContactMessage {
+    fullName: string;
+    email: string;
+    textArea: string;
+  }
+
+  const navigate = useNavigate();
+
+  const initialValue: ContactMessage = {
+    fullName: '',
+    email: '',
+    textArea: ''
+  };
+
+  const { handleChange, inputs } = useForm(initialValue);
+  const { handleError } = useError();
+
+  const handleSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    /* console.log('those are the inputs', inputs); */
+
+    const sendMessage = async () => {
+      try {
+        const res = await fetch(`${process.env.REACT_APP_BACKEND}/message`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+            // Authorization: 'Bearer ' + user
+          },
+          body: JSON.stringify(inputs)
+        });
+        const resJSON = await res.json();
+        if (res.status === 200) {
+          setUserData(resJSON);
+          navigate('/');
+        }
+
+        handleError(resJSON.message, res.status === 200);
+      } catch (error: unknown) {
+        /* console.log('FETCHING ERROR', error); */
+        handleError();
+      }
+    };
+
+    sendMessage();
+  };
   return (
     <PageContainer>
       <TextContainer>
-        <h2 style={{ color: 'white', WebkitTextStroke: '0' }}>
+        <h2 style={{ WebkitTextStroke: '0' }}>
           Contact Us. <br /> We appreciate <br /> <RedSpan>honest</RedSpan> feedback
         </h2>
       </TextContainer>
-      <FormContainer>
+      <FormContainer onSubmit={handleSubmit}>
         {' '}
         <InputWithLabel
           name="fullName"
@@ -69,7 +126,8 @@ function Contact(): JSX.Element {
           type="input"
           placeholder="Full Name"
           style={{ color: 'white' }}
-          /* onChange */ /* value */ required
+          onChange={handleChange}
+          /* value */ required
         />
         <InputWithLabel
           name="email"
@@ -77,7 +135,8 @@ function Contact(): JSX.Element {
           type="input"
           placeholder="E-Mail Address"
           style={{ color: 'white' }}
-          /* onChange */ /* value */ required
+          onChange={handleChange}
+          /* value */ required
         />
         <InputWithLabel
           TextAreaWithLabel
@@ -88,6 +147,7 @@ function Contact(): JSX.Element {
           maxlength={120}
           style={{ color: 'white', fontFamily: 'Inter', fontWeight: 'Bold' }}
           required
+          onChange={handleChange}
         />
         <Button
           text="Send Form"
