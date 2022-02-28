@@ -4,6 +4,7 @@ import Button from '../../atoms/Button/Button';
 import './SignUp.css';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import useForm from '../../../hooks/useForm';
+import useError from '../../../hooks/useError';
 
 const FormContainer = styled.form`
   display: flex;
@@ -40,6 +41,7 @@ const ContainerButton = styled.div`
 
 function SignUp() {
   const [patrykVersion] = useState(true);
+  const { handleError } = useError();
   //   <form
   //   onSubmit={(e: React.SyntheticEvent) => {
   //     e.preventDefault();
@@ -86,14 +88,22 @@ function SignUp() {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
-            // Authorization: 'Bearer ' + userData?.token, // IN FUTURE TO AUTHORIZATION
           },
           body: JSON.stringify(inputs)
         });
         const resJSON = await res.json();
         console.log(resJSON);
+        if (res.status === 201) {
+          handleError(
+            resJSON.message || 'You created account correctly, now verify your email',
+            true
+          );
+        } else {
+          handleError(resJSON.message);
+        }
       } catch (error: any) {
         console.log('FETCHING ERROR', error);
+        handleError();
       }
     };
     signup();

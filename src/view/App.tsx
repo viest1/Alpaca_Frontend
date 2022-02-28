@@ -29,7 +29,7 @@ import Logout from '../components/templates/Logout/Logout';
 
 function App(): JSX.Element {
   const [displayTimeToLogout, setDisplayTimeToLogout] = useState(false);
-  const { userData, setUserData } = useContext(Context);
+  const { userData, setUserData, setMessages, messages } = useContext(Context);
   const { token, role } = userData;
   const navigate = useNavigate();
   useEffect(() => {
@@ -52,9 +52,7 @@ function App(): JSX.Element {
         interval = setInterval(() => {
           // If yes then Display Message About It
           if (+userData.exp - Date.now() < 30000) {
-            // TODO Implement displaying Message
             setDisplayTimeToLogout(true);
-            clearInterval(interval);
           }
           // If Token expired Clear UserData and Logout User/Admin
           if (Date.now() > userData.exp) {
@@ -68,6 +66,7 @@ function App(): JSX.Element {
             });
             navigate('/login');
             setDisplayTimeToLogout(false);
+            clearInterval(interval);
           }
           console.log('Left', ((userData.exp - Date.now()) / 1000).toFixed(0), 's To Logout');
         }, 5000);
@@ -78,6 +77,61 @@ function App(): JSX.Element {
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData.exp]);
+
+  // useEffect(() => {
+  //   console.log('Hi');
+  //   const doConnection = async () => {
+  //     console.log('Hi1');
+  //     const res = await fetch(`${process.env.REACT_APP_BACKEND}/events`, {
+  //       method: 'GET',
+  //       headers: {
+  //         Accept: 'text/event-stream'
+  //       }
+  //     });
+  //     console.log('Hi2');
+  //     console.log(res);
+  //     const resJSON = await res.json();
+  //     console.log('connection SSE', resJSON);
+  //   };
+  //   doConnection();
+  // }, []);
+
+  const [listening, setListening] = useState(false);
+
+  useEffect(() => {
+    const connectSSE = async () => {
+      if (token) {
+        if (!listening) {
+          console.log('Hello AGAIN');
+          const events = await new EventSource(`${process.env.REACT_APP_BACKEND}/events/${token}`);
+
+          events.onmessage = (event) => {
+            const parsedData = JSON.parse(event.data);
+
+            setMessages((messagesItems) => messagesItems.concat(parsedData));
+          };
+
+          events.onerror = (e) => {
+            console.log('SSE ERROR', e);
+          };
+
+          events.onopen = () => {
+            console.log('Connection works ...');
+          };
+
+          setListening(true);
+        }
+      } else {
+        setMessages([]);
+        setListening(false);
+      }
+    };
+    connectSSE().then(() => {
+      console.log('i used the function to connect SSE');
+    });
+  }, [listening, setMessages, token]);
+
+  console.log(messages);
 
   // console.log({ token, role });
   return (

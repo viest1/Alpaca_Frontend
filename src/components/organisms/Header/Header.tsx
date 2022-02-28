@@ -7,6 +7,7 @@ import NavLink from '../../atoms/NavLink/NavLink';
 import Contact from '../../molecules/Contact/Contact';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Context } from '../../../providers/GeneralProvider';
+import useError from '../../../hooks/useError';
 
 interface StyledDivProps {
   isOpenMenu: boolean;
@@ -135,6 +136,7 @@ const StyledInput = styled.input`
   margin: auto;
   border-radius: 0.3rem;
 `;
+
 // Style ClientHeader
 const ContainerDesktopClient = styled.div`
   display: flex;
@@ -168,6 +170,7 @@ const ServicesAndLanguageClient = styled.div`
   justify-content: space-around;
   margin: 1rem;
 `;
+
 
 const data = [
   {
@@ -260,12 +263,9 @@ interface HeaderI {
 
 function Header({ displayTimeToLogout }: HeaderI) {
   const { userData } = useContext(Context);
+  const { handleError } = useError();
   useEffect(() => {
-    if (displayTimeToLogout) {
-      console.log('displayTimeToLogout');
-    } else {
-      console.log('NO - displayTimeToLogout');
-    }
+    if (displayTimeToLogout) handleError('For your Safety, You will logout for 30s');
   }, [displayTimeToLogout]);
 
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -273,7 +273,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
     setIsOpenMenu((prev) => !prev);
   };
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
-  console.log('We are on the size of Desktop Version?', desktopVersion);
+  // console.log('We are on the size of Desktop Version?', desktopVersion);
 
   //   return (
   //     <Container isOpenMenu={isOpenMenu}>
