@@ -125,7 +125,7 @@ function Contact(): JSX.Element {
           label="Full Name"
           type="input"
           placeholder="Full Name"
-          style={{ color: 'white' }}
+          color="#ffffff"
           onChange={handleChange}
           /* value */ required
         />
@@ -134,7 +134,7 @@ function Contact(): JSX.Element {
           label="E-mail"
           type="input"
           placeholder="E-Mail Address"
-          style={{ color: 'white' }}
+          color="white"
           onChange={handleChange}
           /* value */ required
         />
@@ -145,7 +145,7 @@ function Contact(): JSX.Element {
           placeholder="...But be nice :)"
           rows={10}
           maxlength={120}
-          style={{ color: 'white', fontFamily: 'Inter', fontWeight: 'Bold' }}
+          color="white"
           required
           onChange={handleChange}
         />
