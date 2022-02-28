@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
+import { useNavigate } from 'react-router-dom';
 import CompanyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
 import NavLink from '../../atoms/NavLink/NavLink';
 import Contact from '../../molecules/Contact/Contact';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
+// import Button from '../../atoms/Button/Button';
 
 interface StyledDivProps {
   isOpenMenu: boolean;
@@ -170,7 +172,31 @@ const ServicesAndLanguageClient = styled.div`
   justify-content: space-around;
   margin: 1rem;
 `;
+const ButtonLogoutDesktop = styled.button`
+  position: relative;
+  color: ${({ theme }) => theme.color.main8};
+  background: ${({ theme }) => theme.color.main7};
+  font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
 
+  font-weight: bold;
+  border: none;
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.color.main4};
+  }
+`;
+const ButtonLogoutMobil = styled.button`
+  position: absolute;
+  color: ${({ theme }) => theme.color.main2};
+  background: none;
+  font-size: ${({ theme }) => theme.fontSizeInter.m};
+  top: 21rem;
+  border: none;
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.color.main4};
+  }
+`;
 
 const data = [
   {
@@ -273,6 +299,13 @@ function Header({ displayTimeToLogout }: HeaderI) {
     setIsOpenMenu((prev) => !prev);
   };
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
+
+  const { setUserData } = useContext(Context);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    setUserData({ token: '', role: '', email: '', name: '', exp: '', userId: '' });
+    navigate('/');
+  };
   // console.log('We are on the size of Desktop Version?', desktopVersion);
 
   //   return (
@@ -326,7 +359,9 @@ function Header({ displayTimeToLogout }: HeaderI) {
                     />
                   ))}
                   <NavLink path="/messages" text="MESSAGES" />
-                  <NavLink path="/logout" text="LOGOUT" />
+                  <ButtonLogoutMobil type="button" onClick={handleLogout}>
+                    LOGOUT
+                  </ButtonLogoutMobil>
                 </StyledMenu>
                 <br />
                 <StyledLogoSlogan>
@@ -348,7 +383,9 @@ function Header({ displayTimeToLogout }: HeaderI) {
                 {dataHeaderClient.map((item) => (
                   <NavLink key={item.id} path={item.path} text={item.text} color="white" />
                 ))}
-                <NavLink path="/logout" text="LOGOUT" color="white" />
+                <ButtonLogoutDesktop type="button" onClick={handleLogout}>
+                  LOGOUT
+                </ButtonLogoutDesktop>
               </StyledMenuDesktopClient>
               <CountryFlagClient>
                 <span className="fi fi-de" />
@@ -401,7 +438,9 @@ function Header({ displayTimeToLogout }: HeaderI) {
                   <NavLink path="/newClient" text="NEW CUSTOMER" />
                   <NavLink path="/messages" text="MESSAGES" />
                   <NavLink path="/statistics" text="STATISTICS" />
-                  <NavLink path="/" text="LOGOUT" />
+                  <ButtonLogoutMobil type="button" onClick={handleLogout}>
+                    LOGOUT
+                  </ButtonLogoutMobil>
                 </StyledMenu>
                 <br />
                 <StyledLogoSlogan>
@@ -423,7 +462,9 @@ function Header({ displayTimeToLogout }: HeaderI) {
                 {dataHeaderAdmin.map((item) => (
                   <NavLink key={item.id} path={item.path} text={item.text} color="white" />
                 ))}
-                <NavLink path="/" text="LOGOUT" color="white" />
+                <ButtonLogoutDesktop type="button" onClick={handleLogout}>
+                  LOGOUT
+                </ButtonLogoutDesktop>
               </StyledMenuDesktopAdmin>
               <CountryFlagAdmin>
                 <span className="fi fi-de" />
