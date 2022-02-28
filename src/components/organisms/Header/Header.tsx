@@ -201,11 +201,6 @@ const dataHeaderAdmin = [
     text: 'SETTINGS',
     id: 4
   }
-  /* {
-    path: 'logout',
-    text: 'LOGOUT',
-    id: 5
-  } */
 ];
 
 interface HeaderI {
@@ -279,9 +274,9 @@ function Header({ displayTimeToLogout }: HeaderI) {
                       onClick={handleOpenMenu}
                     />
                   ))}
-                  <NavLink path="/" text="STATISTICS" />
+                  <NavLink path="/" text="NEW CUSTOMER" />
                   <NavLink path="/" text="MESSAGES" />
-                  <NavLink path="/" text="SETTINGS" />
+                  <NavLink path="/" text="STATISTICS" />
                   <NavLink path="/" text="LOGOUT" />
                 </StyledMenu>
                 <br />
