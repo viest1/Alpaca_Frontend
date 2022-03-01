@@ -66,12 +66,11 @@ function ClientsOrProjects() {
           method: 'GET',
           headers: {
             'Content-type': 'application/json',
-            Authorization: `Bearer ${userData?.token}`
+            Authorization: `Bearer ${userData.token}`
           }
         }
       );
       const resJSON = await res.json();
-      // console.log(resJSON);
       if (res.status === 200) {
         setClients(resJSON);
       } else {
@@ -89,11 +88,11 @@ function ClientsOrProjects() {
         method: 'GET',
         headers: {
           'Content-type': 'application/json',
-          Authorization: `Bearer ${userData?.token}`
+          Authorization: `Bearer ${userData.token}`
         }
       });
       const resJSON = await res.json();
-      // console.log(resJSON);
+      console.log(resJSON);
       if (res.status === 200) {
         setProjects(resJSON);
       } else {

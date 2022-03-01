@@ -180,7 +180,6 @@ const ButtonLogoutDesktop = styled.button`
   color: ${({ theme }) => theme.color.main8};
   background: ${({ theme }) => theme.color.main7};
   font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
-
   font-weight: bold;
   border: none;
   &:hover {
@@ -212,7 +211,6 @@ const ButtonLogoutMobilAdmin = styled.button`
     color: ${({ theme }) => theme.color.main4};
   }
 `;
-
 const data = [
   {
     path: '/aboutUs',
