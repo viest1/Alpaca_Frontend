@@ -7,6 +7,7 @@ import NavLink from '../../atoms/NavLink/NavLink';
 import Contact from '../../molecules/Contact/Contact';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 
+
 interface StyledDivProps {
   isOpenMenu: boolean;
 }

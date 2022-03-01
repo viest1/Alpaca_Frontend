@@ -4,7 +4,7 @@ import HeroSection from '../../organisms/HeroSection/HeroSection';
 import SectionProductDesc1 from '../../organisms/SectionProductDesc1/SectionProductDesc1';
 import SectionProductDesc2 from '../../organisms/SectionProductDesc2/SectionProductDesc2';
 import SectionProductDesc3 from '../../organisms/SectionProductDesc3/SectionProductDesc3';
-import Footer from '../../organisms/Footer/Footer';
+
 
 // EXAMPLE - using media queries from our theme
 
@@ -72,7 +72,6 @@ function HomePage(): JSX.Element {
         <SectionProductDesc1 />
         <SectionProductDesc2 />
         <SectionProductDesc3 />
-        <Footer />
       </ContainerSections>
     </div>
   );

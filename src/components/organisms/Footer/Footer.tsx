@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { Link } from 'react-router-dom'; // Link to create the
+import { Link } from 'react-router-dom'; // Link to create the
 // import Contact from '../../molecules/Contact/Contact';
 import { MdLocalPhone, MdEmail, MdOutlineFacebook } from 'react-icons/md';
 import { SiTwitter } from 'react-icons/si';
@@ -8,6 +8,7 @@ import { IoLogoInstagram } from 'react-icons/io';
 import mobileFooterWave from '../../../assets/illustrations/mobileFooterWaveBlue.png';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import companyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
+// import NavLink from '../../atoms/NavLink/NavLink';
 // Mobile Styles
 
 const FooterBody = styled.div`
@@ -102,9 +103,9 @@ const CountryFlag = styled.div`
 const StyledLink = styled.div`
   color: white;
 `;
-
+//bei 100% passt sich das Bild dem parentelement an, es ist so groß, wie Platz da ist
 const CompanyLogo = styled.img`
-  width: 25%;
+  width: 100%;
   height: auto;
 `;
 
@@ -159,7 +160,9 @@ function Footer() {
               </FooterRow>
             </StyledCol>
           </LeftCol>
-          <CompanyLogo src={companyLogo} />
+          <Link to="/">
+            <CompanyLogo src={companyLogo} />
+          </Link>
         </DesktopFooter>
       ) : (
         <MobileFooter>
