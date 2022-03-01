@@ -431,7 +431,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="Search" value="" />
+            <StyledInput type="text" placeholder="Search" />
             <ServicesAndLanguageClient>
               <StyledMenuDesktopClient>
                 {dataHeaderClient.map((item) => (
@@ -530,7 +530,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="Search" value="" />
+            <StyledInput type="text" placeholder="Search" />
             <ServicesAndLanguageAdmin>
               <StyledMenuDesktopAdmin>
                 {dataHeaderAdmin.map((item) => (

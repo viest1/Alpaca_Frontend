@@ -5,6 +5,7 @@ import CardClient from '../../molecules/CardClient/CardClient';
 import CardProject from '../../molecules/CardProject/CardProject';
 import { dataStats, optionsDoughnut } from './chartSettings';
 import Chart from '../../molecules/Chart/Chart';
+import GlobalMessage from '../../organisms/GlobalMessage/GlobalMessage';
 
 const Container = styled.div`
   padding: 1rem;
@@ -151,6 +152,7 @@ function AdminDashboard() {
           <Chart data={dataStats} options={optionsDoughnut} />
         </Stats>
       </ContainerDataAndStats>
+      <GlobalMessage />
     </Container>
   );
 }
