@@ -1,7 +1,7 @@
 import React from 'react';
 
 function UserDashboard() {
-  return <div>UserDashboard</div>;
+  return <h2>UserDashboard</h2>;
 }
 
 export default UserDashboard;
