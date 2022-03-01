@@ -53,14 +53,16 @@ interface Props {
   border?: string | undefined;
   onClick?: React.MouseEventHandler;
   color?: string | undefined;
+  weight?: string | undefined;
 }
 interface PropsStyled {
   border: string | undefined;
+  weight: string | undefined;
 }
 
-function NavLink({ path, text, image, alt, bigLogo, border, onClick, color }: Props) {
+function NavLink({ path, text, image, alt, bigLogo, border, onClick, color, weight }: Props) {
   return (
-    <Container border={border}>
+    <Container border={border} weight={weight}>
       {bigLogo ? (
         <BigLogo to={path}>
           {image && <img src={image} alt={alt} />}
@@ -84,7 +86,8 @@ NavLink.defaultProps = {
   image: undefined,
   border: undefined,
   onClick: undefined,
-  color: undefined
+  color: undefined,
+  weight: undefined
 };
 
 export default NavLink;
