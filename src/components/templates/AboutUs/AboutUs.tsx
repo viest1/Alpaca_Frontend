@@ -7,7 +7,7 @@ import face2small from '../../../assets/images/face2small.jpg';
 import face3small from '../../../assets/images/face3small.jpg';
 import face4small from '../../../assets/images/face4small.jpg';
 import face5small from '../../../assets/images/face5small.jpg';
-import Footer from '../../organisms/Footer/Footer'
+
 
 const MainContainer = styled.div`
   display: flex;

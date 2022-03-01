@@ -8,6 +8,7 @@ import { IoLogoInstagram } from 'react-icons/io';
 import mobileFooterWave from '../../../assets/illustrations/mobileFooterWaveBlue.png';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import companyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
+import Impressum from '../../templates/Impressum/Impressum';
 // import NavLink from '../../atoms/NavLink/NavLink';
 // Mobile Styles
 
@@ -103,7 +104,7 @@ const CountryFlag = styled.div`
 const StyledLink = styled.div`
   color: white;
 `;
-//bei 100% passt sich das Bild dem parentelement an, es ist so groß, wie Platz da ist
+// bei 100% passt sich das Bild dem parentelement an, es ist so groß, wie Platz da ist
 const CompanyLogo = styled.img`
   width: 100%;
   height: auto;
@@ -144,7 +145,9 @@ function Footer() {
                 <StyledLink>About Us</StyledLink>
                 <StyledLink>Services</StyledLink>
                 <StyledLink>Payments</StyledLink>
-                <StyledLink>Impressum</StyledLink>
+                <Link to="/Impressum">
+                  <StyledLink>Impressum</StyledLink>
+                </Link>
                 <StyledLink>FAQ</StyledLink>
               </div>
             </StyledCol>
