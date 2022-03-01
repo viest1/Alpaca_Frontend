@@ -13,14 +13,10 @@
     flex-direction: column;
     align-items:center;
     gap:1rem;
-
 }
 
 .line{
     width:50%;
     height: 2px;
     background-color:#666;
-    /* margin-top: 10px;
-    margin-bottom: 15px; */
-    
 }

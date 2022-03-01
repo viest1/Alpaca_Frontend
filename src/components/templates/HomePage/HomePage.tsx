@@ -5,7 +5,6 @@ import SectionProductDesc1 from '../../organisms/SectionProductDesc1/SectionProd
 import SectionProductDesc2 from '../../organisms/SectionProductDesc2/SectionProductDesc2';
 import SectionProductDesc3 from '../../organisms/SectionProductDesc3/SectionProductDesc3';
 
-
 // EXAMPLE - using media queries from our theme
 
 // const ContainerSections = styled.div(
@@ -61,7 +60,7 @@ const ContainerSections = styled.div`
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     width: 90%;
     max-width: 1440px;
-  }
+  }/
 `;
 
 function HomePage(): JSX.Element {

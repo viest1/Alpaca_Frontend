@@ -1,19 +1,30 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useContext } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
 import './LogIn.css';
 import useForm from '../../../hooks/useForm';
+import { Context } from '../../../providers/GeneralProvider';
+import useError from '../../../hooks/useError';
 
 const Container = styled.form`
   padding: 0 1rem;
+  max-width: 350px;
+  margin: 0 auto;
+
   h3 {
     text-align: center;
   }
   p {
     margin: 0.4rem 0 1rem 0;
     text-align: right;
+    display: inline-block;
+  }
+  p:hover {
+    cursor: pointer;
+    text-decoration: underline;
   }
   > div:last-child {
     display: flex;
@@ -21,6 +32,15 @@ const Container = styled.form`
     align-items: center;
     gap: 1rem;
   }
+
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    max-width: 350px;
+  }
+`;
+
+const ContainerP = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const Line = styled.div`
@@ -30,10 +50,12 @@ const Line = styled.div`
 `;
 
 function LogIn() {
+  const { setUserData } = useContext(Context);
   interface FormLogin {
     email: string;
     password: string;
   }
+  const navigate = useNavigate();
 
   const initialValue: FormLogin = {
     email: '',
@@ -41,6 +63,7 @@ function LogIn() {
   };
 
   const { handleChange, inputs } = useForm(initialValue);
+  const { handleError } = useError();
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -57,11 +80,21 @@ function LogIn() {
         });
         const resJSON = await res.json();
         console.log(resJSON);
+        if (res.status === 200) {
+          setUserData(resJSON);
+          navigate('/');
+        }
+        handleError(resJSON.message, res.status === 200);
       } catch (error: any) {
         console.log('FETCHING ERROR', error);
+        handleError();
       }
     };
     login();
+  };
+
+  const handleNavigateToForgotPassword = () => {
+    navigate('/forgotPassword');
   };
 
   return (
@@ -69,7 +102,9 @@ function LogIn() {
       <h3>LOGIN</h3>
       <InputWithLabel label="Email" name="email" onChange={handleChange} />
       <InputWithLabel type="password" label="Password" name="password" onChange={handleChange} />
-      <p>I forgot my password</p>
+      <ContainerP>
+        <p onClick={handleNavigateToForgotPassword}>I forgot my password</p>
+      </ContainerP>
       <div>
         <Button type="submit" background="#2A9D8F" text="Login" />
         <Line />
