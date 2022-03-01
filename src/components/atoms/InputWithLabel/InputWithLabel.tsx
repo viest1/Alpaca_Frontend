@@ -55,7 +55,7 @@ const CheckboxContainer = styled.div`
 
 interface FormInput {
   name: string;
-  label: string | undefined;
+  label?: string | undefined;
   type?: string | undefined;
   placeholder?: string | undefined;
   onChange?: any;
@@ -90,16 +90,16 @@ function InputWithLabel({
     return (
       <div>
         <CheckboxContainer>
-          <label htmlFor={id || name}>{label}</label>
+          {label && <label htmlFor={id || name}>{label}</label>}
           <input
             type={type}
             name={name}
             placeholder={placeholder}
             id={id || name}
-            onChange={onChange}
             value={value}
             required={required}
             checked={checked}
+            onChange={onChange}
           />
         </CheckboxContainer>
       </div>
@@ -110,29 +110,30 @@ function InputWithLabel({
     <div>
       {TextAreaWithLabel ? (
         <TextContainer color={color}>
-          <label htmlFor={name}>{label}</label>
+          {label && <label htmlFor={name}>{label}</label>}
           <textarea
             name={name}
             placeholder={placeholder}
             id={name}
-            onChange={onChange}
+            value={value}
             required={required}
             cols={cols}
             rows={rows}
             maxLength={maxlength}
+            onChange={onChange}
           />
         </TextContainer>
       ) : (
         <Container color={color}>
-          <label htmlFor={name}>{label}</label>
+          {label && <label htmlFor={name}>{label}</label>}
           <input
             type={type}
             name={name}
             placeholder={placeholder}
             id={name}
-            onChange={onChange}
             value={value}
             required={required}
+            onChange={onChange}
           />
         </Container>
       )}
@@ -152,7 +153,8 @@ InputWithLabel.defaultProps = {
   rows: undefined,
   maxlength: undefined,
   checked: undefined,
-  id: undefined
+  id: undefined,
+  label: undefined
 };
 
 export default InputWithLabel;

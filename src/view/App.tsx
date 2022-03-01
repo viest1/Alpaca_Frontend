@@ -102,11 +102,11 @@ function App(): JSX.Element {
       if (token) {
         if (!listening) {
           console.log('Hello AGAIN');
-          const events = await new EventSource(`${process.env.REACT_APP_BACKEND}/events/${token}`);
+          const events = new EventSource(`${process.env.REACT_APP_BACKEND}/events/${token}`);
 
           events.onmessage = (event) => {
             const parsedData = JSON.parse(event.data);
-
+            console.log('Parsed', parsedData);
             setMessages((messagesItems) => messagesItems.concat(parsedData));
           };
 

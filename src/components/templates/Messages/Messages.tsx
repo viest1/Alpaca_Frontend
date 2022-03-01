@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useContext, useEffect, useState } from 'react';
+import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
@@ -13,25 +13,68 @@ const Container = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  position: relative;
+  //gap: 3rem;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   padding: 1rem;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  * {
+    width: 100%;
+  }
+  //border: 1px solid grey;
 `;
 
 const WrapperMessages = styled.div`
-  padding: 1rem;
-  border: 5px solid black;
-  max-height: 600px;
+  //padding: 1rem;
+  //border: 2px solid black;
+  max-height: 1200px;
+  height: 400px;
+  width: 95vw;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  overflow-y: scroll;
+  //gap: 0.4rem;
+  > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    overflow-y: scroll;
+    height: 100%;
+    padding-top: 0.4rem;
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
+`;
+
+const PContainer = styled.div`
+  background: ${({ theme }) => theme.color.main3};
+  color: white;
+  padding: 1rem;
 `;
 
 const ContactList = styled.div`
   padding: 1rem;
+  border-right: 1px solid grey;
 `;
 
 const Contact = styled.div`
@@ -40,28 +83,48 @@ const Contact = styled.div`
   justify-content: space-between;
   border-bottom: 4px solid black;
   padding: 0.5rem 0 0.5rem 0;
+  gap: 1rem;
+  h5 {
+    padding: 0;
+    margin: 0;
+    font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
+  }
 `;
 
 const ContainerContactListAndMessages = styled.div`
   display: flex;
-  gap: 3rem;
+  border: 1px solid grey;
+  justify-content: center;
+  margin: 0 auto;
+  //gap: 3rem;
+`;
+
+const H3Styled = styled.h3`
+  display: none;
+  // ${({ theme }) => theme.up(theme.breakpoint.m)} {
+  //   display: block;
+  // }
 `;
 
 interface Message {
   message: string;
+  receiverId: string;
 }
 
 const initialValue: Message = {
-  message: ''
+  message: '',
+  receiverId: ''
 };
 
 function Messages() {
   const { messages, userData } = useContext(Context);
   const [clientMessages, setClientMessages] = useState([]);
-  const { inputs, handleChange } = useForm(initialValue);
+  const { inputs, handleChange, resetForm } = useForm(initialValue);
   const { handleError } = useError();
-  const [clients, setClients] = useState([]);
+  const [clients, setClients] = useState<any[]>([]);
+  const [actuallyClient, setActuallyClient] = useState<any[]>([]);
 
+  // Fetching Clients from Freelancer
   const fetchClients = async () => {
     try {
       const res = await fetch(
@@ -87,10 +150,34 @@ function Messages() {
     }
   };
 
-  useEffect(() => {
-    fetchClients();
-  }, []);
+  // Fetching Freelancers from Client
+  const fetchClientsForClient = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND}/user/freelancers/${userData.token}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${userData?.token}`
+          }
+        }
+      );
+      const resJSON = await res.json();
+      // console.log(resJSON);
+      if (res.status === 200) {
+        console.log(resJSON);
+        setClients(resJSON);
+      } else {
+        handleError(resJSON.message);
+      }
+    } catch (error: any) {
+      console.log('FETCHING ERROR', error);
+      handleError();
+    }
+  };
 
+  // onSubmit Form - Send a Message
   const handleSubmitMessage = async (e: SyntheticEvent) => {
     e.preventDefault();
     const sendMessage = async () => {
@@ -105,8 +192,10 @@ function Messages() {
           body: JSON.stringify(inputs)
         });
         const resJSON = await res.json();
-        if (res.status === 200) {
-          console.log(resJSON);
+        console.log({ resJSON });
+        if (res.status === 201) {
+          resetForm();
+          handleError(resJSON.message, true);
         } else {
           handleError(resJSON.message);
         }
@@ -115,20 +204,60 @@ function Messages() {
         handleError();
       }
     };
-    await sendMessage();
+    sendMessage();
   };
 
+  // Set actually client and his messages after click on his Avatar
   const handleDisplayMessages = (id: string) => {
     console.log(id);
     setClientMessages(messages.filter((item: any) => item.creator === id || item.receiver === id));
+    setActuallyClient(clients.filter((item: any) => item._id === id));
   };
+
+  // Fetching Clients
+  useEffect(() => {
+    if (userData.token && userData.role === 'Freelancer') {
+      fetchClients();
+    }
+    if (userData.token && userData.role === 'Client') {
+      fetchClientsForClient();
+    }
+  }, []);
+
+  // Assign actually client on begin and set client messages
+  useEffect(() => {
+    if (actuallyClient.length < 1 && clients.length > 0 && messages.length > 0) {
+      setActuallyClient([clients[0]]);
+      setClientMessages(() =>
+        messages.filter(
+          (item: any) => item.creator === clients[0]._id || item.receiver === clients[0]._id
+        )
+      );
+    }
+    if (actuallyClient.length > 0) {
+      inputs.receiverId = actuallyClient[0]._id;
+    }
+  }, [actuallyClient, clients, messages]);
+
+  // If messages changes thanks to SSE(Server Sent Events) then we display new message
+  useEffect(() => {
+    if (actuallyClient.length > 0) {
+      setClientMessages(
+        messages.filter(
+          (item: any) =>
+            item.creator === actuallyClient[0]._id || item.receiver === actuallyClient[0]._id
+        )
+      );
+    }
+  }, [messages]);
+
   return (
     <Container>
-      <h3>Messages</h3>
+      <H3Styled>Messages</H3Styled>
       <ContainerContactListAndMessages>
         <ContactList>
           {clients.map((clientData: any) => (
-            <Contact onClick={() => handleDisplayMessages(clientData._id)}>
+            <Contact key={clientData._id} onClick={() => handleDisplayMessages(clientData._id)}>
               <RoundedPhoto
                 img={face1}
                 alt="face"
@@ -137,19 +266,41 @@ function Messages() {
                 outline="3px solid black"
               />
               <div>
-                <h4>{clientData.name}</h4>
+                <h5>{clientData.name}</h5>
               </div>
             </Contact>
           ))}
         </ContactList>
         <div>
           <WrapperMessages>
-            {clientMessages.map((item: any) => (
-              <CardMessage key={item._id} message={item} />
-            ))}
+            {actuallyClient.length > 0 && (
+              <PContainer>
+                {' '}
+                <p>{actuallyClient[0].name}</p>
+              </PContainer>
+            )}
+            <div>
+              {clientMessages.map((item: any, i) => (
+                <CardMessage
+                  // style={{ marginLeft: item.creator === userData.userId ? 'auto' : null }}
+                  marginLeft={item.creator === userData.userId}
+                  key={item._id}
+                  message={item}
+                  idName={i === clientMessages.length - 1 ? 'lastMessage' : undefined}
+                  // ref={i === clientMessages.length - 1 ? ref : null}
+                />
+              ))}
+              {/* <div ref={lastRef} /> */}
+              <AlwaysScrollToBottom />
+            </div>
           </WrapperMessages>
           <Form onSubmit={handleSubmitMessage}>
-            <InputWithLabel label="Write a Message" name="message" onChange={handleChange} />
+            <InputWithLabel
+              placeholder="Write a Message..."
+              name="message"
+              onChange={handleChange}
+              value={inputs.message}
+            />
             <Button text="Send a Message" type="submit" />
           </Form>
         </div>
@@ -159,3 +310,10 @@ function Messages() {
 }
 
 export default Messages;
+
+// Component which is created after last element to scroll
+export function AlwaysScrollToBottom() {
+  const elementRef: any = useRef();
+  useEffect(() => elementRef.current.scrollIntoView(false));
+  return <div ref={elementRef} />;
+}

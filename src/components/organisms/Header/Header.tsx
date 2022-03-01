@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
@@ -9,7 +9,11 @@ import Contact from '../../molecules/Contact/Contact';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
-// import Button from '../../atoms/Button/Button';
+import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
+import trumpy from '../../../assets/images/trumpy.jpg';
+import putin from '../../../assets/images/putin.jpeg';
+
 
 interface StyledDivProps {
   isOpenMenu: boolean;
@@ -177,10 +181,9 @@ const ServicesAndLanguageClient = styled.div`
 `;
 const ButtonLogoutDesktop = styled.button`
   position: relative;
-  color: ${({ theme }) => theme.color.main8};
-  background: ${({ theme }) => theme.color.main7};
+  color: ${({ theme }) => theme.color.main7};
+  background: ${({ theme }) => theme.color.main8};
   font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
-
   font-weight: bold;
   border: none;
   &:hover {
@@ -212,7 +215,21 @@ const ButtonLogoutMobilAdmin = styled.button`
     color: ${({ theme }) => theme.color.main4};
   }
 `;
-
+// Style Avatar Menu
+const AvatarContainer = styled.div`
+  display: flex;
+`;
+const AvatarMenu = styled.div`
+  display: flex;
+  position: relative;
+  margin: auto;
+  border: 2px solid ${({ theme }) => theme.color.main7};
+  flex-direction: column;
+  top: 5rem;
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.color.main4};
+`;
 const data = [
   {
     path: '/aboutUs',
@@ -275,8 +292,8 @@ const dataHeaderAdmin = [
     id: 2
   },
   {
-    path: '/settings',
-    text: 'SETTINGS',
+    path: '/messages',
+    text: 'MESSAGES',
     id: 3
   }
 ];
@@ -298,6 +315,13 @@ const dataHeaderClient = [
     id: 3
   }
 ];
+const dataAvatarMenu = [
+  {
+    path: '/settings',
+    text: 'SETTINGS',
+    id: 1
+  }
+];
 interface HeaderI {
   displayTimeToLogout: boolean;
 }
@@ -305,22 +329,37 @@ interface HeaderI {
 function Header({ displayTimeToLogout }: HeaderI) {
   const { userData } = useContext(Context);
   const { handleError } = useError();
+
   useEffect(() => {
     if (displayTimeToLogout) handleError('For your Safety, You will logout for 30s');
   }, [displayTimeToLogout]);
-
+  // Open & Closing Menu
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const handleOpenMenu = () => {
     setIsOpenMenu((prev) => !prev);
   };
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
-
+  // Logout
   const { setUserData } = useContext(Context);
   const navigate = useNavigate();
   const handleLogout = () => {
     setUserData({ token: '', role: '', email: '', name: '', exp: '', userId: '' });
     navigate('/');
   };
+  // Avatar Menu
+  const [isOpenAvatarMenu, setIsOpenAvatarMenu] = useState(false);
+  const handleOpenAvatarMenu = () => {
+    setIsOpenAvatarMenu((prev) => !prev);
+  };
+  // Reset Menu when Logout
+  useEffect(() => {
+    if (!userData.token) {
+      setIsOpenAvatarMenu(false);
+    }
+  }, [userData.token]);
+  // useRef()
+  const ref: any = useRef();
+  useOnClickOutside(ref, () => handleOpenAvatarMenu());
   // console.log('We are on the size of Desktop Version?', desktopVersion);
 
   //   return (
@@ -392,20 +431,40 @@ function Header({ displayTimeToLogout }: HeaderI) {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="Search" value="" />
+            <StyledInput type="text" placeholder="Search" />
             <ServicesAndLanguageClient>
               <StyledMenuDesktopClient>
                 {dataHeaderClient.map((item) => (
                   <NavLink key={item.id} path={item.path} text={item.text} color="white" />
                 ))}
-                <ButtonLogoutDesktop type="button" onClick={handleLogout}>
-                  LOGOUT
-                </ButtonLogoutDesktop>
               </StyledMenuDesktopClient>
               <CountryFlagClient>
                 <span className="fi fi-de" />
                 <span>DE</span>
               </CountryFlagClient>
+              <AvatarContainer>
+                {!isOpenAvatarMenu && (
+                  <div role="button" onClick={handleOpenAvatarMenu} tabIndex={0}>
+                    <RoundedPhoto
+                      img={putin}
+                      alt="avatar"
+                      outline="3px solid yellow"
+                      width="5rem"
+                      height="5rem"
+                    />
+                  </div>
+                )}
+                {isOpenAvatarMenu && (
+                  <AvatarMenu ref={ref}>
+                    {dataAvatarMenu.map((item) => (
+                      <NavLink key={item.id} path={item.path} text={item.text} weight="bold" />
+                    ))}
+                    <ButtonLogoutDesktop type="button" onClick={handleLogout}>
+                      LOGOUT
+                    </ButtonLogoutDesktop>
+                  </AvatarMenu>
+                )}
+              </AvatarContainer>
             </ServicesAndLanguageClient>
           </ContainerDesktopClient>
         )}
@@ -471,20 +530,40 @@ function Header({ displayTimeToLogout }: HeaderI) {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="Search" value="" />
+            <StyledInput type="text" placeholder="Search" />
             <ServicesAndLanguageAdmin>
               <StyledMenuDesktopAdmin>
                 {dataHeaderAdmin.map((item) => (
                   <NavLink key={item.id} path={item.path} text={item.text} color="white" />
                 ))}
-                <ButtonLogoutDesktop type="button" onClick={handleLogout}>
-                  LOGOUT
-                </ButtonLogoutDesktop>
               </StyledMenuDesktopAdmin>
               <CountryFlagAdmin>
                 <span className="fi fi-de" />
                 <span>DE</span>
               </CountryFlagAdmin>
+              <AvatarContainer>
+                {!isOpenAvatarMenu && (
+                  <div role="button" onClick={handleOpenAvatarMenu} tabIndex={0}>
+                    <RoundedPhoto
+                      img={trumpy}
+                      alt="avatar"
+                      outline="3px solid yellow"
+                      width="5rem"
+                      height="5rem"
+                    />
+                  </div>
+                )}
+                {isOpenAvatarMenu && (
+                  <AvatarMenu ref={ref}>
+                    {dataAvatarMenu.map((item) => (
+                      <NavLink key={item.id} path={item.path} text={item.text} weight="bold" />
+                    ))}
+                    <ButtonLogoutDesktop type="button" onClick={handleLogout}>
+                      LOGOUT
+                    </ButtonLogoutDesktop>
+                  </AvatarMenu>
+                )}
+              </AvatarContainer>
             </ServicesAndLanguageAdmin>
           </ContainerDesktopAdmin>
         )}

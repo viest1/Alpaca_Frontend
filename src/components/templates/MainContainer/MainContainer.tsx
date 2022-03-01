@@ -1,6 +1,7 @@
 import React, { ReactNode, useContext } from 'react';
 import Header from '../../organisms/Header/Header';
 import Footer from '../../organisms/Footer/Footer';
+
 import ErrorMessage from '../../molecules/ErrorMessage/ErrorMessage';
 import { Context } from '../../../providers/GeneralProvider';
 
