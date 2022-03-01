@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  color: ${({ color }) => color || 'black'};
   label {
     font-family: Inter;
     display: block;
-    font-weight: 600;
+    font-weight: bold;
     padding-left: 0.3rem;
   }
   input {
@@ -22,6 +23,8 @@ const Container = styled.div`
 
 const TextContainer = styled.div`
   display: block;
+  color: ${({ color }) => color || 'black'};
+  font-weight: bold;
   textarea {
     padding: 0.7rem 1rem;
     margin: 0.7rem 0 0.7rem 0;
@@ -58,7 +61,7 @@ interface FormInput {
   onChange?: any;
   value?: string;
   required?: boolean;
-  style?: React.CSSProperties;
+  color?: string;
   TextAreaWithLabel?: boolean;
   cols?: number;
   rows?: number;
@@ -75,7 +78,7 @@ function InputWithLabel({
   onChange,
   value,
   required,
-  style,
+  color,
   TextAreaWithLabel,
   cols,
   rows,
@@ -88,7 +91,7 @@ function InputWithLabel({
       <div>
         <CheckboxContainer>
           {label && (
-            <label htmlFor={name} style={style}>
+            <label htmlFor={id || name}>
               {label}
             </label>
           )}
@@ -110,9 +113,9 @@ function InputWithLabel({
   return (
     <div>
       {TextAreaWithLabel ? (
-        <TextContainer>
+        <TextContainer color={color}>
           {label && (
-            <label htmlFor={name} style={style}>
+            <label htmlFor={name}>
               {label}
             </label>
           )}
@@ -128,9 +131,9 @@ function InputWithLabel({
           />
         </TextContainer>
       ) : (
-        <Container>
+        <Container color={color}>
           {label && (
-            <label htmlFor={name} style={style}>
+            <label htmlFor={name}>
               {label}
             </label>
           )}
@@ -155,7 +158,7 @@ InputWithLabel.defaultProps = {
   onChange: undefined,
   value: undefined,
   required: false,
-  style: undefined,
+  color: undefined,
   TextAreaWithLabel: false,
   cols: undefined,
   rows: undefined,
