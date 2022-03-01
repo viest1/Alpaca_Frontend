@@ -52,7 +52,7 @@ const CheckboxContainer = styled.div`
 
 interface FormInput {
   name: string;
-  label: string | undefined;
+  label?: string | undefined;
   type?: string | undefined;
   placeholder?: string | undefined;
   onChange?: any;
@@ -87,9 +87,11 @@ function InputWithLabel({
     return (
       <div>
         <CheckboxContainer>
-          <label htmlFor={id || name} style={style}>
-            {label}
-          </label>
+          {label && (
+            <label htmlFor={name} style={style}>
+              {label}
+            </label>
+          )}
           <input
             type={type}
             name={name}
@@ -109,9 +111,11 @@ function InputWithLabel({
     <div>
       {TextAreaWithLabel ? (
         <TextContainer>
-          <label htmlFor={name} style={style}>
-            {label}
-          </label>
+          {label && (
+            <label htmlFor={name} style={style}>
+              {label}
+            </label>
+          )}
           <textarea
             name={name}
             placeholder={placeholder}
@@ -125,9 +129,11 @@ function InputWithLabel({
         </TextContainer>
       ) : (
         <Container>
-          <label htmlFor={name} style={style}>
-            {label}
-          </label>
+          {label && (
+            <label htmlFor={name} style={style}>
+              {label}
+            </label>
+          )}
           <input
             type={type}
             name={name}
@@ -155,7 +161,8 @@ InputWithLabel.defaultProps = {
   rows: undefined,
   maxlength: undefined,
   checked: undefined,
-  id: undefined
+  id: undefined,
+  label: undefined
 };
 
 export default InputWithLabel;

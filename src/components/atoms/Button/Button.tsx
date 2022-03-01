@@ -38,7 +38,6 @@ interface ButtonInterface {
   icon?: any;
 }
 
-
 // function Button({ text, color, background, type, border, onClick, icon, style }: ButtonInterface) {
 //
 //   icon?: ReactElement;
@@ -76,7 +75,6 @@ function Button({
         <span>{text}</span>
       </ButtonStyle>
     </div>
-
   );
 }
 
@@ -92,7 +90,6 @@ Button.defaultProps = {
   style: undefined,
   padding: undefined,
   fontSize: undefined
-
 };
 
 export default Button;

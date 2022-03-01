@@ -171,7 +171,6 @@ const ServicesAndLanguageClient = styled.div`
   margin: 1rem;
 `;
 
-
 const data = [
   {
     path: '/aboutUs',

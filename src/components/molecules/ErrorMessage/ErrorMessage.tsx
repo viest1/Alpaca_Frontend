@@ -33,6 +33,7 @@ const slideAnimation = keyframes`
 
 export const Wrapper = styled.div<Error>`
   position: fixed;
+  z-index: 9999;
   left: 50%;
   transform: translateX(-50%);
   bottom: 10%;
