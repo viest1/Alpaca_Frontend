@@ -13,6 +13,7 @@ const Container = styled.form`
   padding: 0 1rem;
   max-width: 350px;
   margin: 0 auto;
+
   h3 {
     text-align: center;
   }
