@@ -309,9 +309,14 @@ const dataHeaderClient = [
     id: 2
   },
   {
+    path: '/messages',
+    text: 'MESSAGES',
+    id: 3
+  },
+  {
     path: '/settings',
     text: 'SETTINGS',
-    id: 3
+    id: 4
   }
 ];
 const dataAvatarMenu = [
