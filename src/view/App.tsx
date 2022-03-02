@@ -25,6 +25,7 @@ import ClientDetail from '../components/organisms/ClientDetail/ClientDetails';
 import ProjectDetail from '../components/organisms/ProjectDetail/ProjectDetails';
 import Messages from '../components/templates/Messages/Messages';
 import NewProject from '../components/templates/Admin_NewProject/NewProject';
+import Impressum from '../components/templates/Impressum/Impressum';
 
 function App(): JSX.Element {
   const [displayTimeToLogout, setDisplayTimeToLogout] = useState(false);
@@ -169,6 +170,7 @@ function App(): JSX.Element {
             <Route path="/verifyEmail/:token" element={<VerifyEmail />} />
             <Route path="/forgotPassword/" element={<ForgotPassword />} />
             <Route path="/forgotPassword/:token" element={<ResetPassword />} />
+            <Route path="/impressum" element={<Impressum />} />
           </Routes>
         )}
       </MainContainerApp>
