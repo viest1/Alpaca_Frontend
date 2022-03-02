@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useContext, useEffect, useState } from 'react';
+import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
@@ -13,6 +13,7 @@ const Container = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  position: relative;
   //gap: 3rem;
 `;
 
@@ -65,7 +66,7 @@ const WrapperMessages = styled.div`
   }
 `;
 
-const PContainer = styled.p`
+const PContainer = styled.div`
   background: ${({ theme }) => theme.color.main3};
   color: white;
   padding: 1rem;
@@ -118,11 +119,12 @@ const initialValue: Message = {
 function Messages() {
   const { messages, userData } = useContext(Context);
   const [clientMessages, setClientMessages] = useState([]);
-  const { inputs, handleChange } = useForm(initialValue);
+  const { inputs, handleChange, resetForm } = useForm(initialValue);
   const { handleError } = useError();
   const [clients, setClients] = useState<any[]>([]);
   const [actuallyClient, setActuallyClient] = useState<any[]>([]);
 
+  // Fetching Clients from Freelancer
   const fetchClients = async () => {
     try {
       const res = await fetch(
@@ -148,21 +150,34 @@ function Messages() {
     }
   };
 
-  useEffect(() => {
-    fetchClients();
-  }, []);
-
-  useEffect(() => {
-    if (actuallyClient.length > 0) {
-      setClientMessages(
-        messages.filter(
-          (item: any) =>
-            item.creator === actuallyClient[0]._id || item.receiver === actuallyClient[0]._id
-        )
+  // Fetching Freelancers from Client
+  const fetchClientsForClient = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND}/user/freelancers/${userData.token}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${userData?.token}`
+          }
+        }
       );
+      const resJSON = await res.json();
+      // console.log(resJSON);
+      if (res.status === 200) {
+        console.log(resJSON);
+        setClients(resJSON);
+      } else {
+        handleError(resJSON.message);
+      }
+    } catch (error: any) {
+      console.log('FETCHING ERROR', error);
+      handleError();
     }
-  }, [messages]);
+  };
 
+  // onSubmit Form - Send a Message
   const handleSubmitMessage = async (e: SyntheticEvent) => {
     e.preventDefault();
     const sendMessage = async () => {
@@ -177,8 +192,9 @@ function Messages() {
           body: JSON.stringify(inputs)
         });
         const resJSON = await res.json();
+        console.log({ resJSON });
         if (res.status === 201) {
-          console.log(resJSON);
+          resetForm();
           handleError(resJSON.message, true);
         } else {
           handleError(resJSON.message);
@@ -188,15 +204,27 @@ function Messages() {
         handleError();
       }
     };
-    await sendMessage();
+    sendMessage();
   };
 
+  // Set actually client and his messages after click on his Avatar
   const handleDisplayMessages = (id: string) => {
     console.log(id);
     setClientMessages(messages.filter((item: any) => item.creator === id || item.receiver === id));
     setActuallyClient(clients.filter((item: any) => item._id === id));
   };
 
+  // Fetching Clients
+  useEffect(() => {
+    if (userData.token && userData.role === 'Freelancer') {
+      fetchClients();
+    }
+    if (userData.token && userData.role === 'Client') {
+      fetchClientsForClient();
+    }
+  }, []);
+
+  // Assign actually client on begin and set client messages
   useEffect(() => {
     if (actuallyClient.length < 1 && clients.length > 0 && messages.length > 0) {
       setActuallyClient([clients[0]]);
@@ -211,13 +239,25 @@ function Messages() {
     }
   }, [actuallyClient, clients, messages]);
 
+  // If messages changes thanks to SSE(Server Sent Events) then we display new message
+  useEffect(() => {
+    if (actuallyClient.length > 0) {
+      setClientMessages(
+        messages.filter(
+          (item: any) =>
+            item.creator === actuallyClient[0]._id || item.receiver === actuallyClient[0]._id
+        )
+      );
+    }
+  }, [messages]);
+
   return (
     <Container>
       <H3Styled>Messages</H3Styled>
       <ContainerContactListAndMessages>
         <ContactList>
           {clients.map((clientData: any) => (
-            <Contact onClick={() => handleDisplayMessages(clientData._id)}>
+            <Contact key={clientData._id} onClick={() => handleDisplayMessages(clientData._id)}>
               <RoundedPhoto
                 img={face1}
                 alt="face"
@@ -240,14 +280,18 @@ function Messages() {
               </PContainer>
             )}
             <div>
-              {clientMessages.map((item: any) => (
+              {clientMessages.map((item: any, i) => (
                 <CardMessage
                   // style={{ marginLeft: item.creator === userData.userId ? 'auto' : null }}
                   marginLeft={item.creator === userData.userId}
                   key={item._id}
                   message={item}
+                  idName={i === clientMessages.length - 1 ? 'lastMessage' : undefined}
+                  // ref={i === clientMessages.length - 1 ? ref : null}
                 />
               ))}
+              {/* <div ref={lastRef} /> */}
+              <AlwaysScrollToBottom />
             </div>
           </WrapperMessages>
           <Form onSubmit={handleSubmitMessage}>
@@ -266,3 +310,10 @@ function Messages() {
 }
 
 export default Messages;
+
+// Component which is created after last element to scroll
+export function AlwaysScrollToBottom() {
+  const elementRef: any = useRef();
+  useEffect(() => elementRef.current.scrollIntoView(false));
+  return <div ref={elementRef} />;
+}

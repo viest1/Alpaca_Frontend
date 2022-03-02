@@ -29,7 +29,7 @@ import Impressum from '../components/templates/Impressum/Impressum';
 
 function App(): JSX.Element {
   const [displayTimeToLogout, setDisplayTimeToLogout] = useState(false);
-  const { userData, setUserData, setMessages, messages } = useContext(Context);
+  const { userData, setUserData, setMessages } = useContext(Context);
   const { token, role } = userData;
   const navigate = useNavigate();
   useEffect(() => {
@@ -78,36 +78,18 @@ function App(): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData.exp]);
 
-  // useEffect(() => {
-  //   console.log('Hi');
-  //   const doConnection = async () => {
-  //     console.log('Hi1');
-  //     const res = await fetch(`${process.env.REACT_APP_BACKEND}/events`, {
-  //       method: 'GET',
-  //       headers: {
-  //         Accept: 'text/event-stream'
-  //       }
-  //     });
-  //     console.log('Hi2');
-  //     console.log(res);
-  //     const resJSON = await res.json();
-  //     console.log('connection SSE', resJSON);
-  //   };
-  //   doConnection();
-  // }, []);
-
   const [listening, setListening] = useState(false);
 
   useEffect(() => {
     const connectSSE = async () => {
       if (token) {
         if (!listening) {
-          console.log('Hello AGAIN');
+          console.log('I try listening SSE...');
           const events = new EventSource(`${process.env.REACT_APP_BACKEND}/events/${token}`);
 
           events.onmessage = (event) => {
             const parsedData = JSON.parse(event.data);
-            console.log('Parsed', parsedData);
+            // console.log('Parsed', parsedData)
             setMessages((messagesItems) => messagesItems.concat(parsedData));
           };
 
@@ -129,9 +111,9 @@ function App(): JSX.Element {
     connectSSE().then(() => {
       console.log('i used the function to connect SSE');
     });
-  }, [listening, setMessages, token]);
+  }, [listening, token]);
 
-  console.log(messages);
+  // console.log(messages);
 
   // console.log({ token, role });
   return (

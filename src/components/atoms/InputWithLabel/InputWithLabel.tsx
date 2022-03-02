@@ -90,20 +90,16 @@ function InputWithLabel({
     return (
       <div>
         <CheckboxContainer>
-          {label && (
-            <label htmlFor={id || name}>
-              {label}
-            </label>
-          )}
+          {label && <label htmlFor={id || name}>{label}</label>}
           <input
             type={type}
             name={name}
             placeholder={placeholder}
             id={id || name}
-            onChange={onChange}
             value={value}
             required={required}
             checked={checked}
+            onChange={onChange}
           />
         </CheckboxContainer>
       </div>
@@ -114,37 +110,30 @@ function InputWithLabel({
     <div>
       {TextAreaWithLabel ? (
         <TextContainer color={color}>
-          {label && (
-            <label htmlFor={name}>
-              {label}
-            </label>
-          )}
+          {label && <label htmlFor={name}>{label}</label>}
           <textarea
             name={name}
             placeholder={placeholder}
             id={name}
-            onChange={onChange}
+            value={value}
             required={required}
             cols={cols}
             rows={rows}
             maxLength={maxlength}
+            onChange={onChange}
           />
         </TextContainer>
       ) : (
         <Container color={color}>
-          {label && (
-            <label htmlFor={name}>
-              {label}
-            </label>
-          )}
+          {label && <label htmlFor={name}>{label}</label>}
           <input
             type={type}
             name={name}
             placeholder={placeholder}
             id={name}
-            onChange={onChange}
             value={value}
             required={required}
+            onChange={onChange}
           />
         </Container>
       )}
