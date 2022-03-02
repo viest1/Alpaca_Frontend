@@ -8,7 +8,7 @@ const initValue: objectValues = {};
 
 export default function useForm(initial = initValue) {
   // create a state object for our inputs
-  const [inputs, setInputs] = useState(initial);
+  const [inputs, setInputs] = useState(initial); // {}
   // const initialValues = Object.values(initial).join('');
   //
   // useEffect(() => {

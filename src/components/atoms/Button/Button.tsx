@@ -10,6 +10,7 @@ const ButtonStyle = styled.button<ButtonInterface>`
   border: ${({ border }) => border || 'none'};
   outline: none;
   width: ${({ width }) => width || '300px'};
+  height: ${({ height }) => height};
   text-transform: uppercase;
   font-weight: bold;
   transition: 0.3s ease-in-out;
@@ -24,18 +25,44 @@ const ButtonStyle = styled.button<ButtonInterface>`
   }
 `;
 
+const ButtonWhiteStyle = styled.button<ButtonInterface>`
+  padding: 0.5rem;
+  background: ${({ theme }) => theme.color.main8};
+  font-size: ${({ theme, fontSize }) => fontSize || theme.fontSizeOpenSans.m};
+  border-radius: 0.6rem;
+  color: ${({ color }) => color || 'black'};
+  border: ${({ border }) => border || 'none'};
+  outline: none;
+  width: ${({ width }) => width || '300px'};
+  height: ${({ height }) => height};
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+  //white-space: nowrap;
+  &:hover {
+    cursor: pointer;
+    color: white;
+    background: black;
+  }
+  svg {
+    margin-right: 1rem;
+  }
+`;
+
 interface ButtonInterface {
   text?: string;
   color?: string;
   background?: string;
   type?: 'button' | 'submit';
   border?: string;
+  height?: string;
   width?: string;
   onClick?: React.MouseEventHandler;
   padding?: string;
   fontSize?: string;
   style?: React.CSSProperties;
   icon?: any;
+  WhiteMenu?: boolean;
 }
 
 // function Button({ text, color, background, type, border, onClick, icon, style }: ButtonInterface) {
@@ -54,26 +81,47 @@ function Button({
   onClick,
   icon,
   width,
+  height,
   padding,
   fontSize,
-  style
+  style,
+  WhiteMenu
 }: ButtonInterface) {
   return (
     <div>
-      <ButtonStyle
-        type={type}
-        color={color}
-        background={background}
-        border={border}
-        onClick={onClick}
-        style={style}
-        width={width}
-        padding={padding}
-        fontSize={fontSize}
-      >
-        {icon && <span>{icon}</span>}
-        <span>{text}</span>
-      </ButtonStyle>
+      {WhiteMenu ? (
+        <ButtonWhiteStyle
+          type={type}
+          color={color}
+          background={background}
+          border={border}
+          onClick={onClick}
+          style={style}
+          width={width}
+          height={height}
+          padding={padding}
+          fontSize={fontSize}
+        >
+          {icon && <span>{icon}</span>}
+          <span>{text}</span>
+        </ButtonWhiteStyle>
+      ) : (
+        <ButtonStyle
+          type={type}
+          color={color}
+          background={background}
+          border={border}
+          onClick={onClick}
+          style={style}
+          width={width}
+          height={height}
+          padding={padding}
+          fontSize={fontSize}
+        >
+          {icon && <span>{icon}</span>}
+          <span>{text}</span>
+        </ButtonStyle>
+      )}
     </div>
   );
 }
@@ -85,11 +133,13 @@ Button.defaultProps = {
   border: undefined,
   text: undefined,
   width: undefined,
+  height: undefined,
   onClick: undefined,
   icon: undefined,
   style: undefined,
   padding: undefined,
-  fontSize: undefined
+  fontSize: undefined,
+  WhiteMenu: false
 };
 
 export default Button;
