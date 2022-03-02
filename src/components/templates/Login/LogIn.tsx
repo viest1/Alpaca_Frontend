@@ -90,7 +90,7 @@ function LogIn() {
         handleError();
       }
     };
-    login();
+    await login();
   };
 
   const handleNavigateToForgotPassword = () => {
