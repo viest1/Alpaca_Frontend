@@ -14,7 +14,6 @@ import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import trumpy from '../../../assets/images/trumpy.jpg';
 import putin from '../../../assets/images/putin.jpeg';
 
-
 interface StyledDivProps {
   isOpenMenu: boolean;
 }
