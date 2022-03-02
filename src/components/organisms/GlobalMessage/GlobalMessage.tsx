@@ -235,6 +235,7 @@ function GlobalMessage() {
   const { userData, messages } = useContext(Context);
   const { handleError } = useError();
   const [openChatWithMessages, setOpenChatWithMessages] = useState(false);
+  const [displayChatBoxOnTheBottom, setDisplayChatBoxOnTheBottom] = useState(false);
   // Fetching Clients from Freelancer
   const fetchClients = async () => {
     try {
@@ -285,57 +286,11 @@ function GlobalMessage() {
       handleError();
     }
   };
-  // Fetching Clients
-  useEffect(() => {
-    if (userData.token && userData.role === 'Freelancer') {
-      fetchClients();
-    }
-    if (userData.token && userData.role === 'Client') {
-      fetchClientsForClient();
-    }
-  }, []);
-
-  // Assign actually client on begin and set client messages
-  useEffect(() => {
-    if (actuallyClient.length < 1 && clients.length > 0 && messages.length > 0) {
-      setActuallyClient([clients[0]]);
-      setClientMessages(() =>
-        messages.filter(
-          (item: any) => item.creator === clients[0]._id || item.receiver === clients[0]._id
-        )
-      );
-    }
-    if (actuallyClient.length > 0) {
-      inputs.receiverId = actuallyClient[0]._id;
-    }
-  }, [actuallyClient, clients, messages]);
-
-  // Set actually client and his messages after click on his Avatar
-  const handleOpenChatBox = (id: string) => {
-    console.log(id);
-    setClientMessages(messages.filter((item: any) => item.creator === id || item.receiver === id));
-    setActuallyClient(clients.filter((item: any) => item._id === id));
-    setIsOpenContactList(false);
-    setOpenChatWithMessages(true);
-  };
-
-  // If messages changes thanks to SSE(Server Sent Events) then we display new message
-  useEffect(() => {
-    if (actuallyClient.length > 0) {
-      setClientMessages(
-        messages.filter(
-          (item: any) =>
-            item.creator === actuallyClient[0]._id || item.receiver === actuallyClient[0]._id
-        )
-      );
-    }
-  }, [messages]);
-
+  // Opening ChatBox With Messages
   const handleOpenChatBoxWithMessages = () => {
-    console.log(clientMessages);
     setOpenChatWithMessages((prev) => !prev);
   };
-
+  // onSubmit = Sending message to backend
   const handleSubmitMessage = async (e: SyntheticEvent) => {
     e.preventDefault();
     const sendMessage = async () => {
@@ -350,7 +305,6 @@ function GlobalMessage() {
           body: JSON.stringify(inputs)
         });
         const resJSON = await res.json();
-        console.log({ resJSON });
         if (res.status === 201) {
           resetForm();
           handleError(resJSON.message, true);
@@ -365,7 +319,44 @@ function GlobalMessage() {
     sendMessage();
   };
 
-  console.log(clientMessages);
+  // Set actually client and his messages after click on his Avatar
+  const handleOpenChatBox = (id: string) => {
+    setClientMessages(messages.filter((item: any) => item.creator === id || item.receiver === id));
+    setActuallyClient(clients.filter((item: any) => item._id === id));
+    setIsOpenContactList(false);
+    setOpenChatWithMessages(true);
+    setDisplayChatBoxOnTheBottom(true);
+  };
+
+  // Fetching Clients (Freelancer or Client)
+  useEffect(() => {
+    if (userData.token && userData.role === 'Freelancer') {
+      fetchClients();
+    }
+    if (userData.token && userData.role === 'Client') {
+      fetchClientsForClient();
+    }
+  }, []);
+
+  // Assign actually client id to inputs.receiverId
+  useEffect(() => {
+    if (actuallyClient.length > 0) {
+      inputs.receiverId = actuallyClient[0]._id;
+    }
+  }, [actuallyClient]);
+
+  // If messages changes thanks to SSE(Server Sent Events) then we display new message
+  useEffect(() => {
+    if (actuallyClient.length > 0) {
+      setClientMessages(
+        messages.filter(
+          (item: any) =>
+            item.creator === actuallyClient[0]._id || item.receiver === actuallyClient[0]._id
+        )
+      );
+    }
+  }, [messages]);
+
   return (
     <ContainerFixed>
       {openChatWithMessages ? (
@@ -375,11 +366,12 @@ function GlobalMessage() {
             <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
           </div>
           <div>
-            {clientMessages.map((item: any) => (
+            {clientMessages.map((item: any, i) => (
               <CardMessage
                 // style={{ marginLeft: item.creator === userData.userId ? 'auto' : null }}
                 marginLeft={item.creator === userData.userId}
-                key={item._id}
+                /* eslint-disable-next-line react/no-array-index-key */
+                key={i}
                 message={item}
               />
             ))}
@@ -397,10 +389,12 @@ function GlobalMessage() {
           </Form>
         </ChatBox>
       ) : (
-        <ChatBoxSmall onClick={handleOpenChatBoxWithMessages}>
-          <RoundedPhoto width="40px" height="40px" img={face} alt="avatar" />
-          <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
-        </ChatBoxSmall>
+        displayChatBoxOnTheBottom && (
+          <ChatBoxSmall onClick={handleOpenChatBoxWithMessages}>
+            <RoundedPhoto width="40px" height="40px" img={face} alt="avatar" />
+            <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
+          </ChatBoxSmall>
+        )
       )}
       {isOpenContactList ? (
         <ContainerOpenContactList>

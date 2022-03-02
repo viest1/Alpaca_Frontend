@@ -1,14 +1,32 @@
 import React from 'react';
+import styled from 'styled-components';
 
+const ImpressumBody = styled.div`
+  text-align: center;
+`;
+
+const ImpressumItself = styled.p`
+  font-size: 60px;
+  font-weight: bold;
+`;
+
+const ImpressumHeadline = styled.p`
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+const PatryksParagraph = styled.p`
+  font-weight: bold;
+`;
 function Impressum() {
   return (
-    <div>
-      <h1>Impressum</h1>
-
-      <h2>Angaben gem&auml;&szlig; &sect; 5 TMG</h2>
+    <ImpressumBody>
+      <ImpressumItself>Impressum</ImpressumItself>
+      <br />
+      <ImpressumHeadline>Angaben gem&auml;&szlig; &sect; 5 TMG</ImpressumHeadline>
+      <br />
       <p>
-        Patryk&acute;s Company
-        <br />
+        <PatryksParagraph> Patryk&acute;s Company</PatryksParagraph>
         Musterstra&szlig;e 111
         <br />
         Geb&auml;ude 44
@@ -21,7 +39,7 @@ function Impressum() {
         <br />
         Registergericht: Amtsgericht Musterstadt
       </p>
-
+      <br />
       <p>
         <strong>Vertreten durch:</strong>
         <br />
@@ -45,7 +63,7 @@ function Impressum() {
         Registergericht: Amtsgericht Musterstadt
       </p>
 
-      <h2>Kontakt</h2>
+      <ImpressumHeadline>Kontakt</ImpressumHeadline>
       <p>
         Telefon: +49 (0) 123 44 55 66
         <br />
@@ -54,20 +72,20 @@ function Impressum() {
         E-Mail: mustermann@musterfirma.de
       </p>
 
-      <h2>Umsatzsteuer-ID</h2>
+      <ImpressumHeadline>Umsatzsteuer-ID</ImpressumHeadline>
       <p>
         Umsatzsteuer-Identifikationsnummer gem&auml;&szlig; &sect; 27 a Umsatzsteuergesetz:
         <br />
         DE999999999
       </p>
 
-      <h2>Berufsbezeichnung und berufsrechtliche Regelungen</h2>
+      <ImpressumHeadline>Berufsbezeichnung und berufsrechtliche Regelungen</ImpressumHeadline>
       <p>
         Berufsbezeichnung:
         <br />
         anderer Beruf
       </p>
-    </div>
+    </ImpressumBody>
   );
 }
 
