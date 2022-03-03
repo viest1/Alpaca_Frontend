@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { BsThreeDots } from 'react-icons/bs';
-/* import useForm from '../../../hooks/useForm'; */
+import { Context } from '../../../providers/GeneralProvider';
+import Button from '../../atoms/Button/Button';
+import useForm from '../../../hooks/useForm';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import COMPANYLOGO from '../../../assets/illustrations/COMPANYLOGO.png';
-import IconClickable from '../../atoms/IconClickable/IconClickable';
-import Button from '../../atoms/Button/Button';
-import ServiceListItem from '../../molecules/ServiceListItem/ServiceListItem';
+
+import ServiceListInputs from '../../molecules/ServiceListItem/ServiceListInputs';
 
 const PageContainer = styled.div`
   border: 2px solid red;
@@ -23,32 +24,33 @@ const BasicInfoContainer = styled.div`
 
   .left {
     border: 5px solid yellow;
-    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-grow: 1;
   }
 
   .right {
+    display: flex;
+    flex-direction: column;
     border: 5px solid purple;
-    width: 100%;
-    padding: 1.5rem;
+    flex-grow: 6;
+    padding: 0.5rem;
   }
 `;
 
-const AddNewServiceContainer = styled.div`
-  border: 2px solid black;
+const FormContainer = styled.form`
+  border: 5px solid black;
   display: flex;
   flex-direction: column;
   flex-grow: 4;
 `;
 
-const ThreeDotsMenuWrapper = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
+const ButtonWrapper = styled.div`
+  align-self: flex-end;
 `;
 
-const ListOfServices = styled.div`
+/* const ListOfServices = styled.div`
   border: 2px solid purple;
   display: flex;
   align-items: center;
@@ -65,39 +67,10 @@ const ListOfServices = styled.div`
     border: 2px solid black;
     height: 60px;
   }
-`;
-
-/* const initialValue = {
-  serviceId: '0',
-  serviceName: '',
-  price: '',
-  description: ''
-};
- */
-function NewProject(): JSX.Element {
-  return (
-    <PageContainer>
-      <BasicInfoContainer>
-        <div className="left">
-          <RoundedPhoto
-            img={COMPANYLOGO}
-            alt="blablabla"
-            width="150px"
-            height="150px"
-            border="2px"
-          />
-          <InputWithLabel label="Star Date*" type="date" name="startDate" required />
-          <InputWithLabel label="End Date*" type="date" name="endDate" required />
-        </div>
-        <div className="right">
-          <InputWithLabel
-            label="Project Title*"
-            type="input"
-            name="projectTitle"
-            placeholder="enter a name for the project"
-            required
-          />
-          <InputWithLabel
+`; */
+/*
+{
+   <InputWithLabel
             label="Company Name"
             type="input"
             name="companyName"
@@ -121,24 +94,98 @@ function NewProject(): JSX.Element {
             type="input"
             name="taxNumber"
             placeholder="enter a tax ID"
-          />
-        </div>
-      </BasicInfoContainer>
-      <AddNewServiceContainer>
-        <ThreeDotsMenuWrapper>
-          <IconClickable icon={<BsThreeDots fontSize={40} />}>
-            <div
-              style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.5rem' }}
-            >
-              <Button WhiteMenu text="Add New Service" width="200px" fontSize="1rem" />
-              <Button WhiteMenu text="Add Text Field" width="200px" fontSize="1rem" />
-            </div>
-          </IconClickable>
-        </ThreeDotsMenuWrapper>
-        <h2>List Of Services</h2>
-        <ServiceListItem />
-        <ListOfServices />
-      </AddNewServiceContainer>
+          /> 
+}
+*/
+interface initial {
+  companyName: string;
+  customerName: string;
+  website: string;
+  taxNumber: string;
+}
+
+const projectInfo: initial = {
+  companyName: '',
+  customerName: '',
+  website: '',
+  taxNumber: ''
+};
+
+function NewProject(): JSX.Element {
+  const { userData } = useContext(Context);
+  const { inputs, handleChange } = useForm(projectInfo);
+  const params = useParams();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/newProject/${params}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userData.token}`
+        },
+        body: JSON.stringify(inputs)
+      });
+      const resJSON = await res.json();
+      console.log(resJSON);
+    } catch (error: any) {
+      console.log('FETCHING ERROR', error);
+    }
+  };
+
+  return (
+    <PageContainer>
+      <FormContainer onSubmit={handleSubmit}>
+        <BasicInfoContainer>
+          <div className="left">
+            <RoundedPhoto
+              img={COMPANYLOGO}
+              alt="blablabla"
+              width="150px"
+              height="150px"
+              border="2px"
+            />
+            <InputWithLabel label="Star Date*" type="date" name="startDate" required />
+            <InputWithLabel label="End Date*" type="date" name="endDate" required />
+          </div>
+          <div className="right">
+            <InputWithLabel
+              label="Company Name"
+              type="input"
+              name="companyName"
+              placeholder="enter the name of the company"
+              onChange={handleChange}
+            />
+            <InputWithLabel
+              label="Customer Name*"
+              type="input"
+              name="customerName"
+              placeholder="enter a customer name"
+              onChange={handleChange}
+              required
+            />
+            <InputWithLabel
+              label="Website"
+              type="input"
+              name="website"
+              placeholder="enter a website"
+              onChange={handleChange}
+            />
+            <InputWithLabel
+              label="Tax Number"
+              type="input"
+              name="taxNumber"
+              placeholder="enter a tax ID"
+              onChange={handleChange}
+            />
+          </div>
+          <ServiceListInputs />
+        </BasicInfoContainer>
+
+        <ButtonWrapper>
+          <Button type="submit" text="submit" height="40px" width="150px" padding="0px;" />
+        </ButtonWrapper>
+      </FormContainer>
     </PageContainer>
   );
 }
