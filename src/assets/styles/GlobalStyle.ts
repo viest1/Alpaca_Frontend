@@ -26,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin:0;
   }
-  button{
+  button, label{
     font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
   }

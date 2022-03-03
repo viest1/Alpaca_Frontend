@@ -169,7 +169,6 @@ const ContainerFlex = styled.div`
 
 function SectionProductDesc1(): JSX.Element {
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
-  console.log(desktopVersion);
   return (
     <Container>
       {!desktopVersion ? (

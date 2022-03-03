@@ -69,12 +69,16 @@ function App(): JSX.Element {
     const connectSSE = async () => {
       if (token) {
         if (!listening) {
-          console.log('I try listening SSE...');
+          // console.log('I try listening SSE...');
           const events = new EventSource(`${process.env.REACT_APP_BACKEND}/events/${token}`);
 
           events.onmessage = (event) => {
             const parsedData = JSON.parse(event.data);
-            // console.log('Parsed', parsedData)
+            // console.log('Parsed', parsedData);
+            // console.log(parsedData.text);
+            if (parsedData.text === 'stopSSEEventsNow') {
+              events.close();
+            }
             setMessages((messagesItems) => messagesItems.concat(parsedData));
           };
 
@@ -93,9 +97,7 @@ function App(): JSX.Element {
         setListening(false);
       }
     };
-    connectSSE().then(() => {
-      console.log('i used the function to connect SSE');
-    });
+    connectSSE();
   }, [listening, token]);
 
   // console.log(messages);
