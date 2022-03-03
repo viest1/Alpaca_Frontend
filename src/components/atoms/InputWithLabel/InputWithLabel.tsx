@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Container = styled.div`
   color: ${({ color }) => color || 'black'};
   label {
-    font-family: Inter;
     display: block;
     font-weight: bold;
     padding-left: 0.3rem;
@@ -15,6 +14,7 @@ const Container = styled.div`
     padding: 0.7rem 1rem;
     margin: 0.7rem 0 0.7rem 0;
     font-size: 14px;
+    width: 100%;
   }
   input:focus {
     outline: 3px solid ${({ theme }) => theme.color.main6};

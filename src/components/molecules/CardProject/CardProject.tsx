@@ -24,6 +24,9 @@ const Container = styled.div<Card>`
     justify-content: space-between;
     border-bottom: 4px solid black;
     padding: 0.5rem 0 0.5rem 0;
+    h4 {
+      text-align: center;
+    }
     div:last-child {
       align-self: flex-start;
     }

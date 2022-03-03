@@ -5,6 +5,7 @@ import Button from '../../atoms/Button/Button';
 import { Context } from '../../../providers/GeneralProvider';
 import useForm from '../../../hooks/useForm';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
+import useError from '../../../hooks/useError';
 // import useError from '../../../hooks/useError';
 
 const FormContainer = styled.form`
@@ -34,7 +35,6 @@ const ContainerDiv = styled.div`
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     background: ${({ theme }) => theme.color.main1};
     display: flex;
-    align-items: ;
     gap: 3rem;
     padding: 2rem 3rem;
 
@@ -47,7 +47,7 @@ const ContainerPhoto = styled.div`
   width: 120px;
   height: 120px;
   display: flex;
-  align-item: center;
+  align-items: center;
   justify-content: center;
   border: 1px solid black;
   margin-bottom: 1rem;
@@ -56,7 +56,7 @@ const ContainerPhoto = styled.div`
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     margin: auto;
     margin-bottom: 3rem;
-    diplay: block;
+    display: block;
     border-radius: 50%;
     width: 220px;
     height: 220px;
@@ -117,7 +117,6 @@ function NewClient() {
   const { userData } = useContext(Context);
   interface initial {
     name: string;
-    surname: string;
     email: string;
     password: string;
     phoneNumber: string;
@@ -127,17 +126,17 @@ function NewClient() {
   // updating both objects
   const initialValue: initial = {
     name: '',
-    surname: '',
     email: '',
     password: '',
-    phoneNumber: 'string',
-    identityCardNumber: 'string',
-    taxNumber: 'string'
+    phoneNumber: '',
+    identityCardNumber: '',
+    taxNumber: ''
   };
   const { inputs, handleChange } = useForm(initialValue);
+  const { handleError } = useError();
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(inputs);
+    console.log({ inputs });
     try {
       const res = await fetch(`${process.env.REACT_APP_BACKEND}/user`, {
         method: 'POST',
@@ -148,9 +147,14 @@ function NewClient() {
         body: JSON.stringify(inputs)
       });
       const resJSON = await res.json();
-      console.log(resJSON);
+      if (res.status === 201) {
+        handleError('You created user', true);
+      } else {
+        handleError(resJSON.message);
+      }
     } catch (error: any) {
       console.log('FETCHING ERROR', error);
+      handleError();
     }
   };
   return (
@@ -180,14 +184,6 @@ function NewClient() {
                 required
               />
               <InputWithLabel
-                label="Surname*"
-                name="surname"
-                placeholder="Give your Surname"
-                onChange={handleChange}
-                required
-              />
-
-              <InputWithLabel
                 label="Email*"
                 name="email"
                 type="email"
@@ -201,13 +197,11 @@ function NewClient() {
                 onChange={handleChange}
                 required
               />
-
               <InputWithLabel
-                label="Phone Number*"
+                label="Phone Number"
                 name="phoneNumber"
-                type="phonenumber"
+                type="tel"
                 onChange={handleChange}
-                required
               />
             </DivTwo>
             <DivThree>
@@ -229,7 +223,7 @@ function NewClient() {
                 <Button type="submit" background="#9e0059" text="Create Account" />
               </ContainerButton2>
               <ContainerButtonSubmit>
-                <Button background="#9e0059" text="Submit" />
+                <Button background="#9e0059" text="Submit" type="submit" />
               </ContainerButtonSubmit>
             </DivThree>
           </ContainerDiv>
