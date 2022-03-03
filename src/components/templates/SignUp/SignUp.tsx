@@ -116,7 +116,6 @@ function SignUp() {
     name: string;
     email: string;
     password: string;
-    id: string;
     taxNumber: string;
     identityCardNumber: string | undefined;
   }
@@ -125,7 +124,6 @@ function SignUp() {
     name: '',
     email: '',
     password: '',
-    id: '',
     taxNumber: '',
     identityCardNumber: undefined
   };
