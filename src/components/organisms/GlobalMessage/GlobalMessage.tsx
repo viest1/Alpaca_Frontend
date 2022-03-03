@@ -135,6 +135,7 @@ const ChatBox = styled.div`
     flex-direction: column;
     gap: 0.1rem;
     overflow-y: scroll;
+    overscroll-behavior: contain;
     ::-webkit-scrollbar {
       width: 10px;
     }

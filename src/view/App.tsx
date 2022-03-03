@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import HomePage from '../components/templates/HomePage/HomePage';
 import Services from '../components/templates/Services/Services';
@@ -26,26 +26,19 @@ import ProjectDetail from '../components/organisms/ProjectDetail/ProjectDetails'
 import Messages from '../components/templates/Messages/Messages';
 import NewProject from '../components/templates/Admin_NewProject/NewProject';
 import Impressum from '../components/templates/Impressum/Impressum';
+import { useAuth } from '../hooks/useAuth';
 
 function App(): JSX.Element {
   const [displayTimeToLogout, setDisplayTimeToLogout] = useState(false);
-  const { userData, setUserData, setMessages } = useContext(Context);
+  const { userData, setMessages } = useContext(Context);
+  const { handleLogout } = useAuth();
   const { token, role } = userData;
-  const navigate = useNavigate();
   useEffect(() => {
     let interval: any;
     if (userData.token) {
       // When entering the website, check whether the token's time has expired
       if (Date.now() > userData.exp) {
-        setUserData({
-          token: '',
-          role: '',
-          email: '',
-          name: '',
-          exp: '',
-          userId: ''
-        });
-        navigate('/');
+        handleLogout();
       }
       // If token exist check whether the token is close to expiration ( < 30s )
       if (userData.token) {
@@ -56,19 +49,11 @@ function App(): JSX.Element {
           }
           // If Token expired Clear UserData and Logout User/Admin
           if (Date.now() > userData.exp) {
-            setUserData({
-              token: '',
-              role: '',
-              email: '',
-              name: '',
-              exp: '',
-              userId: ''
-            });
-            navigate('/login');
+            handleLogout();
             setDisplayTimeToLogout(false);
             clearInterval(interval);
           }
-          console.log('Left', ((userData.exp - Date.now()) / 1000).toFixed(0), 's To Logout');
+          // console.log('Left', ((userData.exp - Date.now()) / 1000).toFixed(0), 's To Logout');
         }, 5000);
       } else {
         clearInterval(interval);

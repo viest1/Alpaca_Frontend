@@ -26,6 +26,8 @@ interface ContextType {
     userId: string;
     exp: any;
     name: string;
+    identityCardNumber: string;
+    taxNumber: string;
   };
   setUserData: Dispatch<
     SetStateAction<{
@@ -35,6 +37,8 @@ interface ContextType {
       userId: string;
       exp: any;
       name: string;
+      identityCardNumber: string;
+      taxNumber: string;
     }>
   >;
   myError: {
@@ -64,7 +68,9 @@ export const Context = createContext<ContextType>({
     email: '',
     name: '',
     exp: '',
-    userId: ''
+    userId: '',
+    identityCardNumber: '',
+    taxNumber: ''
   },
   setUserData: () => undefined,
   myError: {
@@ -86,16 +92,16 @@ function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
     email: '',
     name: '',
     exp: '',
-    userId: ''
+    userId: '',
+    identityCardNumber: '',
+    taxNumber: ''
   });
   const [myError, setMyError] = useState({
     message: '',
     success: false,
     successMessage: ''
   });
-  const [messages, setMessages] = useState([]);
-  // const [clientArray, setClientArray] = useState([]);
-  // eslint-disable-next-line default-param-last
+  const [messages, setMessages] = useState<never[]>([]);
 
   const value = useMemo(() => {
     return {
