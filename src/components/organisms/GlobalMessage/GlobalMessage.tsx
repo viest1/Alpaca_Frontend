@@ -135,6 +135,7 @@ const ChatBox = styled.div`
     flex-direction: column;
     gap: 0.1rem;
     overflow-y: scroll;
+    overscroll-behavior: contain;
     ::-webkit-scrollbar {
       width: 10px;
     }
@@ -235,6 +236,7 @@ function GlobalMessage() {
   const { userData, messages } = useContext(Context);
   const { handleError } = useError();
   const [openChatWithMessages, setOpenChatWithMessages] = useState(false);
+  const [displayChatBoxOnTheBottom, setDisplayChatBoxOnTheBottom] = useState(false);
   // Fetching Clients from Freelancer
   const fetchClients = async () => {
     try {
@@ -285,57 +287,11 @@ function GlobalMessage() {
       handleError();
     }
   };
-  // Fetching Clients
-  useEffect(() => {
-    if (userData.token && userData.role === 'Freelancer') {
-      fetchClients();
-    }
-    if (userData.token && userData.role === 'Client') {
-      fetchClientsForClient();
-    }
-  }, []);
-
-  // Assign actually client on begin and set client messages
-  useEffect(() => {
-    if (actuallyClient.length < 1 && clients.length > 0 && messages.length > 0) {
-      setActuallyClient([clients[0]]);
-      setClientMessages(() =>
-        messages.filter(
-          (item: any) => item.creator === clients[0]._id || item.receiver === clients[0]._id
-        )
-      );
-    }
-    if (actuallyClient.length > 0) {
-      inputs.receiverId = actuallyClient[0]._id;
-    }
-  }, [actuallyClient, clients, messages]);
-
-  // Set actually client and his messages after click on his Avatar
-  const handleOpenChatBox = (id: string) => {
-    console.log(id);
-    setClientMessages(messages.filter((item: any) => item.creator === id || item.receiver === id));
-    setActuallyClient(clients.filter((item: any) => item._id === id));
-    setIsOpenContactList(false);
-    setOpenChatWithMessages(true);
-  };
-
-  // If messages changes thanks to SSE(Server Sent Events) then we display new message
-  useEffect(() => {
-    if (actuallyClient.length > 0) {
-      setClientMessages(
-        messages.filter(
-          (item: any) =>
-            item.creator === actuallyClient[0]._id || item.receiver === actuallyClient[0]._id
-        )
-      );
-    }
-  }, [messages]);
-
+  // Opening ChatBox With Messages
   const handleOpenChatBoxWithMessages = () => {
-    console.log(clientMessages);
     setOpenChatWithMessages((prev) => !prev);
   };
-
+  // onSubmit = Sending message to backend
   const handleSubmitMessage = async (e: SyntheticEvent) => {
     e.preventDefault();
     const sendMessage = async () => {
@@ -350,7 +306,6 @@ function GlobalMessage() {
           body: JSON.stringify(inputs)
         });
         const resJSON = await res.json();
-        console.log({ resJSON });
         if (res.status === 201) {
           resetForm();
           handleError(resJSON.message, true);
@@ -365,7 +320,44 @@ function GlobalMessage() {
     sendMessage();
   };
 
-  console.log(clientMessages);
+  // Set actually client and his messages after click on his Avatar
+  const handleOpenChatBox = (id: string) => {
+    setClientMessages(messages.filter((item: any) => item.creator === id || item.receiver === id));
+    setActuallyClient(clients.filter((item: any) => item._id === id));
+    setIsOpenContactList(false);
+    setOpenChatWithMessages(true);
+    setDisplayChatBoxOnTheBottom(true);
+  };
+
+  // Fetching Clients (Freelancer or Client)
+  useEffect(() => {
+    if (userData.token && userData.role === 'Freelancer') {
+      fetchClients();
+    }
+    if (userData.token && userData.role === 'Client') {
+      fetchClientsForClient();
+    }
+  }, []);
+
+  // Assign actually client id to inputs.receiverId
+  useEffect(() => {
+    if (actuallyClient.length > 0) {
+      inputs.receiverId = actuallyClient[0]._id;
+    }
+  }, [actuallyClient]);
+
+  // If messages changes thanks to SSE(Server Sent Events) then we display new message
+  useEffect(() => {
+    if (actuallyClient.length > 0) {
+      setClientMessages(
+        messages.filter(
+          (item: any) =>
+            item.creator === actuallyClient[0]._id || item.receiver === actuallyClient[0]._id
+        )
+      );
+    }
+  }, [messages]);
+
   return (
     <ContainerFixed>
       {openChatWithMessages ? (
@@ -375,11 +367,12 @@ function GlobalMessage() {
             <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
           </div>
           <div>
-            {clientMessages.map((item: any) => (
+            {clientMessages.map((item: any, i) => (
               <CardMessage
                 // style={{ marginLeft: item.creator === userData.userId ? 'auto' : null }}
                 marginLeft={item.creator === userData.userId}
-                key={item._id}
+                /* eslint-disable-next-line react/no-array-index-key */
+                key={i}
                 message={item}
               />
             ))}
@@ -397,10 +390,12 @@ function GlobalMessage() {
           </Form>
         </ChatBox>
       ) : (
-        <ChatBoxSmall onClick={handleOpenChatBoxWithMessages}>
-          <RoundedPhoto width="40px" height="40px" img={face} alt="avatar" />
-          <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
-        </ChatBoxSmall>
+        displayChatBoxOnTheBottom && (
+          <ChatBoxSmall onClick={handleOpenChatBoxWithMessages}>
+            <RoundedPhoto width="40px" height="40px" img={face} alt="avatar" />
+            <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
+          </ChatBoxSmall>
+        )
       )}
       {isOpenContactList ? (
         <ContainerOpenContactList>
@@ -434,144 +429,3 @@ function GlobalMessage() {
 }
 
 export default GlobalMessage;
-
-// // Component which is created after last element to scroll
-// function AlwaysScrollToBottom() {
-//   const elementRef: any = useRef();
-//   useEffect(() => elementRef.current.scrollIntoView(false));
-//   return <div ref={elementRef} />;
-// }
-
-// const { messages, userData } = useContext(Context);
-// const [clientMessages, setClientMessages] = useState([]);
-// const { inputs, handleChange, resetForm } = useForm(initialValue);
-// const { handleError } = useError();
-// const [clients, setClients] = useState<any[]>([]);
-// const [actuallyClient, setActuallyClient] = useState<any[]>([]);
-//
-// // Fetching Clients from Freelancer
-// const fetchClients = async () => {
-//   try {
-//     const res = await fetch(
-//       `${process.env.REACT_APP_BACKEND}/user/freelancer/${userData.token}`,
-//       {
-//         method: 'GET',
-//         headers: {
-//           'Content-type': 'application/json',
-//           Authorization: `Bearer ${userData?.token}`
-//         }
-//       }
-//     );
-//     const resJSON = await res.json();
-//     // console.log(resJSON);
-//     if (res.status === 200) {
-//       setClients(resJSON);
-//     } else {
-//       handleError(resJSON.message);
-//     }
-//   } catch (error: any) {
-//     console.log('FETCHING ERROR', error);
-//     handleError();
-//   }
-// };
-//
-// // Fetching Freelancers from Client
-// const fetchClientsForClient = async () => {
-//   try {
-//     const res = await fetch(
-//       `${process.env.REACT_APP_BACKEND}/user/freelancers/${userData.token}`,
-//       {
-//         method: 'GET',
-//         headers: {
-//           'Content-type': 'application/json',
-//           Authorization: `Bearer ${userData?.token}`
-//         }
-//       }
-//     );
-//     const resJSON = await res.json();
-//     // console.log(resJSON);
-//     if (res.status === 200) {
-//       console.log(resJSON);
-//       setClients(resJSON);
-//     } else {
-//       handleError(resJSON.message);
-//     }
-//   } catch (error: any) {
-//     console.log('FETCHING ERROR', error);
-//     handleError();
-//   }
-// };
-//
-// // onSubmit Form - Send a Message
-// const handleSubmitMessage = async (e: SyntheticEvent) => {
-//   e.preventDefault();
-//   const sendMessage = async () => {
-//     try {
-//       console.log('This message is sending...', inputs);
-//       const res = await fetch(`${process.env.REACT_APP_BACKEND}/message`, {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           Authorization: `Bearer ${userData.token}`
-//         },
-//         body: JSON.stringify(inputs)
-//       });
-//       const resJSON = await res.json();
-//       console.log({ resJSON });
-//       if (res.status === 201) {
-//         resetForm();
-//         handleError(resJSON.message, true);
-//       } else {
-//         handleError(resJSON.message);
-//       }
-//     } catch (error: any) {
-//       console.log('Something wrong with sending message', error);
-//       handleError();
-//     }
-//   };
-//   sendMessage();
-// };
-//
-// // Set actually client and his messages after click on his Avatar
-// const handleDisplayMessages = (id: string) => {
-//   console.log(id);
-//   setClientMessages(messages.filter((item: any) => item.creator === id || item.receiver === id));
-//   setActuallyClient(clients.filter((item: any) => item._id === id));
-// };
-//
-// // Fetching Clients
-// useEffect(() => {
-//   if (userData.token && userData.role === 'Freelancer') {
-//     fetchClients();
-//   }
-//   if (userData.token && userData.role === 'Client') {
-//     fetchClientsForClient();
-//   }
-// }, []);
-//
-// // Assign actually client on begin and set client messages
-// useEffect(() => {
-//   if (actuallyClient.length < 1 && clients.length > 0 && messages.length > 0) {
-//     setActuallyClient([clients[0]]);
-//     setClientMessages(() =>
-//       messages.filter(
-//         (item: any) => item.creator === clients[0]._id || item.receiver === clients[0]._id
-//       )
-//     );
-//   }
-//   if (actuallyClient.length > 0) {
-//     inputs.receiverId = actuallyClient[0]._id;
-//   }
-// }, [actuallyClient, clients, messages]);
-//
-// // If messages changes thanks to SSE(Server Sent Events) then we display new message
-// useEffect(() => {
-//   if (actuallyClient.length > 0) {
-//     setClientMessages(
-//       messages.filter(
-//         (item: any) =>
-//           item.creator === actuallyClient[0]._id || item.receiver === actuallyClient[0]._id
-//       )
-//     );
-//   }
-// }, [messages]);

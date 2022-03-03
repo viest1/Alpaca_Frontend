@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
-import './LogIn.css';
 import useForm from '../../../hooks/useForm';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
@@ -81,8 +80,8 @@ function LogIn() {
         const resJSON = await res.json();
         console.log(resJSON);
         if (res.status === 200) {
-          setUserData(resJSON);
           navigate('/');
+          setUserData(resJSON);
         }
         handleError(resJSON.message, res.status === 200);
       } catch (error: any) {
@@ -90,7 +89,7 @@ function LogIn() {
         handleError();
       }
     };
-    login();
+    await login();
   };
 
   const handleNavigateToForgotPassword = () => {
@@ -112,18 +111,6 @@ function LogIn() {
         <Button background="#9e0059" text="Create New Account" />
       </div>
     </Container>
-    // <div className="login">
-    //   <h3 className="h3">LOGIN</h3>
-    //   <InputWithLabel label="Email" name="email" />
-    //   <InputWithLabel label="Password" name="password" />
-    //   <p className="p">I forgot my password</p>
-    //   <div className="btn">
-    //     <Button background="#2A9D8F" text="Login" />
-    //     <div className="line" />
-    //     <Button text="Login with Gmail" icon={<FcGoogle />} />
-    //     <Button background="#9e0059" text="Create New Account" />
-    //   </div>
-    // </div>
   );
 }
 

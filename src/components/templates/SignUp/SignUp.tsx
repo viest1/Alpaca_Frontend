@@ -1,7 +1,6 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent } from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/Button/Button';
-import './SignUp.css';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import useForm from '../../../hooks/useForm';
 import useError from '../../../hooks/useError';
@@ -111,29 +110,12 @@ const DivThree = styled.div`
 `;
 
 function SignUp() {
-  const [patrykVersion] = useState(true);
   const { handleError } = useError();
-  //   <form
-  //   onSubmit={(e: React.SyntheticEvent) => {
-  //     e.preventDefault();
-  //     const target = e.target as typeof e.target & {
-  //       name: { value: string };
-  //       surname: { value: string };
-  //       email: { value: string };
-  //       password: { value: string };
-  //       repeatPassword: { value: string };
-  //       phoneNumber: { value: number };
-  //     };
-  //     const email = target.email.value;
-  //     const password = target.password.value;
-  //   }}
-  // >
 
   interface FormSignUp {
     name: string;
     email: string;
     password: string;
-    id: string;
     taxNumber: string;
     identityCardNumber: string | undefined;
   }
@@ -142,7 +124,6 @@ function SignUp() {
     name: '',
     email: '',
     password: '',
-    id: '',
     taxNumber: '',
     identityCardNumber: undefined
   };
@@ -182,111 +163,71 @@ function SignUp() {
 
   return (
     <div>
-      {patrykVersion ? (
-        <FormContainer onSubmit={handleSubmit}>
-          <div>
-            <h3>CREATE NEW ACCOUNT</h3>
-            <ContainerDiv>
-              <DivOne>
-                <HeadingAdd>
-                  <h4>User Details</h4>
-                </HeadingAdd>
-                <ContainerPhoto>
-                  <img src="" alt="" />
-                </ContainerPhoto>
-                <ContainerButton>
-                  <Button background="#1F313E" text="Upload Photo" />
-                </ContainerButton>
-              </DivOne>
-              <DivTwo>
-                <h4>Contact Information</h4>
-                <InputWithLabel
-                  label="Name*"
-                  name="name"
-                  placeholder="Give your Name"
-                  onChange={handleChange}
-                  required
-                />
-
-                <InputWithLabel
-                  label="Email*"
-                  name="email"
-                  type="email"
-                  onChange={handleChange}
-                  required
-                />
-                <InputWithLabel
-                  label="Password*"
-                  name="password"
-                  type="password"
-                  onChange={handleChange}
-                  required
-                />
-              </DivTwo>
-              <DivThree>
-                <h4>Billing Information</h4>
-                <InputWithLabel
-                  label="Identity Card Number"
-                  name="identityCardNumber"
-                  onChange={handleChange}
-                />
-                <InputWithLabel label="Tax Number" name="taxNumber" onChange={handleChange} />
-                <ParagraphAdd>
-                  <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam odio sunt,
-                    provident dolorem, mollitia obcaecati quisquam, voluptate optio commodi
-                    repudiandae quae earum debitis eum error itaque quia nisi corrupti voluptatibus?
-                  </p>
-                </ParagraphAdd>
-                <ContainerButton2>
-                  <Button type="submit" background="#9e0059" text="Create Account" />
-                </ContainerButton2>
-                <ContainerButtonSubmit>
-                  <Button background="#9e0059" text="Submit" />
-                </ContainerButtonSubmit>
-              </DivThree>
-            </ContainerDiv>
-          </div>
-        </FormContainer>
-      ) : (
-        <div className="container">
-          <div>
-            <div className="first-div">
-              <h3 className="new-contact">CREATE NEW ACCOUNT</h3>
-              <ContainerPhoto className="photo">
-                <p>Photo</p>
-                <img className="img" src="" alt="" />
+      <FormContainer onSubmit={handleSubmit}>
+        <div>
+          <h3>CREATE NEW ACCOUNT</h3>
+          <ContainerDiv>
+            <DivOne>
+              <HeadingAdd>
+                <h4>User Details</h4>
+              </HeadingAdd>
+              <ContainerPhoto>
+                <img src="" alt="" />
               </ContainerPhoto>
-              <div className="btn">
-                <Button background="blue" text="Upload Photo" />
-              </div>
-            </div>
-          </div>
-          <div>
-            <h2 className="billing">Billing Information</h2>
-            <div>
-              <InputWithLabel label="Id" name="id" />
-              <div className="second-div">
-                <h4>Contact Information</h4>
-                <div className="flex-container">
-                  <InputWithLabel label="Name" name="name" placeholder="Give your Name" />
-                  <InputWithLabel label="Surname" name="surname" />
-                  <InputWithLabel label="Email" name="email" />
-                  <InputWithLabel label="Password" name="password" />
-                </div>
-              </div>
-              <div className="flex-container">
-                <h4 className="billing">Billing Information</h4>
-                <InputWithLabel label="Id" name="id" />
-                <InputWithLabel label="Tax Number" name="taxnumber" />
-                <div className="btn1">
-                  <Button background="#2A9D8F" text="Create Account" />
-                </div>
-              </div>
-            </div>
-          </div>
+              <ContainerButton>
+                <Button background="#1F313E" text="Upload Photo" />
+              </ContainerButton>
+            </DivOne>
+            <DivTwo>
+              <h4>Contact Information</h4>
+              <InputWithLabel
+                label="Name*"
+                name="name"
+                placeholder="Give your Name"
+                onChange={handleChange}
+                required
+              />
+
+              <InputWithLabel
+                label="Email*"
+                name="email"
+                type="email"
+                onChange={handleChange}
+                required
+              />
+              <InputWithLabel
+                label="Password*"
+                name="password"
+                type="password"
+                onChange={handleChange}
+                required
+              />
+            </DivTwo>
+            <DivThree>
+              <h4>Billing Information</h4>
+              <InputWithLabel
+                label="Identity Card Number"
+                name="identityCardNumber"
+                onChange={handleChange}
+              />
+              <InputWithLabel label="Tax Number" name="taxNumber" onChange={handleChange} />
+              <ParagraphAdd>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam odio sunt,
+                  provident dolorem, mollitia obcaecati quisquam, voluptate optio commodi
+                  repudiandae quae earum debitis eum error itaque quia nisi corrupti voluptatibus?
+                </p>
+              </ParagraphAdd>
+              <ContainerButton2>
+                <Button type="submit" background="#9e0059" text="Create Account" />
+              </ContainerButton2>
+              <ContainerButtonSubmit>
+                <Button background="#9e0059" text="Submit" />
+              </ContainerButtonSubmit>
+            </DivThree>
+          </ContainerDiv>
         </div>
-      )}
+      </FormContainer>
     </div>
   );
 }

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
-import { useNavigate } from 'react-router-dom';
 import CompanyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
 import NavLink from '../../atoms/NavLink/NavLink';
 import Contact from '../../molecules/Contact/Contact';
@@ -13,6 +12,8 @@ import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import trumpy from '../../../assets/images/trumpy.jpg';
 import putin from '../../../assets/images/putin.jpeg';
+import { useAuth } from '../../../hooks/useAuth';
+
 
 interface StyledDivProps {
   isOpenMenu: boolean;
@@ -309,9 +310,14 @@ const dataHeaderClient = [
     id: 2
   },
   {
+    path: '/messages',
+    text: 'MESSAGES',
+    id: 3
+  },
+  {
     path: '/settings',
     text: 'SETTINGS',
-    id: 3
+    id: 4
   }
 ];
 const dataAvatarMenu = [
@@ -328,6 +334,7 @@ interface HeaderI {
 function Header({ displayTimeToLogout }: HeaderI) {
   const { userData } = useContext(Context);
   const { handleError } = useError();
+  const { handleLogout } = useAuth();
 
   useEffect(() => {
     if (displayTimeToLogout) handleError('For your Safety, You will logout for 30s');
@@ -339,13 +346,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
   };
   // useMediaQuery
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
-  // Logout
-  const { setUserData } = useContext(Context);
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    setUserData({ token: '', role: '', email: '', name: '', exp: '', userId: '' });
-    navigate('/');
-  };
+
   // Avatar Menu
   const [isOpenAvatarMenu, setIsOpenAvatarMenu] = useState(false);
   const handleOpenAvatarMenu = () => {
@@ -362,16 +363,6 @@ function Header({ displayTimeToLogout }: HeaderI) {
   useOnClickOutside(ref, () => handleOpenAvatarMenu());
 
   // console.log('We are on the size of Desktop Version?', desktopVersion);
-
-  //   return (
-  //     <Container isOpenMenu={isOpenMenu}>
-  //       {!isOpenMenu && (
-  //         <Flex>
-  //           <div style={{ position: 'relative' }}>
-  //             <NavLink path="/" image={CompanyLogo} alt="Logo" />
-  //             <StyledP>live outside the box</StyledP>
-  //           </div>
-  //           <div>
 
   // Testing AdminHeader
   // const adminLogIn = true;
