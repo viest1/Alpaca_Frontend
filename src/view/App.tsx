@@ -16,7 +16,7 @@ import { Context } from '../providers/GeneralProvider';
 import ClientsOrProjects from '../components/templates/Admin_ClientsOrProjects/ClientsOrProjects';
 import Settings from '../components/templates/Settings/Settings';
 import NewClient from '../components/templates/Admin_NewClient/NewClient';
-import Projects from '../components/templates/User_Projects/Projects';
+import Projects from '../components/templates/HIER_User_Projects/HIERProjectsFromClientView';
 import VerifyEmail from '../components/molecules/VerifyEmail/VerifyEmail';
 import ForgotPassword from '../components/molecules/ForgotPassword/ForgotPassword';
 import ResetPassword from '../components/molecules/ResetPassword/ResetPassword';
