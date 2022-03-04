@@ -60,6 +60,7 @@ const ContactList = styled.div`
   border-right: 1px solid grey;
   overflow: hidden;
   overflow-y: scroll;
+  min-width: 200px;
   overscroll-behavior: contain;
   // Not good - to FIX
   max-height: 566px;
@@ -244,6 +245,7 @@ function Messages() {
       <H3Styled>Messages</H3Styled>
       <ContainerContactListAndMessages>
         <ContactList>
+          <p>Chats</p>
           {clients.map((clientData: any) => (
             <Contact key={clientData._id} onClick={() => handleDisplayMessages(clientData._id)}>
               <RoundedPhoto

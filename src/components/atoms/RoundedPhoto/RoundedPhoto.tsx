@@ -29,7 +29,7 @@ const ContainerPhoto = styled.div<PhotoStyled>`
 `;
 
 interface Photo {
-  img: string | undefined;
+  img: string | undefined | null;
   alt: string;
   width?: string;
   height?: string;

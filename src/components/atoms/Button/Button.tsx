@@ -39,13 +39,6 @@ interface ButtonInterface {
   icon?: any;
 }
 
-// function Button({ text, color, background, type, border, onClick, icon, style }: ButtonInterface) {
-//
-//   icon?: ReactElement;
-//   padding?: string;
-//   fontSize?: string;
-// }
-
 function Button({
   text,
   color,
@@ -74,7 +67,7 @@ function Button({
         padding={padding}
         fontSize={fontSize}
       >
-        {icon && <span>{icon}</span>}
+        {icon && icon}
         <span>{text}</span>
       </ButtonStyle>
     </div>

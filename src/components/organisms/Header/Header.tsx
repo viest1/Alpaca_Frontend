@@ -14,7 +14,6 @@ import trumpy from '../../../assets/images/trumpy.jpg';
 import putin from '../../../assets/images/putin.jpeg';
 import { useAuth } from '../../../hooks/useAuth';
 
-
 interface StyledDivProps {
   isOpenMenu: boolean;
 }

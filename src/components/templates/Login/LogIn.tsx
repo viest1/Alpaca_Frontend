@@ -1,6 +1,5 @@
 import React, { SyntheticEvent, useContext } from 'react';
 import styled from 'styled-components';
-import * as queryString from 'query-string';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
@@ -8,11 +7,12 @@ import Button from '../../atoms/Button/Button';
 import useForm from '../../../hooks/useForm';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
+import { googleLoginUrl } from '../../../helpers/googleLoginUrl';
 
 const Container = styled.form`
   padding: 0 1rem;
   max-width: 350px;
-  margin: 0 auto;
+  margin: 1rem auto;
 
   h3 {
     text-align: center;
@@ -97,20 +97,6 @@ function LogIn() {
     navigate('/forgotPassword');
   };
 
-  const stringifiedParams = queryString.stringify({
-    client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-    redirect_uri: process.env.REACT_APP_FRONTEND,
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.email',
-      'https://www.googleapis.com/auth/userinfo.profile'
-    ].join(' '), // space seperated string
-    response_type: 'code',
-    access_type: 'offline',
-    prompt: 'consent'
-  });
-
-  const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`;
-
   return (
     <Container onSubmit={handleSubmit}>
       <h3>LOGIN</h3>
@@ -124,7 +110,7 @@ function LogIn() {
         <Line />
         {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <a href={googleLoginUrl}>
-          <Button text="Login with Gmail" icon={<FcGoogle />} />
+          <Button text="Login with Google" icon={<FcGoogle />} padding="1.3rem 1rem" />
         </a>
         <Button background="#9e0059" text="Create New Account" />
       </div>
