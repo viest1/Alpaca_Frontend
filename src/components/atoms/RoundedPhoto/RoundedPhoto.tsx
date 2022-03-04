@@ -29,7 +29,7 @@ const ContainerPhoto = styled.div<PhotoStyled>`
 `;
 
 interface Photo {
-  img: string;
+  img: string | undefined;
   alt: string;
   width?: string;
   height?: string;
@@ -47,7 +47,7 @@ function RoundedPhoto({ img, alt, width, height, border, outline, outlineOffset 
       outline={outline}
       outlineOffset={outlineOffset}
     >
-      <img src={img} alt={alt} />
+      {img && <img src={img} alt={alt} />}
     </ContainerPhoto>
   );
 }

@@ -28,6 +28,7 @@ interface ContextType {
     name: string;
     identityCardNumber: string;
     taxNumber: string;
+    avatar: string;
   };
   setUserData: Dispatch<
     SetStateAction<{
@@ -39,6 +40,7 @@ interface ContextType {
       name: string;
       identityCardNumber: string;
       taxNumber: string;
+      avatar: string;
     }>
   >;
   myError: {
@@ -70,7 +72,8 @@ export const Context = createContext<ContextType>({
     exp: '',
     userId: '',
     identityCardNumber: '',
-    taxNumber: ''
+    taxNumber: '',
+    avatar: ''
   },
   setUserData: () => undefined,
   myError: {
@@ -94,7 +97,8 @@ function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
     exp: '',
     userId: '',
     identityCardNumber: '',
-    taxNumber: ''
+    taxNumber: '',
+    avatar: ''
   });
   const [myError, setMyError] = useState({
     message: '',
