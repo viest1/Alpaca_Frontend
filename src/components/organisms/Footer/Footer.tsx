@@ -8,7 +8,6 @@ import { IoLogoInstagram } from 'react-icons/io';
 import mobileFooterWave from '../../../assets/illustrations/mobileFooterWaveBlue.png';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import companyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
-
 // import NavLink from '../../atoms/NavLink/NavLink';
 // Mobile Styles
 
@@ -45,7 +44,7 @@ const FooterRow = styled.div`
   align-items: center;
   width: 180px;
   justify-content: left;
-  margin-bottom: 18px;
+  // margin-bottom: 18px;
 `;
 
 const IconRow = styled.div`
@@ -60,10 +59,12 @@ const StyledSpan = styled.span`
 `;
 
 // allgemein
+
 const MyFooter = styled.div`
   width: 100%;
   position: relative;
 `;
+
 // Desktop Styles
 
 const DesktopFooter = styled.div`
@@ -72,8 +73,10 @@ const DesktopFooter = styled.div`
   display: flex;
   padding: 100px 50px;
   flex-basis: 100%;
-  width: 100vw;
+  width: 100%;
   justify-content: space-between;
+  align-items: center;
+  padding: 3vh;
 `;
 
 const LeftCol = styled.div`
@@ -83,18 +86,21 @@ const LeftCol = styled.div`
 /* const LogoCol = styled.div`
   background-color: red;
   display: flex;
-`; */
+`
+*/
 
 const StyledCol = styled.div`
   width: 140px;
   margin-right: 30px;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1rem;
 `;
 
 const CountryFlag = styled.div`
   display: flex;
-  gap: 0.1rem;
+  gap: 0.2rem;
   margin: auto;
   :hover {
     cursor: pointer;
@@ -108,11 +114,12 @@ const StyledLink = styled.div`
 const CompanyLogo = styled.img`
   width: 100%;
   height: auto;
+  align-items: bottom;
 `;
 
 // alles, was html(html tags) ist klein schreiben, nur Components groß
 // contact wurde importiert und kann deshalb im return zurückgegeben werden
-// ract reurned nur ein element, deshalb muss ein allumschließendes element gegeben sein, kann auch div oder leerer tag sein
+// ract returned nur ein element, deshalb muss ein allumschließendes element gegeben sein, kann auch div oder leerer tag sein
 function Footer() {
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
   return (
@@ -152,7 +159,7 @@ function Footer() {
               </div>
             </StyledCol>
             <StyledCol>
-              <span>CONTACT US</span>
+              <span>CONTACT US : </span>
               <FooterRow>
                 <MdLocalPhone color="white" size={28} />
                 <StyledSpan>+49 1234 6666666</StyledSpan>
