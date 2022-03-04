@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import * as queryString from 'query-string';
 import HomePage from '../components/templates/HomePage/HomePage';
 import Services from '../components/templates/Services/Services';
 import SignUp from '../components/templates/SignUp/SignUp';
@@ -27,12 +28,15 @@ import Messages from '../components/templates/Messages/Messages';
 import NewProject from '../components/templates/Admin_NewProject/NewProject';
 import Impressum from '../components/templates/Impressum/Impressum';
 import { useAuth } from '../hooks/useAuth';
+import useError from '../hooks/useError';
 
 function App(): JSX.Element {
   const [displayTimeToLogout, setDisplayTimeToLogout] = useState(false);
-  const { userData, setMessages } = useContext(Context);
+  const { userData, setMessages, setUserData } = useContext(Context);
+  const navigate = useNavigate();
   const { handleLogout } = useAuth();
   const { token, role } = userData;
+  const { handleError } = useError();
   useEffect(() => {
     let interval: any;
     if (userData.token) {
@@ -100,6 +104,46 @@ function App(): JSX.Element {
     connectSSE();
   }, [listening, token]);
 
+  const handleGoogleLogin = async (code: any) => {
+    console.log({ code });
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/googleLogin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // Authorization: 'Bearer ' + userData?.token, // IN FUTURE TO AUTHORIZATION
+        },
+        body: JSON.stringify({ code })
+      });
+      const resJSON = await res.json();
+      if (res.status === 200) {
+        setUserData(resJSON);
+        navigate('/');
+        handleError('You are correctly logged in', true);
+        console.log(resJSON);
+      } else {
+        handleError(resJSON.message, res.status === 200);
+      }
+    } catch (error: any) {
+      console.log('FETCHING ERROR', error);
+      handleError();
+    }
+  };
+
+  useEffect(() => {
+    const urlParams = queryString.parse(window.location.search);
+
+    if (urlParams.error) {
+      const { error }: any = urlParams;
+      console.log(`An error occurred: ${error}`);
+      handleError('Something went wrong with Google Login, try later again');
+    }
+    if (urlParams.code) {
+      console.log(`The code is: ${urlParams.code}`);
+      handleGoogleLogin(urlParams.code);
+    }
+  }, [window.location.search]);
+
   // console.log(messages);
 
   // console.log({ token, role });
@@ -113,25 +157,25 @@ function App(): JSX.Element {
             <Route path="/clients" element={<ClientsOrProjects />} />
             <Route path="/client/:clientId" element={<ClientDetail />} /> {/* TODO */}
             <Route path="/project/:projectId" element={<ProjectDetail />} /> {/* TODO */}
-            <Route path="/settings" element={<Settings />} /> {/* TODO */}
-            <Route path="/statistics" element={<Statistics />} /> {/* TODO */}
-            <Route path="/messages" element={<Messages />} /> {/* TODO */}
-            <Route path="/newClient" element={<NewClient />} /> {/* TODO */}
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/statistics" element={<Statistics />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/newClient" element={<NewClient />} />
             <Route path="/newProject/:clientId" element={<NewProject />} /> {/* TODO */}
           </Routes>
         ) : token && role === 'Client' ? (
           <Routes>
-            <Route path="/" element={<UserDashboard />} /> {/* TODO */}
-            <Route path="/projects" element={<Projects />} /> {/* TODO */}
+            <Route path="/" element={<UserDashboard />} />
+            <Route path="/projects" element={<Projects />} />
             <Route path="/project/:projectId" element={<ProjectDetail />} /> {/* TODO */}
             <Route path="/freelancer/:freelancerId" element={<ClientDetail />} /> {/* TODO */}
-            <Route path="/messages" element={<Messages />} /> {/* TODO */}
-            <Route path="/settings" element={<Settings />} /> {/* TODO */}
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         ) : (
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<Services />} /> {/* TODO */}
+            <Route path="/services" element={<Services />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<SignUp />} />

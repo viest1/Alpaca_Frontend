@@ -38,7 +38,8 @@ export const useAuth = () => {
       role: '',
       email: '',
       identityCardNumber: '',
-      taxNumber: ''
+      taxNumber: '',
+      avatar: ''
     });
     navigate('/');
   };
