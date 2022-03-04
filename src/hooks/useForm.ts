@@ -10,7 +10,7 @@ export default function useForm(initial = initValue) {
   // create a state object for our inputs
   const [inputs, setInputs] = useState(initial);
   // const initialValues = Object.values(initial).join('');
-  //
+  // //
   // useEffect(() => {
   //   // This function runs when the things we are watching change
   //   setInputs(initial);
@@ -18,7 +18,7 @@ export default function useForm(initial = initValue) {
   // }, [initialValues]);
 
   interface ChangeEvent {
-    value: string | number | File;
+    value: string | number | File | any;
     name: string;
     type: string;
   }
@@ -30,14 +30,25 @@ export default function useForm(initial = initValue) {
       value = parseInt(value, 10);
     }
     if (type === 'file') {
-      // eslint-disable-next-line prefer-destructuring
-      value = (e.target as HTMLInputElement).files![0];
+      // setPreviewImage(window.URL.createObjectURL(inputs.image) as any);
+      const file = (e.target as HTMLInputElement).files![0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        value = reader.result;
+        setInputs({
+          ...inputs,
+          [name]: value
+        });
+      };
     }
-    setInputs({
-      // copy the existing state
-      ...inputs,
-      [name]: value
-    });
+    if (type !== 'file') {
+      setInputs({
+        // copy the existing state
+        ...inputs,
+        [name]: value
+      });
+    }
   }
 
   const handleSelect = (e: any, action: any) => {
