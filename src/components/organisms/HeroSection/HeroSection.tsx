@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MdCheckCircleOutline } from 'react-icons/md';
+import { useTranslation } from 'react-i18next';
 import Button from '../../atoms/Button/Button';
 import womenOnTheWay from '../../../assets/illustrations/WomanOnTheWay.png';
 import waveMobile from '../../../assets/illustrations/wave.svg';
@@ -128,11 +129,12 @@ const dataHeroSection = [
 ];
 
 function HeroSection() {
+  const { t } = useTranslation();
   return (
     <Background>
       <Container style={{ position: 'relative' }}>
         <div>
-          <h3 style={{ position: 'relative', zIndex: 1 }}>From freelancers to freelancer</h3>
+          <h3 style={{ position: 'relative', zIndex: 1 }}>{t('mainText')}</h3>
           <div>
             <img src={womenOnTheWay} alt="women on the way" />
           </div>

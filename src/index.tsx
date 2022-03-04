@@ -1,20 +1,58 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import HttpApi from 'i18next-http-backend';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import { BrowserRouter } from 'react-router-dom';
-import App from './view/App';
-import reportWebVitals from './reportWebVitals';
 import GeneralProvider from './providers/GeneralProvider';
 import 'sanitize.css/sanitize.css';
 import 'flag-icons/css/flag-icons.min.css';
+import reportWebVitals from './reportWebVitals';
+import App from './view/App';
+
+i18next
+  .use(HttpApi)
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    supportedLngs: ['en', 'de'],
+    fallbacks: true,
+    fallbackLng: 'en',
+    whitelist: 'en',
+    debug: false,
+    // Options for language detector
+    detection: {
+      order: [
+        'cookie',
+        'localStorage',
+        'sessionStorage',
+        'navigator',
+        'htmlTag',
+        'querystring',
+        'path',
+        'subdomain'
+      ],
+      lookupQuerystring: 'lng',
+      lookupCookie: 'i18n',
+      lookupLocalStorage: 'i18nextLng',
+      caches: ['localStorage', 'cookie']
+    },
+    backend: {
+      loadPath: '/assets/locales/{{lng}}/translation.json'
+    }
+  } as any);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <GeneralProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </GeneralProvider>
-  </React.StrictMode>,
+  <Suspense fallback={<div />}>
+    <React.StrictMode>
+      <GeneralProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </GeneralProvider>
+    </React.StrictMode>
+  </Suspense>,
   document.getElementById('root')
 );
 
