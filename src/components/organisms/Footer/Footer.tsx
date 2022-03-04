@@ -8,6 +8,7 @@ import { IoLogoInstagram } from 'react-icons/io';
 import mobileFooterWave from '../../../assets/illustrations/mobileFooterWaveBlue.png';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import companyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
+
 // import NavLink from '../../atoms/NavLink/NavLink';
 // Mobile Styles
 

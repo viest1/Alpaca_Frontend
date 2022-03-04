@@ -234,7 +234,6 @@ function SignUp() {
     email: string;
     password: string;
     file: File | string;
-    id: string;
     taxNumber: string;
     identityCardNumber: string | undefined;
   }
@@ -243,7 +242,6 @@ function SignUp() {
     name: '',
     email: '',
     password: '',
-    id: '',
     file: '',
     taxNumber: '',
     identityCardNumber: undefined

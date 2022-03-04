@@ -14,6 +14,7 @@ import trumpy from '../../../assets/images/trumpy.jpg';
 import putin from '../../../assets/images/putin.jpeg';
 import { useAuth } from '../../../hooks/useAuth';
 
+
 interface StyledDivProps {
   isOpenMenu: boolean;
 }
@@ -343,6 +344,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
   const handleOpenMenu = () => {
     setIsOpenMenu((prev) => !prev);
   };
+  // useMediaQuery
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
 
   // Avatar Menu
@@ -359,6 +361,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
   // useRef()
   const ref: any = useRef();
   useOnClickOutside(ref, () => handleOpenAvatarMenu());
+
   // console.log('We are on the size of Desktop Version?', desktopVersion);
 
   // Testing AdminHeader
@@ -446,7 +449,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
                 {isOpenAvatarMenu && (
                   <AvatarMenu ref={ref}>
                     {dataAvatarMenu.map((item) => (
-                      <NavLink key={item.id} path={item.path} text={item.text} weight="bold" />
+                      <NavLink key={item.id} path={item.path} text={item.text} fontWeight="bold" />
                     ))}
                     <ButtonLogoutDesktop type="button" onClick={handleLogout}>
                       LOGOUT
@@ -545,7 +548,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
                 {isOpenAvatarMenu && (
                   <AvatarMenu ref={ref}>
                     {dataAvatarMenu.map((item) => (
-                      <NavLink key={item.id} path={item.path} text={item.text} weight="bold" />
+                      <NavLink key={item.id} path={item.path} text={item.text} fontWeight="bold" />
                     ))}
                     <ButtonLogoutDesktop type="button" onClick={handleLogout}>
                       LOGOUT

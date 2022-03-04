@@ -31,6 +31,7 @@ interface ButtonInterface {
   type?: 'button' | 'submit';
   border?: string;
   width?: string;
+  height?: string;
   onClick?: React.MouseEventHandler;
   padding?: string;
   fontSize?: string;
@@ -54,6 +55,7 @@ function Button({
   onClick,
   icon,
   width,
+  height,
   padding,
   fontSize,
   style
@@ -68,6 +70,7 @@ function Button({
         onClick={onClick}
         style={style}
         width={width}
+        height={height}
         padding={padding}
         fontSize={fontSize}
       >
@@ -85,6 +88,7 @@ Button.defaultProps = {
   border: undefined,
   text: undefined,
   width: undefined,
+  height: undefined,
   onClick: undefined,
   icon: undefined,
   style: undefined,
