@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Container = styled.div`
   color: ${({ color }) => color || 'black'};
   label {
-    font-family: Inter;
     display: block;
     font-weight: bold;
     padding-left: 0.3rem;
@@ -15,6 +14,7 @@ const Container = styled.div`
     padding: 0.7rem 1rem;
     margin: 0.7rem 0 0.7rem 0;
     font-size: 14px;
+    width: 100%;
   }
   input:focus {
     outline: 3px solid ${({ theme }) => theme.color.main6};
@@ -90,20 +90,16 @@ function InputWithLabel({
     return (
       <div>
         <CheckboxContainer>
-          {label && (
-            <label htmlFor={id || name}>
-              {label}
-            </label>
-          )}
+          {label && <label htmlFor={id || name}>{label}</label>}
           <input
             type={type}
             name={name}
             placeholder={placeholder}
             id={id || name}
-            onChange={onChange}
             value={value}
             required={required}
             checked={checked}
+            onChange={onChange}
           />
         </CheckboxContainer>
       </div>
@@ -114,37 +110,30 @@ function InputWithLabel({
     <div>
       {TextAreaWithLabel ? (
         <TextContainer color={color}>
-          {label && (
-            <label htmlFor={name}>
-              {label}
-            </label>
-          )}
+          {label && <label htmlFor={name}>{label}</label>}
           <textarea
             name={name}
             placeholder={placeholder}
             id={name}
-            onChange={onChange}
+            value={value}
             required={required}
             cols={cols}
             rows={rows}
             maxLength={maxlength}
+            onChange={onChange}
           />
         </TextContainer>
       ) : (
         <Container color={color}>
-          {label && (
-            <label htmlFor={name}>
-              {label}
-            </label>
-          )}
+          {label && <label htmlFor={name}>{label}</label>}
           <input
             type={type}
             name={name}
             placeholder={placeholder}
             id={name}
-            onChange={onChange}
             value={value}
             required={required}
+            onChange={onChange}
           />
         </Container>
       )}

@@ -7,6 +7,9 @@ const Container = styled.div`
     border-bottom: 1px solid black;
     margin: 0;
     padding: 0;
+    //width: max-content;
+    //margin: 0 auto;
+    text-align: center;
   }
 `;
 

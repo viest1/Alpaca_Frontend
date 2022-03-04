@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import * as queryString from 'query-string';
 import HomePage from '../components/templates/HomePage/HomePage';
 import Services from '../components/templates/Services/Services';
 import SignUp from '../components/templates/SignUp/SignUp';
@@ -25,26 +26,23 @@ import ClientDetail from '../components/organisms/ClientDetail/ClientDetails';
 import ProjectDetail from '../components/organisms/ProjectDetail/ProjectDetails';
 import Messages from '../components/templates/Messages/Messages';
 import NewProject from '../components/templates/Admin_NewProject/NewProject';
+import Impressum from '../components/templates/Impressum/Impressum';
+import { useAuth } from '../hooks/useAuth';
+import useError from '../hooks/useError';
 
 function App(): JSX.Element {
   const [displayTimeToLogout, setDisplayTimeToLogout] = useState(false);
-  const { userData, setUserData, setMessages, messages } = useContext(Context);
-  const { token, role } = userData;
+  const { userData, setMessages, setUserData } = useContext(Context);
   const navigate = useNavigate();
+  const { handleLogout } = useAuth();
+  const { token, role } = userData;
+  const { handleError } = useError();
   useEffect(() => {
     let interval: any;
     if (userData.token) {
       // When entering the website, check whether the token's time has expired
       if (Date.now() > userData.exp) {
-        setUserData({
-          token: '',
-          role: '',
-          email: '',
-          name: '',
-          exp: '',
-          userId: ''
-        });
-        navigate('/');
+        handleLogout();
       }
       // If token exist check whether the token is close to expiration ( < 30s )
       if (userData.token) {
@@ -55,19 +53,11 @@ function App(): JSX.Element {
           }
           // If Token expired Clear UserData and Logout User/Admin
           if (Date.now() > userData.exp) {
-            setUserData({
-              token: '',
-              role: '',
-              email: '',
-              name: '',
-              exp: '',
-              userId: ''
-            });
-            navigate('/login');
+            handleLogout();
             setDisplayTimeToLogout(false);
             clearInterval(interval);
           }
-          console.log('Left', ((userData.exp - Date.now()) / 1000).toFixed(0), 's To Logout');
+          // console.log('Left', ((userData.exp - Date.now()) / 1000).toFixed(0), 's To Logout');
         }, 5000);
       } else {
         clearInterval(interval);
@@ -77,36 +67,22 @@ function App(): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData.exp]);
 
-  // useEffect(() => {
-  //   console.log('Hi');
-  //   const doConnection = async () => {
-  //     console.log('Hi1');
-  //     const res = await fetch(`${process.env.REACT_APP_BACKEND}/events`, {
-  //       method: 'GET',
-  //       headers: {
-  //         Accept: 'text/event-stream'
-  //       }
-  //     });
-  //     console.log('Hi2');
-  //     console.log(res);
-  //     const resJSON = await res.json();
-  //     console.log('connection SSE', resJSON);
-  //   };
-  //   doConnection();
-  // }, []);
-
   const [listening, setListening] = useState(false);
 
   useEffect(() => {
     const connectSSE = async () => {
       if (token) {
         if (!listening) {
-          console.log('Hello AGAIN');
+          // console.log('I try listening SSE...');
           const events = new EventSource(`${process.env.REACT_APP_BACKEND}/events/${token}`);
 
           events.onmessage = (event) => {
             const parsedData = JSON.parse(event.data);
-            console.log('Parsed', parsedData);
+            // console.log('Parsed', parsedData);
+            // console.log(parsedData.text);
+            if (parsedData.text === 'stopSSEEventsNow') {
+              events.close();
+            }
             setMessages((messagesItems) => messagesItems.concat(parsedData));
           };
 
@@ -125,12 +101,50 @@ function App(): JSX.Element {
         setListening(false);
       }
     };
-    connectSSE().then(() => {
-      console.log('i used the function to connect SSE');
-    });
-  }, [listening, setMessages, token]);
+    connectSSE();
+  }, [listening, token]);
 
-  console.log(messages);
+  const handleGoogleLogin = async (code: any) => {
+    console.log({ code });
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/googleLogin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // Authorization: 'Bearer ' + userData?.token, // IN FUTURE TO AUTHORIZATION
+        },
+        body: JSON.stringify({ code })
+      });
+      const resJSON = await res.json();
+      if (res.status === 200) {
+        setUserData(resJSON);
+        navigate('/');
+        handleError('You are correctly logged in', true);
+        console.log(resJSON);
+      } else {
+        handleError(resJSON.message, res.status === 200);
+      }
+    } catch (error: any) {
+      console.log('FETCHING ERROR', error);
+      handleError();
+    }
+  };
+
+  useEffect(() => {
+    const urlParams = queryString.parse(window.location.search);
+
+    if (urlParams.error) {
+      const { error }: any = urlParams;
+      console.log(`An error occurred: ${error}`);
+      handleError('Something went wrong with Google Login, try later again');
+    }
+    if (urlParams.code) {
+      console.log(`The code is: ${urlParams.code}`);
+      handleGoogleLogin(urlParams.code);
+    }
+  }, [window.location.search]);
+
+  // console.log(messages);
 
   // console.log({ token, role });
   return (
@@ -143,25 +157,25 @@ function App(): JSX.Element {
             <Route path="/clients" element={<ClientsOrProjects />} />
             <Route path="/client/:clientId" element={<ClientDetail />} /> {/* TODO */}
             <Route path="/project/:projectId" element={<ProjectDetail />} /> {/* TODO */}
-            <Route path="/settings" element={<Settings />} /> {/* TODO */}
-            <Route path="/statistics" element={<Statistics />} /> {/* TODO */}
-            <Route path="/messages" element={<Messages />} /> {/* TODO */}
-            <Route path="/newClient" element={<NewClient />} /> {/* TODO */}
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/statistics" element={<Statistics />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/newClient" element={<NewClient />} />
             <Route path="/newProject/:clientId" element={<NewProject />} /> {/* TODO */}
           </Routes>
         ) : token && role === 'Client' ? (
           <Routes>
-            <Route path="/" element={<UserDashboard />} /> {/* TODO */}
-            <Route path="/projects" element={<Projects />} /> {/* TODO */}
+            <Route path="/" element={<UserDashboard />} />
+            <Route path="/projects" element={<Projects />} />
             <Route path="/project/:projectId" element={<ProjectDetail />} /> {/* TODO */}
             <Route path="/freelancer/:freelancerId" element={<ClientDetail />} /> {/* TODO */}
-            <Route path="/messages" element={<Messages />} /> {/* TODO */}
-            <Route path="/settings" element={<Settings />} /> {/* TODO */}
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         ) : (
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<Services />} /> {/* TODO */}
+            <Route path="/services" element={<Services />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<SignUp />} />
@@ -169,6 +183,7 @@ function App(): JSX.Element {
             <Route path="/verifyEmail/:token" element={<VerifyEmail />} />
             <Route path="/forgotPassword/" element={<ForgotPassword />} />
             <Route path="/forgotPassword/:token" element={<ResetPassword />} />
+            <Route path="/impressum" element={<Impressum />} />
           </Routes>
         )}
       </MainContainerApp>

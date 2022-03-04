@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { MdLocalPhone, MdEmail, MdOutlineFacebook } from 'react-icons/md';
 import { SiTwitter } from 'react-icons/si';
 import { IoLogoInstagram } from 'react-icons/io';
-import { dataContact } from '../../../dataContact/dataContact';
+import { dataContact } from '../../../data/dataContact';
 
 const StyledContact = styled.div`
   display: flex;

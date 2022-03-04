@@ -152,7 +152,7 @@ function Footer() {
                 <StyledLink>About Us</StyledLink>
                 <StyledLink>Services</StyledLink>
                 <StyledLink>Payments</StyledLink>
-                <Link to="/Impressum">
+                <Link to="/impressum">
                   <StyledLink>Impressum</StyledLink>
                 </Link>
                 <StyledLink>FAQ</StyledLink>

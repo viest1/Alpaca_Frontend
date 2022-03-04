@@ -12,6 +12,7 @@
     "@types/react-dom": "^17.0.9",
     "chart.js": "^3.7.1",
     "flag-icons": "^6.1.1",
+    "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.1",
     "react-dom": "^17.0.2",
@@ -30,8 +31,7 @@
     "eject": "react-scripts eject",
     "lint": "npx eslint src/**/*.tsx",
     "lint-ts": "npx eslint src/**/*.ts",
-    "lint-fix": "npx eslint src/**/*.tsx --fix",
-    "lint-fix-ts": "npx eslint src/**/*.ts --fix"
+    "lint-fix": "npx eslint src/**/*.{tsx,ts} --quiet --fix"
   },
   "browserslist": {
     "production": [

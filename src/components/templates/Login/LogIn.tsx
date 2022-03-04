@@ -1,10 +1,10 @@
 import React, { SyntheticEvent, useContext } from 'react';
 import styled from 'styled-components';
+import * as queryString from 'query-string';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
-import './LogIn.css';
 import useForm from '../../../hooks/useForm';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
@@ -81,8 +81,8 @@ function LogIn() {
         const resJSON = await res.json();
         console.log(resJSON);
         if (res.status === 200) {
-          setUserData(resJSON);
           navigate('/');
+          setUserData(resJSON);
         }
         handleError(resJSON.message, res.status === 200);
       } catch (error: any) {
@@ -90,12 +90,26 @@ function LogIn() {
         handleError();
       }
     };
-    login();
+    await login();
   };
 
   const handleNavigateToForgotPassword = () => {
     navigate('/forgotPassword');
   };
+
+  const stringifiedParams = queryString.stringify({
+    client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    redirect_uri: process.env.REACT_APP_FRONTEND,
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.email',
+      'https://www.googleapis.com/auth/userinfo.profile'
+    ].join(' '), // space seperated string
+    response_type: 'code',
+    access_type: 'offline',
+    prompt: 'consent'
+  });
+
+  const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`;
 
   return (
     <Container onSubmit={handleSubmit}>
@@ -108,22 +122,13 @@ function LogIn() {
       <div>
         <Button type="submit" background="#2A9D8F" text="Login" />
         <Line />
-        <Button text="Login with Gmail" icon={<FcGoogle />} />
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+        <a href={googleLoginUrl}>
+          <Button text="Login with Gmail" icon={<FcGoogle />} />
+        </a>
         <Button background="#9e0059" text="Create New Account" />
       </div>
     </Container>
-    // <div className="login">
-    //   <h3 className="h3">LOGIN</h3>
-    //   <InputWithLabel label="Email" name="email" />
-    //   <InputWithLabel label="Password" name="password" />
-    //   <p className="p">I forgot my password</p>
-    //   <div className="btn">
-    //     <Button background="#2A9D8F" text="Login" />
-    //     <div className="line" />
-    //     <Button text="Login with Gmail" icon={<FcGoogle />} />
-    //     <Button background="#9e0059" text="Create New Account" />
-    //   </div>
-    // </div>
   );
 }
 

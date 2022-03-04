@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 interface objectValues {
   [key: string]: any;
@@ -9,13 +9,13 @@ const initValue: objectValues = {};
 export default function useForm(initial = initValue) {
   // create a state object for our inputs
   const [inputs, setInputs] = useState(initial);
-  const initialValues = Object.values(initial).join('');
-
-  useEffect(() => {
-    // This function runs when the things we are watching change
-    setInputs(initial);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialValues]);
+  // const initialValues = Object.values(initial).join('');
+  //
+  // useEffect(() => {
+  //   // This function runs when the things we are watching change
+  //   setInputs(initial);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [initialValues]);
 
   interface ChangeEvent {
     value: string | number | File;
@@ -24,22 +24,20 @@ export default function useForm(initial = initValue) {
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (e.target) {
-      let { value }: ChangeEvent = e.target as HTMLInputElement;
-      const { name, type }: ChangeEvent = e.target as HTMLInputElement;
-      if (type === 'number') {
-        value = parseInt(value, 10);
-      }
-      if (type === 'file') {
-        // eslint-disable-next-line prefer-destructuring
-        value = (e.target as HTMLInputElement).files![0];
-      }
-      setInputs({
-        // copy the existing state
-        ...inputs,
-        [name]: value
-      });
+    let { value }: ChangeEvent = e.target as HTMLInputElement;
+    const { name, type }: ChangeEvent = e.target as HTMLInputElement;
+    if (type === 'number') {
+      value = parseInt(value, 10);
     }
+    if (type === 'file') {
+      // eslint-disable-next-line prefer-destructuring
+      value = (e.target as HTMLInputElement).files![0];
+    }
+    setInputs({
+      // copy the existing state
+      ...inputs,
+      [name]: value
+    });
   }
 
   const handleSelect = (e: any, action: any) => {
