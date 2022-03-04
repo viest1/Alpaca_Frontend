@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CgPlayListAdd, CgRemove } from 'react-icons/cg';
 import { BsThreeDots } from 'react-icons/bs';
-/* import useForm from '../../../hooks/useForm'; */
 
+/* import useForm from '../../../hooks/useForm'; */
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import IconClickable from '../../atoms/IconClickable/IconClickable';
 import Button from '../../atoms/Button/Button';
@@ -18,15 +18,16 @@ const Container = styled.div<DivStyles>`
   width: ${({ width }) => width};
 `;
 const AddNewServiceContainer = styled.div`
-  border: 2px solid black;
+  /* border: 2px solid black; */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 1.5rem;
   justify-content: space-between;
 `;
 const InputsContainer = styled.div`
   display: flex;
   justify-content: center;
+
   margin: 0 0 1.5rem 0;
 `;
 /* const ListOfServicesWrapper = styled.div`
@@ -93,14 +94,16 @@ type Service = {
   description: string;
 };
 
-function ServiceListItem(): JSX.Element {
-  const [serviceList, setServiceList] = useState([
-    { serviceId: 0, serviceName: '', price: 0, description: '' }
-  ]);
+function ServiceListItem({ handleChange }: any): JSX.Element {
+  const [serviceList, setServiceList] = useState([{ serviceName: '', price: 0, description: '' }]);
+
+  /* useEffect(() => {
+    getServices(serviceList);
+  }, [serviceList]); */
 
   // FUNCTION TO ADD A SERVICE
   const handleServiceAdd = () => {
-    setServiceList([...serviceList, { serviceId: 0, serviceName: '', price: 0, description: '' }]);
+    setServiceList([...serviceList, { serviceName: '', price: 0, description: '' }]);
   };
 
   // FUNCTION TO REMOVE A SERVICE
@@ -110,11 +113,13 @@ function ServiceListItem(): JSX.Element {
     setServiceList(list);
   };
 
+  // FUNCTION TO HANDLE INPUT CHANGES AND MANAGING TO THE FORM
   const handleServiceChange = (e: InputEvent, index: number) => {
     const { value, name }: any = e.target as HTMLInputElement;
     const list: Service[] | any = [...serviceList];
     list[index][name] = value as string;
     setServiceList(list);
+    handleChange(e);
   };
 
   return (
@@ -130,7 +135,7 @@ function ServiceListItem(): JSX.Element {
               text="Add New Service"
               width="200px"
               fontSize="1rem"
-              onClick={handleServiceAdd}
+              onClick={() => handleServiceAdd}
             />
           </div>
         </IconClickable>
@@ -154,11 +159,11 @@ function ServiceListItem(): JSX.Element {
           {serviceList.length === 0 ? (
             <h5 style={{ textAlign: 'center' }}>NO SERVICES</h5>
           ) : (
-            serviceList.map((singleService, index) => (
+            serviceList.map((singleService: any, index: number) => (
               <InputsContainer>
                 <div>
                   <InputWithLabel
-                    onChange={(e: InputEvent) => handleServiceChange(e, index)}
+                    onChange={(e: any) => handleServiceChange(e, index)}
                     value={singleService.serviceName}
                     type="text"
                     name="serviceName"
@@ -170,8 +175,8 @@ function ServiceListItem(): JSX.Element {
                 </div>
                 <div>
                   <InputWithLabel
-                    onChange={(e: InputEvent) => handleServiceChange(e, index)}
-                    value={singleService.price.toString()}
+                    onChange={(e: any) => handleServiceChange(e, index)}
+                    value={singleService.price}
                     type="number"
                     name="price"
                     placeholder="Price"
@@ -182,7 +187,7 @@ function ServiceListItem(): JSX.Element {
                 </div>
                 <div>
                   <InputWithLabel
-                    onChange={(e: InputEvent) => handleServiceChange(e, index)}
+                    onChange={(e: any) => handleServiceChange(e, index)}
                     value={singleService.description}
                     type="text"
                     name="description"

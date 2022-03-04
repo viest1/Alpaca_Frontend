@@ -11,19 +11,19 @@ import COMPANYLOGO from '../../../assets/illustrations/COMPANYLOGO.png';
 import ServiceListInputs from '../../molecules/ServiceListItem/ServiceListInputs';
 
 const PageContainer = styled.div`
-  border: 2px solid red;
+  /* border: 2px solid red; */
   padding: 2rem;
   display: flex;
 `;
 
 const BasicInfoContainer = styled.div`
-  border: 2px solid green;
+  /* border: 2px solid green; */
   display: flex;
   flex-direction: row;
   flex-grow: 1;
 
   .left {
-    border: 5px solid yellow;
+    /* border: 5px solid yellow; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,16 +31,16 @@ const BasicInfoContainer = styled.div`
   }
 
   .right {
+    /* border: 5px solid purple; */
     display: flex;
     flex-direction: column;
-    border: 5px solid purple;
     flex-grow: 6;
     padding: 0.5rem;
   }
 `;
 
 const FormContainer = styled.form`
-  border: 5px solid black;
+  /* border: 5px solid black; */
   display: flex;
   flex-direction: column;
   flex-grow: 4;
@@ -50,53 +50,6 @@ const ButtonWrapper = styled.div`
   align-self: flex-end;
 `;
 
-/* const ListOfServices = styled.div`
-  border: 2px solid purple;
-  display: flex;
-  align-items: center;
-  justify-content: baseline;
-
-  .wrapper {
-    border: 2px solid black;
-    width: 500px;
-    display: flex;
-    jus
-  }
-
-  .iconWrapper {
-    border: 2px solid black;
-    height: 60px;
-  }
-`; */
-/*
-{
-   <InputWithLabel
-            label="Company Name"
-            type="input"
-            name="companyName"
-            placeholder="enter the name of the company"
-          />
-          <InputWithLabel
-            label="Customer Name*"
-            type="input"
-            name="customerName"
-            placeholder="enter a customer name"
-            required
-          />
-          <InputWithLabel
-            label="Website"
-            type="input"
-            name="website"
-            placeholder="enter a website"
-          />
-          <InputWithLabel
-            label="Tax Number"
-            type="input"
-            name="taxNumber"
-            placeholder="enter a tax ID"
-          /> 
-}
-*/
 interface initial {
   companyName: string;
   customerName: string;
@@ -115,16 +68,33 @@ function NewProject(): JSX.Element {
   const { userData } = useContext(Context);
   const { inputs, handleChange } = useForm(projectInfo);
   const params = useParams();
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+  // EXTRACT THE SERVICES FROM THE SERVICE LIST INPUT COMPONENT
+  /* 
+  const getServicesFromComponent = (array: any) => {
+    const listOfServicesCopy = [...array];
+    const arrayOfServices = listOfServicesCopy.map((service: any) => [
+      service.serviceName,
+      service.price,
+      service.description
+    ]);
+
+    return arrayOfServices;
+  }; */
+
+  /* console.log(inputs); */
+
+  // SUBMIT THE NEW PROJECT INFORMATION
+  const handleSubmitNewProject = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${process.env.REACT_APP_BACKEND}/newProject/${params}`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/project/${params.clientId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${userData.token}`
         },
-        body: JSON.stringify(inputs)
+        body: JSON.stringify({ inputs })
       });
       const resJSON = await res.json();
       console.log(resJSON);
@@ -135,7 +105,7 @@ function NewProject(): JSX.Element {
 
   return (
     <PageContainer>
-      <FormContainer onSubmit={handleSubmit}>
+      <FormContainer onSubmit={handleSubmitNewProject}>
         <BasicInfoContainer>
           <div className="left">
             <RoundedPhoto
@@ -145,8 +115,20 @@ function NewProject(): JSX.Element {
               height="150px"
               border="2px"
             />
-            <InputWithLabel label="Star Date*" type="date" name="startDate" required />
-            <InputWithLabel label="End Date*" type="date" name="endDate" required />
+            <InputWithLabel
+              label="Star Date*"
+              type="date"
+              name="startDate"
+              onChange={handleChange}
+              required
+            />
+            <InputWithLabel
+              label="End Date*"
+              type="date"
+              name="endDate"
+              required
+              onChange={handleChange}
+            />
           </div>
           <div className="right">
             <InputWithLabel
@@ -179,7 +161,7 @@ function NewProject(): JSX.Element {
               onChange={handleChange}
             />
           </div>
-          <ServiceListInputs />
+          <ServiceListInputs handleChange={handleChange} />
         </BasicInfoContainer>
 
         <ButtonWrapper>
