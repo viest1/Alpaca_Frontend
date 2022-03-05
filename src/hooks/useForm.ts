@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Compressor from 'compressorjs';
 
 interface objectValues {
   [key: string]: any;
@@ -23,7 +24,7 @@ export default function useForm(initial = initValue) {
     type: string;
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     let { value }: ChangeEvent = e.target as HTMLInputElement;
     const { name, type }: ChangeEvent = e.target as HTMLInputElement;
     if (type === 'number') {
@@ -32,15 +33,40 @@ export default function useForm(initial = initValue) {
     if (type === 'file') {
       // setPreviewImage(window.URL.createObjectURL(inputs.image) as any);
       const file = (e.target as HTMLInputElement).files![0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        value = reader.result;
-        setInputs({
-          ...inputs,
-          [name]: value
+      console.log(file);
+      if (file.type.startsWith('image')) {
+        console.log({ file });
+        await new Compressor(file, {
+          quality: 0.6,
+          success(result: File | Blob) {
+            console.log({ result });
+            const reader = new FileReader();
+            reader.readAsDataURL(result);
+            reader.onloadend = () => {
+              value = reader.result;
+              setInputs({
+                ...inputs,
+                [name]: value
+              });
+            };
+          },
+          error(err) {
+            console.log('Hello');
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+              value = reader.result;
+              setInputs({
+                ...inputs,
+                [name]: value
+              });
+            };
+            console.log(err.message);
+          }
         });
-      };
+      } else {
+        console.log('Wrong format');
+      }
     }
     if (type !== 'file') {
       setInputs({
