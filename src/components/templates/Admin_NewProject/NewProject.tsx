@@ -55,13 +55,15 @@ interface initial {
   customerName: string;
   website: string;
   taxNumber: string;
+  services: any;
 }
 
 const projectInfo: initial = {
   companyName: '',
   customerName: '',
   website: '',
-  taxNumber: ''
+  taxNumber: '',
+  services: []
 };
 
 function NewProject(): JSX.Element {
