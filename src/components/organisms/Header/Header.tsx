@@ -195,7 +195,7 @@ const ButtonLogoutMobil = styled.button`
   color: ${({ theme }) => theme.color.main2};
   background: none;
   font-size: ${({ theme }) => theme.fontSizeInter.m};
-  top: 21rem;
+  top: 25rem;
   border: none;
   &:hover {
     cursor: pointer;
@@ -309,9 +309,14 @@ const dataHeaderClient = [
     id: 2
   },
   {
+    path: '/messages',
+    text: 'MESSAGES',
+    id: 3
+  },
+  {
     path: '/settings',
     text: 'SETTINGS',
-    id: 3
+    id: 4
   }
 ];
 const dataAvatarMenu = [
