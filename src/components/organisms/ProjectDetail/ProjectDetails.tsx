@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 // import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { GrClose } from 'react-icons/gr';
 import { Context } from '../../../providers/GeneralProvider';
 import CardDetails from '../../molecules/CardDetails/CardDetails';
 import useError from '../../../hooks/useError';
 import useMediaQuery from '../../../hooks/useMediaQuery';
-
 // /project/:projectId
+// https://www.youtube.com/watch?v=ZCvemsUfwPQ
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,10 +24,10 @@ const ContainerDetails = styled.div`
 const ProjectInvoicesFiles = styled.div`
   display: flex;
   flex-direction: row;
+  margin: auto;
+  gap: 4rem;
   justify-content: space-around;
-  margin-top: 2rem;
   padding: 1rem 2rem;
-  border: 1px solid red;
   padding: 1rem;
 `;
 const ServicesInvoice = styled.div`
@@ -58,6 +59,35 @@ const Files = styled.div`
   display: flex;
   border: 1px solid black;
   padding: 1rem;
+`;
+
+const ModalBackground = styled.div`
+  width: 70vw;
+  height: 70vh;
+
+  background-color: ${({ theme }) => theme.color.main8};
+  //position: fixed;
+  display: flex;
+  justify-content: center;
+  align-item: center;
+`;
+const ModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  height: 70vh;
+  border-radius: 0.6rem;
+  background-color: ${({ theme }) => theme.color.main};
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 25px;
+}
+div {
+  display:flex;
+  justify-content: flex-end;
+}
+`;
+const ModalText = styled.div`
+  margin: auto;
 `;
 const nameOfServicesData = [
   {
@@ -181,6 +211,10 @@ function ProjectDetail() {
   }, []);
   // useMediaQuery
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
+  const [openModal, setOpenModal] = useState(false);
+  const closeModal = () => {
+    setOpenModal((prev) => !prev);
+  };
   return (
     <div>
       <Title>Project Details</Title>
@@ -190,14 +224,37 @@ function ProjectDetail() {
           <ProjectInvoicesFiles>
             {/* AQUÍ ME QUEDÉ -------------------------------------------------------------*/}
             <ServicesInvoice>
-              <h4>
-                <span>Name</span>
-                <span>of</span>
-                <span>Service</span>
-              </h4>
+              <h4>Name of Service</h4>
+
+              {openModal && (
+                <ModalBackground>
+                  <ModalContainer>
+                    <div>
+                      <GrClose onClick={closeModal} cursor="pointer" fontSize={28} />
+                    </div>
+                    <ModalText>
+                      <h5>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi expedita
+                        fugiat quos accusamus in soluta. Necessitatibus doloremque vitae quia totam
+                        ipsa! Esse fugit reprehenderit sequi molestiae possimus qui perspiciatis
+                        iste in recusandae, ratione quibusdam tenetur. Quibusdam incidunt iusto
+                        ipsum repellat natus fugiat voluptatem esse, architecto explicabo, inventore
+                        nulla quae dolorum!
+                      </h5>
+                    </ModalText>
+                  </ModalContainer>
+                </ModalBackground>
+              )}
               {nameOfServicesData.map((item) => (
                 <div key={item.id}>
-                  <p>{item.text}</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOpenModal(true);
+                    }}
+                  >
+                    {item.text}
+                  </button>
                 </div>
               ))}
             </ServicesInvoice>
