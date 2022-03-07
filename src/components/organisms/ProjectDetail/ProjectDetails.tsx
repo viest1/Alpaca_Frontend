@@ -39,6 +39,11 @@ h4 {
   text-decoration: underline;
 }
 `;
+const ServicesButton = styled.button`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 const PricesInvoice = styled.div`
   display: flex;
   flex-direction: column;
@@ -77,6 +82,7 @@ const ModalContainer = styled.div`
   width: 70vw;
   height: 70vh;
   border-radius: 0.6rem;
+  overflow: scroll;
   background-color: ${({ theme }) => theme.color.main};
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 25px;
@@ -212,7 +218,7 @@ function ProjectDetail() {
   // useMediaQuery
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
   const [openModal, setOpenModal] = useState(false);
-  const closeModal = () => {
+  const handleModal = () => {
     setOpenModal((prev) => !prev);
   };
   return (
@@ -222,15 +228,13 @@ function ProjectDetail() {
         <Container>
           <ContainerDetails>{project && <CardDetails projectData={project} />}</ContainerDetails>
           <ProjectInvoicesFiles>
-            {/* AQUÍ ME QUEDÉ -------------------------------------------------------------*/}
             <ServicesInvoice>
-              <h4>Name of Service</h4>
-
+              <h4>Service</h4>
               {openModal && (
                 <ModalBackground>
                   <ModalContainer>
                     <div>
-                      <GrClose onClick={closeModal} cursor="pointer" fontSize={28} />
+                      <GrClose onClick={handleModal} cursor="pointer" fontSize={28} />
                     </div>
                     <ModalText>
                       <h5>
@@ -247,14 +251,14 @@ function ProjectDetail() {
               )}
               {nameOfServicesData.map((item) => (
                 <div key={item.id}>
-                  <button
+                  <ServicesButton
                     type="button"
                     onClick={() => {
                       setOpenModal(true);
                     }}
                   >
                     {item.text}
-                  </button>
+                  </ServicesButton>
                 </div>
               ))}
             </ServicesInvoice>
