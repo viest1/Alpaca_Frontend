@@ -13,6 +13,7 @@ import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import trumpy from '../../../assets/images/trumpy.jpg';
 import putin from '../../../assets/images/putin.jpeg';
 import { useAuth } from '../../../hooks/useAuth';
+import LanguageMenu from '../../molecules/LanguageMenu/LanguageMenu';
 
 interface StyledDivProps {
   isOpenMenu: boolean;
@@ -358,7 +359,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
     }
   }, [userData.token]);
   // useRef()
-  const ref: any = useRef();
+  const ref: any = useRef(null);
   useOnClickOutside(ref, () => handleOpenAvatarMenu());
 
   // console.log('We are on the size of Desktop Version?', desktopVersion);
@@ -429,10 +430,9 @@ function Header({ displayTimeToLogout }: HeaderI) {
                   <NavLink key={item.id} path={item.path} text={item.text} color="white" />
                 ))}
               </StyledMenuDesktopClient>
-              <CountryFlagClient>
-                <span className="fi fi-de" />
-                <span>DE</span>
-              </CountryFlagClient>
+              <CountryFlagAdmin>
+                <LanguageMenu />
+              </CountryFlagAdmin>
               <AvatarContainer>
                 {!isOpenAvatarMenu && (
                   <div role="button" onClick={handleOpenAvatarMenu} tabIndex={0}>
@@ -528,10 +528,10 @@ function Header({ displayTimeToLogout }: HeaderI) {
                   <NavLink key={item.id} path={item.path} text={item.text} color="white" />
                 ))}
               </StyledMenuDesktopAdmin>
-              <CountryFlagAdmin>
-                <span className="fi fi-de" />
-                <span>DE</span>
-              </CountryFlagAdmin>
+              <CountryFlagClient>
+                <LanguageMenu />
+              </CountryFlagClient>
+
               <AvatarContainer>
                 {!isOpenAvatarMenu && (
                   <div role="button" onClick={handleOpenAvatarMenu} tabIndex={0}>
@@ -623,8 +623,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
               <NavLink path="/signup" text="SIGN UP" border="2px solid black" />
             </StyledMenuDesktop>
             <CountryFlag>
-              <span className="fi fi-de" />
-              <span>DE</span>
+              <LanguageMenu />
             </CountryFlag>
           </ServicesAndLanguage>
         </ContainerDesktop>

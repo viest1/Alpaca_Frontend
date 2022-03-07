@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import i18next from 'i18next';
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
 
 const Container = styled.div`
   position: relative;
+  background-color: ${({ theme }) => theme.color.main7};
+  border-radius: 0.6rem;
   z-index: 9999;
   > div:first-child {
     display: flex;
@@ -12,25 +15,29 @@ const Container = styled.div`
     padding: 0.3rem 0.6rem;
     &:hover {
       cursor: pointer;
-      background: white;
+      background: ${({ theme }) => theme.color.main3};
     }
   }
   > div:nth-child(2) {
     display: flex;
+    background-color: ${({ theme }) => theme.color.main7};
+    border-radius: 0.6rem;
     flex-direction: column;
     position: absolute;
-    top: 2rem;
+    top: 2.5rem;
     left: 0;
   }
   > div:nth-child(2) > div {
     display: flex;
+    background-color: ${({ theme }) => theme.color.main7};
+    border-radius: 0.6rem;
     gap: 0.2rem;
     transition: 0.3s;
     border-radius: 0.4rem;
     padding: 0.3rem 0.6rem;
     &:hover {
       cursor: pointer;
-      background: white;
+      background: ${({ theme }) => theme.color.main3};
     }
   }
 `;
@@ -51,14 +58,19 @@ const languages = [
 function LanguageMenu() {
   const [actuallyLng, setActuallyLng] = useState(i18next.resolvedLanguage);
   const [isOpenMenuLanguage, setIsOpenMenuLanguage] = useState(false);
+  const handleOpenLanguageMenu = () => {
+    setIsOpenMenuLanguage((prev) => !prev);
+  };
+  const ref: any = useRef(null);
+  useOnClickOutside(ref, () => setIsOpenMenuLanguage(false));
   return (
     <Container>
-      <div onClick={() => setIsOpenMenuLanguage((prev) => !prev)}>
+      <div onClick={handleOpenLanguageMenu}>
         <span className={`fi fi-${actuallyLng === 'en' ? 'gb' : 'de'}`} />
         <p>{actuallyLng.toUpperCase()}</p>
       </div>
       {isOpenMenuLanguage && (
-        <div>
+        <div ref={ref}>
           {languages.map((item) => (
             <div
               onClick={() => {
