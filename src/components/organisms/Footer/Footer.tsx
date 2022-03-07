@@ -8,6 +8,7 @@ import { IoLogoInstagram } from 'react-icons/io';
 import mobileFooterWave from '../../../assets/illustrations/mobileFooterWaveBlue.png';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import companyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
+import LanguageMenu from '../../molecules/LanguageMenu/LanguageMenu';
 // import NavLink from '../../atoms/NavLink/NavLink';
 // Mobile Styles
 
@@ -143,8 +144,7 @@ function Footer() {
             </StyledCol>
             <StyledCol>
               <CountryFlag>
-                <span className="fi fi-de" />
-                <span>DE</span>
+                <LanguageMenu />
               </CountryFlag>
             </StyledCol>
             <StyledCol>
