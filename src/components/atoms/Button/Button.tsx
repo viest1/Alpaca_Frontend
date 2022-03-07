@@ -44,7 +44,7 @@ const ButtonWhiteStyle = styled.button<ButtonInterface>`
     color: white;
     background: black;
   }
-  `
+`;
 
 interface ButtonInterface {
   text?: string;
@@ -53,7 +53,6 @@ interface ButtonInterface {
   type?: 'button' | 'submit';
   border?: string;
   width?: string;
-  height?: string;
   height?: string;
   onClick?: React.MouseEventHandler;
   padding?: string;
@@ -73,11 +72,10 @@ function Button({
   icon,
   width,
   height,
-  height,
   padding,
   fontSize,
   style,
-  whiteMenu,
+  whiteMenu
 }: ButtonInterface) {
   return (
     <div>

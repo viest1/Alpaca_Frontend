@@ -131,7 +131,7 @@ function ServiceListItem({ handleChange }: any): JSX.Element {
             style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.5rem' }}
           >
             <Button
-              WhiteMenu
+              whiteMenu
               text="Add New Service"
               width="200px"
               fontSize="1rem"
