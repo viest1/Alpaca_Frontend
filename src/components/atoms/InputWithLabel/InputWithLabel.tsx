@@ -1,7 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+interface ContainerProp {
+  width: string | undefined;
+  height: string | undefined;
+  margin: string | undefined;
+}
+
+const Container = styled.div<ContainerProp>`
   color: ${({ color }) => color || 'black'};
   label {
     display: block;
@@ -12,9 +18,10 @@ const Container = styled.div`
     display: block;
     border-radius: 0.8rem;
     padding: 0.7rem 1rem;
-    margin: 0.7rem 0 0.7rem 0;
+    margin: ${({ margin }) => margin || '0.7rem 0 0.7rem 0'};
+    width: ${({ width }) => width || '100%'};
+    height: ${({ height }) => height || '100%'};
     font-size: 14px;
-    width: 100%;
   }
   input:focus {
     outline: 3px solid ${({ theme }) => theme.color.main6};
@@ -55,8 +62,7 @@ const CheckboxContainer = styled.div`
 
 interface FormInput {
   name: string;
-  label?: string | undefined;
-  type?: string | undefined;
+  label?: string | undefined | any;
   placeholder?: string | undefined;
   onChange?: any;
   value?: string;
@@ -68,6 +74,10 @@ interface FormInput {
   maxlength?: number;
   checked?: boolean;
   id?: string;
+  type?: string | undefined;
+  width?: string;
+  height?: string;
+  margin?: string;
 }
 
 function InputWithLabel({
@@ -84,7 +94,10 @@ function InputWithLabel({
   rows,
   maxlength,
   checked,
-  id
+  id,
+  width,
+  height,
+  margin
 }: FormInput) {
   if (type === 'radio' || type === 'checkbox') {
     return (
@@ -124,7 +137,7 @@ function InputWithLabel({
           />
         </TextContainer>
       ) : (
-        <Container color={color}>
+        <Container color={color} width={width} height={height} margin={margin}>
           {label && <label htmlFor={name}>{label}</label>}
           <input
             type={type}
@@ -154,7 +167,10 @@ InputWithLabel.defaultProps = {
   maxlength: undefined,
   checked: undefined,
   id: undefined,
-  label: undefined
+  label: undefined,
+  width: undefined,
+  height: undefined,
+  margin: undefined
 };
 
 export default InputWithLabel;
