@@ -67,7 +67,7 @@ function LanguageMenu() {
     <Container>
       <div onClick={handleOpenLanguageMenu}>
         <span className={`fi fi-${actuallyLng === 'en' ? 'gb' : 'de'}`} />
-        <p>{actuallyLng.toUpperCase()}</p>
+        {actuallyLng && <p>{actuallyLng.toUpperCase()}</p>}
       </div>
       {isOpenMenuLanguage && (
         <div ref={ref}>
