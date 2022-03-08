@@ -7,7 +7,6 @@ import CardDetails from '../../molecules/CardDetails/CardDetails';
 import useError from '../../../hooks/useError';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 // /project/:projectId
-// https://www.youtube.com/watch?v=ZCvemsUfwPQ
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,6 +17,7 @@ const Title = styled.h3`
   margin: auto;
   text-align: center;
 `;
+// Style Mobil Version
 const ContainerDetails = styled.div`
   margin: auto;
 `;
@@ -48,7 +48,6 @@ const PricesInvoice = styled.div`
   display: flex;
   flex-direction: column;
 `;
-// Desktop Version
 const Invoice = styled.div`
   //by the moment is a flex div
   display: flex;
@@ -65,11 +64,10 @@ const Files = styled.div`
   border: 1px solid black;
   padding: 1rem;
 `;
-
+// Style Modal
 const ModalBackground = styled.div`
   width: 70vw;
   height: 70vh;
-
   background-color: ${({ theme }) => theme.color.main8};
   //position: fixed;
   display: flex;
@@ -83,7 +81,7 @@ const ModalContainer = styled.div`
   height: 70vh;
   border-radius: 0.6rem;
   overflow: scroll;
-  background-color: ${({ theme }) => theme.color.main};
+  background-color: ${({ theme }) => theme.color.main1};
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 25px;
 }
@@ -91,6 +89,28 @@ div {
   display:flex;
   justify-content: flex-end;
 }
+`;
+// Style Desktop Version
+const ContainerDesktop = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  padding: 1rem;
+  border: 1px solid red;
+`;
+const ContainerDetailsDesktop = styled.div`
+  margin: auto;
+  border: 1px solid green;
+`;
+const ProjectInvoicesFilesDesktop = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  gap: 4rem;
+  justify-content: space-around;
+  padding: 1rem 2rem;
+  padding: 1rem;
+  border: 1px solid red;
 `;
 const ModalText = styled.div`
   margin: auto;
@@ -273,14 +293,16 @@ function ProjectDetail() {
           </ProjectInvoicesFiles>
         </Container>
       ) : (
-        <Container>
-          <ContainerDetails>{project && <CardDetails projectData={project} />}</ContainerDetails>
-          <ProjectInvoicesFiles>
+        <ContainerDesktop>
+          <ContainerDetailsDesktop>
+            {project && <CardDetails projectData={project} />}
+          </ContainerDetailsDesktop>
+          <ProjectInvoicesFilesDesktop>
             <Invoice>Invoice</Invoice>
             <Total>Total</Total>
             <Files>Files</Files>
-          </ProjectInvoicesFiles>
-        </Container>
+          </ProjectInvoicesFilesDesktop>
+        </ContainerDesktop>
       )}
     </div>
   );
