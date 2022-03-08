@@ -2,10 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 // import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { GrClose } from 'react-icons/gr';
+import { BsThreeDots } from 'react-icons/bs';
 import { Context } from '../../../providers/GeneralProvider';
 import CardDetails from '../../molecules/CardDetails/CardDetails';
 import useError from '../../../hooks/useError';
 import useMediaQuery from '../../../hooks/useMediaQuery';
+import Button from '../../atoms/Button/Button';
+import IconClickable from '../../atoms/IconClickable/IconClickable';
 // /project/:projectId
 const Container = styled.div`
   display: flex;
@@ -33,7 +36,7 @@ const ProjectInvoicesFiles = styled.div`
 const ServicesInvoice = styled.div`
   display: flex;
   flex-direction: column;
-  font-weight: bold;
+  
   }
 h4 {
   text-decoration: underline;
@@ -47,13 +50,12 @@ const ServicesButton = styled.button`
 const PricesInvoice = styled.div`
   display: flex;
   flex-direction: column;
+    }
+h4 {
+  text-decoration: underline;
+}
 `;
-const Invoice = styled.div`
-  //by the moment is a flex div
-  display: flex;
-  border: 1px solid black;
-  padding: 1rem;
-`;
+
 const Total = styled.div`
   display: flex;
   border: 1px solid black;
@@ -69,7 +71,7 @@ const ModalBackground = styled.div`
   width: 70vw;
   height: 70vh;
   background-color: ${({ theme }) => theme.color.main8};
-  //position: fixed;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-item: center;
@@ -90,30 +92,80 @@ div {
   justify-content: flex-end;
 }
 `;
+const ModalText = styled.div`
+  margin: auto;
+`;
+// Style Modal Desktop
+const ModalContainerDesktop = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 35vw;
+  height: 40vh;
+  border-radius: 0.6rem;
+  overflow: scroll;
+  background-color: ${({ theme }) => theme.color.main1};
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 25px;
+}
+div {
+  display:flex;
+  justify-content: flex-end;
+}
+`;
 // Style Desktop Version
+const ContainerThreeDots = styled.div`
+  position: relative;
+  margin: auto;
+  left: 37rem;
+  bottom: 10rem;
+`;
 const ContainerDesktop = styled.div`
   display: flex;
   flex-direction: row;
   margin: auto;
-  padding: 1rem;
-  border: 1px solid red;
+  border: 1px solid yellow;
 `;
 const ContainerDetailsDesktop = styled.div`
+  position: relative;
   margin: auto;
+  right: 10rem;
   border: 1px solid green;
 `;
 const ProjectInvoicesFilesDesktop = styled.div`
   display: flex;
   flex-direction: column;
-  margin: auto;
-  gap: 4rem;
+  margin: 2rem;
+  gap: 1rem;
   justify-content: space-around;
-  padding: 1rem 2rem;
-  padding: 1rem;
   border: 1px solid red;
 `;
-const ModalText = styled.div`
-  margin: auto;
+const InvoiceDesktop = styled.div`
+  //by the moment is a flex div
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  padding: 1rem;
+  gap: 3rem;
+`;
+
+const ShortDescriptionDesktop = styled.div`
+  display: flex;
+  flex-direction: column;
+
+}
+h4 {
+  text-decoration: underline;
+}  
+`;
+
+const PricesInvoiceDesktop = styled.div`
+  display: flex;
+  flex-direction: column;
+  
+}
+h4 {
+  text-decoration: underline;
+}
 `;
 const nameOfServicesData = [
   {
@@ -200,6 +252,48 @@ const pricesData = [
   }
 ];
 
+const shortDescriptionData = [
+  {
+    path: '/',
+    text: 'Low Res. Mockup',
+    id: 1
+  },
+  {
+    path: '/',
+    text: 'Back End Architecture',
+    id: 2
+  },
+  {
+    path: '/',
+    text: 'UX & UI Design',
+    id: 3
+  },
+  {
+    path: '/',
+    text: 'Front End Development',
+    id: 4
+  },
+  {
+    path: '/',
+    text: 'Low Res. Mockup',
+    id: 5
+  },
+  {
+    path: '/',
+    text: 'Back End Architecture',
+    id: 6
+  },
+  {
+    path: '/',
+    text: 'UX & UI Design',
+    id: 7
+  },
+  {
+    path: '/',
+    text: 'Front End Development',
+    id: 8
+  }
+];
 function ProjectDetail() {
   const [project, setProject] = useState({});
 
@@ -298,7 +392,78 @@ function ProjectDetail() {
             {project && <CardDetails projectData={project} />}
           </ContainerDetailsDesktop>
           <ProjectInvoicesFilesDesktop>
-            <Invoice>Invoice</Invoice>
+            <InvoiceDesktop>
+              <ContainerThreeDots>
+                <IconClickable icon={<BsThreeDots fontSize={38} />}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '0.5rem',
+                      padding: '1rem'
+                    }}
+                  >
+                    <Button text="What ever" width="180px" fontSize="1rem" padding="0.5rem 1rem" />
+                    <Button
+                      text="What ever too"
+                      width="180px"
+                      fontSize="1rem"
+                      padding="0.5rem 1rem"
+                    />
+                  </div>
+                </IconClickable>
+              </ContainerThreeDots>
+              <ServicesInvoice>
+                <h4>Service</h4>
+                {openModal && (
+                  <ModalBackground>
+                    <ModalContainerDesktop>
+                      <div>
+                        <GrClose onClick={handleModal} cursor="pointer" fontSize={28} />
+                      </div>
+                      <ModalText>
+                        <h5>
+                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi expedita
+                          fugiat quos accusamus in soluta. Necessitatibus doloremque vitae quia
+                          totam ipsa! Esse fugit reprehenderit sequi molestiae possimus qui
+                          perspiciatis iste in recusandae, ratione quibusdam tenetur. Quibusdam
+                          incidunt iusto ipsum repellat natus fugiat voluptatem esse, architecto
+                          explicabo, inventore nulla quae dolorum!
+                        </h5>
+                      </ModalText>
+                    </ModalContainerDesktop>
+                  </ModalBackground>
+                )}
+                {nameOfServicesData.map((item) => (
+                  <div key={item.id}>
+                    <ServicesButton
+                      type="button"
+                      onClick={() => {
+                        setOpenModal(true);
+                      }}
+                    >
+                      {item.text}
+                    </ServicesButton>
+                  </div>
+                ))}
+              </ServicesInvoice>
+              <PricesInvoiceDesktop>
+                <h4>Price</h4>
+                {pricesData.map((item) => (
+                  <div key={item.id}>
+                    <p>{item.text}</p>
+                  </div>
+                ))}
+              </PricesInvoiceDesktop>
+              <ShortDescriptionDesktop>
+                <h4>Short Description</h4>
+                {shortDescriptionData.map((item) => (
+                  <div key={item.id}>
+                    <p>{item.text}</p>
+                  </div>
+                ))}
+              </ShortDescriptionDesktop>
+            </InvoiceDesktop>
             <Total>Total</Total>
             <Files>Files</Files>
           </ProjectInvoicesFilesDesktop>
