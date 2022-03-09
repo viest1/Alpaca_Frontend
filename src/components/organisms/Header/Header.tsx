@@ -500,9 +500,9 @@ function Header({ displayTimeToLogout }: HeaderI) {
                       onClick={handleOpenMenu}
                     />
                   ))}
-                  <NavLink path="/newClient" text="NEW CUSTOMER" />
-                  <NavLink path="/messages" text="MESSAGES" />
-                  <NavLink path="/statistics" text="STATISTICS" />
+                  <NavLink path="/newClient" text="NEW CUSTOMER" onClick={handleOpenMenu} />
+                  <NavLink path="/settings" text="SETTINGS" onClick={handleOpenMenu} />
+                  <NavLink path="/statistics" text="STATISTICS" onClick={handleOpenMenu} />
                   <ButtonLogoutMobilAdmin type="button" onClick={handleLogout}>
                     LOGOUT
                   </ButtonLogoutMobilAdmin>
