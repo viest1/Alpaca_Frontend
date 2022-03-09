@@ -105,7 +105,6 @@ function App(): JSX.Element {
   }, [listening, token]);
 
   const handleGoogleLogin = async (code: any) => {
-    console.log({ code });
     try {
       const res = await fetch(`${process.env.REACT_APP_BACKEND}/googleLogin`, {
         method: 'POST',
@@ -120,7 +119,6 @@ function App(): JSX.Element {
         setUserData(resJSON);
         navigate('/');
         handleError('You are correctly logged in', true);
-        console.log(resJSON);
       } else {
         handleError(resJSON.message, res.status === 200);
       }
@@ -133,6 +131,10 @@ function App(): JSX.Element {
   useEffect(() => {
     const urlParams = queryString.parse(window.location.search);
 
+    // Finded another solution? TODO - check this, maybe better avoid installing a library
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const clientCode = urlParams.get('code');
+
     if (urlParams.error) {
       const { error }: any = urlParams;
       console.log(`An error occurred: ${error}`);
@@ -144,9 +146,6 @@ function App(): JSX.Element {
     }
   }, [window.location.search]);
 
-  // console.log(messages);
-
-  // console.log({ token, role });
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
@@ -155,22 +154,28 @@ function App(): JSX.Element {
           <Routes>
             <Route path="/" element={<AdminDashboard />} />
             <Route path="/clients" element={<ClientsOrProjects />} />
-            <Route path="/client/:clientId" element={<ClientDetail />} /> {/* TODO */}
-            <Route path="/project/:projectId" element={<ProjectDetail />} /> {/* TODO */}
+            <Route path="/client/:clientId" element={<ClientDetail />} />
+            <Route path="/project/:projectId" element={<ProjectDetail />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/statistics" element={<Statistics />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/newClient" element={<NewClient />} />
-            <Route path="/newProject/:clientId" element={<NewProject />} /> {/* TODO */}
+            <Route path="/newProject/:clientId" element={<NewProject />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
+            <Route path="/impressum" element={<Impressum />} />
           </Routes>
         ) : token && role === 'Client' ? (
           <Routes>
             <Route path="/" element={<UserDashboard />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/project/:projectId" element={<ProjectDetail />} /> {/* TODO */}
-            <Route path="/freelancer/:freelancerId" element={<ClientDetail />} /> {/* TODO */}
+            <Route path="/project/:projectId" element={<ProjectDetail />} />
+            <Route path="/freelancer/:freelancerId" element={<ClientDetail />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
+            <Route path="/impressum" element={<Impressum />} />
           </Routes>
         ) : (
           <Routes>
