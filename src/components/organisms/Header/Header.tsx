@@ -7,7 +7,6 @@ import NavLink from '../../atoms/NavLink/NavLink';
 import Contact from '../../molecules/Contact/Contact';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Context } from '../../../providers/GeneralProvider';
-import useError from '../../../hooks/useError';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import trumpy from '../../../assets/images/trumpy.jpg';
@@ -327,18 +326,11 @@ const dataAvatarMenu = [
     id: 1
   }
 ];
-interface HeaderI {
-  displayTimeToLogout: boolean;
-}
 
-function Header({ displayTimeToLogout }: HeaderI) {
+function Header() {
   const { userData } = useContext(Context);
-  const { handleError } = useError();
   const { handleLogout } = useAuth();
 
-  useEffect(() => {
-    if (displayTimeToLogout) handleError('For your Safety, You will logout for 30s');
-  }, [displayTimeToLogout]);
   // Open & Closing Menu
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const handleOpenMenu = () => {
