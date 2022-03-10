@@ -448,7 +448,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
                 {isOpenAvatarMenu && (
                   <AvatarMenu ref={ref}>
                     {dataAvatarMenu.map((item) => (
-                      <NavLink key={item.id} path={item.path} text={item.text} fontWeight="bold" />
+                      <NavLink key={item.id} path={item.path} text={item.text} />
                     ))}
                     <ButtonLogoutDesktop type="button" onClick={handleLogout}>
                       LOGOUT
@@ -547,7 +547,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
                 {isOpenAvatarMenu && (
                   <AvatarMenu ref={ref}>
                     {dataAvatarMenu.map((item) => (
-                      <NavLink key={item.id} path={item.path} text={item.text} fontWeight="bold" />
+                      <NavLink key={item.id} path={item.path} text={item.text} />
                     ))}
                     <ButtonLogoutDesktop type="button" onClick={handleLogout}>
                       LOGOUT
