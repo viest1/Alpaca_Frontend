@@ -1,9 +1,8 @@
 // import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
 import React, { SyntheticEvent, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { GrContact } from 'react-icons/gr';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
-import face from '../../../assets/images/face2small.jpg';
-import face1 from '../../../assets/images/face1small.jpg';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
 import CardMessage from '../../molecules/CardMessage/CardMessage';
@@ -76,12 +75,14 @@ const Contact = styled.div`
   align-items: center;
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   gap: 0.6rem;
+  > div:first-child {
+    min-width: 40px;
+  }
   p {
     font-weight: normal;
   }
   p:last-child {
     font-weight: normal;
-    //font-size: ${({ theme }) => theme.fontSizeOpenSans.xxs};
   }
   > div:last-child {
     border-bottom: 1px solid grey;
@@ -131,29 +132,12 @@ const ChatBox = styled.div`
   > div:nth-child(2) {
     max-height: 300px;
     min-width: 300px;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
     overflow-y: scroll;
     overscroll-behavior: contain;
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    /* Track */
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: #888;
-    }
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: #555;
-    }
   }
 `;
 
@@ -183,12 +167,25 @@ const Container = styled.div`
   background: ${({ theme }) => theme.color.main4};
   display: flex;
   align-items: center;
+  justify-content: space-around;
   gap: 0.6rem;
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
+  ${({ theme }) => theme.down(theme.breakpoint.m)} {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    background: none;
+    p {
+      display: none;
+    }
+  }
   &:hover {
     cursor: pointer;
     background: ${({ theme }) => theme.color.main5};
+    ${({ theme }) => theme.down(theme.breakpoint.m)} {
+      background: none;
+    }
   }
 `;
 
@@ -240,16 +237,13 @@ function GlobalMessage() {
   // Fetching Clients from Freelancer
   const fetchClients = async () => {
     try {
-      const res = await fetch(
-        `${process.env.REACT_APP_BACKEND}/user/freelancer/${userData.token}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json',
-            Authorization: `Bearer ${userData?.token}`
-          }
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/user/freelancer`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${userData?.token}`
         }
-      );
+      });
       const resJSON = await res.json();
       // console.log(resJSON);
       if (res.status === 200) {
@@ -265,16 +259,13 @@ function GlobalMessage() {
   // Fetching Freelancers from Client
   const fetchClientsForClient = async () => {
     try {
-      const res = await fetch(
-        `${process.env.REACT_APP_BACKEND}/user/freelancers/${userData.token}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json',
-            Authorization: `Bearer ${userData?.token}`
-          }
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/user/freelancers`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${userData?.token}`
         }
-      );
+      });
       const resJSON = await res.json();
       // console.log(resJSON);
       if (res.status === 200) {
@@ -363,7 +354,7 @@ function GlobalMessage() {
       {openChatWithMessages ? (
         <ChatBox>
           <div onClick={handleOpenChatBoxWithMessages}>
-            <RoundedPhoto width="40px" height="40px" img={face} alt="avatar" />
+            <RoundedPhoto width="40px" height="40px" img={actuallyClient[0].avatar} alt="avatar" />
             <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
           </div>
           <div>
@@ -392,7 +383,7 @@ function GlobalMessage() {
       ) : (
         displayChatBoxOnTheBottom && (
           <ChatBoxSmall onClick={handleOpenChatBoxWithMessages}>
-            <RoundedPhoto width="40px" height="40px" img={face} alt="avatar" />
+            <RoundedPhoto width="40px" height="40px" img={actuallyClient[0].avatar} alt="avatar" />
             <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
           </ChatBoxSmall>
         )
@@ -400,14 +391,14 @@ function GlobalMessage() {
       {isOpenContactList ? (
         <ContainerOpenContactList>
           <div onClick={handleOpenContactListChat}>
-            <RoundedPhoto width="40px" height="40px" img={face} alt="avatar" />
+            <RoundedPhoto width="40px" height="40px" img={userData.avatar} alt="avatar" />
             <p>Messages</p>
           </div>
           <div>
             <ContactList>
               {clients.map((clientData: any) => (
                 <Contact key={clientData._id} onClick={() => handleOpenChatBox(clientData._id)}>
-                  <RoundedPhoto img={face1} alt="face" width="40px" height="40px" />
+                  <RoundedPhoto img={clientData.avatar} alt="face" width="40px" height="40px" />
                   <div>
                     <p>{clientData.name}</p>
                     {/* {console.log(clientData)} */}
@@ -420,8 +411,8 @@ function GlobalMessage() {
         </ContainerOpenContactList>
       ) : (
         <Container onClick={handleOpenContactListChat}>
-          <RoundedPhoto width="40px" height="40px" img={face} alt="avatar" />
           <p>Messages</p>
+          <GrContact fontSize={28} />
         </Container>
       )}
     </ContainerFixed>
