@@ -366,6 +366,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
 
   // Testing AdminHeader
   // const adminLogIn = true;
+  // Client Mobil Version ----------------------------------------------
   if (userData.token && userData.role === 'Client') {
     return (
       <div>
@@ -419,6 +420,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
             )}
           </Container>
         ) : (
+          // Client Desktop Version ----------------------------------------------
           <ContainerDesktopClient>
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
@@ -462,6 +464,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
       </div>
     );
   }
+  // Freelancer Mobil Version ----------------------------------------------
   if (userData.token && userData.role === 'Freelancer') {
     return (
       <div>
@@ -517,6 +520,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
             )}
           </Container>
         ) : (
+          // Freelancer Mobil Version ----------------------------------------------
           <ContainerDesktopAdmin>
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
@@ -561,7 +565,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
       </div>
     );
   }
-  // STOP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // Logout Mobil Version ----------------------------------------------
   return (
     <div>
       {!desktopVersion ? (
@@ -610,6 +614,7 @@ function Header({ displayTimeToLogout }: HeaderI) {
           )}
         </Container>
       ) : (
+        // Logout Desktop Version ----------------------------------------------
         <ContainerDesktop>
           <StyledLogoSlogan>
             <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
