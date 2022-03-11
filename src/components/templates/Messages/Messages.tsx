@@ -7,7 +7,6 @@ import { Context } from '../../../providers/GeneralProvider';
 import useForm from '../../../hooks/useForm';
 import useError from '../../../hooks/useError';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
-import face1 from '../../../assets/images/face1small.jpg';
 import NoItemsFound from '../../atoms/NoItemsFound/NoItemsFound';
 
 const Container = styled.div`
@@ -244,7 +243,7 @@ function Messages() {
           {clients.map((clientData: any) => (
             <Contact key={clientData._id} onClick={() => handleDisplayMessages(clientData._id)}>
               <RoundedPhoto
-                img={face1}
+                img={clientData.avatar}
                 alt="face"
                 width="60px"
                 height="60px"
