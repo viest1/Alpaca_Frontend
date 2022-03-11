@@ -72,13 +72,15 @@ const ContainerOptionsToClick = styled.div`
 `;
 
 interface client {
-  clientData: {
-    name: string;
-    email: string;
-    phone: string;
-    projects: string;
-    finished: string;
-  };
+  clientData:
+    | {
+        name: string;
+        email: string;
+        phone?: string;
+        projects: string;
+        finished: string;
+      }
+    | any;
 }
 
 function CardClient({ clientData }: client) {
