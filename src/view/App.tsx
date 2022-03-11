@@ -22,7 +22,7 @@ import VerifyEmail from '../components/molecules/VerifyEmail/VerifyEmail';
 import ForgotPassword from '../components/molecules/ForgotPassword/ForgotPassword';
 import ResetPassword from '../components/molecules/ResetPassword/ResetPassword';
 import Statistics from '../components/templates/Admin_Statistics/Statistics';
-import ClientDetail from '../components/organisms/ClientDetail/ClientDetails';
+import ClientDetails from '../components/organisms/ClientDetail/ClientDetails';
 import ProjectDetail from '../components/organisms/ProjectDetail/ProjectDetails';
 import Messages from '../components/templates/Messages/Messages';
 import NewProject from '../components/templates/Admin_NewProject/NewProject';
@@ -155,7 +155,7 @@ function App(): JSX.Element {
           <Routes>
             <Route path="/" element={<AdminDashboard />} />
             <Route path="/clients" element={<ClientsOrProjects />} />
-            <Route path="/client/:clientId" element={<ClientDetail />} />
+            <Route path="/client/:clientId" element={<ClientDetails />} />
             <Route path="/project/:projectId" element={<ProjectDetail />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/statistics" element={<Statistics />} />
@@ -171,7 +171,7 @@ function App(): JSX.Element {
             <Route path="/" element={<UserDashboard />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/project/:projectId" element={<ProjectDetail />} />
-            <Route path="/freelancer/:freelancerId" element={<ClientDetail />} />
+            <Route path="/freelancer/:freelancerId" element={<ClientDetails />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/services" element={<Services />} />

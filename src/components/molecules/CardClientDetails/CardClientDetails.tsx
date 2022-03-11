@@ -6,12 +6,13 @@ import Button from '../../atoms/Button/Button';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import kim from '../../../assets/images/kim.jpg';
-import GeneratePdf from '../GeneratePdf/GeneratePdf';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 15rem;
+  margin-top: 3rem;
   gap: 1rem;
   padding: 1rem 4rem;
   border: 1px solid ${({ theme }) => theme.color.main2};
@@ -22,6 +23,9 @@ const Container = styled.div`
     font-weight: 700;
     font-size: 22px;
     
+  }
+  h4 {
+      margin:auto;
   }
 `;
 const ContainerThreeDots = styled.div`
@@ -36,23 +40,22 @@ const Details = styled.div`
   color: ${({ theme }) => theme.color.main2};
   align-content: center;
 `;
+
 const DetailsElement = styled.div`
   display: flex;
   flex-direction: column;
   padding: 3px;
   justify-content: center;
 `;
-const DownloadInvoiceButton = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-`;
+
 // Style Desktop
 const ContainerDesktop = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+  padding: 2rem 3rem;
+  margin-bottom: 4rem;
   border: 1px solid ${({ theme }) => theme.color.main2};
   border-radius: 0.6rem;
   background-color: ${({ theme }) => theme.color.main1};
@@ -63,10 +66,21 @@ const ContainerDesktop = styled.div`
     
   }
 `;
+const ContainerThreeDotsDesktop = styled.div`
+  position: relative;
+  margin: auto;
+  left: 53rem;
+  //border: 10px solid pink;
+  bottom: 11rem;
+  :hover {
+    cursor: pointer;
+  }
+`;
 const ContainerDetailDesktop = styled.div`
   display: flex;
-  //border: 1px solid red;
-  gap: 2rem;
+  padding: inherit;
+  //border: 10px solid red;
+  gap: 10rem;
 `;
 const TitleAndPicture = styled.div`
   display: flex;
@@ -74,12 +88,34 @@ const TitleAndPicture = styled.div`
   align-items: center;
   align-content: space-around;
   margin: auto;
-  padding-left: 30px;
   //border: 1px solid green;
 `;
+const DetailsDesktop = styled.div`
+  display: flex;
+  gap: 7px;
+  color: ${({ theme }) => theme.color.main2};
+  align-content: center;
+  gap: 5rem;
+`;
+const ContactInformation = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-item: center;
+  align-content:space-around;
 
-interface Project {
-  projectData: any;
+}
+h4  {
+    margin:auto;
+}
+`;
+const BillingInformation = styled.div`
+  margin: auto;
+  h4 {
+    margin: auto;
+  }
+`;
+interface Client {
+  clientData: any;
   /*  projectData: {
     startingDate: string;
     dueDate: string;
@@ -90,7 +126,7 @@ interface Project {
   }; */
 }
 // Card Details Mobil Version
-function CardDetails({ projectData }: Project) {
+function CardClientDetails({ clientData }: Client) {
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
   return (
     <div>
@@ -127,57 +163,69 @@ function CardDetails({ projectData }: Project) {
             />
             {/* check this part later, because the ? are not the best solution  */}
             {/* the problem is of the time of rendering */}
-            {projectData && (
+            {clientData && (
               <Details>
+                <h4>Contact Information</h4>
                 <DetailsElement>
-                  <span>Staring Date</span>
-                  <p>{projectData?.oneProject?.createdAt}</p>
+                  <span>Name</span>
+                  <p>{clientData?.oneClient?.name}</p>
                 </DetailsElement>
                 <DetailsElement>
-                  <span>Due Date</span>
-                  <p>{projectData?.oneProject?.updatedAt}</p>
+                  <span>Surname</span>
+                  <p>{clientData?.oneClient?.name}</p>
                 </DetailsElement>
                 <DetailsElement>
-                  <span>Company Name</span>
-                  <p>{projectData?.oneProject?.clientName}</p>
+                  <span>Email</span>
+                  <p>{clientData?.oneClient?.email}</p>
                 </DetailsElement>
                 <DetailsElement>
-                  <span>Customer Name</span>
-                  <p>{projectData?.oneProject?.name}</p>
+                  <span>Phone number</span>
+                  <p>{clientData?.oneClient?.name}</p>
                 </DetailsElement>
+                <h4>Billing Information</h4>
                 <DetailsElement>
-                  <span>Website</span>
-                  <p>{projectData?.oneProject?.text}</p>
+                  <span>Id</span>
+                  <p>{clientData?.oneClient?.role}</p>
                 </DetailsElement>
                 <DetailsElement>
                   <span>Tax Number</span>
-                  <p>{projectData?.oneProject?.ownerUser}</p>
+                  <p>{clientData?.oneClient?.taxNumber}</p>
                 </DetailsElement>
               </Details>
             )}
           </Container>
-          <DownloadInvoiceButton>
-            <Button
-              text="Download Invoice"
-              height="40px"
-              width="180px"
-              fontSize="13px"
-              padding="0.5rem 1rem"
-              onClick={GeneratePdf}
-            />
-          </DownloadInvoiceButton>
         </div>
       ) : (
         // Card Details Desktop Version
         <div>
           <ContainerDesktop>
+            <ContainerThreeDotsDesktop>
+              <IconClickable icon={<BsThreeDots fontSize={38} />}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.5rem',
+                    padding: '1rem'
+                  }}
+                >
+                  <Button text="What ever" width="180px" fontSize="1rem" padding="0.5rem 1rem" />
+                  <Button
+                    text="What ever too"
+                    width="180px"
+                    fontSize="1rem"
+                    padding="0.5rem 1rem"
+                  />
+                </div>
+              </IconClickable>
+            </ContainerThreeDotsDesktop>
             <ContainerDetailDesktop>
               <TitleAndPicture>
-                <h4>Nomad Studio</h4>
+                <h5>Nomad Studio</h5>
                 <RoundedPhoto
                   img={kim}
                   alt="avatar"
-                  outline="3px solid black"
+                  outline="3px solid red"
                   width="12rem"
                   height="12rem"
                 />
@@ -185,33 +233,39 @@ function CardDetails({ projectData }: Project) {
               {/* check this part later, because the ? are not the best solution  */}
               {/* the problem is of the time of rendering */}
               <div>
-                {projectData && (
-                  <Details>
-                    <DetailsElement>
-                      <span>Staring Date</span>
-                      <p>{projectData?.oneProject?.createdAt}</p>
-                    </DetailsElement>
-                    <DetailsElement>
-                      <span>Due Date</span>
-                      <p>{projectData?.oneProject?.updatedAt}</p>
-                    </DetailsElement>
-                    <DetailsElement>
-                      <span>Company Name</span>
-                      <p>{projectData?.oneProject?.clientName}</p>
-                    </DetailsElement>
-                    <DetailsElement>
-                      <span>Customer Name</span>
-                      <p>{projectData?.oneProject?.name}</p>
-                    </DetailsElement>
-                    <DetailsElement>
-                      <span>Website</span>
-                      <p>{projectData?.oneProject?.text}</p>
-                    </DetailsElement>
-                    <DetailsElement>
-                      <span>Tax Number</span>
-                      <p>{projectData?.oneProject?.ownerUser}</p>
-                    </DetailsElement>
-                  </Details>
+                {clientData && (
+                  <DetailsDesktop>
+                    <ContactInformation>
+                      <h4>Contact</h4>
+                      <DetailsElement>
+                        <span>Name</span>
+                        <p>{clientData?.oneClient?.name}</p>
+                      </DetailsElement>
+                      <DetailsElement>
+                        <span>Surname</span>
+                        <p>{clientData?.oneClient?.name}</p>
+                      </DetailsElement>
+                      <DetailsElement>
+                        <span>Email</span>
+                        <p>{clientData?.oneClient?.email}</p>
+                      </DetailsElement>
+                      <DetailsElement>
+                        <span>Phone Number</span>
+                        <p>{clientData?.oneClient?.name}</p>
+                      </DetailsElement>
+                    </ContactInformation>
+                    <BillingInformation>
+                      <h4>Billing</h4>
+                      <DetailsElement>
+                        <span>Id</span>
+                        <p>{clientData?.oneClient?.role}</p>
+                      </DetailsElement>
+                      <DetailsElement>
+                        <span>Tax Number</span>
+                        <p>{clientData?.oneClient?.taxNumber}</p>
+                      </DetailsElement>
+                    </BillingInformation>
+                  </DetailsDesktop>
                 )}
               </div>
             </ContainerDetailDesktop>
@@ -221,5 +275,4 @@ function CardDetails({ projectData }: Project) {
     </div>
   );
 }
-
-export default CardDetails;
+export default CardClientDetails;

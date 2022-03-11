@@ -210,6 +210,9 @@ const TotalInput = styled.input`
   margin: auto;
   border-radius: 0.3rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 `;
 const LabelTotal = styled.label`
   font-weight: bold;
@@ -388,7 +391,9 @@ function ProjectDetail() {
     setOpenModal((prev) => !prev);
   };
   const ref: any = useRef(null);
-  useOnClickOutside(ref, () => handleModal());
+  // useOnClickOutside(ref, () => handleModal()); Come from this one but is enough
+  // with (ref, handleModal) if we have declared this function before
+  useOnClickOutside(ref, handleModal);
   return (
     // Project Details Mobil Version ----------------------------------------------
     <div>
@@ -399,6 +404,7 @@ function ProjectDetail() {
           <ProjectInvoicesFiles>
             <ServicesInvoice>
               <h4>Service</h4>
+              {/* Closing */}
               {openModal && (
                 <ModalBackground ref={ref}>
                   <ModalContainer>
@@ -418,6 +424,8 @@ function ProjectDetail() {
                   </ModalContainer>
                 </ModalBackground>
               )}
+              {/* closing end */}
+              {/* opening */}
               {nameOfServicesData.map((item) => (
                 <div key={item.id}>
                   <ServicesButton
@@ -430,6 +438,7 @@ function ProjectDetail() {
                   </ServicesButton>
                 </div>
               ))}
+              {/* opening ends */}
             </ServicesInvoice>
             <PricesInvoice>
               <h4>Price</h4>
