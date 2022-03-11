@@ -109,7 +109,7 @@ function RoundedPhoto({
   border,
   outline,
   outlineOffset,
-  icon
+  icon,
   handleChange
 }: Photo) {
   return (
@@ -160,7 +160,7 @@ RoundedPhoto.defaultProps = {
   outline: undefined,
   outlineOffset: undefined,
   RoundedPhotoWithButton: false,
-  icon: undefined
+  icon: undefined,
   handleChange: undefined
 };
 
