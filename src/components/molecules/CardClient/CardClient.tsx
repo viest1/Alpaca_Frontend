@@ -1,4 +1,5 @@
 import React, { SyntheticEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { BsThreeDots } from 'react-icons/bs';
 import { BiArrowFromBottom } from 'react-icons/bi';
@@ -82,6 +83,7 @@ const ContainerOptionsToClick = styled.div`
 
 interface client {
   clientData: {
+    _id?: string;
     name: string;
     email: string;
     phone: string;
@@ -93,6 +95,8 @@ interface client {
 
 function CardClient({ clientData }: client) {
   const [openDataDetails, setOpenDataDetails] = useState(false);
+
+  const navigate = useNavigate();
   const handleCloseDetails = (e: SyntheticEvent) => {
     e.stopPropagation();
     setOpenDataDetails(false);
@@ -100,6 +104,13 @@ function CardClient({ clientData }: client) {
   const handleOpenDetails = () => {
     setOpenDataDetails(true);
   };
+
+  const handleNewProjectClick = () => {
+    const userData = clientData;
+
+    navigate(`/newProject/${userData._id}`);
+  };
+
   return (
     <Container openDataDetails={openDataDetails} onClick={handleOpenDetails}>
       <div>
@@ -116,9 +127,22 @@ function CardClient({ clientData }: client) {
         <div>
           <IconClickable icon={<BsThreeDots fontSize={28} />}>
             <ContainerOptionsToClick>
-              <Button text="View" width="150px" fontSize="1rem" padding="0.3rem 1rem" />
-              <Button text="Message" width="150px" fontSize="1rem" padding="0.3rem 1rem" />
-              <Button text="New Project" width="150px" fontSize="1rem" padding="0.3rem 1rem" />
+              <Button whiteMenu text="View" width="150px" fontSize="1rem" padding="0.3rem 1rem" />
+              <Button
+                whiteMenu
+                text="Message"
+                width="150px"
+                fontSize="1rem"
+                padding="0.3rem 1rem"
+              />
+              <Button
+                whiteMenu
+                text="New Project"
+                width="150px"
+                fontSize="1rem"
+                padding="0.3rem 1rem"
+                onClick={handleNewProjectClick}
+              />
             </ContainerOptionsToClick>
           </IconClickable>
         </div>

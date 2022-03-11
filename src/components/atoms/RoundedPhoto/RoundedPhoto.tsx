@@ -46,7 +46,7 @@ const PhotoWithButton = styled.div`
   margin-bottom: 2.5rem;
 `;
 
-const ButtonForPhoto = styled.div`
+const ButtonForPhoto = styled.button`
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -55,6 +55,8 @@ const ButtonForPhoto = styled.div`
   background-position: center;
   background-size: 20px;
   background-color: ${({ theme }) => theme.color.main4};
+  outline: none;
+  border:none
 
   top: 10px;
   left: 110px;
@@ -65,6 +67,24 @@ const ButtonForPhoto = styled.div`
   }
 `;
 
+const UploadPhotoButton = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+`;
+const InputFileStyle = styled.input`
+  z-index: 12;
+  position: absolute;
+  opacity: 0;
+  background: black;
+  width: 30px;
+  height: 30px;
+  left: 110px;
+  &:hover {
+    cursor: pointer;
+    outline: 3px solid black;
+  }
+`;
 interface Photo {
   img: string | undefined | null;
   alt: string;
@@ -76,6 +96,7 @@ interface Photo {
   outlineOffset?: string;
   RoundedPhotoWithButton?: boolean;
   icon?: any;
+  handleChange?: any;
 }
 
 function RoundedPhoto({
@@ -89,12 +110,16 @@ function RoundedPhoto({
   outline,
   outlineOffset,
   icon
+  handleChange
 }: Photo) {
   return (
     <Container>
       {RoundedPhotoWithButton ? (
         <PhotoWithButton>
-          <ButtonForPhoto />
+          <UploadPhotoButton>
+            <InputFileStyle name="image" type="file" onChange={handleChange} />
+            <ButtonForPhoto type="button" />
+          </UploadPhotoButton>
           <ContainerPhoto
             width={width}
             height={height}
@@ -136,6 +161,7 @@ RoundedPhoto.defaultProps = {
   outlineOffset: undefined,
   RoundedPhotoWithButton: false,
   icon: undefined
+  handleChange: undefined
 };
 
 export default RoundedPhoto;
