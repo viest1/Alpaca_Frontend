@@ -7,7 +7,6 @@ import useError from '../../../hooks/useError';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import { Context } from '../../../providers/GeneralProvider';
 import { InputFileStyle } from '../SignUp/SignUp';
-import GeneratePdf from '../../molecules/GeneratePdf/GeneratePdf';
 
 declare global {
   interface Window {
@@ -191,7 +190,6 @@ function Settings() {
   return (
     <FormContainer onSubmit={handleSubmitUserDataChange}>
       <div>
-        <GeneratePdf />
         <h3>Settings</h3>
         <ContainerDiv>
           <DivOne>

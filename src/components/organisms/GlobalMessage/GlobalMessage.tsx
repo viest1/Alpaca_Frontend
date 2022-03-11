@@ -1,7 +1,8 @@
 // import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
-import React, { SyntheticEvent, useContext, useEffect, useState } from 'react';
+import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { GrContact } from 'react-icons/gr';
+import { MdOutlineClose } from 'react-icons/md';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
@@ -10,6 +11,7 @@ import { AlwaysScrollToBottom } from '../../templates/Messages/Messages';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
 import useForm from '../../../hooks/useForm';
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
 
 const Form = styled.form`
   padding: 1rem;
@@ -67,7 +69,9 @@ const Form = styled.form`
 // `;
 //
 const ContactList = styled.div`
-  padding: 0;
+  margin: 0 0 3rem 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 `;
 
 const Contact = styled.div`
@@ -116,10 +120,12 @@ const ChatBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  ${({ theme }) => theme.down(theme.breakpoint.m)} {
+    right: 70px;
+  }
   > div:first-child {
     display: flex;
-    align-items: center;
-    gap: 0.6rem;
+    justify-content: space-between;
     padding: 0.5rem;
     border-bottom: 1px solid grey;
     border-top-left-radius: 0.6rem;
@@ -129,15 +135,38 @@ const ChatBox = styled.div`
       background: ${({ theme }) => theme.color.main5};
     }
   }
+
+  > div:first-child > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  > div:first-child > div:nth-child(2) > svg:hover {
+    cursor: pointer;
+    background: white;
+    border-radius: 50%;
+  }
+
+  > div:first-child > div:nth-child(2) > svg {
+    position: relative;
+    top: -6px;
+  }
+
   > div:nth-child(2) {
     max-height: 300px;
     min-width: 300px;
     max-width: 450px;
     display: flex;
     flex-direction: column;
+    align-self: center;
     gap: 0.1rem;
     overflow-y: scroll;
     overscroll-behavior: contain;
+    ${({ theme }) => theme.down(theme.breakpoint.m)} {
+      min-width: 200px;
+      max-width: 250px;
+    }
   }
 `;
 
@@ -149,11 +178,23 @@ const ChatBoxSmall = styled.div`
   min-width: 200px;
   padding: 0 0.5rem;
   background: ${({ theme }) => theme.color.main4};
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  > div:last-child > svg:hover {
+    cursor: pointer;
+    background: white;
+    border-radius: 50%;
+  }
+  ${({ theme }) => theme.down(theme.breakpoint.m)} {
+    right: 70px;
+  }
   &:hover {
     cursor: pointer;
     background: ${({ theme }) => theme.color.main5};
@@ -175,7 +216,6 @@ const Container = styled.div`
     width: 40px;
     height: 40px;
     min-width: 40px;
-    background: none;
     p {
       display: none;
     }
@@ -183,9 +223,9 @@ const Container = styled.div`
   &:hover {
     cursor: pointer;
     background: ${({ theme }) => theme.color.main5};
-    ${({ theme }) => theme.down(theme.breakpoint.m)} {
-      background: none;
-    }
+    // ${({ theme }) => theme.down(theme.breakpoint.m)} {
+    //   background: none;
+    // }
   }
 `;
 
@@ -228,6 +268,7 @@ function GlobalMessage() {
   const [actuallyClient, setActuallyClient] = useState<any[]>([]);
   const handleOpenContactListChat = () => {
     setIsOpenContactList((prev) => !prev);
+    setOpenChatWithMessages(false);
   };
   const [clients, setClients] = useState<any[]>([]);
   const { userData, messages } = useContext(Context);
@@ -282,6 +323,11 @@ function GlobalMessage() {
   const handleOpenChatBoxWithMessages = () => {
     setOpenChatWithMessages((prev) => !prev);
   };
+  const handleCloseChatBoxWithMessages = (e: any) => {
+    e.stopPropagation();
+    setDisplayChatBoxOnTheBottom(false);
+    setOpenChatWithMessages(false);
+  };
   // onSubmit = Sending message to backend
   const handleSubmitMessage = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -320,6 +366,11 @@ function GlobalMessage() {
     setDisplayChatBoxOnTheBottom(true);
   };
 
+  const handleCloseMessagesAndContactList = () => {
+    setOpenChatWithMessages(false);
+    setIsOpenContactList(false);
+  };
+
   // Fetching Clients (Freelancer or Client)
   useEffect(() => {
     if (userData.token && userData.role === 'Freelancer') {
@@ -349,13 +400,27 @@ function GlobalMessage() {
     }
   }, [messages]);
 
+  const containerFixed = useRef(null);
+
+  useOnClickOutside(containerFixed, handleCloseMessagesAndContactList);
+
   return (
-    <ContainerFixed>
+    <ContainerFixed ref={containerFixed}>
       {openChatWithMessages ? (
         <ChatBox>
           <div onClick={handleOpenChatBoxWithMessages}>
-            <RoundedPhoto width="40px" height="40px" img={actuallyClient[0].avatar} alt="avatar" />
-            <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
+            <div>
+              <RoundedPhoto
+                width="40px"
+                height="40px"
+                img={actuallyClient[0].avatar}
+                alt="avatar"
+              />
+              <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
+            </div>
+            <div>
+              <MdOutlineClose fontSize={18} onClick={handleCloseChatBoxWithMessages} />
+            </div>
           </div>
           <div>
             {clientMessages.map((item: any, i) => (
@@ -383,8 +448,18 @@ function GlobalMessage() {
       ) : (
         displayChatBoxOnTheBottom && (
           <ChatBoxSmall onClick={handleOpenChatBoxWithMessages}>
-            <RoundedPhoto width="40px" height="40px" img={actuallyClient[0].avatar} alt="avatar" />
-            <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
+            <div>
+              <RoundedPhoto
+                width="40px"
+                height="40px"
+                img={actuallyClient[0].avatar}
+                alt="avatar"
+              />
+              <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
+            </div>
+            <div>
+              <MdOutlineClose fontSize={18} onClick={handleCloseChatBoxWithMessages} />
+            </div>
           </ChatBoxSmall>
         )
       )}

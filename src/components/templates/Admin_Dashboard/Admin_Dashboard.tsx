@@ -30,7 +30,7 @@ const Container = styled.div`
 `;
 
 const ContainerClients = styled.div`
-  padding: 1rem;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -42,7 +42,7 @@ const ContainerClients = styled.div`
 `;
 
 const ContainerProjects = styled.div`
-  padding: 1rem;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -55,15 +55,17 @@ const ContainerProjects = styled.div`
 
 const Data = styled.div`
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
-    width: 66%;
+    width: 76%;
   }
 `;
 const Stats = styled.div`
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
-    width: 30%;
+    width: 20%;
   }
 `;
 const ContainerDataAndStats = styled.div`
+  display: flex;
+  flex-direction: column;
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     display: flex;
     width: 100%;

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { BsThreeDots } from 'react-icons/bs';
 import { BiArrowFromBottom } from 'react-icons/bi';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
-import face1 from '../../../assets/images/face1small.jpg';
 import IconClickable from '../../atoms/IconClickable/IconClickable';
 import Button from '../../atoms/Button/Button';
 
@@ -22,7 +21,7 @@ const Container = styled.div<Card>`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 4px solid black;
+    border-bottom: 3px solid grey;
     padding: 0.5rem 0 0.5rem 0;
     div:last-child {
       align-self: flex-start;
@@ -45,15 +44,25 @@ const Container = styled.div<Card>`
 
   h4 {
     max-width: 180px;
+    font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
+  }
+  h5 {
+    font-size: ${({ theme }) => theme.fontSizeOpenSans.ms};
+  }
+  p {
+    font-size: ${({ theme }) => theme.fontSizeOpenSans.xs};
+    font-weight: bold;
   }
   span {
-    font-weight: 700;
+    font-weight: 600;
+    font-size: ${({ theme }) => theme.fontSizeOpenSans.xs};
   }
 `;
 
 const ElementData = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   p {
     width: 180px;
     overflow: hidden;
@@ -78,6 +87,7 @@ interface client {
     phone: string;
     projects: string;
     finished: string;
+    avatar: string;
   };
 }
 
@@ -93,7 +103,13 @@ function CardClient({ clientData }: client) {
   return (
     <Container openDataDetails={openDataDetails} onClick={handleOpenDetails}>
       <div>
-        <RoundedPhoto img={face1} alt="face" width="60px" height="60px" outline="3px solid black" />
+        <RoundedPhoto
+          img={clientData.avatar}
+          alt="face"
+          width="60px"
+          height="60px"
+          outline="3px solid black"
+        />
         <div>
           <h4>{clientData.name}</h4>
         </div>

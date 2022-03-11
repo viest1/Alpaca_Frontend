@@ -75,6 +75,7 @@ interface Photo {
   outline?: string;
   outlineOffset?: string;
   RoundedPhotoWithButton?: boolean;
+  icon?: any;
 }
 
 function RoundedPhoto({
@@ -86,7 +87,8 @@ function RoundedPhoto({
   height,
   border,
   outline,
-  outlineOffset
+  outlineOffset,
+  icon
 }: Photo) {
   return (
     <Container>
@@ -101,7 +103,12 @@ function RoundedPhoto({
             outlineOffset={outlineOffset}
             margin={margin}
           >
-            <div>{img && <img src={img} alt={alt} />}</div>
+            {img && (
+              <div>
+                <img src={img} alt={alt} />
+              </div>
+            )}
+            {icon && !img && <div>{icon}</div>}
           </ContainerPhoto>
         </PhotoWithButton>
       ) : (
@@ -113,6 +120,7 @@ function RoundedPhoto({
           outlineOffset={outlineOffset}
         >
           {img && <img src={img} alt={alt} />}
+          {icon && !img && icon}
         </ContainerPhoto>
       )}
     </Container>
@@ -126,7 +134,8 @@ RoundedPhoto.defaultProps = {
   border: undefined,
   outline: undefined,
   outlineOffset: undefined,
-  RoundedPhotoWithButton: false
+  RoundedPhotoWithButton: false,
+  icon: undefined
 };
 
 export default RoundedPhoto;
