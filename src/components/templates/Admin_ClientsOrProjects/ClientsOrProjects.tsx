@@ -8,6 +8,7 @@ import { Context } from '../../../providers/GeneralProvider';
 import CardClient from '../../molecules/CardClient/CardClient';
 import CardProject from '../../molecules/CardProject/CardProject';
 import useError from '../../../hooks/useError';
+import NoItemsFound from '../../atoms/NoItemsFound/NoItemsFound';
 
 const ContainerFilterBy = styled.div`
   display: flex;
@@ -30,7 +31,7 @@ const ContainerClients = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
   max-width: 95%;
-  margin: 1.2rem auto 0 auto;
+  margin: 1.2rem auto 1.2rem auto;
   border-radius: 1rem;
   ${({ theme }) => theme.down('700px')} {
     grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
@@ -43,7 +44,7 @@ const ContainerProjects = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
   max-width: 95%;
-  margin: 1.2rem auto 0 auto;
+  margin: 1.2rem auto 1.2rem auto;
   border-radius: 1rem;
   ${({ theme }) => theme.down('700px')} {
     grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
@@ -54,22 +55,21 @@ const ContainerProjects = styled.div`
 function ClientsOrProjects() {
   const [choiceRadio, setChoiceRadio] = useState('projects');
   const [clients, setClients] = useState([]);
+  console.log(clients[0]);
+
   const [projects, setProjects] = useState([]);
   const { userData } = useContext(Context);
   const { handleError } = useError();
 
   const fetchClients = async () => {
     try {
-      const res = await fetch(
-        `${process.env.REACT_APP_BACKEND}/user/freelancer/${userData.token}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-type': 'application/json',
-            Authorization: `Bearer ${userData.token}`
-          }
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/user/freelancer`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${userData.token}`
         }
-      );
+      });
       const resJSON = await res.json();
       if (res.status === 200) {
         setClients(resJSON);
@@ -164,21 +164,19 @@ function ClientsOrProjects() {
       </ContainerFilterBy>
       {choiceRadio === 'projects' ? (
         <ContainerProjects>
-          {projects.map((item: any) => (
-            <div>
-              {/* eslint-disable-next-line react/no-array-index-key */}
-              <CardProject key={item._id} projectData={item} />
-            </div>
-          ))}
+          {projects.length ? (
+            projects.map((item: any) => <CardProject key={item._id} projectData={item} />)
+          ) : (
+            <NoItemsFound text="Projects" />
+          )}
         </ContainerProjects>
       ) : (
         <ContainerClients>
-          {clients.map((item: any) => (
-            <div>
-              {/* eslint-disable-next-line react/no-array-index-key */}
-              <CardClient key={item._id} clientData={item} />
-            </div>
-          ))}
+          {clients.length ? (
+            clients.map((item: any) => <CardClient key={item._id} clientData={item} />)
+          ) : (
+            <NoItemsFound text="Clients" />
+          )}
         </ContainerClients>
       )}
     </div>

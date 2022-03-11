@@ -2,16 +2,14 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
+import { BiFace } from 'react-icons/bi';
 import CompanyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
 import NavLink from '../../atoms/NavLink/NavLink';
 import Contact from '../../molecules/Contact/Contact';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Context } from '../../../providers/GeneralProvider';
-import useError from '../../../hooks/useError';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
-import trumpy from '../../../assets/images/trumpy.jpg';
-import putin from '../../../assets/images/putin.jpeg';
 import { useAuth } from '../../../hooks/useAuth';
 import LanguageMenu from '../../molecules/LanguageMenu/LanguageMenu';
 
@@ -218,6 +216,10 @@ const ButtonLogoutMobilAdmin = styled.button`
 // Style Avatar Menu
 const AvatarContainer = styled.div`
   display: flex;
+  > div {
+    display: flex;
+    align-items: center;
+  }
 `;
 const AvatarMenu = styled.div`
   display: flex;
@@ -327,18 +329,11 @@ const dataAvatarMenu = [
     id: 1
   }
 ];
-interface HeaderI {
-  displayTimeToLogout: boolean;
-}
 
-function Header({ displayTimeToLogout }: HeaderI) {
+function Header() {
   const { userData } = useContext(Context);
-  const { handleError } = useError();
   const { handleLogout } = useAuth();
 
-  useEffect(() => {
-    if (displayTimeToLogout) handleError('For your Safety, You will logout for 30s');
-  }, [displayTimeToLogout]);
   // Open & Closing Menu
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const handleOpenMenu = () => {
@@ -439,11 +434,12 @@ function Header({ displayTimeToLogout }: HeaderI) {
                 {!isOpenAvatarMenu && (
                   <div role="button" onClick={handleOpenAvatarMenu} tabIndex={0}>
                     <RoundedPhoto
-                      img={putin}
+                      img={userData.avatar}
+                      icon={<BiFace fontSize={32} />}
                       alt="avatar"
-                      outline="3px solid yellow"
-                      width="5rem"
-                      height="5rem"
+                      outline="1px solid black"
+                      width="30px"
+                      height="30px"
                     />
                   </div>
                 )}
@@ -540,11 +536,12 @@ function Header({ displayTimeToLogout }: HeaderI) {
                 {!isOpenAvatarMenu && (
                   <div role="button" onClick={handleOpenAvatarMenu} tabIndex={0}>
                     <RoundedPhoto
-                      img={trumpy}
+                      img={userData.avatar}
+                      icon={<BiFace fontSize={32} />}
                       alt="avatar"
-                      outline="3px solid yellow"
-                      width="5rem"
-                      height="5rem"
+                      outline="1px solid black"
+                      width="30px"
+                      height="30px"
                     />
                   </div>
                 )}
