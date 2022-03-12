@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { BsThreeDots } from 'react-icons/bs';
 import { BiArrowFromBottom } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import IconClickable from '../../atoms/IconClickable/IconClickable';
 import Button from '../../atoms/Button/Button';
+import { Context } from '../../../providers/GeneralProvider';
 
 interface Card {
   openDataDetails: boolean;
@@ -81,21 +83,39 @@ const ContainerOptionsToClick = styled.div`
 
 interface client {
   projectData: {
+    _id: string;
     name: string;
     finished: string;
     website: string;
     dueData: string;
     text: string;
     avatar: string;
+    ownerFreelancer: string;
+    ownerUser: string;
   };
 }
 
 function CardProject({ projectData }: client) {
   const [openDataDetails, setOpenDataDetails] = useState(false);
+  const { setOpenChatBoxWithThisUser, userData } = useContext(Context);
+  const navigate = useNavigate();
   const handleCloseDetails = (e: any) => {
     e.stopPropagation();
     setOpenDataDetails(false);
   };
+  const handleNavigateToProjectDetails = () => {
+    navigate(`/project/${projectData._id}`);
+  };
+
+  const handleNavigateToChatBoxMessage = () => {
+    if (userData.role === 'Client') {
+      setOpenChatBoxWithThisUser(projectData.ownerFreelancer);
+    }
+    if (userData.role === 'Freelancer') {
+      setOpenChatBoxWithThisUser(projectData.ownerUser);
+    }
+  };
+
   return (
     <Container openDataDetails={openDataDetails} onClick={() => setOpenDataDetails(true)}>
       <div>
@@ -112,21 +132,29 @@ function CardProject({ projectData }: client) {
         <div>
           <IconClickable icon={<BsThreeDots fontSize={28} />}>
             <ContainerOptionsToClick>
-              <Button whiteMenu text="View" width="150px" fontSize="1rem" padding="0.3rem 1rem" />
-              <Button whiteMenu text="Upload" width="150px" fontSize="1rem" padding="0.3rem 1rem" />
               <Button
                 whiteMenu
-                text="Progress"
+                text="View"
                 width="150px"
                 fontSize="1rem"
                 padding="0.3rem 1rem"
+                onClick={handleNavigateToProjectDetails}
               />
+              {/* <Button whiteMenu text="Upload" width="150px" fontSize="1rem" padding="0.3rem 1rem" /> */}
+              {/* <Button */}
+              {/*   whiteMenu */}
+              {/*   text="Progress" */}
+              {/*   width="150px" */}
+              {/*   fontSize="1rem" */}
+              {/*   padding="0.3rem 1rem" */}
+              {/* /> */}
               <Button
                 whiteMenu
                 text="Message"
                 width="150px"
                 fontSize="1rem"
                 padding="0.3rem 1rem"
+                onClick={handleNavigateToChatBoxMessage}
               />
             </ContainerOptionsToClick>
           </IconClickable>

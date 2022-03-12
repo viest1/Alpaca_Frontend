@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
 import CardClientDetails from '../../molecules/CardClientDetails/CardClientDetails';
@@ -22,7 +23,7 @@ function ClientDetails() {
   const [client, setClient] = useState({});
   const { userData } = useContext(Context);
   const { handleError } = useError();
-  const clientId = '62192d9c2e604dba40f3a58b';
+  const { clientId } = useParams();
 
   const fetchClientDetails = async () => {
     try {

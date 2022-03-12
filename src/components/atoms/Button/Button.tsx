@@ -38,6 +38,10 @@ const ButtonWhiteStyle = styled.button<ButtonInterface>`
   text-transform: uppercase;
   font-weight: bold;
   transition: 0.3s ease-in-out;
+  > span {
+    font-weight: 600;
+    font-size: ${({ theme }) => theme.fontSizeOpenSans.xs};
+  }
   //white-space: nowrap;
   &:hover {
     cursor: pointer;

@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { BsThreeDots } from 'react-icons/bs';
@@ -6,6 +6,7 @@ import { BiArrowFromBottom } from 'react-icons/bi';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import IconClickable from '../../atoms/IconClickable/IconClickable';
 import Button from '../../atoms/Button/Button';
+import { Context } from '../../../providers/GeneralProvider';
 
 interface Card {
   openDataDetails: boolean;
@@ -79,7 +80,7 @@ const ElementData = styled.div`
   }
 `;
 
-const ContainerOptionsToClick = styled.div`
+export const ContainerOptionsToClick = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -103,6 +104,7 @@ interface client {
 
 function CardClient({ clientData }: client) {
   const [openDataDetails, setOpenDataDetails] = useState(false);
+  const { setOpenChatBoxWithThisUser } = useContext(Context);
 
   const navigate = useNavigate();
   const handleCloseDetails = (e: SyntheticEvent) => {
@@ -117,6 +119,14 @@ function CardClient({ clientData }: client) {
     const userData = clientData;
 
     navigate(`/newProject/${userData._id}`);
+  };
+
+  const handleNavigateToClientDetails = () => {
+    navigate(`/client/${clientData._id}`);
+  };
+
+  const handleNavigateToChatBoxMessage = () => {
+    setOpenChatBoxWithThisUser(clientData._id);
   };
 
   return (
@@ -135,8 +145,16 @@ function CardClient({ clientData }: client) {
         <div>
           <IconClickable icon={<BsThreeDots fontSize={28} />}>
             <ContainerOptionsToClick>
-              <Button whiteMenu text="View" width="150px" fontSize="1rem" padding="0.3rem 1rem" />
               <Button
+                onClick={handleNavigateToClientDetails}
+                whiteMenu
+                text="View"
+                width="150px"
+                fontSize="1rem"
+                padding="0.3rem 1rem"
+              />
+              <Button
+                onClick={handleNavigateToChatBoxMessage}
                 whiteMenu
                 text="Message"
                 width="150px"
