@@ -15,6 +15,12 @@ const Container = styled.div<Card>`
   border: 3px solid black;
   padding: 0 1rem 1rem 1rem;
   border-radius: 0.6rem;
+  min-width: 290px;
+  width: 100%;
+  max-width: 450px;
+  ${({ theme }) => theme.up(theme.breakpoint.sm)} {
+    max-width: 290px;
+  }
   * {
     margin: 0;
   }
@@ -31,13 +37,13 @@ const Container = styled.div<Card>`
 
   > div:nth-child(2) {
     padding: 0.5rem 0.5rem 0 0.5rem;
-    ${({ theme }) => theme.down(theme.breakpoint.m)} {
+    ${({ theme }) => theme.down(theme.breakpoint.sm)} {
       display: ${({ openDataDetails }) => (openDataDetails ? 'block' : 'none')};
     }
     > div:last-child {
       display: flex;
       justify-content: center;
-      ${({ theme }) => theme.up(theme.breakpoint.m)} {
+      ${({ theme }) => theme.up(theme.breakpoint.sm)} {
         display: none;
       }
     }
@@ -148,7 +154,6 @@ function CardClient({ clientData }: client) {
         </div>
       </div>
       <div>
-        <h5>Contact Overview:</h5>
         <ElementData>
           <span>Phone:</span>
           <p>{clientData.phone}</p>
