@@ -90,13 +90,13 @@ const ContainerOptionsToClick = styled.div`
 interface client {
   clientData:
     | {
-      _id?: string;
+        _id?: string;
         name: string;
         email: string;
         phone?: string;
         projects: string;
         finished: string;
-      avatar: string;
+        avatar: string;
       }
     | any;
 }

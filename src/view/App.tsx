@@ -165,6 +165,7 @@ function App(): JSX.Element {
             <Route path="/services" element={<Services />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/impressum" element={<Impressum />} />
+            <Route path="/faqs" element={<FAQs />} />
           </Routes>
         ) : token && role === 'Client' ? (
           <Routes>
@@ -177,6 +178,7 @@ function App(): JSX.Element {
             <Route path="/services" element={<Services />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/impressum" element={<Impressum />} />
+            <Route path="/faqs" element={<FAQs />} />
           </Routes>
         ) : (
           <Routes>

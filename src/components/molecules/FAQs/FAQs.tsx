@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { GrClose } from 'react-icons/gr';
-import { theme } from '../../../assets/styles/theme';
 // import { Link } from 'react-router-dom';
 
 const ButtonAccordion = styled.button`
@@ -38,7 +37,7 @@ const changeBackground = ()=> {
 
 function FAQs() {
   const [openedPanel, setOpenedPanel] = useState(false);
-  //setOpenPanel wird in handleThePanel gespeichert
+  // setOpenPanel wird in handleThePanel gespeichert
   const handleThePanel = () => {
     setOpenedPanel((prev) => !prev);
   };
@@ -50,14 +49,10 @@ function FAQs() {
   // 1. den Array mit dem ID´s schreiben 2. das Ganze ggf. in eine Funktion wie in Zeile 399 bis 404 im header setzen
   return (
     <div>
-
       <h3> Unsere FAQs</h3>
 
-
-
-
-{/*The Panel is CLOSED now and needs to be OPENED*/}
-{/*{openedPanel && (
+      {/* The Panel is CLOSED now and needs to be OPENED */}
+      {/* {openedPanel && (
    <div>
     < GrClose onClick={handleThePanel}/>
         <ButtonAccordion>Section 2</ButtonAccordion>
@@ -75,26 +70,20 @@ function FAQs() {
 )}
 */}
 
+      {/* CLOSED Section will be OPENED ONE BY ONE */}
+      {openedPanel &&
+        dataOfButtonAccordion.map((itemOfTheArray) => (
+          <div key={itemOfTheArray.id}>
+            <ButtonAccordion onClick={handleThePanel}> </ButtonAccordion>
+          </div>
+        ))}
+      {/* OPENED PANEL WILL BECOME CLOSED ONE BY ONE */}
+      <div>
+        <GrClose onClick={handleThePanel} />
+        <Panel>lorem ipsum sin amet</Panel>
+      </div>
 
-{/*CLOSED Section will be OPENED ONE BY ONE*/}
-{openedPanel &&( 
-{dataOfButtonAccordion.map((itemOfTheArray) => {
-<div key={itemOfTheArray.id}>
-<ButtonAccordion onClick={handleThePanel}> </ButtonAccordion>
-</div>
-})
-}
-)}
-{/*OPENED PANEL WILL BECOME CLOSED ONE BY ONE */}
-{
-<div>
-< GrClose onClick={handleThePanel}/>
-<Panel>lorem ipsum sin amet</Panel>
-</div>
-}
-
-
-{/*
+      {/*
       {openPanel && ( 
       {dataOfButtonAccordion.map((hola) => (
         <div key={hola.id}>
@@ -108,8 +97,8 @@ function FAQs() {
           </ButtonAccordion>  
     </div>
         
-          */}   
-     
+          */}
+
       {/*
       <div>
         <ButtonAccordion onClick={() => setOpenPanel((prev) => !prev)}>Section 2</ButtonAccordion>
