@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import TitleWithLines from '../../atoms/TitleWithLines/TitleWithLines';
 import CardClient from '../../molecules/CardClient/CardClient';
 import CardProject from '../../molecules/CardProject/CardProject';
-import { dataStats, optionsDoughnut } from '../../../helpers/chartSettings';
+import { backgroundColorSchema, optionsDoughnut } from '../../../helpers/chartSettings';
 import Chart from '../../molecules/Chart/Chart';
 import GlobalMessage from '../../organisms/GlobalMessage/GlobalMessage';
 import { Context } from '../../../providers/GeneralProvider';
@@ -15,7 +15,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-items: center;
   h3 {
     padding: 1rem 0;
     margin: 0;
@@ -32,35 +31,27 @@ const Container = styled.div`
 const ContainerClients = styled.div`
   padding: 1rem 0;
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  ${({ theme }) => theme.up(theme.breakpoint.m)} {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 `;
 
 const ContainerProjects = styled.div`
   padding: 1rem 0;
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  ${({ theme }) => theme.up(theme.breakpoint.m)} {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 `;
 
 const Data = styled.div`
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
-    width: 76%;
+    width: 66%;
   }
 `;
 const Stats = styled.div`
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
-    width: 20%;
+    width: 32%;
   }
 `;
 const ContainerDataAndStats = styled.div`
@@ -69,15 +60,16 @@ const ContainerDataAndStats = styled.div`
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     display: flex;
     width: 100%;
-    gap: 1rem;
+    gap: 0.5rem;
     flex-direction: row;
     flex-wrap: wrap;
   }
 `;
 
 function AdminDashboard() {
-  const [clients, setClients] = useState([]);
-  const [projects, setProjects] = useState([]);
+  const [clients, setClients]: any = useState([]);
+  const [projects, setProjects]: any = useState([]);
+  const [statistics, setStatistics]: any = useState([]);
   const { userData } = useContext(Context);
   const { handleError } = useError();
   const fetchClients = async () => {
@@ -123,12 +115,54 @@ function AdminDashboard() {
     }
   };
 
+  const fetchStatistics = async () => {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/statistics`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${userData.token}`
+        }
+      });
+      const resJSON = await res.json();
+      console.log(resJSON);
+      if (res.status === 200) {
+        setStatistics(resJSON);
+      } else {
+        handleError(resJSON.message);
+      }
+    } catch (error: any) {
+      console.log('FETCHING ERROR', error);
+      handleError();
+    }
+  };
+
   useEffect(() => {
     fetchClients();
     fetchProjects();
+    fetchStatistics();
   }, []);
 
   console.log({ clients, projects });
+
+  const dataStats = {
+    labels: ['Clients', 'Projects'],
+    datasets: [
+      {
+        label: 'Stats',
+        data: [statistics.clients, statistics.projects],
+        backgroundColor: backgroundColorSchema,
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)'
+        ],
+        borderWidth: 3
+      }
+    ]
+  };
 
   return (
     <Container>
@@ -158,7 +192,7 @@ function AdminDashboard() {
         </Data>
         <Stats>
           <TitleWithLines text="Statistics" />
-          {projects.length || clients.length ? (
+          {statistics.clients ? (
             <Chart data={dataStats} options={optionsDoughnut} />
           ) : (
             <NoItemsFound text="Statistics" />

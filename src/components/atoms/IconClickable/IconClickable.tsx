@@ -18,6 +18,7 @@ const ContainerChildrens = styled.div`
   background: white;
   border-radius: 0.6rem;
   border: 1px solid black;
+  z-index: 1;
 `;
 
 const ContainerIcon = styled.div``;
