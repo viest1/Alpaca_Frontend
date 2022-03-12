@@ -57,6 +57,8 @@ interface ContextType {
   >;
   messages: never[];
   setMessages: Dispatch<SetStateAction<never[]>>;
+  openChatBoxWithThisUser: string;
+  setOpenChatBoxWithThisUser: Dispatch<SetStateAction<string>>;
 }
 
 export const Context = createContext<ContextType>({
@@ -83,7 +85,9 @@ export const Context = createContext<ContextType>({
   },
   setMyError: () => undefined,
   messages: [],
-  setMessages: () => undefined
+  setMessages: () => undefined,
+  openChatBoxWithThisUser: '',
+  setOpenChatBoxWithThisUser: () => undefined
 });
 
 function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
@@ -106,6 +110,7 @@ function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
     successMessage: ''
   });
   const [messages, setMessages] = useState<never[]>([]);
+  const [openChatBoxWithThisUser, setOpenChatBoxWithThisUser] = useState<string>('');
 
   const value = useMemo(() => {
     return {
@@ -118,7 +123,9 @@ function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
       myError,
       setMyError,
       messages,
-      setMessages
+      setMessages,
+      openChatBoxWithThisUser,
+      setOpenChatBoxWithThisUser
     };
   }, [
     example,
@@ -130,7 +137,9 @@ function GeneralProvider({ children }: { children: ReactNode }): ReactElement {
     myError,
     setMyError,
     messages,
-    setMessages
+    setMessages,
+    openChatBoxWithThisUser,
+    setOpenChatBoxWithThisUser
   ]);
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { GrClose } from 'react-icons/gr';
 import { BsThreeDots } from 'react-icons/bs';
+import { useParams } from 'react-router-dom';
 import { Context } from '../../../providers/GeneralProvider';
 import CardDetails from '../../molecules/CardDetails/CardDetails';
 import useError from '../../../hooks/useError';
@@ -354,8 +355,7 @@ function ProjectDetail() {
 
   const { userData } = useContext(Context);
   const { handleError } = useError();
-  const projectId = '620f606f16b8070a5564db1d';
-  // const projectId = useParams();
+  const { projectId } = useParams();
   console.log(projectId);
 
   const fetchProject = async () => {
@@ -553,7 +553,7 @@ function ProjectDetail() {
             <h6>Project Files</h6>
             <Line />
             <Files>
-              <FileUploader projectId=" " />
+              <FileUploader projectId={projectId} />
             </Files>
           </ProjectInvoicesFilesDesktop>
         </ContainerDesktop>

@@ -33,12 +33,15 @@ function IconClickable({ icon, children }: Icon) {
   const handleOpen = () => {
     setOpen((prev) => !prev);
   };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const ref = useRef(null);
   useOnClickOutside(ref, () => setOpen(false));
   return (
     <Container ref={ref}>
       <ContainerIcon onClick={handleOpen}>{icon}</ContainerIcon>
-      {open && <ContainerChildrens>{children}</ContainerChildrens>}
+      {open && <ContainerChildrens onClick={handleClose}>{children}</ContainerChildrens>}
     </Container>
   );
 }

@@ -271,7 +271,8 @@ function GlobalMessage() {
     setOpenChatWithMessages(false);
   };
   const [clients, setClients] = useState<any[]>([]);
-  const { userData, messages } = useContext(Context);
+  const { userData, messages, openChatBoxWithThisUser, setOpenChatBoxWithThisUser } =
+    useContext(Context);
   const { handleError } = useError();
   const [openChatWithMessages, setOpenChatWithMessages] = useState(false);
   const [displayChatBoxOnTheBottom, setDisplayChatBoxOnTheBottom] = useState(false);
@@ -399,6 +400,14 @@ function GlobalMessage() {
       );
     }
   }, [messages]);
+
+  useEffect(() => {
+    console.log('in effect', openChatBoxWithThisUser);
+    if (openChatBoxWithThisUser) {
+      handleOpenChatBox(openChatBoxWithThisUser);
+      setOpenChatBoxWithThisUser('');
+    }
+  }, [openChatBoxWithThisUser]);
 
   const containerFixed = useRef(null);
 

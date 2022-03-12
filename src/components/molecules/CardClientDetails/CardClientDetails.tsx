@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BsThreeDots } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 import IconClickable from '../../atoms/IconClickable/IconClickable';
 import Button from '../../atoms/Button/Button';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import kim from '../../../assets/images/kim.jpg';
+import { ContainerOptionsToClick } from '../CardClient/CardClient';
 
 const Container = styled.div`
   display: flex;
@@ -63,7 +65,6 @@ const ContainerDesktop = styled.div`
   span {
     font-weight: 700;
     font-size: 22px;
-    
   }
 `;
 const ContainerThreeDotsDesktop = styled.div`
@@ -128,6 +129,11 @@ interface Client {
 // Card Details Mobil Version
 function CardClientDetails({ clientData }: Client) {
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
+  const navigate = useNavigate();
+  const handleOpenNewProjectPage = () => {
+    console.log('client', clientData);
+    navigate(`/newProject/${clientData._id}`);
+  };
   return (
     <div>
       {!desktopVersion ? (
@@ -135,22 +141,22 @@ function CardClientDetails({ clientData }: Client) {
           <Container>
             <ContainerThreeDots>
               <IconClickable icon={<BsThreeDots fontSize={38} />}>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.5rem',
-                    padding: '1rem'
-                  }}
-                >
-                  <Button text="What ever" width="180px" fontSize="1rem" padding="0.5rem 1rem" />
+                <ContainerOptionsToClick>
                   <Button
-                    text="What ever too"
-                    width="180px"
+                    whiteMenu
+                    text="New Project"
+                    onClick={handleOpenNewProjectPage}
+                    width="150px"
                     fontSize="1rem"
-                    padding="0.5rem 1rem"
+                    padding="0.3rem 1rem"
                   />
-                </div>
+                  {/*   <Button */}
+                  {/*     text="What ever too" */}
+                  {/*     width="180px" */}
+                  {/*     fontSize="1rem" */}
+                  {/*     padding="0.5rem 1rem" */}
+                  {/*   /> */}
+                </ContainerOptionsToClick>
               </IconClickable>
             </ContainerThreeDots>
             <h3>Nomad Studio</h3>
@@ -168,28 +174,28 @@ function CardClientDetails({ clientData }: Client) {
                 <h4>Contact Information</h4>
                 <DetailsElement>
                   <span>Name</span>
-                  <p>{clientData?.oneClient?.name}</p>
+                  <p>{clientData?.name}</p>
                 </DetailsElement>
                 <DetailsElement>
                   <span>Surname</span>
-                  <p>{clientData?.oneClient?.name}</p>
+                  <p>{clientData?.name}</p>
                 </DetailsElement>
                 <DetailsElement>
                   <span>Email</span>
-                  <p>{clientData?.oneClient?.email}</p>
+                  <p>{clientData?.email}</p>
                 </DetailsElement>
                 <DetailsElement>
                   <span>Phone number</span>
-                  <p>{clientData?.oneClient?.name}</p>
+                  <p>{clientData?.name}</p>
                 </DetailsElement>
                 <h4>Billing Information</h4>
                 <DetailsElement>
                   <span>Id</span>
-                  <p>{clientData?.oneClient?.role}</p>
+                  <p>{clientData?.role}</p>
                 </DetailsElement>
                 <DetailsElement>
                   <span>Tax Number</span>
-                  <p>{clientData?.oneClient?.taxNumber}</p>
+                  <p>{clientData?.taxNumber}</p>
                 </DetailsElement>
               </Details>
             )}
@@ -209,13 +215,20 @@ function CardClientDetails({ clientData }: Client) {
                     padding: '1rem'
                   }}
                 >
-                  <Button text="What ever" width="180px" fontSize="1rem" padding="0.5rem 1rem" />
                   <Button
-                    text="What ever too"
-                    width="180px"
+                    whiteMenu
+                    text="New Project"
+                    onClick={handleOpenNewProjectPage}
+                    width="150px"
                     fontSize="1rem"
-                    padding="0.5rem 1rem"
+                    padding="0.3rem 1rem"
                   />
+                  {/* <Button */}
+                  {/*   text="What ever too" */}
+                  {/*   width="180px" */}
+                  {/*   fontSize="1rem" */}
+                  {/*   padding="0.5rem 1rem" */}
+                  {/* /> */}
                 </div>
               </IconClickable>
             </ContainerThreeDotsDesktop>
@@ -239,30 +252,30 @@ function CardClientDetails({ clientData }: Client) {
                       <h4>Contact</h4>
                       <DetailsElement>
                         <span>Name</span>
-                        <p>{clientData?.oneClient?.name}</p>
+                        <p>{clientData?.name}</p>
                       </DetailsElement>
                       <DetailsElement>
                         <span>Surname</span>
-                        <p>{clientData?.oneClient?.name}</p>
+                        <p>{clientData?.name}</p>
                       </DetailsElement>
                       <DetailsElement>
                         <span>Email</span>
-                        <p>{clientData?.oneClient?.email}</p>
+                        <p>{clientData?.email}</p>
                       </DetailsElement>
                       <DetailsElement>
                         <span>Phone Number</span>
-                        <p>{clientData?.oneClient?.name}</p>
+                        <p>{clientData?.name}</p>
                       </DetailsElement>
                     </ContactInformation>
                     <BillingInformation>
                       <h4>Billing</h4>
                       <DetailsElement>
                         <span>Id</span>
-                        <p>{clientData?.oneClient?.role}</p>
+                        <p>{clientData?.role}</p>
                       </DetailsElement>
                       <DetailsElement>
                         <span>Tax Number</span>
-                        <p>{clientData?.oneClient?.taxNumber}</p>
+                        <p>{clientData?.taxNumber}</p>
                       </DetailsElement>
                     </BillingInformation>
                   </DetailsDesktop>
