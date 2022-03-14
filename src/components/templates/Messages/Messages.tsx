@@ -8,6 +8,7 @@ import useForm from '../../../hooks/useForm';
 import useError from '../../../hooks/useError';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import NoItemsFound from '../../atoms/NoItemsFound/NoItemsFound';
+import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
 
 const Container = styled.div`
   padding: 1rem;
@@ -139,6 +140,7 @@ const initialValue: Message = {
 
 function Messages() {
   const { messages, userData } = useContext(Context);
+  const [isLoading, setIsLoading] = useState(false);
   const [clientMessages, setClientMessages] = useState([]);
   const { inputs, handleChange, resetForm } = useForm(initialValue);
   const { handleError } = useError();
@@ -147,6 +149,7 @@ function Messages() {
 
   // Fetching Clients from Freelancer
   const fetchClients = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch(`${process.env.REACT_APP_BACKEND}/user/freelancer`, {
         method: 'GET',
@@ -165,11 +168,14 @@ function Messages() {
     } catch (error: any) {
       console.log('FETCHING ERROR', error);
       handleError();
+    } finally {
+      setIsLoading(false);
     }
   };
 
   // Fetching Freelancers from Client
   const fetchClientsForClient = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch(`${process.env.REACT_APP_BACKEND}/user/freelancers`, {
         method: 'GET',
@@ -189,6 +195,8 @@ function Messages() {
     } catch (error: any) {
       console.log('FETCHING ERROR', error);
       handleError();
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -266,12 +274,14 @@ function Messages() {
     }
   }, [messages]);
 
+  if (isLoading) return <LoadingSpin />;
+
   return (
     <Container>
       <H3Styled>Messages</H3Styled>
       <ContainerContactListAndMessages>
         <ContactList>
-          {!clients.length && <NoItemsFound text="Clients" />}
+          {!clients.length && <NoItemsFound text="Client" />}
           {clients.map((clientData: any) => (
             <Contact key={clientData._id} onClick={() => handleDisplayMessages(clientData._id)}>
               <RoundedPhoto

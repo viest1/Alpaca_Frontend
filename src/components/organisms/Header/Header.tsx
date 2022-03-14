@@ -175,7 +175,7 @@ const ButtonLogoutMobil = styled.button`
   color: ${({ theme }) => theme.color.main2};
   background: none;
   font-size: ${({ theme }) => theme.fontSizeInter.m};
-  top: 25rem;
+  top: 17rem;
   border: none;
   &:hover {
     cursor: pointer;
@@ -342,7 +342,6 @@ function Header() {
                       onClick={handleOpenMenu}
                     />
                   ))}
-                  <NavLink path="/messages" text="MESSAGES" />
                   <ButtonLogoutMobil type="button" onClick={handleLogout}>
                     LOGOUT
                   </ButtonLogoutMobil>

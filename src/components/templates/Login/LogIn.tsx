@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useContext } from 'react';
+import React, { SyntheticEvent, useContext, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
@@ -61,7 +61,7 @@ function LogIn() {
     email: '',
     password: ''
   };
-
+  const [isLoading, setIsLoading] = useState(false);
   const { handleChange, inputs } = useForm(initialValue);
   const { handleError } = useError();
 
@@ -71,7 +71,7 @@ function LogIn() {
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log('You try login with these inputs', inputs);
+    setIsLoading(true);
     const login = async () => {
       try {
         const res = await fetch(`${process.env.REACT_APP_BACKEND}/login`, {
@@ -92,6 +92,8 @@ function LogIn() {
       } catch (error: any) {
         console.log('FETCHING ERROR', error);
         handleError();
+      } finally {
+        setIsLoading(true);
       }
     };
     await login();
@@ -110,7 +112,7 @@ function LogIn() {
         <p onClick={handleNavigateToForgotPassword}>I forgot my password</p>
       </ContainerP>
       <div>
-        <Button type="submit" background="#2A9D8F" text="Login" />
+        <Button type="submit" background="#2A9D8F" text={isLoading ? 'Loading...' : 'Login'} />
         <Line />
         {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <a href={googleLoginUrl}>
