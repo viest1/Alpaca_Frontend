@@ -218,20 +218,8 @@ function AdminDashboard() {
           <GlobalMessage />
         </>
       )}
-            </ContainerProjects>
-          </div>
-        </Data>
-        <Stats>
-          <TitleWithLines text="Statistics" />
-          {statistics.clients ? (
-            <Chart data={dataStats} options={optionsDoughnut} />
-          ) : (
-            <NoItemsFound text="Statistics" />
-          )}
-        </Stats>
-      </ContainerDataAndStats>
-      <GlobalMessage />
     </Container>
+  );
 }
 
 export default AdminDashboard;
