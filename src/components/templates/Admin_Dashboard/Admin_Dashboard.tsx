@@ -10,6 +10,9 @@ import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
 import NoItemsFound from '../../atoms/NoItemsFound/NoItemsFound';
 
+// LoadingSpin
+import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
+
 const Container = styled.div`
   padding: 1rem;
   display: flex;
@@ -80,6 +83,15 @@ function AdminDashboard() {
   const [projects, setProjects] = useState([]);
   const { userData } = useContext(Context);
   const { handleError } = useError();
+
+  // LoadingSpin
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+  });
+
   const fetchClients = async () => {
     try {
       const res = await fetch(`${process.env.REACT_APP_BACKEND}/user/freelancer/3`, {
@@ -132,40 +144,46 @@ function AdminDashboard() {
 
   return (
     <Container>
-      <h3>Dashboard</h3>
-      <ContainerDataAndStats>
-        <Data>
-          <div>
-            <TitleWithLines text="Recent Clients" />
-            <ContainerClients>
-              {clients.length ? (
-                clients.map((item: any) => <CardClient key={item._id} clientData={item} />)
+      {isLoading ? (
+        <LoadingSpin />
+      ) : (
+        <>
+          <h3>Dashboard</h3>
+          <ContainerDataAndStats>
+            <Data>
+              <div>
+                <TitleWithLines text="Recent Clients" />
+                <ContainerClients>
+                  {clients.length ? (
+                    clients.map((item: any) => <CardClient key={item._id} clientData={item} />)
+                  ) : (
+                    <NoItemsFound text="Clients" />
+                  )}
+                </ContainerClients>
+              </div>
+              <div>
+                <TitleWithLines text="Recent Projects" />
+                <ContainerProjects>
+                  {projects.length ? (
+                    projects.map((item: any) => <CardProject key={item._id} projectData={item} />)
+                  ) : (
+                    <NoItemsFound text="Projects" />
+                  )}
+                </ContainerProjects>
+              </div>
+            </Data>
+            <Stats>
+              <TitleWithLines text="Statistics" />
+              {projects.length || clients.length ? (
+                <Chart data={dataStats} options={optionsDoughnut} />
               ) : (
-                <NoItemsFound text="Clients" />
+                <NoItemsFound text="Statistics" />
               )}
-            </ContainerClients>
-          </div>
-          <div>
-            <TitleWithLines text="Recent Projects" />
-            <ContainerProjects>
-              {projects.length ? (
-                projects.map((item: any) => <CardProject key={item._id} projectData={item} />)
-              ) : (
-                <NoItemsFound text="Projects" />
-              )}
-            </ContainerProjects>
-          </div>
-        </Data>
-        <Stats>
-          <TitleWithLines text="Statistics" />
-          {projects.length || clients.length ? (
-            <Chart data={dataStats} options={optionsDoughnut} />
-          ) : (
-            <NoItemsFound text="Statistics" />
-          )}
-        </Stats>
-      </ContainerDataAndStats>
-      <GlobalMessage />
+            </Stats>
+          </ContainerDataAndStats>
+          <GlobalMessage />
+        </>
+      )}
     </Container>
   );
 }
