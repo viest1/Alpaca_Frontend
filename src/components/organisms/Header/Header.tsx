@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
 import { BiFace } from 'react-icons/bi';
-import CompanyLogo from '../../../assets/illustrations/COMPANYLOGO.png';
+/* import CompanyLogo from '../../../assets/illustrations/COMPANYLOGO.png'; */
+import logoForWhiteBackground from '../../../assets/images/Logos/logoForWhiteBackground.svg';
 import NavLink from '../../atoms/NavLink/NavLink';
 import Contact from '../../molecules/Contact/Contact';
 import useMediaQuery from '../../../hooks/useMediaQuery';
@@ -21,9 +22,9 @@ const Container = styled.div<StyledDivProps>`
   background: ${({ theme }) => theme.color.main1};
   color: ${({ theme }) => theme.color.main2};
   font-size: ${({ theme }) => theme.fontSizeInter.m};
-  border: 2px solid black;
+  /* border: 2px solid black; */
   min-height: ${({ isOpenMenu }) => (isOpenMenu ? '100vh' : 'auto')};
-  border: 2px solid red;
+  /* border: 2px solid red; */
 `;
 
 const Flex = styled.div`
@@ -36,8 +37,8 @@ const FlexOpen = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid grey;
-  padding: 0 1rem;
+  /* border: 1px solid grey; */
+  padding: 0.3rem 1rem 0 1rem;
 `;
 
 const StyledP = styled.p`
@@ -49,11 +50,8 @@ const StyledP = styled.p`
 `;
 const StyledSlogan = styled.p`
   font-size: ${({ theme }) => theme.fontSizeOpenSans.xxs};
-  display: flex;
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  margin: auto;
+  padding-left: 70px;
+  margin-top: -15px;
   font-weight: bold;
 `;
 const StyledMenu = styled.div`
@@ -63,14 +61,15 @@ const StyledMenu = styled.div`
 `;
 const StyledLogoSlogan = styled.div`
   display: flex;
-  position: relative;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 // Style desktopVersion
 const ContainerDesktop = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: baseline;
   background: ${({ theme }) => theme.color.main1};
   color: ${({ theme }) => theme.color.main2};
   font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
@@ -79,31 +78,26 @@ const ContainerDesktop = styled.div`
 `;
 const StyledMenuDesktop = styled.div`
   display: flex;
-  flex-direction: row;
+  align-items: center;
   gap: 2rem;
   font-weight: bold;
 `;
 const CountryFlag = styled.div`
   display: flex;
-  gap: 0.1rem;
-  margin: auto;
   :hover {
     cursor: pointer;
   }
 `;
 const ServicesAndLanguage = styled.div`
   display: flex;
-  position: relative;
-  padding-right: 32px;
   gap: 1rem;
-  justify-content: space-around;
-  margin: auto;
+  align-items: center;
 `;
 // Style AdminHeader
 
 const ContainerDesktopAdmin = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background: ${({ theme }) => theme.color.main7};
   color: ${({ theme }) => theme.color.main8};
   font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
@@ -112,8 +106,6 @@ const ContainerDesktopAdmin = styled.div`
 
 const StyledMenuDesktopAdmin = styled.div`
   display: flex;
-  margin: auto;
-  flex-direction: row;
   gap: 2rem;
   font-weight: bold;
 `;
@@ -128,7 +120,6 @@ const CountryFlagAdmin = styled.div`
 const ServicesAndLanguageAdmin = styled.div`
   display: flex;
   position: relative;
-  padding-right: 32px;
   gap: 1rem;
   justify-content: space-around;
   margin: 1rem;
@@ -164,7 +155,6 @@ const StyledMenuDesktopClient = styled.div`
 const CountryFlagClient = styled.div`
   display: flex;
   gap: 0.1rem;
-  margin: auto;
   :hover {
     cursor: pointer;
   }
@@ -224,7 +214,6 @@ const AvatarContainer = styled.div`
 const AvatarMenu = styled.div`
   display: flex;
   position: relative;
-  margin: auto;
   border: 2px solid ${({ theme }) => theme.color.main7};
   flex-direction: column;
   top: 5rem;
@@ -370,7 +359,7 @@ function Header() {
             {!isOpenMenu && (
               <Flex>
                 <div style={{ position: 'relative' }}>
-                  <NavLink path="/" image={CompanyLogo} alt="Logo" />
+                  <NavLink path="/" image={logoForWhiteBackground} alt="Logo" />
                   <StyledP>live outside the box</StyledP>
                 </div>
                 <div>
@@ -384,7 +373,7 @@ function Header() {
               <>
                 <FlexOpen>
                   <div style={{ position: 'relative' }}>
-                    <NavLink path="/" image={CompanyLogo} alt="Logo" />
+                    <NavLink path="/" image={logoForWhiteBackground} alt="Logo" />
                     <StyledP>live outside the box</StyledP>
                   </div>
                   <div>
@@ -407,7 +396,7 @@ function Header() {
                 </StyledMenu>
                 <br />
                 <StyledLogoSlogan>
-                  <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
+                  <NavLink path="/" bigLogo image={logoForWhiteBackground} alt="Logo" />
                   <StyledSlogan>live outside the box</StyledSlogan>
                 </StyledLogoSlogan>
                 <Contact />
@@ -418,7 +407,7 @@ function Header() {
           // Client Desktop Version ----------------------------------------------
           <ContainerDesktopClient>
             <StyledLogoSlogan>
-              <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
+              <NavLink path="/" bigLogo image={logoForWhiteBackground} alt="Logo" />
             </StyledLogoSlogan>
             <StyledInput type="text" placeholder="Search" />
             <ServicesAndLanguageClient>
@@ -469,7 +458,7 @@ function Header() {
             {!isOpenMenu && (
               <Flex>
                 <div style={{ position: 'relative' }}>
-                  <NavLink path="/" image={CompanyLogo} alt="Logo" />
+                  <NavLink path="/" image={logoForWhiteBackground} alt="Logo" />
                   <StyledP>live outside the box</StyledP>
                 </div>
                 <div>
@@ -483,7 +472,7 @@ function Header() {
               <>
                 <FlexOpen>
                   <div style={{ position: 'relative' }}>
-                    <NavLink path="/" image={CompanyLogo} alt="Logo" />
+                    <NavLink path="/" image={logoForWhiteBackground} alt="Logo" />
                     <StyledP>live outside the box</StyledP>
                   </div>
                   <div>
@@ -508,7 +497,7 @@ function Header() {
                 </StyledMenu>
                 <br />
                 <StyledLogoSlogan>
-                  <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
+                  <NavLink path="/" bigLogo image={logoForWhiteBackground} alt="Logo" />
                   <StyledSlogan>live outside the box</StyledSlogan>
                 </StyledLogoSlogan>
                 <Contact />
@@ -516,10 +505,10 @@ function Header() {
             )}
           </Container>
         ) : (
-          // Freelancer Mobil Version ----------------------------------------------
+          // Freelancer Desktop Version ----------------------------------------------
           <ContainerDesktopAdmin>
             <StyledLogoSlogan>
-              <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
+              <NavLink path="/" bigLogo image={logoForWhiteBackground} alt="Logo" />
             </StyledLogoSlogan>
             <StyledInput type="text" placeholder="Search" />
             <ServicesAndLanguageAdmin>
@@ -569,9 +558,8 @@ function Header() {
         <Container isOpenMenu={isOpenMenu}>
           {!isOpenMenu && (
             <Flex>
-              <div style={{ position: 'relative' }}>
-                <NavLink path="/" image={CompanyLogo} alt="Logo" />
-                <StyledP>live outside the box</StyledP>
+              <div>
+                <NavLink path="/" image={logoForWhiteBackground} alt="Logo" />
               </div>
               <div>
                 {!isOpenMenu && (
@@ -583,9 +571,8 @@ function Header() {
           {isOpenMenu && (
             <>
               <FlexOpen>
-                <div style={{ position: 'relative' }}>
-                  <NavLink path="/" image={CompanyLogo} alt="Logo" />
-                  <StyledP>live outside the box</StyledP>
+                <div>
+                  <NavLink path="/" image={logoForWhiteBackground} alt="Logo" />
                 </div>
                 <div>
                   <GrClose onClick={handleOpenMenu} cursor="pointer" fontSize={48} />
@@ -603,7 +590,7 @@ function Header() {
               </StyledMenu>
               <br />
               <StyledLogoSlogan>
-                <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
+                <NavLink path="/" bigLogo image={logoForWhiteBackground} alt="Logo" />
                 <StyledSlogan>live outside the box</StyledSlogan>
               </StyledLogoSlogan>
               <Contact />
@@ -614,7 +601,7 @@ function Header() {
         // Logout Desktop Version ----------------------------------------------
         <ContainerDesktop>
           <StyledLogoSlogan>
-            <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
+            <NavLink path="/" bigLogo image={logoForWhiteBackground} alt="Logo" />
           </StyledLogoSlogan>
           <ServicesAndLanguage>
             <StyledMenuDesktop>
