@@ -32,7 +32,7 @@ import useError from '../hooks/useError';
 import FAQs from '../components/molecules/FAQs/FAQs';
 
 function App(): JSX.Element {
-  const { userData, setMessages, setUserData } = useContext(Context);
+  const { userData, setMessages, setUserData, setClientsGlobal } = useContext(Context);
   const navigate = useNavigate();
   const { handleLogout } = useAuth();
   const { token, role } = userData;
@@ -69,6 +69,60 @@ function App(): JSX.Element {
   }, [userData.exp]);
 
   const [listening, setListening] = useState(false);
+
+  // Fetching clientsGlobal from Freelancer
+  const fetchClients = async () => {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/user/freelancer`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${userData?.token}`
+        }
+      });
+      const resJSON = await res.json();
+      // console.log(resJSON);
+      if (res.status === 200) {
+        setClientsGlobal(resJSON);
+      } else {
+        handleError(resJSON.message);
+      }
+    } catch (error: any) {
+      console.log('FETCHING ERROR', error);
+      handleError();
+    }
+  };
+  // Fetching Freelancers from Client
+  const fetchClientsForClient = async () => {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND}/user/freelancers`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${userData?.token}`
+        }
+      });
+      const resJSON = await res.json();
+      // console.log(resJSON);
+      if (res.status === 200) {
+        setClientsGlobal(resJSON);
+      } else {
+        handleError(resJSON.message);
+      }
+    } catch (error: any) {
+      console.log('FETCHING ERROR', error);
+      handleError();
+    }
+  };
+  // Fetching clientsGlobal (Freelancer or Client)
+  useEffect(() => {
+    if (userData.token && userData.role === 'Freelancer') {
+      fetchClients();
+    }
+    if (userData.token && userData.role === 'Client') {
+      fetchClientsForClient();
+    }
+  }, []);
 
   useEffect(() => {
     const connectSSE = async () => {
