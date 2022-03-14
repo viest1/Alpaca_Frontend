@@ -13,6 +13,7 @@ import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { useAuth } from '../../../hooks/useAuth';
 import LanguageMenu from '../../molecules/LanguageMenu/LanguageMenu';
+import SearchBar from '../SearchBar/SearchBar';
 
 interface StyledDivProps {
   isOpenMenu: boolean;
@@ -121,19 +122,20 @@ const ServicesAndLanguageAdmin = styled.div`
   display: flex;
   position: relative;
   gap: 1rem;
+
   justify-content: space-around;
   margin: 1rem;
 `;
-const StyledInput = styled.input`
-  position: relative;
-  height: 2rem;
-  width: 20rem;
-  margin: auto;
-  border-radius: 0.3rem;
-  background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
-  background-repeat: no-repeat;
-  background-position: right center;
-`;
+// const StyledInput = styled.input`
+//   position: relative;
+//   height: 2rem;
+//   width: 20rem;
+//   margin: auto;
+//   border-radius: 0.3rem;
+//   background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
+//   background-repeat: no-repeat;
+//   background-position: right center;
+// `;
 
 // Style ClientHeader
 const ContainerDesktopClient = styled.div`
@@ -162,8 +164,8 @@ const CountryFlagClient = styled.div`
 const ServicesAndLanguageClient = styled.div`
   display: flex;
   position: relative;
-  padding-right: 32px;
-  gap: 1rem;
+  padding-right: 116px;
+  gap: 3rem;
   justify-content: space-around;
   margin: 1rem;
 `;
@@ -206,9 +208,15 @@ const ButtonLogoutMobilAdmin = styled.button`
 // Style Avatar Menu
 const AvatarContainer = styled.div`
   display: flex;
+  position: absolute;
+  top: 1rem;
+  right: 3rem;
   > div {
     display: flex;
     align-items: center;
+    top: 4rem;
+    right: -3rem;
+    z-index: 1000;
   }
 `;
 const AvatarMenu = styled.div`
@@ -220,6 +228,12 @@ const AvatarMenu = styled.div`
   &:hover {
     cursor: pointer;
     color: ${({ theme }) => theme.color.main4};
+`;
+const ContainerRoundPhoto = styled.div`
+  position: absolute;
+  bottom: 102px;
+  right: 46px;
+  //border: 3px solid pink;
 `;
 const data = [
   {
@@ -304,11 +318,6 @@ const dataHeaderClient = [
     path: '/messages',
     text: 'MESSAGES',
     id: 3
-  },
-  {
-    path: '/settings',
-    text: 'SETTINGS',
-    id: 4
   }
 ];
 const dataAvatarMenu = [
@@ -409,7 +418,8 @@ function Header() {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={logoForWhiteBackground} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="Search" />
+            {/* <StyledInput type="text" placeholder="Search" /> */}
+            <SearchBar />
             <ServicesAndLanguageClient>
               <StyledMenuDesktopClient>
                 {dataHeaderClient.map((item) => (
@@ -434,6 +444,16 @@ function Header() {
                 )}
                 {isOpenAvatarMenu && (
                   <AvatarMenu ref={ref}>
+                    <ContainerRoundPhoto>
+                      <RoundedPhoto
+                        img={userData.avatar}
+                        icon={<BiFace fontSize={32} />}
+                        alt="avatar"
+                        outline="1px solid black"
+                        width="30px"
+                        height="30px"
+                      />
+                    </ContainerRoundPhoto>
                     {dataAvatarMenu.map((item) => (
                       <NavLink key={item.id} path={item.path} text={item.text} />
                     ))}
@@ -510,7 +530,8 @@ function Header() {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={logoForWhiteBackground} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="Search" />
+            {/* <StyledInput type="text" placeholder="Search" /> */}
+            <SearchBar />
             <ServicesAndLanguageAdmin>
               <StyledMenuDesktopAdmin>
                 {dataHeaderAdmin.map((item) => (
@@ -536,6 +557,16 @@ function Header() {
                 )}
                 {isOpenAvatarMenu && (
                   <AvatarMenu ref={ref}>
+                    <ContainerRoundPhoto>
+                      <RoundedPhoto
+                        img={userData.avatar}
+                        icon={<BiFace fontSize={32} />}
+                        alt="avatar"
+                        outline="1px solid black"
+                        width="30px"
+                        height="30px"
+                      />
+                    </ContainerRoundPhoto>
                     {dataAvatarMenu.map((item) => (
                       <NavLink key={item.id} path={item.path} text={item.text} />
                     ))}
