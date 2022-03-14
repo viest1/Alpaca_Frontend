@@ -37,6 +37,7 @@ function App(): JSX.Element {
   const { handleLogout } = useAuth();
   const { token, role } = userData;
   const { handleError } = useError();
+
   useEffect(() => {
     let interval: any;
     if (userData.token) {
