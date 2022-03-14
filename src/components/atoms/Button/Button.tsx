@@ -58,7 +58,7 @@ interface ButtonInterface {
   border?: string;
   width?: string;
   height?: string;
-  onClick?: React.MouseEventHandler;
+  onClick?: React.MouseEventHandler | any;
   padding?: string;
   fontSize?: string;
   style?: React.CSSProperties;
