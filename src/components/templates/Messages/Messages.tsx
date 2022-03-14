@@ -14,6 +14,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  //border: 10px solid purple;
   ${({ theme }) => theme.down(theme.breakpoint.sm)} {
     padding: 0;
   }
@@ -24,10 +25,11 @@ const Form = styled.form`
   align-items: flex-end;
   display: flex;
   flex-direction: column;
+
   * {
     width: 100%;
   }
-  //border: 1px solid grey;
+  //border: 10px solid grey;
 `;
 
 const ContainerContactListAndMessages = styled.div`

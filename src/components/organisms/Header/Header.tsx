@@ -128,8 +128,8 @@ const CountryFlagAdmin = styled.div`
 const ServicesAndLanguageAdmin = styled.div`
   display: flex;
   position: relative;
-  padding-right: 32px;
-  gap: 1rem;
+  padding-right: 116px;
+  gap: 3rem;
   justify-content: space-around;
   margin: 1rem;
 `;
@@ -172,8 +172,8 @@ const CountryFlagClient = styled.div`
 const ServicesAndLanguageClient = styled.div`
   display: flex;
   position: relative;
-  padding-right: 32px;
-  gap: 1rem;
+  padding-right: 116px;
+  gap: 3rem;
   justify-content: space-around;
   margin: 1rem;
 `;
@@ -216,9 +216,15 @@ const ButtonLogoutMobilAdmin = styled.button`
 // Style Avatar Menu
 const AvatarContainer = styled.div`
   display: flex;
+  position: absolute;
+  top: 1rem;
+  right: 3rem;
   > div {
     display: flex;
     align-items: center;
+    top: 4rem;
+    right: -3rem;
+    z-index: 1000;
   }
 `;
 const AvatarMenu = styled.div`
@@ -231,6 +237,12 @@ const AvatarMenu = styled.div`
   &:hover {
     cursor: pointer;
     color: ${({ theme }) => theme.color.main4};
+`;
+const ContainerRoundPhoto = styled.div`
+  position: absolute;
+  bottom: 102px;
+  right: 46px;
+  //border: 3px solid pink;
 `;
 const data = [
   {
@@ -315,11 +327,6 @@ const dataHeaderClient = [
     path: '/messages',
     text: 'MESSAGES',
     id: 3
-  },
-  {
-    path: '/settings',
-    text: 'SETTINGS',
-    id: 4
   }
 ];
 const dataAvatarMenu = [
@@ -445,6 +452,16 @@ function Header() {
                 )}
                 {isOpenAvatarMenu && (
                   <AvatarMenu ref={ref}>
+                    <ContainerRoundPhoto>
+                      <RoundedPhoto
+                        img={userData.avatar}
+                        icon={<BiFace fontSize={32} />}
+                        alt="avatar"
+                        outline="1px solid black"
+                        width="30px"
+                        height="30px"
+                      />
+                    </ContainerRoundPhoto>
                     {dataAvatarMenu.map((item) => (
                       <NavLink key={item.id} path={item.path} text={item.text} />
                     ))}
@@ -516,7 +533,7 @@ function Header() {
             )}
           </Container>
         ) : (
-          // Freelancer Mobil Version ----------------------------------------------
+          // Freelancer Desktop Version ----------------------------------------------
           <ContainerDesktopAdmin>
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
@@ -547,6 +564,16 @@ function Header() {
                 )}
                 {isOpenAvatarMenu && (
                   <AvatarMenu ref={ref}>
+                    <ContainerRoundPhoto>
+                      <RoundedPhoto
+                        img={userData.avatar}
+                        icon={<BiFace fontSize={32} />}
+                        alt="avatar"
+                        outline="1px solid black"
+                        width="30px"
+                        height="30px"
+                      />
+                    </ContainerRoundPhoto>
                     {dataAvatarMenu.map((item) => (
                       <NavLink key={item.id} path={item.path} text={item.text} />
                     ))}
