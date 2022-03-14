@@ -281,7 +281,7 @@ function Messages() {
       <H3Styled>Messages</H3Styled>
       <ContainerContactListAndMessages>
         <ContactList>
-          {!clients.length && <NoItemsFound text="Clients" />}
+          {!clients.length && <NoItemsFound text="Client" />}
           {clients.map((clientData: any) => (
             <Contact key={clientData._id} onClick={() => handleDisplayMessages(clientData._id)}>
               <RoundedPhoto
