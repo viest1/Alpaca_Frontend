@@ -24,6 +24,7 @@ function ClientDetails() {
   const { userData } = useContext(Context);
   const { handleError } = useError();
   const { clientId } = useParams();
+  console.log('clientId', clientId);
 
   const fetchClientDetails = async () => {
     try {
@@ -50,6 +51,9 @@ function ClientDetails() {
   useEffect(() => {
     fetchClientDetails();
   }, []);
+  useEffect(() => {
+    fetchClientDetails();
+  }, [clientId]);
   return (
     <div>
       <Title>Customer Details</Title>

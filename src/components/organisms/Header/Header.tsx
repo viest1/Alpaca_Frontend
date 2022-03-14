@@ -12,6 +12,7 @@ import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { useAuth } from '../../../hooks/useAuth';
 import LanguageMenu from '../../molecules/LanguageMenu/LanguageMenu';
+import SearchBar from '../SearchBar/SearchBar';
 
 interface StyledDivProps {
   isOpenMenu: boolean;
@@ -133,16 +134,16 @@ const ServicesAndLanguageAdmin = styled.div`
   justify-content: space-around;
   margin: 1rem;
 `;
-const StyledInput = styled.input`
-  position: relative;
-  height: 2rem;
-  width: 20rem;
-  margin: auto;
-  border-radius: 0.3rem;
-  background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
-  background-repeat: no-repeat;
-  background-position: right center;
-`;
+// const StyledInput = styled.input`
+//   position: relative;
+//   height: 2rem;
+//   width: 20rem;
+//   margin: auto;
+//   border-radius: 0.3rem;
+//   background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
+//   background-repeat: no-repeat;
+//   background-position: right center;
+// `;
 
 // Style ClientHeader
 const ContainerDesktopClient = styled.div`
@@ -420,7 +421,8 @@ function Header() {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="Search" />
+            {/* <StyledInput type="text" placeholder="Search" /> */}
+            <SearchBar />
             <ServicesAndLanguageClient>
               <StyledMenuDesktopClient>
                 {dataHeaderClient.map((item) => (
@@ -521,7 +523,8 @@ function Header() {
             <StyledLogoSlogan>
               <NavLink path="/" bigLogo image={CompanyLogo} alt="Logo" />
             </StyledLogoSlogan>
-            <StyledInput type="text" placeholder="Search" />
+            {/* <StyledInput type="text" placeholder="Search" /> */}
+            <SearchBar />
             <ServicesAndLanguageAdmin>
               <StyledMenuDesktopAdmin>
                 {dataHeaderAdmin.map((item) => (
