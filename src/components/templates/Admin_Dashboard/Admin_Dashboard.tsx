@@ -76,7 +76,16 @@ function AdminDashboard() {
   const [statistics, setStatistics]: any = useState([]);
   const { userData } = useContext(Context);
   const { handleError } = useError();
+
+  // LoadingSpin
+
   const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+  });
+
 
   const fetchClients = async () => {
     try {

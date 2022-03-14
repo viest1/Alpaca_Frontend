@@ -1,19 +1,21 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
-import { BiFace } from 'react-icons/bi';
+
+/* import { useNavigate } from 'react-router-dom'; */
+import { useNavigate } from 'react-router-dom';
+import AvatarWithMenu from '../../molecules/AvatarWithMenu/AvatarWithMenu';
 /* import CompanyLogo from '../../../assets/illustrations/COMPANYLOGO.png'; */
 import logoForWhiteBackground from '../../../assets/images/Logos/logoForWhiteBackground.svg';
 import NavLink from '../../atoms/NavLink/NavLink';
 import Contact from '../../molecules/Contact/Contact';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { Context } from '../../../providers/GeneralProvider';
-import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
-import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { useAuth } from '../../../hooks/useAuth';
 import LanguageMenu from '../../molecules/LanguageMenu/LanguageMenu';
 import SearchBar from '../SearchBar/SearchBar';
+import Button from '../../atoms/Button/Button';
 
 interface StyledDivProps {
   isOpenMenu: boolean;
@@ -140,7 +142,7 @@ const ServicesAndLanguageAdmin = styled.div`
 // Style ClientHeader
 const ContainerDesktopClient = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background: ${({ theme }) => theme.color.main7};
   color: ${({ theme }) => theme.color.main8};
   font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
@@ -149,13 +151,12 @@ const ContainerDesktopClient = styled.div`
 
 const StyledMenuDesktopClient = styled.div`
   display: flex;
-  margin: auto;
-  flex-direction: row;
   gap: 2rem;
   font-weight: bold;
 `;
 const CountryFlagClient = styled.div`
   display: flex;
+  z-index: 0;
   gap: 0.1rem;
   :hover {
     cursor: pointer;
@@ -164,23 +165,11 @@ const CountryFlagClient = styled.div`
 const ServicesAndLanguageClient = styled.div`
   display: flex;
   position: relative;
-  padding-right: 116px;
   gap: 3rem;
   justify-content: space-around;
   margin: 1rem;
 `;
-const ButtonLogoutDesktop = styled.button`
-  position: relative;
-  color: ${({ theme }) => theme.color.main7};
-  background: ${({ theme }) => theme.color.main8};
-  font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
-  font-weight: bold;
-  border: none;
-  &:hover {
-    cursor: pointer;
-    color: ${({ theme }) => theme.color.main4};
-  }
-`;
+
 const ButtonLogoutMobil = styled.button`
   position: absolute;
   color: ${({ theme }) => theme.color.main2};
@@ -205,36 +194,7 @@ const ButtonLogoutMobilAdmin = styled.button`
     color: ${({ theme }) => theme.color.main4};
   }
 `;
-// Style Avatar Menu
-const AvatarContainer = styled.div`
-  display: flex;
-  position: absolute;
-  top: 1rem;
-  right: 3rem;
-  > div {
-    display: flex;
-    align-items: center;
-    top: 4rem;
-    right: -3rem;
-    z-index: 1000;
-  }
-`;
-const AvatarMenu = styled.div`
-  display: flex;
-  position: relative;
-  border: 2px solid ${({ theme }) => theme.color.main7};
-  flex-direction: column;
-  top: 5rem;
-  &:hover {
-    cursor: pointer;
-    color: ${({ theme }) => theme.color.main4};
-`;
-const ContainerRoundPhoto = styled.div`
-  position: absolute;
-  bottom: 102px;
-  right: 46px;
-  //border: 3px solid pink;
-`;
+
 const data = [
   {
     path: '/aboutUs',
@@ -320,17 +280,16 @@ const dataHeaderClient = [
     id: 3
   }
 ];
-const dataAvatarMenu = [
-  {
-    path: '/settings',
-    text: 'SETTINGS',
-    id: 1
-  }
-];
 
 function Header() {
   const { userData } = useContext(Context);
   const { handleLogout } = useAuth();
+
+  // useNavigate Function
+  const navigate = useNavigate();
+  const navigateTo = (path: any) => {
+    navigate(path);
+  };
 
   // Open & Closing Menu
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -339,21 +298,6 @@ function Header() {
   };
   // useMediaQuery
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
-
-  // Avatar Menu
-  const [isOpenAvatarMenu, setIsOpenAvatarMenu] = useState(false);
-  const handleOpenAvatarMenu = () => {
-    setIsOpenAvatarMenu((prev) => !prev);
-  };
-  // Reset Menu when Logout
-  useEffect(() => {
-    if (!userData.token) {
-      setIsOpenAvatarMenu(false);
-    }
-  }, [userData.token]);
-  // useRef()
-  const ref: any = useRef(null);
-  useOnClickOutside(ref, () => handleOpenAvatarMenu());
 
   // console.log('We are on the size of Desktop Version?', desktopVersion);
 
@@ -428,40 +372,24 @@ function Header() {
               <CountryFlagAdmin>
                 <LanguageMenu />
               </CountryFlagAdmin>
-              <AvatarContainer>
-                {!isOpenAvatarMenu && (
-                  <div role="button" onClick={handleOpenAvatarMenu} tabIndex={0}>
-                    <RoundedPhoto
-                      img={userData.avatar}
-                      icon={<BiFace fontSize={32} />}
-                      alt="avatar"
-                      outline="1px solid black"
-                      width="30px"
-                      height="30px"
-                    />
-                  </div>
-                )}
-                {isOpenAvatarMenu && (
-                  <AvatarMenu ref={ref}>
-                    <ContainerRoundPhoto>
-                      <RoundedPhoto
-                        img={userData.avatar}
-                        icon={<BiFace fontSize={32} />}
-                        alt="avatar"
-                        outline="1px solid black"
-                        width="30px"
-                        height="30px"
-                      />
-                    </ContainerRoundPhoto>
-                    {dataAvatarMenu.map((item) => (
-                      <NavLink key={item.id} path={item.path} text={item.text} />
-                    ))}
-                    <ButtonLogoutDesktop type="button" onClick={handleLogout}>
-                      LOGOUT
-                    </ButtonLogoutDesktop>
-                  </AvatarMenu>
-                )}
-              </AvatarContainer>
+              <AvatarWithMenu img={userData.avatar}>
+                <div>
+                  <Button
+                    whiteMenu
+                    text="Settings"
+                    width="100px"
+                    fontSize="1rem"
+                    onClick={() => navigateTo('/settings')}
+                  />
+                  <Button
+                    whiteMenu
+                    text="Logout"
+                    width="100px"
+                    fontSize="1rem"
+                    onClick={handleLogout}
+                  />
+                </div>
+              </AvatarWithMenu>
             </ServicesAndLanguageClient>
           </ContainerDesktopClient>
         )}
@@ -540,41 +468,51 @@ function Header() {
               <CountryFlagClient>
                 <LanguageMenu />
               </CountryFlagClient>
+              <AvatarWithMenu img={userData.avatar}>
+                <div>
+                  <Button
+                    whiteMenu
+                    text="Settings"
+                    width="100px"
+                    fontSize="1rem"
+                    onClick={() => navigateTo('/settings')}
+                  />
+                  <Button
+                    whiteMenu
+                    text="Logout"
+                    width="100px"
+                    fontSize="1rem"
+                    onClick={handleLogout}
+                  />
+                </div>
+              </AvatarWithMenu>
 
-              <AvatarContainer>
-                {!isOpenAvatarMenu && (
-                  <div role="button" onClick={handleOpenAvatarMenu} tabIndex={0}>
-                    <RoundedPhoto
-                      img={userData.avatar}
-                      icon={<BiFace fontSize={32} />}
-                      alt="avatar"
-                      outline="1px solid black"
-                      width="30px"
-                      height="30px"
-                    />
-                  </div>
-                )}
+              {/* <AvatarContainer onClick={handleOpenAvatarMenu} ref={ref}>
+                <RoundedPhoto
+                  img={userData.avatar}
+                  icon={<BiFace fontSize={32} />}
+                  alt="avatar"
+                  outline="1px solid black"
+                  width="30px"
+                  height="30px"
+                />
                 {isOpenAvatarMenu && (
-                  <AvatarMenu ref={ref}>
-                    <ContainerRoundPhoto>
-                      <RoundedPhoto
-                        img={userData.avatar}
-                        icon={<BiFace fontSize={32} />}
-                        alt="avatar"
-                        outline="1px solid black"
-                        width="30px"
-                        height="30px"
-                      />
-                    </ContainerRoundPhoto>
+                  <AvatarMenu>
                     {dataAvatarMenu.map((item) => (
-                      <NavLink key={item.id} path={item.path} text={item.text} />
+                      <div>
+                        <Button whiteMenu text={item.text} width="100px" fontSize="1rem" />
+                        <Button
+                          whiteMenu
+                          text="Logout"
+                          width="100px"
+                          fontSize="1rem"
+                          onClick={handleLogout}
+                        />
+                      </div>
                     ))}
-                    <ButtonLogoutDesktop type="button" onClick={handleLogout}>
-                      LOGOUT
-                    </ButtonLogoutDesktop>
                   </AvatarMenu>
                 )}
-              </AvatarContainer>
+              </AvatarContainer> */}
             </ServicesAndLanguageAdmin>
           </ContainerDesktopAdmin>
         )}
