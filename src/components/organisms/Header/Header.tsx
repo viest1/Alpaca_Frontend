@@ -111,7 +111,18 @@ const StyledMenuDesktopAdmin = styled.div`
   display: flex;
   gap: 2rem;
   font-weight: bold;
+  @media (max-width: 1200px) {
+    > div:last-child {
+      display: none;
+    }
+  }
 `;
+const DropdownMenuDesktopAdmin = styled.div`
+@media (max-width: 2000px) and (min-width: 1200px) {
+    > div:first-child {
+      display: none;
+    }`;
+
 const CountryFlagAdmin = styled.div`
   display: flex;
   gap: 0.1rem;
@@ -260,11 +271,6 @@ const dataHeaderAdmin = [
     path: '/messages',
     text: 'MESSAGES',
     id: 3
-  },
-  {
-    path: '/statistics',
-    text: 'STATISTICS',
-    id: 4
   }
 ];
 
@@ -442,7 +448,7 @@ function Header() {
                   ))}
                   <NavLink path="/newClient" text="NEW CUSTOMER" onClick={handleOpenMenu} />
                   <NavLink path="/settings" text="SETTINGS" onClick={handleOpenMenu} />
-                  {/* <NavLink path="/statistics" text="STATISTICS" onClick={handleOpenMenu} /> */}
+                  <NavLink path="/statistics" text="STATISTICS" onClick={handleOpenMenu} />
                   <ButtonLogoutMobilAdmin type="button" onClick={handleLogout}>
                     LOGOUT
                   </ButtonLogoutMobilAdmin>
@@ -469,12 +475,25 @@ function Header() {
                 {dataHeaderAdmin.map((item) => (
                   <NavLink key={item.id} path={item.path} text={item.text} color="white" />
                 ))}
+                <NavLink
+                  path="/statistics"
+                  text="STATISTICS"
+                  onClick={handleOpenMenu}
+                  color="white"
+                />
               </StyledMenuDesktopAdmin>
               <CountryFlagClient>
                 <LanguageMenu />
               </CountryFlagClient>
               <AvatarWithMenu img={userData.avatar}>
-                <div>
+                <DropdownMenuDesktopAdmin>
+                  <Button
+                    whiteMenu
+                    text="Statistics"
+                    width="100px"
+                    fontSize="1rem"
+                    onClick={() => navigateTo('/statistics')}
+                  />
                   <Button
                     whiteMenu
                     text="Settings"
@@ -489,7 +508,7 @@ function Header() {
                     fontSize="1rem"
                     onClick={handleLogout}
                   />
-                </div>
+                </DropdownMenuDesktopAdmin>
               </AvatarWithMenu>
 
               {/* <AvatarContainer onClick={handleOpenAvatarMenu} ref={ref}>
