@@ -110,7 +110,10 @@ const WrapperMessages = styled.div`
     padding-top: 0.4rem;
   }
   ${({ theme }) => theme.up(theme.breakpoint.sm)} {
-    min-width: 500px;
+    min-width: 400px;
+  }
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    min-width: 600px;
   }
 `;
 
@@ -281,7 +284,6 @@ function Messages() {
       <H3Styled>Messages</H3Styled>
       <ContainerContactListAndMessages>
         <ContactList>
-          {!clients.length && <NoItemsFound text="Client" />}
           {clients.map((clientData: any) => (
             <Contact key={clientData._id} onClick={() => handleDisplayMessages(clientData._id)}>
               <RoundedPhoto
@@ -306,6 +308,7 @@ function Messages() {
               </PContainer>
             )}
             <div>
+              {!clients.length && <NoItemsFound text="Messages" />}
               {clientMessages.map((item: any, i) => (
                 <CardMessage
                   // style={{ marginLeft: item.creator === userData.userId ? 'auto' : null }}

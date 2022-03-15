@@ -65,6 +65,10 @@ const ContainerProjects = styled.div`
   border-radius: 1rem;
 `;
 
+const H2 = styled.h2`
+  text-align: center;
+`;
+
 function ClientsOrProjects() {
   const navigate = useNavigate();
   const [choiceRadio, setChoiceRadio] = useState('projects');
@@ -137,7 +141,7 @@ function ClientsOrProjects() {
   if (isLoading) return <LoadingSpin />;
   return (
     <div>
-      <h2>Clients/Projects</h2>
+      <H2>Clients/Projects</H2>
       <ContainerFilterBy>
         <div>
           <p>Filter by:</p>

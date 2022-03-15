@@ -86,7 +86,6 @@ function AdminDashboard() {
     }, 2500);
   });
 
-
   const fetchClients = async () => {
     try {
       const res = await fetch(`${process.env.REACT_APP_BACKEND}/user/freelancer/3`, {
