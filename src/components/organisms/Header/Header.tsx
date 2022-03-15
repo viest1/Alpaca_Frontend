@@ -260,6 +260,11 @@ const dataHeaderAdmin = [
     path: '/messages',
     text: 'MESSAGES',
     id: 3
+  },
+  {
+    path: '/statistics',
+    text: 'STATISTICS',
+    id: 4
   }
 ];
 
@@ -437,7 +442,7 @@ function Header() {
                   ))}
                   <NavLink path="/newClient" text="NEW CUSTOMER" onClick={handleOpenMenu} />
                   <NavLink path="/settings" text="SETTINGS" onClick={handleOpenMenu} />
-                  <NavLink path="/statistics" text="STATISTICS" onClick={handleOpenMenu} />
+                  {/* <NavLink path="/statistics" text="STATISTICS" onClick={handleOpenMenu} /> */}
                   <ButtonLogoutMobilAdmin type="button" onClick={handleLogout}>
                     LOGOUT
                   </ButtonLogoutMobilAdmin>
