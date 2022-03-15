@@ -2,7 +2,8 @@ import React, { SyntheticEvent, useContext, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
-import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
+/* import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
+ */ import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import useForm from '../../../hooks/useForm';
 import { Context } from '../../../providers/GeneralProvider';
@@ -106,8 +107,14 @@ function LogIn() {
   return (
     <Container onSubmit={handleSubmit}>
       <h3>LOGIN</h3>
-      <InputWithLabel label="Email" name="email" onChange={handleChange} />
-      <InputWithLabel type="password" label="Password" name="password" onChange={handleChange} />
+      <Input label="Email" name="email" onChange={handleChange} placeholder="Email" />
+      <Input
+        label="Password"
+        type="password"
+        name="password"
+        placeholder="Password"
+        onChange={handleChange}
+      />
       <ContainerP>
         <p onClick={handleNavigateToForgotPassword}>I forgot my password</p>
       </ContainerP>
