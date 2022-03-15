@@ -93,7 +93,7 @@ function LogIn() {
         console.log('FETCHING ERROR', error);
         handleError();
       } finally {
-        setIsLoading(true);
+        setIsLoading(false);
       }
     };
     await login();
@@ -114,7 +114,6 @@ function LogIn() {
       <div>
         <Button type="submit" background="#2A9D8F" text={isLoading ? 'Loading...' : 'Login'} />
         <Line />
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <a href={googleLoginUrl}>
           <Button text="Login with Google" icon={<FcGoogle />} padding="1.3rem 1rem" />
         </a>
