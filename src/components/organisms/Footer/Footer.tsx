@@ -44,8 +44,9 @@ const MobileFooter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 50px;
-  margin-top: -50px;
+  height: 10vh;
+  margin-top: 16vh;
+  width: 100%;
 `;
 
 const FooterRow = styled.div`
