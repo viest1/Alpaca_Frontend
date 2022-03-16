@@ -140,9 +140,9 @@ const ContainerDesktop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 4rem;
   padding-bottom: 4rem;
-  //border: 10px solid yellow;
+  border: 10px solid yellow;
 `;
 const ContainerDetailsDesktop = styled.div`
   position: relative;
