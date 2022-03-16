@@ -34,10 +34,11 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
   }
 
-  input, select{
-    font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+  input, select {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
     //p {margin-bottom: 1rem;} it is necessary?
+  }
   p{
     margin:0;
   }
@@ -84,6 +85,6 @@ export const GlobalStyle = createGlobalStyle`
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
+  };
   
 `;
