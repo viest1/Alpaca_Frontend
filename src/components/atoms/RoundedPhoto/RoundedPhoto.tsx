@@ -165,7 +165,7 @@ RoundedPhoto.defaultProps = {
   RoundedPhotoWithButton: false,
   icon: undefined,
   handleChange: undefined,
-  onClick: false
+  onClick: undefined
 };
 
 export default RoundedPhoto;
