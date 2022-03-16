@@ -24,6 +24,7 @@ const Container = styled.div`
     font-size: 22px;
     
   }
+  
 `;
 const ContainerThreeDots = styled.div`
   position: relative;
@@ -32,14 +33,16 @@ const ContainerThreeDots = styled.div`
 `;
 const Details = styled.div`
   display: flex;
+  flex-direction: column;
   color: ${({ theme }) => theme.color.main2};
-  align-content: center;
+  align-items: center;
+  gap: 2rem;
 `;
 const DetailsElement = styled.div`
   display: flex;
   flex-direction: column;
   padding: 3px;
-  justify-content: center;
+  align-items: center;
 `;
 const DownloadInvoiceButton = styled.div`
   display: flex;
@@ -55,28 +58,45 @@ const ContainerDesktop = styled.div`
   border: 1px solid ${({ theme }) => theme.color.main2};
   border-radius: 0.6rem;
   background-color: ${({ theme }) => theme.color.main1};
-  }
+
   span {
     font-weight: 700;
     font-size: 22px;
-    
+    @media (max-width: 1142px) {
+       {
+        font-size: 15px;
+      }
+    }
   }
 `;
 const ContainerDetailDesktop = styled.div`
   display: flex;
-  padding: 1rem;
+  padding: 2rem;
   gap: 2rem;
-  border: 10px solid red;
+  //border: 10px solid red;
 `;
-const TitleAndPicture = styled.div`
+const TitleAndPictureDesktop = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: space-around;
-  border: 10px solid green;
+  //border: 10px solid green;
+
+  @media (max-width: 1142px) {
+    > h4 {
+      font-size: 25px;
+    }
+  }
+`;
+const DetailsDesktop = styled.div`
+  display: flex;
+  color: ${({ theme }) => theme.color.main2};
+  align-content: center;
+  gap: 2rem;
 `;
 const ContainerDetailsElement = styled.div`
-  border: 10px solid blue;
+  padding-top: 3rem;
+  //border: 10px solid blue;
 `;
 
 interface Project {
@@ -156,11 +176,11 @@ function CardDetails({ projectData }: Project) {
                 />
                 <DetailsElement>
                   <span>Staring Date</span>
-                  <p>{projectData?.startDate}</p>
+                  <p>{projectData?.startDate.substring(0, 15)}</p>
                 </DetailsElement>
                 <DetailsElement>
                   <span>Due Date</span>
-                  <p>{projectData?.updatedAt}</p>
+                  <p>{projectData?.updatedAt.substring(0, 10)}</p>
                 </DetailsElement>
                 <DetailsElement>
                   <span>Company Name</span>
@@ -201,10 +221,9 @@ function CardDetails({ projectData }: Project) {
               {/* the problem is of the time of rendering */}
               <div>
                 {projectData && (
-                  <Details>
-                    <TitleAndPicture>
+                  <DetailsDesktop>
+                    <TitleAndPictureDesktop>
                       <h4>Nomad Studio</h4>
-
                       <RoundedPhoto
                         img={projectData?.avatar}
                         alt="avatar"
@@ -220,7 +239,7 @@ function CardDetails({ projectData }: Project) {
                         <span>Due Date</span>
                         <p>{projectData?.updatedAt.substring(0, 10)}</p>
                       </DetailsElement>
-                    </TitleAndPicture>
+                    </TitleAndPictureDesktop>
                     <ContainerDetailsElement>
                       <DetailsElement>
                         <span>Company Name</span>
@@ -239,7 +258,7 @@ function CardDetails({ projectData }: Project) {
                         <p>{projectData?.taxNumber}</p>
                       </DetailsElement>
                     </ContainerDetailsElement>
-                  </Details>
+                  </DetailsDesktop>
                 )}
               </div>
             </ContainerDetailDesktop>
