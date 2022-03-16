@@ -70,7 +70,7 @@ const Form = styled.form`
 //
 const ContactList = styled.div`
   margin: 0 0 3rem 0;
-  overflow-y: auto;
+  overflow-y: scroll;
   overscroll-behavior: contain;
 `;
 
