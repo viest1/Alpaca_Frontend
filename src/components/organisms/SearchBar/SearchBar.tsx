@@ -18,7 +18,7 @@ const ContainerFilteredList = styled.div`
   border: 2px solid black;
   border-radius: 0.6rem;
   padding: 0.5rem;
-  width: 120%;
+  min-width: 200px;
   min-height: 50px;
   display: flex;
   flex-direction: column;
