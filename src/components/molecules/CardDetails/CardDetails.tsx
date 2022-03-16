@@ -6,7 +6,6 @@ import IconClickable from '../../atoms/IconClickable/IconClickable';
 import Button from '../../atoms/Button/Button';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import useMediaQuery from '../../../hooks/useMediaQuery';
-import kim from '../../../assets/images/kim.jpg';
 import GeneratePdf from '../GeneratePdf/GeneratePdf';
 import { Context } from '../../../providers/GeneralProvider';
 
@@ -33,8 +32,6 @@ const ContainerThreeDots = styled.div`
 `;
 const Details = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 7px;
   color: ${({ theme }) => theme.color.main2};
   align-content: center;
 `;
@@ -67,17 +64,19 @@ const ContainerDesktop = styled.div`
 `;
 const ContainerDetailDesktop = styled.div`
   display: flex;
-  //border: 1px solid red;
+  padding: 1rem;
   gap: 2rem;
+  border: 10px solid red;
 `;
 const TitleAndPicture = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: space-around;
-  margin: auto;
-  padding-left: 30px;
-  //border: 1px solid green;
+  border: 10px solid green;
+`;
+const ContainerDetailsElement = styled.div`
+  border: 10px solid blue;
 `;
 
 interface Project {
@@ -91,7 +90,6 @@ interface Project {
     taxNumber: string;
   }; */
 }
-// Card Details Mobil Version
 function CardDetails({ projectData }: Project) {
   const navigate = useNavigate();
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
@@ -108,6 +106,7 @@ function CardDetails({ projectData }: Project) {
     navigate(`/editProject/${projectData._id}`);
   };
 
+  // Card Details Mobil Version
   return (
     <div>
       {!desktopVersion ? (
@@ -142,21 +141,22 @@ function CardDetails({ projectData }: Project) {
                 </div>
               </IconClickable>
             </ContainerThreeDots>
-            <h3>Nomad Studio</h3>
-            <RoundedPhoto
-              img={kim}
-              alt="avatar"
-              outline="3px solid black"
-              width="12rem"
-              height="12rem"
-            />
+
             {/* check this part later, because the ? are not the best solution  */}
             {/* the problem is of the time of rendering */}
             {projectData && (
               <Details>
+                <h3>Nomad Studio</h3>
+                <RoundedPhoto
+                  img={projectData?.avatar}
+                  alt="avatar"
+                  outline="3px solid black"
+                  width="12rem"
+                  height="12rem"
+                />
                 <DetailsElement>
                   <span>Staring Date</span>
-                  <p>{projectData?.createdAt}</p>
+                  <p>{projectData?.startDate}</p>
                 </DetailsElement>
                 <DetailsElement>
                   <span>Due Date</span>
@@ -164,19 +164,19 @@ function CardDetails({ projectData }: Project) {
                 </DetailsElement>
                 <DetailsElement>
                   <span>Company Name</span>
-                  <p>{projectData?.clientName}</p>
+                  <p>{projectData?.companyName}</p>
                 </DetailsElement>
                 <DetailsElement>
                   <span>Customer Name</span>
-                  <p>{projectData?.name}</p>
+                  <p>{projectData?.clientName}</p>
                 </DetailsElement>
                 <DetailsElement>
                   <span>Website</span>
-                  <p>{projectData?.text}</p>
+                  <p>{projectData?.websiteName}</p>
                 </DetailsElement>
                 <DetailsElement>
                   <span>Tax Number</span>
-                  <p>{projectData?.ownerUser}</p>
+                  <p>{projectData?.taxNumber}</p>
                 </DetailsElement>
               </Details>
             )}
@@ -197,45 +197,48 @@ function CardDetails({ projectData }: Project) {
         <div>
           <ContainerDesktop>
             <ContainerDetailDesktop>
-              <TitleAndPicture>
-                <h4>Nomad Studio</h4>
-                <RoundedPhoto
-                  img={kim}
-                  alt="avatar"
-                  outline="3px solid black"
-                  width="12rem"
-                  height="12rem"
-                />
-              </TitleAndPicture>
               {/* check this part later, because the ? are not the best solution  */}
               {/* the problem is of the time of rendering */}
               <div>
                 {projectData && (
                   <Details>
-                    <DetailsElement>
-                      <span>Staring Date</span>
-                      <p>{projectData?.createdAt}</p>
-                    </DetailsElement>
-                    <DetailsElement>
-                      <span>Due Date</span>
-                      <p>{projectData?.updatedAt}</p>
-                    </DetailsElement>
-                    <DetailsElement>
-                      <span>Company Name</span>
-                      <p>{projectData?.clientName}</p>
-                    </DetailsElement>
-                    <DetailsElement>
-                      <span>Customer Name</span>
-                      <p>{projectData?.name}</p>
-                    </DetailsElement>
-                    <DetailsElement>
-                      <span>Website</span>
-                      <p>{projectData?.text}</p>
-                    </DetailsElement>
-                    <DetailsElement>
-                      <span>Tax Number</span>
-                      <p>{projectData?.ownerUser}</p>
-                    </DetailsElement>
+                    <TitleAndPicture>
+                      <h4>Nomad Studio</h4>
+
+                      <RoundedPhoto
+                        img={projectData?.avatar}
+                        alt="avatar"
+                        outline="3px solid black"
+                        width="12rem"
+                        height="12rem"
+                      />
+                      <DetailsElement>
+                        <span>Staring</span>
+                        <p>{projectData?.startDate.substring(0, 15)}</p>
+                      </DetailsElement>
+                      <DetailsElement>
+                        <span>Due Date</span>
+                        <p>{projectData?.updatedAt.substring(0, 10)}</p>
+                      </DetailsElement>
+                    </TitleAndPicture>
+                    <ContainerDetailsElement>
+                      <DetailsElement>
+                        <span>Company Name</span>
+                        <p>{projectData?.companyName}</p>
+                      </DetailsElement>
+                      <DetailsElement>
+                        <span>Customer Name</span>
+                        <p>{projectData?.clientName}</p>
+                      </DetailsElement>
+                      <DetailsElement>
+                        <span>Website</span>
+                        <p>{projectData?.websiteName}</p>
+                      </DetailsElement>
+                      <DetailsElement>
+                        <span>Tax Number</span>
+                        <p>{projectData?.taxNumber}</p>
+                      </DetailsElement>
+                    </ContainerDetailsElement>
                   </Details>
                 )}
               </div>

@@ -371,7 +371,7 @@ function ProjectDetail() {
       });
       const resJSON = await res.json();
       console.log('This is Fetch', res);
-      console.log(resJSON);
+      console.log('This is resJson', resJSON);
       if (res.status === 200) {
         setProject(resJSON);
       } else {
