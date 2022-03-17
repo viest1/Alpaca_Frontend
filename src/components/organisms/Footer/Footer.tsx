@@ -23,11 +23,13 @@ const FooterBody = styled.div`
   justify-content: center;
   width: 100%;
   flex-direction: column;
-  margin-top: -44px;
   font-size: 14px;
   padding-bottom: 30px;
   z-index: -1;
+  margin-top: -30px;
 `;
+
+// margin-top: -44px;
 
 const FooterWave = styled.div`
   background-image: url(${mobileFooterWave});
@@ -45,8 +47,8 @@ const MobileFooter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 10vh;
-  margin-top: 16vh;
+  height: 4rem;
+  margin-top: 7rem;
   width: 100%;
 `;
 
