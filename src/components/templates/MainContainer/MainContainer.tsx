@@ -24,7 +24,7 @@ function MainContainerApp({ children }: MainContainer) {
       )}
       <div>
         <Header />
-        {children}
+        <div style={{ minHeight: '80vh', paddingBottom: '30px' }}>{children}</div>
       </div>
       <Footer />
       {userData.token && <GlobalMessage />}

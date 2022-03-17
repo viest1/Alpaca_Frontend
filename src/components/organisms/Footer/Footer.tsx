@@ -17,8 +17,6 @@ const FooterBody = styled.div`
   background-color: #001523;
   color: #ffffff;
   display: flex;
-  position: absolute;
-  bottom: 0;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -27,6 +25,8 @@ const FooterBody = styled.div`
   padding-bottom: 30px;
   z-index: -1;
   margin-top: -30px;
+  position: absolute;
+  bottom: 0;
 `;
 
 // margin-top: -44px;
@@ -49,7 +49,7 @@ const MobileFooter = styled.div`
   align-items: center;
   height: 4rem;
   margin-top: 7rem;
-  width: 100%;
+  width: 100vw;
 `;
 
 const FooterRow = styled.div`
