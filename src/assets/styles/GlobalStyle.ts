@@ -42,6 +42,11 @@ export const GlobalStyle = createGlobalStyle`
     margin:0;
   }
 
+  a {
+    text-decoration: none;
+  }
+
+
   h1, h2, h3, h4, h5 {
     margin: 3rem 0 1.38rem;
     font-family: 'Inter', sans-serif;
