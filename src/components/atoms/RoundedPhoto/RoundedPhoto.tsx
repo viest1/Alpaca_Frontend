@@ -15,7 +15,7 @@ const ContainerPhoto = styled.div<PhotoStyled>`
   border-radius: 50%;
   width: ${({ width }) => width || '90px'};
   height: ${({ height }) => height || '90px'};
-  background: grey;
+  border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,7 +56,7 @@ const ButtonForPhoto = styled.button`
   background-size: 20px;
   background-color: ${({ theme }) => theme.color.main4};
   outline: none;
-  border:none
+  border: none;
 
   top: 10px;
   left: 110px;

@@ -111,6 +111,7 @@ const ContainerInputAndPhoto = styled.div`
 
 const ContainerUploadedImages = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   a {
     text-decoration: none;
@@ -133,6 +134,7 @@ const ContainerUploadedImages = styled.div`
 
 const ContainerUploadedFiles = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
   a {
@@ -156,9 +158,56 @@ const DeleteIcon = styled(MdDelete)`
   bottom: 0;
   right: 0;
   transition: 0.3s;
+  background: white;
   &:hover {
     cursor: pointer;
     transform: scale(1.2);
+  }
+`;
+
+// const DeleteIconIframe = styled(MdDelete)`
+//   border: 1px solid black;
+//   &:hover {
+//     cursor: pointer;
+//     transform: scale(1.2);
+//   }
+// `;
+
+const ContainerIframesFiles = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  height: auto;
+  > div {
+    position: relative;
+  }
+  ${({ theme }) => theme.up(theme.breakpoint.sm)} {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+`;
+
+const ContainerPreviewImg = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  width: 100%;
+  height: auto;
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  > div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  ${({ theme }) => theme.up(theme.breakpoint.m)} {
+    flex-direction: row;
   }
 `;
 
@@ -168,6 +217,7 @@ function EditProject() {
   const { userData } = useContext(Context);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
+  const [showPreviews, setShowPreviews] = useState(false);
   const { handleError } = useError();
 
   const fetchProject = async () => {
@@ -374,30 +424,94 @@ function EditProject() {
         <InputWithLabel label="Avatar" name="avatar" onChange={handleChange} type="file" />
         <RoundedPhoto img={inputs.avatar || ''} alt="avatar" />
       </ContainerInputAndPhoto>
-      <p>Images</p>
-      <ContainerUploadedImages>
-        {inputs.images.length > 0 &&
-          inputs.images.map((item: any, i: number) => (
-            <div key={item.key}>
-              <a href={item.url} target="_blank" rel="noreferrer">
-                <BsImage fontSize={36} />
-              </a>
-              <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveImage(e, i)} />
-            </div>
-          ))}
-      </ContainerUploadedImages>
-      <p>Files</p>
-      <ContainerUploadedFiles>
-        {inputs.files.length > 0 &&
-          inputs.files.map((item: any, i: number) => (
-            <div key={item.key}>
-              <a href={item.url} target="_blank" rel="noreferrer">
-                <AiOutlineFileText fontSize={40} />
-              </a>
-              <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveFile(e, i)} />
-            </div>
-          ))}
-      </ContainerUploadedFiles>
+      <Button
+        text={showPreviews ? 'Hide Previews' : 'Show Previews Files/Images'}
+        onClick={() => setShowPreviews((prev) => !prev)}
+      />
+      {!showPreviews ? (
+        <>
+          <p>Images</p>
+          <ContainerUploadedImages>
+            {inputs.images.length > 0 &&
+              inputs.images.map((item: any, i: number) => (
+                <div key={item.key}>
+                  <a href={item.url} target="_blank" rel="noreferrer">
+                    <BsImage fontSize={36} />
+                  </a>
+                  <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveImage(e, i)} />
+                </div>
+              ))}
+          </ContainerUploadedImages>
+          <p>Images</p>
+          <ContainerUploadedFiles>
+            {inputs.files.length > 0 &&
+              inputs.files.map((item: any, i: number) => (
+                <div key={item.key}>
+                  <a href={item.url} target="_blank" rel="noreferrer">
+                    <AiOutlineFileText fontSize={40} />
+                  </a>
+                  <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveFile(e, i)} />
+                </div>
+              ))}
+          </ContainerUploadedFiles>
+        </>
+      ) : (
+        <>
+          <p>Files</p>
+          <ContainerIframesFiles>
+            {inputs.files.length > 0 &&
+              inputs.files.map((item: any, i: number) => (
+                <div key={item.key}>
+                  {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
+                  <iframe
+                    // src={`https://drive.google.com/viewerng/viewer?url=${item.url}&embedded=true`}
+                    src={`https://drive.google.com/gview?url=${item.url}&embedded=true`}
+                    // src={`https://docs.google.com/gview?url=${item.url}&embedded=true`}
+                    // src={`${item.url}`}
+                    height="100%"
+                    width="100%"
+                    loading="eager"
+                    frameBorder="0"
+                    style={{ border: 0 }}
+                  />
+                  {/* eslint-disable-next-line jsx-a11y/alt-text */}
+                  {/* <object data={item.url} type="application/pdf" width="100%" height="100%"> */}
+                  {/*   <p> */}
+                  {/*     Your browser does not support PDFs. */}
+                  {/*     <a href={item.url}>Download the PDF</a>. */}
+                  {/*   </p> */}
+                  {/* </object> */}
+                  <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveFile(e, i)} />
+                </div>
+              ))}
+          </ContainerIframesFiles>
+          <p>Images</p>
+          <ContainerPreviewImg>
+            {inputs.images.length > 0 &&
+              inputs.images.map((item: any, i: number) => (
+                <div key={item.key}>
+                  {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
+                  <img src={`${item.url}`} height="100%" width="100%" alt="idea" />
+                  <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveImage(e, i)} />
+                </div>
+              ))}
+          </ContainerPreviewImg>
+        </>
+      )}
+      {/* <iframe */}
+      {/*   src={`https://docs.google.com/gview?url=${url}&embedded=true`} */}
+      {/*   style={{ width: '200px', height: '200px' }} */}
+      {/*   frameBorder="0" */}
+      {/* /> */}
+      {/* <iframe */}
+      {/*   src={`${url}#view=fitH`} */}
+      {/*   height="100%" */}
+      {/*   width="100%" */}
+      {/*   allowFullScreen */}
+      {/*   loading="lazy" */}
+      {/* /> */}
+
+      {/* FOR NOW */}
       {/* <p>Files/Images Upload</p> */}
       {/* <FileUploader projectId={projectId} /> */}
       <ContainerButton>

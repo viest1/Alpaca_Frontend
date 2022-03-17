@@ -486,20 +486,22 @@ function ProjectDetail() {
                   >
                     <Button
                       whiteMenu
-                      text="View Client"
+                      text={userData.role === 'Freelancer' ? 'View Client' : 'View Freelancer'}
                       width="180px"
                       fontSize="1rem"
                       padding="0.5rem 1rem"
                       onClick={handleNavigateToClient}
                     />
-                    <Button
-                      whiteMenu
-                      text="Edit Project"
-                      width="180px"
-                      fontSize="1rem"
-                      padding="0.5rem 1rem"
-                      onClick={handleNavigateToEditProject}
-                    />
+                    {userData.role === 'Freelancer' && (
+                      <Button
+                        whiteMenu
+                        text="Edit Project"
+                        width="180px"
+                        fontSize="1rem"
+                        padding="0.5rem 1rem"
+                        onClick={handleNavigateToEditProject}
+                      />
+                    )}
                   </div>
                 </IconClickable>
               </ContainerThreeDotsDesktop>

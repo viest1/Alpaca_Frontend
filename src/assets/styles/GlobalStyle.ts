@@ -7,8 +7,6 @@ export const GlobalStyle = createGlobalStyle`
   *:after {
     box-sizing: inherit;
   }
-
-  
   
   #root{
     min-height: 100vh;
@@ -29,6 +27,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin:0;
   }
+  
   button, label{
     font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
@@ -37,9 +36,9 @@ export const GlobalStyle = createGlobalStyle`
   input, select {
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
-    //p {margin-bottom: 1rem;} it is necessary?
   }
-  p{
+  
+  p {
     margin:0;
   }
 
