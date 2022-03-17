@@ -37,12 +37,12 @@ const ProjectInvoicesFiles = styled.div`
   justify-content: space-around;
   padding: 1rem 2rem;
   padding: 1rem;
-  padding-bottom: 16rem;
+  padding-bottom: 1rem;
 `;
 const ServicesInvoice = styled.div`
   display: flex;
   flex-direction: column;
-  
+  align-items: center;
   }
 h4 {
   text-decoration: underline;
@@ -55,11 +55,21 @@ const ServicesButton = styled.button`
 `;
 const PricesInvoice = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
     }
 h4 {
   text-decoration: underline;
 }
+`;
+const LabelTotal = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  //border: 10px solid chocolate;
 `;
 
 // Style Modal
@@ -140,9 +150,9 @@ const ContainerDesktop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
+  gap: 2rem;
   padding-bottom: 4rem;
-  border: 10px solid yellow;
+  //border: 10px solid yellow;
 `;
 const ContainerDetailsDesktop = styled.div`
   position: relative;
@@ -178,6 +188,10 @@ const ShortDescriptionDesktop = styled.div`
   display: flex;
   flex-direction: column;
   flex:1 1 500px;
+  width: 180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 h5 {
   text-decoration: underline;
@@ -205,152 +219,18 @@ const Files = styled.div`
   display: flex;
   //border: 10px solid black;
 `;
-const TotalInput = styled.input`
+const TotalNumber = styled.p`
   position: relative;
-  height: 2rem;
-  width: 5rem;
   margin: auto;
-  border-radius: 0.3rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
 `;
-const LabelTotal = styled.label`
+const LabelTotalDesktop = styled.label`
   font-weight: bold;
-  gap: 1rem;
 `;
 const Line = styled.div`
   border: 0.2px solid black;
   box-shadow: rgba(0, 0, 0, 0.75) 0px 5px 15px;
 `;
-const nameOfServicesData = [
-  {
-    path: '/',
-    text: 'Low Res. Mockup',
-    id: 1
-  },
-  {
-    path: '/',
-    text: 'Back End Architecture',
-    id: 2
-  },
-  {
-    path: '/',
-    text: 'UX & UI Design',
-    id: 3
-  },
-  {
-    path: '/',
-    text: 'Front End Development',
-    id: 4
-  },
-  {
-    path: '/',
-    text: 'Low Res. Mockup',
-    id: 5
-  },
-  {
-    path: '/',
-    text: 'Back End Architecture',
-    id: 6
-  },
-  {
-    path: '/',
-    text: 'UX & UI Design',
-    id: 7
-  },
-  {
-    path: '/',
-    text: 'Front End Development',
-    id: 8
-  }
-];
-const pricesData = [
-  {
-    path: '/',
-    text: '250€',
-    id: 1
-  },
-  {
-    path: '/',
-    text: '45€',
-    id: 2
-  },
-  {
-    path: '/',
-    text: '200€',
-    id: 3
-  },
-  {
-    path: '/',
-    text: '45€',
-    id: 4
-  },
-  {
-    path: '/',
-    text: '250€',
-    id: 5
-  },
-  {
-    path: '/',
-    text: '45€',
-    id: 6
-  },
-  {
-    path: '/',
-    text: '200€',
-    id: 7
-  },
-  {
-    path: '/',
-    text: '45€',
-    id: 8
-  }
-];
 
-const shortDescriptionData = [
-  {
-    path: '/',
-    text: 'Low Res. Mockup',
-    id: 1
-  },
-  {
-    path: '/',
-    text: 'Back End Architecture',
-    id: 2
-  },
-  {
-    path: '/',
-    text: 'UX & UI Design',
-    id: 3
-  },
-  {
-    path: '/',
-    text: 'Front End Development',
-    id: 4
-  },
-  {
-    path: '/',
-    text: 'Low Res. Mockup',
-    id: 5
-  },
-  {
-    path: '/',
-    text: 'Back End Architecture',
-    id: 6
-  },
-  {
-    path: '/',
-    text: 'UX & UI Design',
-    id: 7
-  },
-  {
-    path: '/',
-    text: 'Front End Development',
-    id: 8
-  }
-];
 function ProjectDetail() {
   const navigate = useNavigate();
   const [project, setProject]: any = useState({});
@@ -409,6 +289,16 @@ function ProjectDetail() {
   const handleNavigateToEditProject = () => {
     navigate(`/editProject/${projectId}`);
   };
+  // const [total, setTotal] = useState([]);
+  // const handleTotal = project.price.reduce((sum: number, value: number) => sum + value);
+
+  // Total of the services
+  console.log(`This is the project`, project.services);
+  const projectServices = project.services;
+
+  const total = projectServices?.reduce((a: any, v: any) => a + +v.price, 0);
+  console.log(`This is the total`, total);
+
   if (isLoading) return <LoadingSpin />;
   return (
     // Project Details Mobil Version ----------------------------------------------
@@ -420,7 +310,6 @@ function ProjectDetail() {
           <ProjectInvoicesFiles>
             <ServicesInvoice>
               <h4>Service</h4>
-              {/* Closing */}
               {openModal && (
                 <ModalBackground ref={ref}>
                   <ModalContainer>
@@ -429,42 +318,46 @@ function ProjectDetail() {
                     </div>
                     <ModalText>
                       <h5>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi expedita
-                        fugiat quos accusamus in soluta. Necessitatibus doloremque vitae quia totam
-                        ipsa! Esse fugit reprehenderit sequi molestiae possimus qui perspiciatis
-                        iste in recusandae, ratione quibusdam tenetur. Quibusdam incidunt iusto
-                        ipsum repellat natus fugiat voluptatem esse, architecto explicabo, inventore
-                        nulla quae dolorum!
+                        {project.services.map((item: any, index: number) => (
+                          // eslint-disable-next-line react/no-array-index-key
+                          <div key={index}>
+                            <p>{item.description}</p>
+                          </div>
+                        ))}
                       </h5>
                     </ModalText>
                   </ModalContainer>
                 </ModalBackground>
               )}
-              {/* closing end */}
-              {/* opening */}
-              {nameOfServicesData.map((item) => (
-                <div key={item.id}>
+              {project.services.map((item: any, index: number) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <div key={index}>
                   <ServicesButton
                     type="button"
                     onClick={() => {
                       setOpenModal(true);
                     }}
                   >
-                    {item.text}
+                    {item.serviceName}
                   </ServicesButton>
                 </div>
               ))}
-              {/* opening ends */}
             </ServicesInvoice>
             <PricesInvoice>
               <h4>Price</h4>
-              {pricesData.map((item) => (
-                <div key={item.id}>
-                  <p>{item.text}</p>
+              {project.services.map((item: any, index: number) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <div key={index}>
+                  <p>{item.price} €</p>
                 </div>
               ))}
             </PricesInvoice>
           </ProjectInvoicesFiles>
+          <LabelTotal>
+            Total:<span> </span>
+            <TotalNumber />
+            {total} € <span />
+          </LabelTotal>
         </Container>
       ) : (
         // Project Details Desktop Version ----------------------------------------------
@@ -515,43 +408,46 @@ function ProjectDetail() {
                       </div>
                       <ModalText>
                         <h5>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi expedita
-                          fugiat quos accusamus in soluta. Necessitatibus doloremque vitae quia
-                          totam ipsa! Esse fugit reprehenderit sequi molestiae possimus qui
-                          perspiciatis iste in recusandae, ratione quibusdam tenetur. Quibusdam
-                          incidunt iusto ipsum repellat natus fugiat voluptatem esse, architecto
-                          explicabo, inventore nulla quae dolorum!
+                          {project.services.map((item: any, index: number) => (
+                            // eslint-disable-next-line react/no-array-index-key
+                            <div key={index}>
+                              <p>{item.description}</p>
+                            </div>
+                          ))}
                         </h5>
                       </ModalText>
                     </ModalContainerDesktop>
                   </ModalBackgroundDesktop>
                 )}
-                {nameOfServicesData.map((item) => (
-                  <div key={item.id}>
+                {project.services.map((item: any, index: number) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <div key={index}>
                     <ServicesButton
                       type="button"
                       onClick={() => {
                         setOpenModal(true);
                       }}
                     >
-                      {item.text}
+                      {item.serviceName}
                     </ServicesButton>
                   </div>
                 ))}
               </ServicesInvoiceDesktop>
               <PricesInvoiceDesktop>
                 <h5>Price</h5>
-                {pricesData.map((item) => (
-                  <div key={item.id}>
-                    <p>{item.text}</p>
+                {project.services.map((item: any, index: number) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <div key={index}>
+                    <p>{item.price} €</p>
                   </div>
                 ))}
               </PricesInvoiceDesktop>
               <ShortDescriptionDesktop>
                 <h5>Short description</h5>
-                {shortDescriptionData.map((item) => (
-                  <div key={item.id}>
-                    <p>{item.text}</p>
+                {project.services.map((item: any, index: number) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <div key={index}>
+                    <p>{item.description}</p>
                   </div>
                 ))}
               </ShortDescriptionDesktop>
@@ -571,10 +467,11 @@ function ProjectDetail() {
                 fontSize="13px"
                 padding="0.5rem 1rem"
               />
-              <LabelTotal>
+              <LabelTotalDesktop>
                 Total:<span> </span>
-                <TotalInput type="number" min="0" /> € <span />
-              </LabelTotal>
+                <TotalNumber />
+                {total} € <span />
+              </LabelTotalDesktop>
             </Total>
             <Line />
             <h6>Project Files</h6>
