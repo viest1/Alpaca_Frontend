@@ -49,7 +49,7 @@ const MobileFooter = styled.div`
   flex-direction: column;
   align-items: center;
   height: 4rem;
-  margin-top: 7rem;
+  margin-top: 8rem;
   width: 100%;
 `;
 
@@ -185,7 +185,7 @@ function Footer() {
                 <NavLink path="/aboutUs" text="About Us" color="white" />
                 <NavLink path="/services" text="Services" color="white" />
                 <NavLink path="/contact" text="Contact" color="white" />
-                <NavLink path="/impresum" text="Impresum" color="white" />
+                <NavLink path="/impressum" text="Impressum" color="white" />
                 <NavLink path="/faq" text="FAQ" color="white" />
               </div>
             </StyledCol>
