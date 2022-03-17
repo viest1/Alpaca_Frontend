@@ -15,7 +15,6 @@ const Container = styled.div`
 `;
 
 const ContainerFilteredList = styled.div`
-
   border: 1px solid black;
   background: ${({ theme }) => theme.color.main7};
   padding: 0.1rem;

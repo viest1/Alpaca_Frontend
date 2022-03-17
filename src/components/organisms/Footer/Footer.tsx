@@ -184,7 +184,7 @@ function Footer() {
               <div className="contact">
                 <NavLink path="/aboutUs" text="About Us" color="white" />
                 <NavLink path="/services" text="Services" color="white" />
-                <NavLink path="/payments" text="Payments" color="white" />
+                <NavLink path="/contact" text="Contact" color="white" />
                 <NavLink path="/impresum" text="Impresum" color="white" />
                 <NavLink path="/faq" text="FAQ" color="white" />
               </div>
