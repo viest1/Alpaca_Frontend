@@ -14,21 +14,23 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const ContainerFilteredList = styled.div`
+const ContainerFilteredList = styled.div<{ top: string | undefined }>`
   border: 1px solid #e76f51;
   background: ${({ theme }) => theme.color.main2};
   padding: 0.1rem;
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 60px;
+  top: ${({ top }) => top || '60px'};
   width: 100%;
+  min-width: 160px;
   z-index: 5;
   max-height: 500px;
   overflow: auto;
   & > p {
     padding: 0.6rem 0.8rem;
     color: ${({ theme }) => theme.color.main1};
+    font-size: ${({ theme }) => theme.fontSizeOpenSans.ms};
     text-align: left;
     &:hover {
       cursor: pointer;
@@ -42,7 +44,11 @@ const ContainerFilteredList = styled.div`
   }
 `;
 
-function SearchBar() {
+interface SearchBarI {
+  top?: string;
+}
+
+function SearchBar({ top }: SearchBarI) {
   const { handleChange, inputs, clearForm } = useForm();
   const { clientsGlobal } = useContext(Context);
   const navigate = useNavigate();
@@ -63,7 +69,7 @@ function SearchBar() {
         placeholder="Search"
       />
       {clientsGlobal && inputs.searchBar && (
-        <ContainerFilteredList>
+        <ContainerFilteredList top={top}>
           {clientsGlobal.filter((item: any) =>
             item.name.toLowerCase().includes(inputs.searchBar.toLowerCase())
           ).length < 1 && <p>No results</p>}
@@ -75,7 +81,7 @@ function SearchBar() {
         </ContainerFilteredList>
       )}
       {inputs.searchBar === '.' && (
-        <ContainerFilteredList>
+        <ContainerFilteredList top={top}>
           {clientsGlobal.map((item: any) => (
             <p onClick={() => handleNavigateToClient(item._id)}>{item.name}</p>
           ))}
@@ -84,5 +90,9 @@ function SearchBar() {
     </Container>
   );
 }
+
+SearchBar.defaultProps = {
+  top: undefined
+};
 
 export default SearchBar;

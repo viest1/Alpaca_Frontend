@@ -29,7 +29,7 @@ const Container = styled.div`
 const ContainerThreeDots = styled.div`
   position: relative;
   margin: auto;
-  left: 9rem;
+  left: 8rem;
 `;
 const Details = styled.div`
   display: flex;
@@ -168,7 +168,7 @@ function CardDetails({ projectData }: Project) {
             {/* the problem is of the time of rendering */}
             {projectData && (
               <Details>
-                <h3>Nomad Studio</h3>
+                <h4>Nomad Studio</h4>
                 <RoundedPhoto
                   img={projectData?.avatar}
                   alt="avatar"
