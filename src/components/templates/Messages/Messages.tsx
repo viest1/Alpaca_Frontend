@@ -228,7 +228,6 @@ function Messages() {
         console.log({ resJSON });
         if (res.status === 201) {
           resetForm();
-          handleError(resJSON.message, true);
         } else {
           handleError(resJSON.message);
         }
