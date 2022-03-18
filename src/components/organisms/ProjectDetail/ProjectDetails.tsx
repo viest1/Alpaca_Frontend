@@ -74,14 +74,14 @@ const LabelTotal = styled.label`
 
 // Style Modal
 const ModalBackground = styled.div`
-  width: 80vw;
+  width: 77vw;
   max-width: 350px;
-  height: 70vh;
+  height: 30vh;
   background-color: ${({ theme }) => theme.color.main8};
   position: absolute;
+  left: 3rem;
   display: flex;
-  justify-content: center;
-  align-item: center;
+  border: 10px solid pink;
 `;
 const ModalContainer = styled.div`
   display: flex;
@@ -268,12 +268,23 @@ function ProjectDetail() {
   useEffect(() => {
     fetchProject();
   }, []);
+  // Setting the description one by one
+  const [description, setDescription] = useState('');
+  const handleModalIndex = (index: number) => {
+    setDescription(project.services[index].description);
+    // And is combined with the the modal openModal state
+    setOpenModal(true);
+  };
+  console.log('This is what DESCRIPTION print', description);
+
+  // console.log(`First Description`, project.services[0].description);
   // useMediaQuery
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
   const [openModal, setOpenModal] = useState(false);
   const handleModal = () => {
     setOpenModal((prev) => !prev);
   };
+
   const ref: any = useRef(null);
   // useOnClickOutside(ref, () => handleModal()); Come from this one but is enough
   // with (ref, handleModal) if we have declared this function before
@@ -317,14 +328,7 @@ function ProjectDetail() {
                       <GrClose onClick={handleModal} cursor="pointer" fontSize={28} />
                     </div>
                     <ModalText>
-                      <h5>
-                        {project.services.map((item: any, index: number) => (
-                          // eslint-disable-next-line react/no-array-index-key
-                          <div key={index}>
-                            <p>{item.description}</p>
-                          </div>
-                        ))}
-                      </h5>
+                      <h5>{description}</h5>
                     </ModalText>
                   </ModalContainer>
                 </ModalBackground>
@@ -332,12 +336,7 @@ function ProjectDetail() {
               {project.services.map((item: any, index: number) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <div key={index}>
-                  <ServicesButton
-                    type="button"
-                    onClick={() => {
-                      setOpenModal(true);
-                    }}
-                  >
+                  <ServicesButton type="button" onClick={() => handleModalIndex(index)}>
                     {item.serviceName}
                   </ServicesButton>
                 </div>
@@ -407,14 +406,7 @@ function ProjectDetail() {
                         <GrClose onClick={handleModal} cursor="pointer" fontSize={28} />
                       </div>
                       <ModalText>
-                        <h5>
-                          {project.services.map((item: any, index: number) => (
-                            // eslint-disable-next-line react/no-array-index-key
-                            <div key={index}>
-                              <p>{item.description}</p>
-                            </div>
-                          ))}
-                        </h5>
+                        <h5>{description}</h5>
                       </ModalText>
                     </ModalContainerDesktop>
                   </ModalBackgroundDesktop>
@@ -422,12 +414,7 @@ function ProjectDetail() {
                 {project.services.map((item: any, index: number) => (
                   // eslint-disable-next-line react/no-array-index-key
                   <div key={index}>
-                    <ServicesButton
-                      type="button"
-                      onClick={() => {
-                        setOpenModal(true);
-                      }}
-                    >
+                    <ServicesButton type="button" onClick={() => handleModalIndex(index)}>
                       {item.serviceName}
                     </ServicesButton>
                   </div>
