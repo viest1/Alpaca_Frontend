@@ -138,8 +138,7 @@ function App(): JSX.Element {
 
           events.onmessage = (event) => {
             const parsedData = JSON.parse(event.data);
-            // console.log('Parsed', parsedData);
-            // console.log(parsedData.text);
+            console.log('Parsed', parsedData);
             if (parsedData.text === 'stopSSEEventsNow') {
               events.close();
               console.log('I closed the connection Here');
