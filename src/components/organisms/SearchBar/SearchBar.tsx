@@ -15,8 +15,8 @@ const Container = styled.div`
 `;
 
 const ContainerFilteredList = styled.div<{ top: string | undefined }>`
-  border: 1px solid black;
-  background: ${({ theme }) => theme.color.main7};
+  border: 1px solid #e76f51;
+  background: ${({ theme }) => theme.color.main2};
   padding: 0.1rem;
   position: absolute;
   display: flex;
@@ -35,11 +35,11 @@ const ContainerFilteredList = styled.div<{ top: string | undefined }>`
     &:hover {
       cursor: pointer;
       color: ${({ theme }) => theme.color.main9};
-      border-bottom: ${({ theme }) => theme.color.main9};
+      /* border-bottom: ${({ theme }) => theme.color.main9}; */
     }
 
     &:hover {
-      border-bottom: ${({ theme }) => `0.5px solid ${theme.color.main9}`};
+      /* border-bottom: ${({ theme }) => `0.5px solid ${theme.color.main9}`}; */
     }
   }
 `;
