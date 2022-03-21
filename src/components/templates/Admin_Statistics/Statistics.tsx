@@ -77,9 +77,7 @@ function Statistics() {
   return (
     <Container>
       <h4>Statistics</h4>
-      {statistics && statistics.clients.length > 0 && (
-        <Chart data={dataStats} options={optionsDoughnut} />
-      )}
+      {statistics && statistics.clients > 0 && <Chart data={dataStats} options={optionsDoughnut} />}
       <ContainerCardStatistics>
         {Object.entries(statistics).map((item: [string, any], i) => (
           // eslint-disable-next-line react/no-array-index-key
