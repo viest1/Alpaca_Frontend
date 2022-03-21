@@ -49,10 +49,10 @@ function App(): JSX.Element {
         setMessageDisplayed(false);
       }
       // If token exist check whether the token is close to expiration ( < 30s )
-      if (userData.token && !messageDisplay) {
+      if (userData.token) {
         interval = setInterval(() => {
           // If yes then Display Message About It
-          if (+userData.exp - Date.now() < 30000) {
+          if (+userData.exp - Date.now() < 30000 && !messageDisplay) {
             handleError('For Your Safety We Will Logout You in a 30 seconds :)');
             setMessageDisplayed(true);
           }

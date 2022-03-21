@@ -1,17 +1,36 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 /* import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel'; */
+import { FaMicrophone } from 'react-icons/fa';
 import Input from '../../atoms/Input/Input';
 import useForm from '../../../hooks/useForm';
 import { Context } from '../../../providers/GeneralProvider';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
+
+declare global {
+  interface Window {
+    SpeechRecognition: any;
+    webkitSpeechRecognition: any;
+  }
+}
 
 const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
+`;
+
+const ContainerMicrophone = styled.div`
+  position: absolute;
+  top: 0;
+  right: 4px;
+  color: black;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
 `;
 
 const ContainerFilteredList = styled.div<{ top: string | undefined }>`
@@ -49,8 +68,9 @@ interface SearchBarI {
 }
 
 function SearchBar({ top }: SearchBarI) {
-  const { handleChange, inputs, clearForm } = useForm();
+  const { handleChange, inputs, clearForm, setInputs } = useForm();
   const { clientsGlobal } = useContext(Context);
+  const [isSpeeching, setIsSpeeching] = useState(false);
   const navigate = useNavigate();
   const handleNavigateToClient = (id: string) => {
     navigate(`/client/${id}`);
@@ -58,6 +78,31 @@ function SearchBar({ top }: SearchBarI) {
   };
   const ref = useRef(null);
   useOnClickOutside(ref, clearForm);
+
+  const handleSpeech = () => {
+    setIsSpeeching(true);
+    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition; // webkitSpeechRecognition for Chrome and SpeechRecognition for FF
+    const recognition = new window.SpeechRecognition();
+    recognition.onresult = (event: any) => {
+      // SpeechRecognitionEvent type
+      const speechToText = event.results[0][0].transcript;
+      setInputs({
+        ...inputs,
+        searchBar: speechToText
+      });
+      setIsSpeeching(false);
+    };
+    recognition.onspeechend = function () {
+      setIsSpeeching(false);
+      recognition.stop();
+    };
+    recognition.onerror = function () {
+      setIsSpeeching(false);
+      recognition.stop();
+    };
+    recognition.start();
+  };
+
   return (
     <Container ref={ref}>
       <Input
@@ -66,8 +111,11 @@ function SearchBar({ top }: SearchBarI) {
         name="searchBar"
         value={inputs.searchBar}
         onChange={handleChange}
-        placeholder="Search"
+        placeholder={isSpeeching ? 'Speak Now' : 'Search'}
       />
+      <ContainerMicrophone>
+        <FaMicrophone fontSize={20} onClick={handleSpeech} />
+      </ContainerMicrophone>
       {clientsGlobal && inputs.searchBar && (
         <ContainerFilteredList top={top}>
           {clientsGlobal.filter((item: any) =>
