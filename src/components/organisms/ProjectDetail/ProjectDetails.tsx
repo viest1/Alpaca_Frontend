@@ -41,6 +41,7 @@ const ProjectInvoicesFiles = styled.div`
 `;
 const ServicesInvoice = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   }
@@ -79,9 +80,9 @@ const ModalBackground = styled.div`
   height: 30vh;
   background-color: ${({ theme }) => theme.color.main8};
   position: absolute;
-  left: 3rem;
+  left: -3rem;
   display: flex;
-  border: 10px solid pink;
+  //border: 10px solid pink;
 `;
 const ModalContainer = styled.div`
   display: flex;
