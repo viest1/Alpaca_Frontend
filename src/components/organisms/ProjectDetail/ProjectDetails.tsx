@@ -255,7 +255,7 @@ function ProjectDetail() {
       if (res.status === 200) {
         setProject(resJSON);
       } else {
-        handleError(resJSON.message);
+        handleError();
       }
     } catch (error: any) {
       console.log('FETCHING ERROR', error);
@@ -305,10 +305,10 @@ function ProjectDetail() {
 
   // Total of the services
   console.log(`This is the project`, project.services);
-  const projectServices = project.services;
+  // const projectServices = project.services;
 
-  const total = projectServices?.reduce((a: any, v: any) => a + +v.price, 0);
-  console.log(`This is the total`, total);
+  // const total = projectServices?.reduce((a: any, v: any) => a + +v.price, 0);
+  // console.log(`This is the total`, total);
 
   if (isLoading) return <LoadingSpin />;
   return (
@@ -344,18 +344,19 @@ function ProjectDetail() {
             </ServicesInvoice>
             <PricesInvoice>
               <h4>Price</h4>
-              {project.services.map((item: any, index: number) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <div key={index}>
-                  <p>{item.price} €</p>
-                </div>
-              ))}
+              {project.services.length > 0 &&
+                project.services.map((item: any, index: number) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <div key={index}>
+                    <p>{item.price} €</p>
+                  </div>
+                ))}
             </PricesInvoice>
           </ProjectInvoicesFiles>
           <LabelTotal>
             Total:<span> </span>
             <TotalNumber />
-            {total} € <span />
+            {50} € <span />
           </LabelTotal>
         </Container>
       ) : (
@@ -457,7 +458,7 @@ function ProjectDetail() {
               <LabelTotalDesktop>
                 Total:<span> </span>
                 <TotalNumber />
-                {total} € <span />
+                {50} € <span />
               </LabelTotalDesktop>
             </Total>
             <Line />

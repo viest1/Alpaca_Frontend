@@ -235,11 +235,11 @@ function CardDetails({ projectData }: Project) {
                       />
                       <DetailsElement>
                         <span>Staring</span>
-                        <p>{projectData?.startDate.substring(0, 15)}</p>
+                        <p>{projectData?.startDate?.substring(0, 15)}</p>
                       </DetailsElement>
                       <DetailsElement>
                         <span>Due Date</span>
-                        <p>{projectData?.updatedAt.substring(0, 10)}</p>
+                        <p>{projectData?.updatedAt?.substring(0, 10)}</p>
                       </DetailsElement>
                     </TitleAndPictureDesktop>
                     <ContainerDetailsElement>

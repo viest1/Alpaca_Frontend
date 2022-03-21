@@ -31,6 +31,7 @@ import { useAuth } from '../hooks/useAuth';
 import useError from '../hooks/useError';
 import FAQs from '../components/molecules/FAQs/FAQs';
 import EditProject from '../components/organisms/EditProject/EditProject';
+import Page404 from '../components/templates/Page404/Page404';
 
 function App(): JSX.Element {
   const { userData, setMessages, setUserData, setClientsGlobal } = useContext(Context);
@@ -248,6 +249,7 @@ function App(): JSX.Element {
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/faq" element={<FAQs />} />
+          <Route path="/*" element={<Page404 />} />
         </Routes>
       </MainContainerApp>
     </ThemeProvider>
