@@ -23,6 +23,11 @@ const ContainerFilterBy = styled.div`
     display: flex;
     align-items: center;
   }
+
+  .filter {
+    margin-left: 11rem;
+  }
+
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     padding: 0 2rem;
   }
@@ -67,7 +72,11 @@ const ContainerProjects = styled.div`
 `;
 
 const H3 = styled.h3`
-  text-align: center;
+  text-align: left;
+  font-weight: 400;
+  margin-left: 10rem;
+  color: ${({ theme }) => theme.color.main2};
+  text-shadow: 1px 2px 1px #ffffff;
 `;
 
 function ClientsOrProjects() {
@@ -144,7 +153,7 @@ function ClientsOrProjects() {
     <div>
       <H3>Clients/Projects</H3>
       <ContainerFilterBy>
-        <div>
+        <div className="filter">
           <p>Filter by:</p>
           <InputWithLabel
             type="radio"
@@ -167,16 +176,16 @@ function ClientsOrProjects() {
         </div>
         <div>
           <IconClickable icon={<BsThreeDots fontSize={28} />}>
-            <div
-              style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '1rem' }}
-            >
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <Button
-                whiteMenu
+                dropMenu
                 text="Create New Client"
-                width="180px"
+                width="150px"
                 fontSize="1rem"
-                padding="0.5rem 1rem"
+                padding="0.1rem 1rem"
                 onClick={handleNavigateToCreateNewClient}
+                color="white"
+                border="1px solid #e76f51"
               />
             </div>
           </IconClickable>
