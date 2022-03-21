@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { BsThreeDots } from 'react-icons/bs';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import IconClickable from '../../atoms/IconClickable/IconClickable';
-import Button from '../../atoms/Button/Button';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import { Context } from '../../../providers/GeneralProvider';
 /* import CardClient from '../../molecules/CardClient/CardClient';
@@ -12,20 +9,20 @@ import useError from '../../../hooks/useError';
 import NoItemsFound from '../../atoms/NoItemsFound/NoItemsFound';
 import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
 import CardProfile from '../../molecules/CardProfile/CardProfile';
+import PageHead from '../../molecules/PageHead/PageHead';
 
 const ContainerFilterBy = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 1rem;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  /* border-top: 1px solid black;
+  border-bottom: 1px solid black; */
   > div:first-child {
     display: flex;
     align-items: center;
   }
 
   .filter {
-    margin-left: 11rem;
   }
 
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
@@ -71,12 +68,12 @@ const ContainerProjects = styled.div`
   border-radius: 1rem;
 `;
 
-const H3 = styled.h3`
-  text-align: left;
-  font-weight: 400;
-  margin-left: 10rem;
-  color: ${({ theme }) => theme.color.main2};
-  text-shadow: 1px 2px 1px #ffffff;
+const Wrap = styled.div`
+  /* border: 2px solid red; */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
 `;
 
 function ClientsOrProjects() {
@@ -148,49 +145,45 @@ function ClientsOrProjects() {
     navigate('/newClient');
   };
 
+  const pageHeadInfo = [
+    {
+      id: 1,
+      titleOfPage: 'Clients & Projects',
+      threeDotButton: {
+        button1: 'New Project',
+        onClickEvent: handleNavigateToCreateNewClient
+      }
+    }
+  ];
+
   if (isLoading) return <LoadingSpin />;
   return (
-    <div>
-      <H3>Clients/Projects</H3>
-      <ContainerFilterBy>
-        <div className="filter">
-          <p>Filter by:</p>
-          <InputWithLabel
-            type="radio"
-            label="Projects"
-            name="chooseType"
-            onChange={handleChangeRadio}
-            value="projects"
-            id="projects"
-            checked={choiceRadio === 'projects'}
-          />
-          <InputWithLabel
-            type="radio"
-            label="Clients"
-            name="chooseType"
-            value="clients"
-            id="clients"
-            onChange={handleChangeRadio}
-            checked={choiceRadio === 'clients'}
-          />
-        </div>
-        <div>
-          <IconClickable icon={<BsThreeDots fontSize={28} />}>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <Button
-                dropMenu
-                text="Create New Client"
-                width="150px"
-                fontSize="1rem"
-                padding="0.1rem 1rem"
-                onClick={handleNavigateToCreateNewClient}
-                color="white"
-                border="1px solid #e76f51"
-              />
-            </div>
-          </IconClickable>
-        </div>
-      </ContainerFilterBy>
+    <Wrap>
+      <PageHead pageHeadInfo={pageHeadInfo}>
+        <ContainerFilterBy>
+          <div className="filter">
+            <p>Filter by:</p>
+            <InputWithLabel
+              type="radio"
+              label="Projects"
+              name="chooseType"
+              onChange={handleChangeRadio}
+              value="projects"
+              id="projects"
+              checked={choiceRadio === 'projects'}
+            />
+            <InputWithLabel
+              type="radio"
+              label="Clients"
+              name="chooseType"
+              value="clients"
+              id="clients"
+              onChange={handleChangeRadio}
+              checked={choiceRadio === 'clients'}
+            />
+          </div>
+        </ContainerFilterBy>
+      </PageHead>
       {choiceRadio === 'projects' ? (
         <ContainerProjects>
           {projects.length ? (
@@ -212,7 +205,7 @@ function ClientsOrProjects() {
           )}
         </ContainerClients>
       )}
-    </div>
+    </Wrap>
   );
 }
 
