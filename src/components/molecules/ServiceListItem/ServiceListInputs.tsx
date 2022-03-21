@@ -167,7 +167,7 @@ function ServiceListItem({ serviceList, setServiceList, handleServiceAdd }: any)
                     <CgPlayListAdd size={30} onClick={handleServiceAdd} />
                   </IconBox>
                 )}
-                {serviceList.length > 0 && (
+                {serviceList.length > 1 && (
                   <IconBox>
                     <CgRemove size={20} onClick={() => handleServiceRemove(index)} />
                   </IconBox>
