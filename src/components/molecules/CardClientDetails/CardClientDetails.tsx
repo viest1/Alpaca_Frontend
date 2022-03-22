@@ -16,6 +16,7 @@ const Container = styled.div`
   margin-top: 3rem;
   padding: 1rem 4rem;
   border: 1px solid ${({ theme }) => theme.color.main2};
+  box-shadow:${({ theme }) => theme.boxShadow.mainShadow};
   border-radius: 0.6rem;
   background-color: ${({ theme }) => theme.color.main1};
   }
@@ -55,6 +56,7 @@ const ContainerDesktop = styled.div`
   padding: 2rem 3rem;
   margin-bottom: 2rem;
   border: 1px solid ${({ theme }) => theme.color.main2};
+  box-shadow:${({ theme }) => theme.boxShadow.mainShadow};
   border-radius: 0.6rem;
   background-color: ${({ theme }) => theme.color.main1};
   }

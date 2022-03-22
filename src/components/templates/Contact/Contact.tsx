@@ -51,6 +51,7 @@ const FormContainer = styled.form`
   max-width: 600px;
   flex-grow: 2;
   border: solid 3px black;
+  box-shadow:${({ theme }) => theme.boxShadow.mainShadow};
   border-radius: 10px;
   background: black;
 

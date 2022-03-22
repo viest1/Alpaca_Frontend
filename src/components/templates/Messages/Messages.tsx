@@ -34,11 +34,14 @@ const Form = styled.form`
   align-content: space-between;
   justify-content: space-between;
   flex-direction: column;
+  //border: 10px solid purple;
+
   > div:first-child {
     position: relative;
     width: 100%;
   }
   > div:last-child {
+
     width: 100%;
   }
 `;
@@ -46,6 +49,7 @@ const Form = styled.form`
 const ContainerContactListAndMessages = styled.div`
   display: flex;
   border: 2px solid #1f313e;
+  box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
   //margin: 0 auto;
   justify-content: space-between;
   ${({ theme }) => theme.up(theme.breakpoint.sm)} {

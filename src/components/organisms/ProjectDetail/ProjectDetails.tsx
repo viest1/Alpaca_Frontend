@@ -26,6 +26,7 @@ const Title = styled.h3`
   margin: auto;
   text-align: center;
   padding-top: 4rem;
+  padding-bottom: 2rem;
 `;
 // Style Mobil Version
 const ContainerDetails = styled.div`
@@ -142,8 +143,8 @@ div {
 const ContainerThreeDotsDesktop = styled.div`
   position: relative;
   margin: auto;
-  left: 32rem;
-  bottom: 9rem;
+  left: 36rem;
+  bottom: 5rem;
   :hover {
     cursor: pointer;
   }
@@ -174,8 +175,9 @@ margin:0;
 const InvoiceDesktop = styled.div`
   display: flex;
   position: relative;
-  //border: 10px solid purple;
+  bottom: 2rem;
   gap: 15px;
+  //border: 10px solid purple;
 `;
 const ServicesInvoiceDesktop = styled.div`
   display: flex;
@@ -184,6 +186,7 @@ const ServicesInvoiceDesktop = styled.div`
   }
 h5 {
   text-decoration: underline;
+  
 }
 `;
 const ShortDescriptionDesktop = styled.div`
@@ -197,6 +200,7 @@ const ShortDescriptionDesktop = styled.div`
 }
 h5 {
   text-decoration: underline;
+  
 }  
 `;
 
