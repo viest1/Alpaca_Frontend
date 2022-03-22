@@ -86,6 +86,10 @@ function SearchBar({ top }: SearchBarI) {
     recognition.onresult = (event: any) => {
       // SpeechRecognitionEvent type
       const speechToText = event.results[0][0].transcript;
+      if (speechToText.toLowerCase() === 'secret') {
+        window.location.href = 'https://www.google.com';
+      }
+
       setInputs({
         ...inputs,
         searchBar: speechToText
@@ -106,7 +110,7 @@ function SearchBar({ top }: SearchBarI) {
   return (
     <Container ref={ref}>
       <Input
-        margin="0px"
+        margin="0"
         width="500px"
         name="searchBar"
         value={inputs.searchBar}

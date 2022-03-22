@@ -158,7 +158,7 @@ const ContainerForm = styled.div<ContainerProp>`
     color: black;
     width: 100%;
     letter-spacing: 1px;
-    margin-bottom: 1rem;
+    margin-bottom: ${({ margin }) => margin} || '1rem';
 
     &:focus {
       border-bottom: 2px solid #e76f51;

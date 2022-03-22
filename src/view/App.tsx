@@ -29,7 +29,7 @@ import NewProject from '../components/templates/Admin_NewProject/NewProject';
 import Impressum from '../components/templates/Impressum/Impressum';
 import { useAuth } from '../hooks/useAuth';
 import useError from '../hooks/useError';
-import FAQs from '../components/molecules/FAQs/FAQs';
+import { Faq } from '../components/molecules/FAQs/FAQs';
 import EditProject from '../components/organisms/EditProject/EditProject';
 import Page404 from '../components/templates/Page404/Page404';
 
@@ -248,7 +248,7 @@ function App(): JSX.Element {
           <Route path="/services" element={<Services />} />
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/impressum" element={<Impressum />} />
-          <Route path="/faq" element={<FAQs />} />
+          <Route path="/faq" element={<Faq />} />
           <Route path="/*" element={<Page404 />} />
         </Routes>
       </MainContainerApp>
