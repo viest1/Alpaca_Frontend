@@ -309,10 +309,10 @@ function ProjectDetail() {
 
   // Total of the services
   console.log(`This is the project`, project.services);
-  // const projectServices = project.services;
+  const projectServices = project.services;
 
-  // const total = projectServices?.reduce((a: any, v: any) => a + +v.price, 0);
-  // console.log(`This is the total`, total);
+  const total = projectServices?.reduce((a: any, v: any) => a + +v.price, 0);
+  console.log(`This is the total`, total);
 
   if (isLoading) return <LoadingSpin />;
   return (
@@ -360,7 +360,7 @@ function ProjectDetail() {
           <LabelTotal>
             Total:<span> </span>
             <TotalNumber />
-            {50} € <span />
+            {total} € <span />
           </LabelTotal>
         </Container>
       ) : (
@@ -462,7 +462,7 @@ function ProjectDetail() {
               <LabelTotalDesktop>
                 Total:<span> </span>
                 <TotalNumber />
-                {50} € <span />
+                {total} € <span />
               </LabelTotalDesktop>
             </Total>
             <Line />
