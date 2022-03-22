@@ -38,11 +38,7 @@ const FormContainer = styled.form`
   }
 `;
 const ContainerDiv = styled.div`
-  box-shadow: 0px 0.1px 0.1px rgba(0, 0, 0, 0.063), 0px 0.1px 0.3px rgba(0, 0, 0, 0.119),
-    0px 0.2px 0.7px rgba(0, 0, 0, 0.17), 0px 0.3px 1.2px rgba(0, 0, 0, 0.216),
-    0px 0.5px 2px rgba(0, 0, 0, 0.259), 0px 0.7px 3.2px rgba(0, 0, 0, 0.296),
-    0px 1px 4.9px rgba(0, 0, 0, 0.326), 0px 1.5px 7.9px rgba(0, 0, 0, 0.348),
-    0px 2.3px 13.6px rgba(0, 0, 0, 0.356), 0px 4px 27px rgba(0, 0, 0, 0.34);
+  box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
 
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     background: ${({ theme }) => theme.color.main1};

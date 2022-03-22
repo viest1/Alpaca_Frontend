@@ -12,11 +12,11 @@ import IconClickable from '../../atoms/IconClickable/IconClickable';
 import useError from '../../../hooks/useError';
 
 const PageContainer = styled.div`
-  /* border: 2px solid red; */
+  //border: 2px solid red;
 `;
 
 const FormContainer = styled.form`
-  /* border: 5px solid black; */
+  //
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 70px 2fr 70px;
@@ -27,7 +27,7 @@ const FormContainer = styled.form`
 `;
 
 const Table = styled.div`
-  /* border: 2px solid black;  */
+  //border: 2px solid black; 
   grid-column:1 / span 3;
   display: flex;
   justify-content:space-between;
@@ -85,6 +85,7 @@ const LeftContainer = styled.div`
   column-gap: 10px;
   border-radius: 10px;
   border: 3px solid black;
+  box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
 
   .left {
     /* border: 5px solid yellow; */

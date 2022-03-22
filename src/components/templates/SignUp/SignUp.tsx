@@ -55,6 +55,7 @@ const ContainerDiv = styled.div`
     padding: 2rem 3rem;
     min-height: 500px;
     border: 2px solid black;
+    box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
     border-radius: 0.6rem;
   }
 `;

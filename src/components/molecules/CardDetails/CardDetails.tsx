@@ -17,6 +17,7 @@ const Container = styled.div`
   padding: 1rem 4rem;
   border: 1px solid ${({ theme }) => theme.color.main2};
   border-radius: 0.6rem;
+  box-shadow:${({ theme }) => theme.boxShadow.mainShadow};
   background-color: ${({ theme }) => theme.color.main1};
   }
   span {
@@ -56,6 +57,7 @@ const ContainerDesktop = styled.div`
   align-items: center;
   gap: 1rem;
   border: 1px solid ${({ theme }) => theme.color.main2};
+  box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
   border-radius: 0.6rem;
   background-color: ${({ theme }) => theme.color.main1};
 
@@ -65,6 +67,11 @@ const ContainerDesktop = styled.div`
     @media (max-width: 1142px) {
        {
         font-size: 15px;
+      }
+    }
+    @media (max-width: 1079px) {
+       {
+        font-size: 12px;
       }
     }
   }
