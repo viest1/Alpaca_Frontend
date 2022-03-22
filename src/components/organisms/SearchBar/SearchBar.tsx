@@ -110,7 +110,7 @@ function SearchBar({ top }: SearchBarI) {
   return (
     <Container ref={ref}>
       <Input
-        margin="0px"
+        margin="0"
         width="500px"
         name="searchBar"
         value={inputs.searchBar}

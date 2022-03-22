@@ -76,36 +76,43 @@ const ContactList = styled.div`
   padding: 0 0 3rem 0;
   overflow: auto;
   overscroll-behavior: contain;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
 `;
 
 const Contact = styled.div`
   display: flex;
   align-items: center;
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-  gap: 0.6rem;
+  padding: 1rem;
+  gap: 2rem;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
   > div:first-child {
     min-width: 40px;
   }
   p {
     font-weight: normal;
+    font-size: ${({ theme }) => theme.fontSizeOpenSans.m};
   }
   p:last-child {
     font-weight: normal;
   }
   > div:last-child {
-    border-bottom: 1px solid grey;
+    /* border-bottom: 1px solid grey; */
     width: 100%;
   }
   &:hover {
     cursor: pointer;
-    background: ${({ theme }) => theme.color.main5};
+    background: ${({ theme }) => theme.color.main9};
   }
 `;
 
 const ContainerFixed = styled.div`
   position: fixed;
-  bottom: 0;
-  right: 1rem;
+  bottom: 0px;
+  right: 15rem;
   z-index: 999;
   display: flex;
   gap: 1rem;
@@ -118,7 +125,6 @@ const ChatBox = styled.div`
   min-height: 50px;
   min-width: 200px;
   //padding: 0 0.5rem;
-  background: ${({ theme }) => theme.color.main4};
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
   display: flex;
@@ -134,9 +140,10 @@ const ChatBox = styled.div`
     border-bottom: 1px solid grey;
     border-top-left-radius: 0.6rem;
     border-top-right-radius: 0.6rem;
+
     &:hover {
       cursor: pointer;
-      background: ${({ theme }) => theme.color.main5};
+      background: ${({ theme }) => theme.color.main7};
     }
   }
 
@@ -182,7 +189,7 @@ const ChatBoxSmall = styled.div`
   height: 50px;
   min-width: 200px;
   padding: 0 0.5rem;
-  background: ${({ theme }) => theme.color.main4};
+  background: ${({ theme }) => theme.color.main2};
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
   display: flex;
@@ -202,21 +209,33 @@ const ChatBoxSmall = styled.div`
   }
   &:hover {
     cursor: pointer;
-    background: ${({ theme }) => theme.color.main5};
+    background: ${({ theme }) => theme.color.main7};
   }
 `;
 
 const Container = styled.div`
   height: 50px;
-  min-width: 200px;
+  min-width: 250px;
   padding: 0 0.5rem;
-  background: ${({ theme }) => theme.color.main4};
+  color: white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  background: ${({ theme }) => theme.color.main2};
   display: flex;
   align-items: center;
   justify-content: space-around;
   gap: 0.6rem;
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
+  box-shadow: 0px 0px 0.1px rgba(0, 0, 0, 0.024), 0px 0px 0.3px rgba(0, 0, 0, 0.045),
+    0px 0px 0.7px rgba(0, 0, 0, 0.065), 0px 0px 1.2px rgba(0, 0, 0, 0.083),
+    0px 0px 2px rgba(0, 0, 0, 0.099), 0px 0px 3.2px rgba(0, 0, 0, 0.113),
+    0px 0px 4.9px rgba(0, 0, 0, 0.125), 0px 0px 7.9px rgba(0, 0, 0, 0.133),
+    0px 0px 13.6px rgba(0, 0, 0, 0.136), 0px 0px 27px rgba(0, 0, 0, 0.13);
+
   ${({ theme }) => theme.down(theme.breakpoint.m)} {
     width: 40px;
     height: 40px;
@@ -227,7 +246,7 @@ const Container = styled.div`
   }
   &:hover {
     cursor: pointer;
-    background: ${({ theme }) => theme.color.main5};
+    background: ${({ theme }) => theme.color.main7};
     // ${({ theme }) => theme.down(theme.breakpoint.m)} {
     //   background: none;
     // }
@@ -236,22 +255,31 @@ const Container = styled.div`
 
 const ContainerOpenContactList = styled.div`
   > div:first-child {
+    border: 2px solid red;
     display: flex;
-    gap: 0.6rem;
+    padding: 1rem;
+    gap: 2rem;
     align-items: center;
     font-weight: bold;
+    font-size: ${({ theme }) => theme.fontSizeInter.ms};
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 70px;
     border-bottom: 1px solid grey;
-    padding: 0.3rem 0.5rem;
     border-top-left-radius: 0.6rem;
     border-top-right-radius: 0.6rem;
+    background: ${({ theme }) => theme.color.main2};
     &:hover {
       cursor: pointer;
-      background: ${({ theme }) => theme.color.main5};
+      background: ${({ theme }) => theme.color.main7};
     }
   }
+  color: white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
   height: 80vh;
-  min-width: 200px;
-  background: ${({ theme }) => theme.color.main4};
+  min-width: 250px;
+  background: ${({ theme }) => theme.color.main7};
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
 `;
