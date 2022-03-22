@@ -52,16 +52,17 @@ const Data = styled.div`
   }
 `;
 const Stats = styled.div`
+  //border: 2px solid red;
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
-    width: 32%;
+    width: 20%;
   }
 `;
 const ContainerDataAndStats = styled.div`
-  /* border: 2px solid red; */
+  border: 2px solid red;
   display: flex;
   flex-direction: column;
   align-content: center;
-  width: 100%;
+  justify-content: center;
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     display: flex;
     width: 100%;
@@ -200,6 +201,7 @@ function AdminDashboard() {
       <PageHead pageHeadInfo={PageHeadInfo} />
       <ContainerDataAndStats>
         <Data>
+          <TitleWithLines text="Recent Clients" />
           <ContainerClients>
             {clients.length ? (
               clients.map((item: any) => (

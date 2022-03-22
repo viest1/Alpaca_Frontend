@@ -34,6 +34,7 @@ const ThreeDotMenu = styled.div`
   justify-content: space-between;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+  align-items: center;
 `;
 
 interface Head {

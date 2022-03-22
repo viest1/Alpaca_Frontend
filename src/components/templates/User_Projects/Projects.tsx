@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import GlobalMessage from '../../organisms/GlobalMessage/GlobalMessage';
 import TitleWithLines from '../../atoms/TitleWithLines/TitleWithLines';
-import CardProject from '../../molecules/CardProject/CardProject';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
 import NoItemsFound from '../../atoms/NoItemsFound/NoItemsFound';
 import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
+import PageHead from '../../molecules/PageHead/PageHead';
+import CardProfile from '../../molecules/CardProfile/CardProfile';
 
 const Container = styled.div`
   padding: 1rem;
@@ -84,16 +85,26 @@ function Projects() {
     fetchProjects();
   }, []);
 
+  const PageHeadInfo = [
+    {
+      id: 1,
+      titleOfPage: 'My Projects',
+      threeDotButton: {
+        button1: 'New Project',
+        onClickEvent: 'no action'
+      }
+    }
+  ];
+
   if (isLoading) return <LoadingSpin />;
   return (
     <Container>
-      <h3>My Projects</h3>
-      <TitleWithLines text="All Projects" />
+      <PageHead pageHeadInfo={PageHeadInfo} /> <TitleWithLines text="All Projects" />
       <ContainerProjects>
         {projects.length ? (
           projects.map((item, i) => (
             // eslint-disable-next-line react/no-array-index-key
-            <CardProject key={i} projectData={item} />
+            <CardProfile key={i} projectData={item} />
           ))
         ) : (
           <NoItemsFound text="Projects" />

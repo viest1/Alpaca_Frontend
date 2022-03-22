@@ -146,6 +146,33 @@ const Container = styled.div<ContainerProp>`
   }
 `;
 
+const ContainerForm = styled.div<ContainerProp>`
+  input {
+    background: ${({ theme }) => theme.color.main1};
+    border: none;
+    border-bottom: 2px solid #001523;
+    font-size: 1em;
+    height: 40px;
+    transition: border-color 0.3s;
+    font: 15px/24px 'Open Sans', sans-serif;
+    color: black;
+    width: 100%;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+
+    &:focus {
+      border-bottom: 2px solid #e76f51;
+      outline: none;
+      background: white;
+    }
+  }
+
+  label {
+    font-family: 'Inter';
+    font-weight: 500;
+  }
+`;
+
 interface FormInput {
   name: string;
   placeholder?: string | undefined;
@@ -161,6 +188,7 @@ interface FormInput {
   border?: string;
   id?: string;
   label?: string | undefined | any;
+  form?: boolean;
 }
 function Input({
   name,
@@ -176,7 +204,8 @@ function Input({
   multiple,
   border,
   label,
-  id
+  id,
+  form
 }: FormInput) {
   const [inputName, setInputName] = useState('undefined');
   const getValue = (e: any) => {
@@ -188,34 +217,65 @@ function Input({
 
   return (
     <div>
-      <Container
-        value={value}
-        label={label}
-        inputName={inputName}
-        color={color}
-        width={width}
-        height={height}
-        margin={margin}
-        border={border}
-      >
-        <input
-          className="effect"
-          type={type}
-          name={name}
-          placeholder={placeholder}
-          id={name}
-          value={value}
-          required={required}
-          onChange={onChange}
-          multiple={multiple}
-          onBlur={getValue}
-        />
-        {label === inputName && <label htmlFor={id || name}>{label}</label>}
-        <span className="focus-border">
-          <i />
-        </span>
-        <span className="focus-bg" />
-      </Container>
+      {!form ? (
+        <div>
+          <Container
+            value={value}
+            label={label}
+            inputName={inputName}
+            color={color}
+            width={width}
+            height={height}
+            margin={margin}
+            border={border}
+          >
+            <input
+              className="effect"
+              type={type}
+              name={name}
+              placeholder={placeholder}
+              id={name}
+              value={value}
+              required={required}
+              onChange={onChange}
+              multiple={multiple}
+              onBlur={getValue}
+            />
+            {label === inputName && <label htmlFor={id || name}>{label}</label>}
+            <span className="focus-border">
+              <i />
+            </span>
+            <span className="focus-bg" />
+          </Container>
+        </div>
+      ) : (
+        <div>
+          <ContainerForm
+            value={value}
+            label={label}
+            inputName={inputName}
+            color={color}
+            width={width}
+            height={height}
+            margin={margin}
+            border={border}
+          >
+            <label htmlFor={id || name}>{label}</label>
+            <input
+              className="effect"
+              type={type}
+              name={name}
+              placeholder={placeholder}
+              id={name}
+              value={value}
+              required={required}
+              onChange={onChange}
+              multiple={multiple}
+              onBlur={getValue}
+            />
+          </ContainerForm>
+        </div>
+      )}
     </div>
   );
 }
@@ -232,7 +292,8 @@ Input.defaultProps = {
   multiple: false,
   border: undefined,
   id: undefined,
-  label: undefined
+  label: undefined,
+  form: true
 };
 
 export default Input;

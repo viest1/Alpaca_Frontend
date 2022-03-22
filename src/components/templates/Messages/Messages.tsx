@@ -11,6 +11,10 @@ import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
 import PageHead from '../../molecules/PageHead/PageHead';
 import Input from '../../atoms/Input/Input';
 
+interface Props {
+  selected?: any;
+}
+
 const Container = styled.div`
   padding: 1rem 0;
   display: flex;
@@ -38,7 +42,7 @@ const Form = styled.form`
 
 const ContainerContactListAndMessages = styled.div`
   display: flex;
-  //border: 2px solid #e76f51;
+  border: 2px solid #1f313e;
   //margin: 0 auto;
   justify-content: space-between;
   ${({ theme }) => theme.up(theme.breakpoint.sm)} {
@@ -56,6 +60,7 @@ const ContactList = styled.div`
   overscroll-behavior: contain;
   // TODO Not good - to FIX
   max-height: 566px;
+
   ${({ theme }) => theme.down(theme.breakpoint.sm)} {
     min-width: 50px;
     max-width: 50px;
@@ -65,13 +70,14 @@ const ContactList = styled.div`
 const WrapperBoxMessage = styled.div`
   width: auto;
   min-width: auto;
+  //border: 2px solid red;
   ${({ theme }) => theme.down(theme.breakpoint.sm)} {
     width: 100%;
     min-width: 300px;
   }
 `;
 
-const Contact = styled.div`
+const Contact = styled.div<Props>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,6 +87,7 @@ const Contact = styled.div`
   transition: 0.3s;
   background: #001523;
   color: white;
+
   &:hover {
     cursor: pointer;
     color: ${({ theme }) => theme.color.main9};
@@ -343,7 +350,14 @@ function Messages() {
               onChange={handleChange}
               value={inputs.message}
             />
-            <Button text="Send a Message" type="submit" background="#001523" />
+            <Button
+              dropMenu
+              text="Send"
+              type="submit"
+              background="#001523"
+              color="white"
+              height="4.4rem"
+            />
           </Form>
         </WrapperBoxMessage>
       </ContainerContactListAndMessages>

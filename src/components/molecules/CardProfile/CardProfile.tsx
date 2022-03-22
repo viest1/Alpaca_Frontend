@@ -478,7 +478,7 @@ const MainContainer = styled.div`
 interface client {
   client?: boolean;
 
-  clientData:
+  clientData?:
     | {
         _id?: string;
         name: string;
@@ -490,7 +490,7 @@ interface client {
       }
     | any;
 
-  projectData:
+  projectData?:
     | {
         _id: string;
         name: string;
@@ -687,7 +687,9 @@ function CardProfile({ clientData, projectData, client }: client) {
 }
 
 CardProfile.defaultProps = {
-  client: false
+  client: false,
+  projectData: undefined,
+  clientData: undefined
 };
 
 export default CardProfile;

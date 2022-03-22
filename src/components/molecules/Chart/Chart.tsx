@@ -25,8 +25,8 @@ ChartJS.register(
 );
 
 const ContainerDoughnut = styled.div`
-  height: 300px;
-  width: 100%;
+  height: 200px;
+  //width: 100%;
   margin: 2rem auto;
 `;
 
