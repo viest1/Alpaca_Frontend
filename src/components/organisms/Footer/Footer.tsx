@@ -50,7 +50,7 @@ const MobileFooter = styled.div`
   align-items: center;
   height: 4rem;
   margin-top: 7rem;
-  width: 100vw;
+  width: 100%;
 `;
 
 const FooterRow = styled.div`

@@ -29,7 +29,7 @@ import NewProject from '../components/templates/Admin_NewProject/NewProject';
 import Impressum from '../components/templates/Impressum/Impressum';
 import { useAuth } from '../hooks/useAuth';
 import useError from '../hooks/useError';
-import FAQs from '../components/molecules/FAQs/FAQs';
+import { Faq } from '../components/molecules/FAQs/FAQs';
 import EditProject from '../components/organisms/EditProject/EditProject';
 
 function App(): JSX.Element {
@@ -226,7 +226,7 @@ function App(): JSX.Element {
             <Route path="/services" element={<Services />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/impressum" element={<Impressum />} />
-            <Route path="/faqs" element={<FAQs />} />
+            <Route path="/faqs" element={<Faq />} />
           </Routes>
         ) : token && role === 'Client' ? (
           <Routes>
@@ -239,7 +239,7 @@ function App(): JSX.Element {
             <Route path="/services" element={<Services />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/impressum" element={<Impressum />} />
-            <Route path="/faqs" element={<FAQs />} />
+            <Route path="/faqs" element={<Faq />} />
           </Routes>
         ) : (
           <Routes>
@@ -253,7 +253,7 @@ function App(): JSX.Element {
             <Route path="/forgotPassword/" element={<ForgotPassword />} />
             <Route path="/forgotPassword/:token" element={<ResetPassword />} />
             <Route path="/impressum" element={<Impressum />} />
-            <Route path="/faqs" element={<FAQs />} />
+            <Route path="/faqs" element={<Faq />} />
           </Routes>
         )}
       </MainContainerApp>
