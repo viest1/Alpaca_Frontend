@@ -3,6 +3,7 @@ import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from '
 import styled from 'styled-components';
 import { GrContact } from 'react-icons/gr';
 import { MdOutlineClose } from 'react-icons/md';
+import { FaMicrophone } from 'react-icons/fa';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
@@ -18,10 +19,13 @@ const Form = styled.form`
   align-items: flex-end;
   display: flex;
   flex-direction: column;
-  * {
+  > div:first-child {
+    position: relative;
     width: 100%;
   }
-  //border: 1px solid grey;
+  > div:last-child {
+    width: 100%;
+  }
 `;
 //
 // const WrapperMessages = styled.div`
@@ -252,6 +256,16 @@ const ContainerOpenContactList = styled.div`
   border-top-right-radius: 0.6rem;
 `;
 
+const Microphone = styled(FaMicrophone)`
+  position: absolute;
+  top: 24px;
+  right: 8px;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+`;
+
 interface Message {
   message: string;
   receiverId: string;
@@ -264,7 +278,7 @@ const initialValue: Message = {
 
 function GlobalMessage() {
   const [isOpenContactList, setIsOpenContactList] = useState(false);
-  const { inputs, handleChange, resetForm } = useForm(initialValue);
+  const { inputs, handleChange, resetForm, setInputs } = useForm(initialValue);
   const [clientMessages, setClientMessages] = useState([]);
   const [actuallyClient, setActuallyClient] = useState<any[]>([]);
   const handleOpenContactListChat = () => {
@@ -358,6 +372,22 @@ function GlobalMessage() {
 
   useOnClickOutside(containerFixed, handleCloseMessagesAndContactList);
 
+  const handleSpeech = () => {
+    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition; // webkitSpeechRecognition for Chrome and SpeechRecognition for FF
+    const recognition = new window.SpeechRecognition();
+    recognition.lang = 'en';
+    recognition.onresult = (event: any) => {
+      // SpeechRecognitionEvent type
+      const speechToText = event.results[0][0].transcript;
+      console.log(speechToText);
+      setInputs({
+        ...inputs,
+        message: `${inputs.message.trim()} ${speechToText}`
+      });
+    };
+    recognition.start();
+  };
+
   return (
     <ContainerFixed ref={containerFixed}>
       {openChatWithMessages ? (
@@ -390,13 +420,16 @@ function GlobalMessage() {
             <AlwaysScrollToBottom />
           </div>
           <Form onSubmit={handleSubmitMessage}>
-            <InputWithLabel
-              placeholder="Write a Message..."
-              name="message"
-              onChange={handleChange}
-              value={inputs.message}
-            />
-            <Button text="Send a Message" type="submit" />
+            <div>
+              <InputWithLabel
+                placeholder="Write a Message..."
+                name="message"
+                onChange={handleChange}
+                value={inputs.message}
+              />
+              <Microphone fontSize={18} onClick={handleSpeech} />
+            </div>
+            <Button text="Send a Message" type="submit" width="100%" />
           </Form>
         </ChatBox>
       ) : (

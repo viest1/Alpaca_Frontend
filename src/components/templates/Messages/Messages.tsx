@@ -1,5 +1,6 @@
 import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { FaMicrophone } from 'react-icons/fa';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
 import CardMessage from '../../molecules/CardMessage/CardMessage';
@@ -27,11 +28,13 @@ const Form = styled.form`
   align-items: flex-end;
   display: flex;
   flex-direction: column;
-
-  * {
+  > div:first-child {
+    position: relative;
     width: 100%;
   }
-  //border: 10px solid grey;
+  > div:last-child {
+    width: 100%;
+  }
 `;
 
 const ContainerContactListAndMessages = styled.div`
@@ -138,6 +141,16 @@ const H3Styled = styled.h3`
   // }
 `;
 
+const Microphone = styled(FaMicrophone)`
+  position: absolute;
+  top: 24px;
+  right: 8px;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+`;
+
 interface Message {
   message: string;
   receiverId: string;
@@ -152,7 +165,7 @@ function Messages() {
   const { messages, userData } = useContext(Context);
   const [isLoading, setIsLoading] = useState(false);
   const [clientMessages, setClientMessages] = useState([]);
-  const { inputs, handleChange, resetForm } = useForm(initialValue);
+  const { inputs, handleChange, resetForm, setInputs } = useForm(initialValue);
   const { handleError } = useError();
   const [clients, setClients] = useState<any[]>([]);
   const [actuallyClient, setActuallyClient] = useState<any[]>([]);
@@ -283,6 +296,21 @@ function Messages() {
     }
   }, [messages]);
 
+  const handleSpeech = () => {
+    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition; // webkitSpeechRecognition for Chrome and SpeechRecognition for FF
+    const recognition = new window.SpeechRecognition();
+    recognition.lang = 'en';
+    recognition.onresult = (event: any) => {
+      // SpeechRecognitionEvent type
+      const speechToText = event.results[0][0].transcript;
+      setInputs({
+        ...inputs,
+        message: `${inputs.message.trim()} ${speechToText}`
+      });
+    };
+    recognition.start();
+  };
+
   if (isLoading) return <LoadingSpin />;
 
   return (
@@ -330,13 +358,16 @@ function Messages() {
             </div>
           </WrapperMessages>
           <Form onSubmit={handleSubmitMessage}>
-            <InputWithLabel
-              placeholder="Write a Message..."
-              name="message"
-              onChange={handleChange}
-              value={inputs.message}
-            />
-            <Button text="Send a Message" type="submit" />
+            <div>
+              <InputWithLabel
+                placeholder="Write a Message..."
+                name="message"
+                onChange={handleChange}
+                value={inputs.message}
+              />
+              <Microphone fontSize={18} onClick={handleSpeech} />
+            </div>
+            <Button text="Send a Message" type="submit" width="100%" />
           </Form>
         </WrapperBoxMessage>
       </ContainerContactListAndMessages>

@@ -52,18 +52,22 @@ describe('Test Snapshots', () => {
   it('Simple Test', () => {
     expect(2 + 2).toBe(4);
   });
+
   it('<HomePage />', () => {
     const comp = renderWithThemeProvider(<HomePage />);
     expect(comp.container.firstChild).toMatchSnapshot();
   });
+
   it('<App />', () => {
     const comp = renderWithThemeProvider(<App />);
     expect(comp.container.firstChild).toMatchSnapshot();
   });
+
   it('<ClientsOrProjects />', () => {
     const comp = renderWithThemeProvider(<ClientsOrProjects />);
     expect(comp.container.firstChild).toMatchSnapshot();
   });
+
   it('<Login />', () => {
     const comp = renderWithThemeProvider(<Login />);
     fireEvent.click(screen.getByText('Login'));
