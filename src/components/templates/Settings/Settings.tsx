@@ -1,12 +1,14 @@
 import React, { SyntheticEvent, useContext, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/Button/Button';
-import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
-import useForm from '../../../hooks/useForm';
+/* import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
+ */ import useForm from '../../../hooks/useForm';
 import useError from '../../../hooks/useError';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import { Context } from '../../../providers/GeneralProvider';
 import { InputFileStyle } from '../SignUp/SignUp';
+import PageHead from '../../molecules/PageHead/PageHead';
+import Input from '../../atoms/Input/Input';
 
 declare global {
   interface Window {
@@ -20,7 +22,7 @@ const FormContainer = styled.form`
   flex-direction: column;
   gap: 1rem;
   padding: 3rem 1rem;
-  h3,
+
   h4 {
     text-align: left;
     margin: 1rem 0 0 0;
@@ -36,6 +38,12 @@ const FormContainer = styled.form`
   }
 `;
 const ContainerDiv = styled.div`
+  box-shadow: 0px 0.1px 0.1px rgba(0, 0, 0, 0.063), 0px 0.1px 0.3px rgba(0, 0, 0, 0.119),
+    0px 0.2px 0.7px rgba(0, 0, 0, 0.17), 0px 0.3px 1.2px rgba(0, 0, 0, 0.216),
+    0px 0.5px 2px rgba(0, 0, 0, 0.259), 0px 0.7px 3.2px rgba(0, 0, 0, 0.296),
+    0px 1px 4.9px rgba(0, 0, 0, 0.326), 0px 1.5px 7.9px rgba(0, 0, 0, 0.348),
+    0px 2.3px 13.6px rgba(0, 0, 0, 0.356), 0px 4px 27px rgba(0, 0, 0, 0.34);
+
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     background: ${({ theme }) => theme.color.main1};
     display: flex;
@@ -190,10 +198,21 @@ function Settings() {
   //   recognition.start();
   // }, []);
 
+  const PageHeadInfo = [
+    {
+      id: 1,
+      titleOfPage: 'Settings',
+      threeDotButton: {
+        button1: 'New Project',
+        onClickEvent: 'no action'
+      }
+    }
+  ];
+
   return (
     <FormContainer onSubmit={handleSubmitUserDataChange}>
       <div>
-        <h3>Settings</h3>
+        <PageHead pageHeadInfo={PageHeadInfo} />
         <ContainerDiv>
           <DivOne>
             <div>
@@ -214,14 +233,16 @@ function Settings() {
           </DivOne>
           <DivTwo>
             <h4>Contact Information</h4>
-            <InputWithLabel
+            <Input
+              form
               label="Name*"
               name="name"
               onChange={handleChange}
               value={inputs.name}
               required
             />
-            <InputWithLabel
+            <Input
+              form
               label="Email*"
               name="email"
               type="email"
@@ -229,14 +250,16 @@ function Settings() {
               value={inputs.email}
               required
             />
-            <InputWithLabel
+            <Input
+              form
               label="New Password"
               name="newPassword"
               type="password"
               value={inputs.newPassword}
               onChange={handleChange}
             />
-            <InputWithLabel
+            <Input
+              form
               label="Repeat New Password"
               name="newPasswordRepeated"
               type="password"
@@ -247,19 +270,22 @@ function Settings() {
           <DivThree>
             <div>
               <h4>Billing Information</h4>
-              <InputWithLabel
+              <Input
+                form
                 label="Identity Card Number"
                 name="identityCardNumber"
                 onChange={handleChange}
                 value={inputs.identityCardNumber}
               />
-              <InputWithLabel
+              <Input
+                form
                 label="Tax Number"
                 name="taxNumber"
                 onChange={handleChange}
                 value={inputs.taxNumber}
               />
-              <InputWithLabel
+              <Input
+                form
                 label="Password To Confirm Changes*"
                 name="password"
                 type="password"

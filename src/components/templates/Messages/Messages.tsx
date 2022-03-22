@@ -1,6 +1,5 @@
 import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
 import CardMessage from '../../molecules/CardMessage/CardMessage';
 import { Context } from '../../../providers/GeneralProvider';
@@ -9,6 +8,12 @@ import useError from '../../../hooks/useError';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import NoItemsFound from '../../atoms/NoItemsFound/NoItemsFound';
 import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
+import PageHead from '../../molecules/PageHead/PageHead';
+import Input from '../../atoms/Input/Input';
+
+interface Props {
+  selected?: any;
+}
 
 const Container = styled.div`
   padding: 1rem 0;
@@ -23,9 +28,10 @@ const Container = styled.div`
 `;
 
 const Form = styled.form`
-  padding: 1rem;
-  align-items: flex-end;
   display: flex;
+  align-items: flex-end;
+  align-content: space-between;
+  justify-content: space-between;
   flex-direction: column;
 
   * {
@@ -36,10 +42,9 @@ const Form = styled.form`
 
 const ContainerContactListAndMessages = styled.div`
   display: flex;
-  border: 1px solid grey;
+  border: 2px solid #1f313e;
   //margin: 0 auto;
   justify-content: space-between;
-  border-radius: 0.6rem;
   ${({ theme }) => theme.up(theme.breakpoint.sm)} {
     margin: 0 auto;
   }
@@ -47,7 +52,7 @@ const ContainerContactListAndMessages = styled.div`
 `;
 
 const ContactList = styled.div`
-  border-right: 1px solid grey;
+  border-right: 1px solid #001523;
   overflow: hidden;
   overflow-y: auto;
   min-width: 200px;
@@ -55,6 +60,7 @@ const ContactList = styled.div`
   overscroll-behavior: contain;
   // TODO Not good - to FIX
   max-height: 566px;
+
   ${({ theme }) => theme.down(theme.breakpoint.sm)} {
     min-width: 50px;
     max-width: 50px;
@@ -64,25 +70,27 @@ const ContactList = styled.div`
 const WrapperBoxMessage = styled.div`
   width: auto;
   min-width: auto;
+  //border: 2px solid red;
   ${({ theme }) => theme.down(theme.breakpoint.sm)} {
     width: 100%;
     min-width: 300px;
   }
 `;
 
-const Contact = styled.div`
+const Contact = styled.div<Props>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #eae2b7;
   padding: 0.5rem 1rem 0.5rem 1rem;
   gap: 1rem;
   transition: 0.3s;
+  background: #001523;
+  color: white;
+
   &:hover {
     cursor: pointer;
-    background: ${({ theme }) => theme.color.main3};
-    color: white;
-    border-radius: 0.6rem;
+    color: ${({ theme }) => theme.color.main9};
   }
   h5 {
     padding: 0;
@@ -125,17 +133,11 @@ const WrapperMessages = styled.div`
 `;
 
 const PContainer = styled.div`
-  background: ${({ theme }) => theme.color.main3};
+  background: ${({ theme }) => theme.color.main2};
   color: white;
   padding: 1rem;
-  border-radius: 0.5rem;
-`;
-
-const H3Styled = styled.h3`
-  display: none;
-  // ${({ theme }) => theme.up(theme.breakpoint.m)} {
-  //   display: block;
-  // }
+  font-family: 'Inter';
+  font-size: ${({ theme }) => theme.fontSizeInter.ms};
 `;
 
 interface Message {
@@ -283,15 +285,29 @@ function Messages() {
     }
   }, [messages]);
 
+  const pageHeadInfo = [
+    {
+      id: 1,
+      titleOfPage: 'Messages',
+      threeDotButton: {
+        button1: 'No Action',
+        onClickEvent: 'undefined'
+      }
+    }
+  ];
+
   if (isLoading) return <LoadingSpin />;
 
   return (
     <Container>
-      <H3Styled>Messages</H3Styled>
+      <PageHead pageHeadInfo={pageHeadInfo} />
       <ContainerContactListAndMessages>
         <ContactList>
           {clients.map((clientData: any) => (
             <Contact key={clientData._id} onClick={() => handleDisplayMessages(clientData._id)}>
+              <div>
+                <h5>{clientData.name}</h5>
+              </div>
               <RoundedPhoto
                 img={clientData.avatar}
                 alt="face"
@@ -299,9 +315,6 @@ function Messages() {
                 height="40px"
                 outline="2px solid black"
               />
-              <div>
-                <h5>{clientData.name}</h5>
-              </div>
             </Contact>
           ))}
         </ContactList>
@@ -330,13 +343,21 @@ function Messages() {
             </div>
           </WrapperMessages>
           <Form onSubmit={handleSubmitMessage}>
-            <InputWithLabel
+            <Input
+              margin="50px 0 0.1rem 0"
               placeholder="Write a Message..."
               name="message"
               onChange={handleChange}
               value={inputs.message}
             />
-            <Button text="Send a Message" type="submit" />
+            <Button
+              dropMenu
+              text="Send"
+              type="submit"
+              background="#001523"
+              color="white"
+              height="4.4rem"
+            />
           </Form>
         </WrapperBoxMessage>
       </ContainerContactListAndMessages>
