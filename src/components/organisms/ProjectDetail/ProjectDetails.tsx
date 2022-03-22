@@ -13,6 +13,7 @@ import IconClickable from '../../atoms/IconClickable/IconClickable';
 import FileUploader from '../../molecules/FileUploader/FileUploader';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
+import GeneratePdf from '../../molecules/GeneratePdf/GeneratePdf';
 
 // /project/:projectId
 const Container = styled.div`
@@ -218,6 +219,8 @@ const Total = styled.div`
 `;
 const Files = styled.div`
   display: flex;
+  gap: 1rem;
+  align-items: center;
   //border: 10px solid black;
 `;
 const TotalNumber = styled.p`
@@ -467,6 +470,7 @@ function ProjectDetail() {
             <Line />
             <Files>
               <FileUploader projectId={projectId} />
+              <GeneratePdf />
             </Files>
           </ProjectInvoicesFilesDesktop>
         </ContainerDesktop>

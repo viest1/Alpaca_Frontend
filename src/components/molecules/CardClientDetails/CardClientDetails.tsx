@@ -52,10 +52,8 @@ const DetailsElement = styled.div`
 const ContainerDesktop = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: 1rem;
   padding: 2rem 3rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   border: 1px solid ${({ theme }) => theme.color.main2};
   border-radius: 0.6rem;
   background-color: ${({ theme }) => theme.color.main1};
@@ -68,8 +66,8 @@ const ContainerDesktop = styled.div`
 const ContainerThreeDotsDesktop = styled.div`
   position: relative;
   margin: auto;
-  left: 50rem;
-  bottom: 11rem;
+  left: 47rem;
+  bottom: 13rem;
   //border: 10px solid pink;
   :hover {
     cursor: pointer;
@@ -78,7 +76,6 @@ const ContainerThreeDotsDesktop = styled.div`
 const ContainerDetailDesktop = styled.div`
   display: flex;
   padding: inherit;
-  gap: 10rem;
   //border: 10px solid red;
 `;
 const TitleAndPicture = styled.div`
@@ -86,12 +83,14 @@ const TitleAndPicture = styled.div`
   flex-direction: column;
   align-items: center;
   align-content: space-around;
-  margin: auto;
+  gap: 2rem;
   //border: 10px solid green;
+  h5 {
+    margin: 0;
+  }
 `;
 const DetailsDesktop = styled.div`
   display: flex;
-  gap: 7px;
   color: ${({ theme }) => theme.color.main2};
   align-content: center;
   gap: 5rem;
@@ -99,8 +98,11 @@ const DetailsDesktop = styled.div`
 const ContactInformation = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 1rem;
   //border: 10px solid orange;
+  & :first-child {
+    //background-color: yellow;
+  }
   h4 {
     margin: auto;
   }
@@ -109,6 +111,11 @@ const BillingInformation = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
+  //border: 10px solid blue;
+  h4 {
+    margin: 0;
+  }
 `;
 interface Client {
   clientData: any;

@@ -245,7 +245,7 @@ function GeneratePdf() {
     };
     generatePdf();
   };
-  return <Button type="button" text="Generate Pdf" onClick={handleGeneratePdf} />;
+  return <Button type="button" text="Generate Pdf" width="auto" onClick={handleGeneratePdf} />;
 }
 
 export default GeneratePdf;
