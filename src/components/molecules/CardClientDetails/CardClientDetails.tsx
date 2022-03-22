@@ -66,8 +66,8 @@ const ContainerDesktop = styled.div`
 const ContainerThreeDotsDesktop = styled.div`
   position: relative;
   margin: auto;
-  left: 47rem;
-  bottom: 13rem;
+  left: 49rem;
+  bottom: 12rem;
   //border: 10px solid pink;
   :hover {
     cursor: pointer;
@@ -85,7 +85,7 @@ const TitleAndPicture = styled.div`
   align-content: space-around;
   gap: 2rem;
   //border: 10px solid green;
-  h5 {
+  h4 {
     margin: 0;
   }
 `;
@@ -98,23 +98,28 @@ const DetailsDesktop = styled.div`
 const ContactInformation = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   //border: 10px solid orange;
-  & :first-child {
-    //background-color: yellow;
+  span,
+  p {
+    margin-right: auto;
   }
   h4 {
     margin: auto;
+    margin-bottom: 1rem;
   }
 `;
 const BillingInformation = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
   //border: 10px solid blue;
+  span,
+  p {
+    margin-right: auto;
+  }
   h4 {
     margin: 0;
+    padding-left: 17px;
+    margin-bottom: 1rem;
   }
 `;
 interface Client {
@@ -242,7 +247,7 @@ function CardClientDetails({ clientData }: Client) {
                 {clientData && (
                   <DetailsDesktop>
                     <TitleAndPicture>
-                      <h5>Nomad Studio</h5>
+                      <h4>Nomad Studio</h4>
                       <RoundedPhoto
                         img={clientData?.avatar}
                         alt="avatar"
@@ -273,11 +278,11 @@ function CardClientDetails({ clientData }: Client) {
                     <BillingInformation>
                       <h4>Billing</h4>
                       <DetailsElement>
-                        <span>Id</span>
+                        <span>Id-Number</span>
                         <p>{clientData?.role}</p>
                       </DetailsElement>
                       <DetailsElement>
-                        <span>Tax Number</span>
+                        <span>Tax-Number</span>
                         <p>{clientData?.taxNumber}</p>
                       </DetailsElement>
                     </BillingInformation>
