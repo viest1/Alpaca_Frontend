@@ -13,6 +13,7 @@ import IconClickable from '../../atoms/IconClickable/IconClickable';
 import FileUploader from '../../molecules/FileUploader/FileUploader';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
+import GeneratePdf from '../../molecules/GeneratePdf/GeneratePdf';
 
 // /project/:projectId
 const Container = styled.div`
@@ -218,6 +219,8 @@ const Total = styled.div`
 `;
 const Files = styled.div`
   display: flex;
+  gap: 1rem;
+  align-items: center;
   //border: 10px solid black;
 `;
 const TotalNumber = styled.p`
@@ -306,10 +309,10 @@ function ProjectDetail() {
 
   // Total of the services
   console.log(`This is the project`, project.services);
-  // const projectServices = project.services;
+  const projectServices = project.services;
 
-  // const total = projectServices?.reduce((a: any, v: any) => a + +v.price, 0);
-  // console.log(`This is the total`, total);
+  const total = projectServices?.reduce((a: any, v: any) => a + +v.price, 0);
+  console.log(`This is the total`, total);
 
   if (isLoading) return <LoadingSpin />;
   return (
@@ -357,7 +360,7 @@ function ProjectDetail() {
           <LabelTotal>
             Total:<span> </span>
             <TotalNumber />
-            {50} € <span />
+            {total} € <span />
           </LabelTotal>
         </Container>
       ) : (
@@ -459,7 +462,7 @@ function ProjectDetail() {
               <LabelTotalDesktop>
                 Total:<span> </span>
                 <TotalNumber />
-                {50} € <span />
+                {total} € <span />
               </LabelTotalDesktop>
             </Total>
             <Line />
@@ -467,6 +470,7 @@ function ProjectDetail() {
             <Line />
             <Files>
               <FileUploader projectId={projectId} />
+              <GeneratePdf />
             </Files>
           </ProjectInvoicesFilesDesktop>
         </ContainerDesktop>
