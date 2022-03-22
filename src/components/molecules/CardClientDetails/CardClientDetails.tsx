@@ -31,7 +31,7 @@ const Container = styled.div`
 const ContainerThreeDots = styled.div`
   position: relative;
   margin: auto;
-  left: 9rem;
+  left: 8rem;
 `;
 const Details = styled.div`
   display: flex;
@@ -52,10 +52,8 @@ const DetailsElement = styled.div`
 const ContainerDesktop = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: 1rem;
   padding: 2rem 3rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   border: 1px solid ${({ theme }) => theme.color.main2};
   border-radius: 0.6rem;
   background-color: ${({ theme }) => theme.color.main1};
@@ -68,8 +66,8 @@ const ContainerDesktop = styled.div`
 const ContainerThreeDotsDesktop = styled.div`
   position: relative;
   margin: auto;
-  left: 50rem;
-  bottom: 11rem;
+  left: 49rem;
+  bottom: 12rem;
   //border: 10px solid pink;
   :hover {
     cursor: pointer;
@@ -78,7 +76,6 @@ const ContainerThreeDotsDesktop = styled.div`
 const ContainerDetailDesktop = styled.div`
   display: flex;
   padding: inherit;
-  gap: 10rem;
   //border: 10px solid red;
 `;
 const TitleAndPicture = styled.div`
@@ -86,12 +83,14 @@ const TitleAndPicture = styled.div`
   flex-direction: column;
   align-items: center;
   align-content: space-around;
-  margin: auto;
+  gap: 2rem;
   //border: 10px solid green;
+  h4 {
+    margin: 0;
+  }
 `;
 const DetailsDesktop = styled.div`
   display: flex;
-  gap: 7px;
   color: ${({ theme }) => theme.color.main2};
   align-content: center;
   gap: 5rem;
@@ -99,16 +98,29 @@ const DetailsDesktop = styled.div`
 const ContactInformation = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   //border: 10px solid orange;
+  span,
+  p {
+    margin-right: auto;
+  }
   h4 {
     margin: auto;
+    margin-bottom: 1rem;
   }
 `;
 const BillingInformation = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  //border: 10px solid blue;
+  span,
+  p {
+    margin-right: auto;
+  }
+  h4 {
+    margin: 0;
+    padding-left: 17px;
+    margin-bottom: 1rem;
+  }
 `;
 interface Client {
   clientData: any;
@@ -159,7 +171,7 @@ function CardClientDetails({ clientData }: Client) {
             {/* the problem is of the time of rendering */}
             {clientData && (
               <Details>
-                <h3>Nomad Studio</h3>
+                <h4>Nomad Studio</h4>
                 <RoundedPhoto
                   img={clientData?.avatar}
                   alt="avatar"
@@ -167,7 +179,7 @@ function CardClientDetails({ clientData }: Client) {
                   width="12rem"
                   height="12rem"
                 />
-                <h4>Contact Information</h4>
+                <h5>Contact Information</h5>
                 <DetailsElement>
                   <span>Name</span>
                   <p>{clientData?.name}</p>
@@ -184,7 +196,7 @@ function CardClientDetails({ clientData }: Client) {
                   <span>Phone number</span>
                   <p>{clientData?.name}</p>
                 </DetailsElement>
-                <h4>Billing Information</h4>
+                <h5>Billing Information</h5>
                 <DetailsElement>
                   <span>Id</span>
                   <p>{clientData?.role}</p>
@@ -235,7 +247,7 @@ function CardClientDetails({ clientData }: Client) {
                 {clientData && (
                   <DetailsDesktop>
                     <TitleAndPicture>
-                      <h5>Nomad Studio</h5>
+                      <h4>Nomad Studio</h4>
                       <RoundedPhoto
                         img={clientData?.avatar}
                         alt="avatar"
@@ -266,11 +278,11 @@ function CardClientDetails({ clientData }: Client) {
                     <BillingInformation>
                       <h4>Billing</h4>
                       <DetailsElement>
-                        <span>Id</span>
+                        <span>Id-Number</span>
                         <p>{clientData?.role}</p>
                       </DetailsElement>
                       <DetailsElement>
-                        <span>Tax Number</span>
+                        <span>Tax-Number</span>
                         <p>{clientData?.taxNumber}</p>
                       </DetailsElement>
                     </BillingInformation>
