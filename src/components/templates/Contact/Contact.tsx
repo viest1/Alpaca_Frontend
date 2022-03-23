@@ -1,11 +1,11 @@
 import React, { SyntheticEvent } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
 import { RedSpan } from '../../atoms/RedSpan/RedSpan';
 import useError from '../../../hooks/useError';
-
 import useForm from '../../../hooks/useForm';
 
 const PageContainer = styled.div`
@@ -107,19 +107,21 @@ function Contact(): JSX.Element {
 
     sendMessage();
   };
+  const { t } = useTranslation();
   return (
     <PageContainer>
       <TextContainer>
         <h2 style={{ WebkitTextStroke: '0' }}>
-          Contact Us. <br /> We appreciate <br /> <RedSpan>honest</RedSpan> feedback
+          {t('contact1')} <br /> {t('contact2')} <br /> <RedSpan>{t('contact3')}</RedSpan>
+          {t('contact4')}
         </h2>
       </TextContainer>
       <FormContainer onSubmit={handleSubmit}>
         {' '}
         <InputWithLabel
           name="name"
-          label="Full Name"
-          placeholder="Full Name"
+          label={t('contactChatName')}
+          placeholder={t('contactChatName')}
           color="#ffffff"
           onChange={handleChange}
           value={inputs.name}
@@ -137,9 +139,9 @@ function Contact(): JSX.Element {
         />
         <InputWithLabel
           TextAreaWithLabel
-          label="Tell Us Whatever you want..."
+          label={t('contactChatText')}
           name="message"
-          placeholder="...But be nice :)"
+          placeholder={t('contactChatInnerText')}
           rows={10}
           maxlength={120}
           color="white"
@@ -148,7 +150,7 @@ function Contact(): JSX.Element {
           value={inputs.message}
         />
         <Button
-          text="Send Form"
+          text={t('contactChatButton')}
           type="submit"
           color="black"
           background="#9e0059"

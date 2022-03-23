@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
 import { useNavigate } from 'react-router-dom';
+import { t } from 'i18next';
 import NSLogo from '../../../assets/images/Logos/newLogos/53x161/NSLogo.png';
 /* import { useNavigate } from 'react-router-dom'; */
 import AvatarWithMenu from '../../molecules/AvatarWithMenu/AvatarWithMenu';
@@ -207,27 +208,27 @@ const ContainerSearchBar = styled.div`
 const data = [
   {
     path: '/aboutUs',
-    text: 'About Us',
+    text: t('headerAboutUs'),
     id: 1
   },
   {
     path: '/services',
-    text: 'Services',
+    text: t('headerServices'),
     id: 2
   },
   {
     path: '/login',
-    text: 'Login',
+    text: t('headerLogin'),
     id: 3
   },
   {
     path: '/signup',
-    text: 'Signup',
+    text: t('headerSignUp'),
     id: 4
   },
   {
     path: '/contact',
-    text: 'Contact',
+    text: t('headerContact'),
     id: 5
   }
 ];
