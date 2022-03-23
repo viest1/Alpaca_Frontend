@@ -1,19 +1,17 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
-// import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { GrClose } from 'react-icons/gr';
-import { BsThreeDots } from 'react-icons/bs';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../../../providers/GeneralProvider';
 import CardDetails from '../../molecules/CardDetails/CardDetails';
 import useError from '../../../hooks/useError';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import Button from '../../atoms/Button/Button';
-import IconClickable from '../../atoms/IconClickable/IconClickable';
 import FileUploader from '../../molecules/FileUploader/FileUploader';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
 import GeneratePdf from '../../molecules/GeneratePdf/GeneratePdf';
+import PageHead from '../../molecules/PageHead/PageHead';
 
 // /project/:projectId
 const Container = styled.div`
@@ -21,12 +19,6 @@ const Container = styled.div`
   flex-direction: column;
   margin: auto;
   padding: 1rem;
-`;
-const Title = styled.h3`
-  margin: auto;
-  text-align: center;
-  padding-top: 4rem;
-  padding-bottom: 2rem;
 `;
 // Style Mobil Version
 const ContainerDetails = styled.div`
@@ -140,15 +132,6 @@ div {
 `;
 
 // Style Desktop Version
-const ContainerThreeDotsDesktop = styled.div`
-  position: relative;
-  margin: auto;
-  left: 36rem;
-  bottom: 5rem;
-  :hover {
-    cursor: pointer;
-  }
-`;
 const ContainerDesktop = styled.div`
   display: flex;
   justify-content: center;
@@ -285,7 +268,6 @@ function ProjectDetail() {
   };
   console.log('This is what DESCRIPTION print', description);
 
-  // console.log(`First Description`, project.services[0].description);
   // useMediaQuery
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
   const [openModal, setOpenModal] = useState(false);
@@ -318,11 +300,29 @@ function ProjectDetail() {
   const total = projectServices?.reduce((a: any, v: any) => a + +v.price, 0);
   console.log(`This is the total`, total);
 
+  const PageHeadInfo = [
+    {
+      id: 1,
+      titleOfPage: `Project Details`,
+      threeDotButton: {
+        button1: 'Edit Project',
+        onClickEvent: handleNavigateToEditProject
+      }
+    },
+    {
+      id: 2,
+      threeDotButton: {
+        button1: 'View Client',
+        onClickEvent: handleNavigateToClient
+      }
+    }
+  ];
+
   if (isLoading) return <LoadingSpin />;
   return (
     // Project Details Mobil Version ----------------------------------------------
     <div>
-      <Title>Project Details</Title>
+      <PageHead pageHeadInfo={PageHeadInfo} />
       {!desktopVersion ? (
         <Container>
           <ContainerDetails>{project && <CardDetails projectData={project} />}</ContainerDetails>
@@ -375,37 +375,6 @@ function ProjectDetail() {
           </ContainerDetailsDesktop>
           <ProjectInvoicesFilesDesktop>
             <InvoiceDesktop>
-              <ContainerThreeDotsDesktop>
-                <IconClickable icon={<BsThreeDots fontSize={38} />}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '0.5rem',
-                      padding: '1rem'
-                    }}
-                  >
-                    <Button
-                      whiteMenu
-                      text={userData.role === 'Freelancer' ? 'View Client' : 'View Freelancer'}
-                      width="180px"
-                      fontSize="1rem"
-                      padding="0.5rem 1rem"
-                      onClick={handleNavigateToClient}
-                    />
-                    {userData.role === 'Freelancer' && (
-                      <Button
-                        whiteMenu
-                        text="Edit Project"
-                        width="180px"
-                        fontSize="1rem"
-                        padding="0.5rem 1rem"
-                        onClick={handleNavigateToEditProject}
-                      />
-                    )}
-                  </div>
-                </IconClickable>
-              </ContainerThreeDotsDesktop>
               <ServicesInvoiceDesktop>
                 <h5>Service</h5>
                 {openModal && (
@@ -455,14 +424,15 @@ function ProjectDetail() {
                 width="200px"
                 fontSize="13px"
                 padding="0.5rem 1rem"
+                onClick={handleNavigateToEditProject}
               />
-              <Button
-                text="+ Add note"
-                height="50px"
-                width="140px"
-                fontSize="13px"
-                padding="0.5rem 1rem"
-              />
+              {/* <Button */}
+              {/*   text="+ Add note" */}
+              {/*   height="50px" */}
+              {/*   width="140px" */}
+              {/*   fontSize="13px" */}
+              {/*   padding="0.5rem 1rem" */}
+              {/* /> */}
               <LabelTotalDesktop>
                 Total:<span> </span>
                 <TotalNumber />

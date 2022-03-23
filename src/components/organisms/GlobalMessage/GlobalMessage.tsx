@@ -17,6 +17,7 @@ import useOnClickOutside from '../../../hooks/useOnClickOutside';
 const Form = styled.form`
   padding: 1rem;
   align-items: flex-end;
+  justify-self: flex-end;
   display: flex;
   flex-direction: column;
   > div:first-child {
@@ -27,59 +28,15 @@ const Form = styled.form`
     width: 100%;
   }
 `;
-//
-// const WrapperMessages = styled.div`
-//   //padding: 1rem;
-//   //border: 2px solid black;
-//   max-height: 1200px;
-//   height: 400px;
-//   width: 95vw;
-//   max-width: 600px;
-//   display: flex;
-//   flex-direction: column;
-//   //gap: 0.4rem;
-//   > div:last-child {
-//     display: flex;
-//     flex-direction: column;
-//     gap: 0.4rem;
-//     overflow-y: scroll;
-//     height: 100%;
-//     padding-top: 0.4rem;
-//     ::-webkit-scrollbar {
-//       width: 10px;
-//     }
-//
-//     /* Track */
-//     ::-webkit-scrollbar-track {
-//       background: #f1f1f1;
-//     }
-//
-//     /* Handle */
-//     ::-webkit-scrollbar-thumb {
-//       background: #888;
-//     }
-//
-//     /* Handle on hover */
-//     ::-webkit-scrollbar-thumb:hover {
-//       background: #555;
-//     }
-//   }
-// `;
-//
-// const PContainer = styled.div`
-//   background: ${({ theme }) => theme.color.main3};
-//   color: white;
-//   padding: 1rem;
-// `;
-//
+
 const ContactList = styled.div`
   padding: 0 0 3rem 0;
-  overflow-y: scroll;
+  height: 500px;
+  overflow: auto;
   overscroll-behavior: contain;
   border-left: 1px solid white;
   border-right: 1px solid white;
   border-top: 1px solid white;
-  max-height: 300px;
 `;
 
 const Contact = styled.div`
@@ -113,7 +70,7 @@ const Contact = styled.div`
 const ContainerFixed = styled.div`
   position: fixed;
   bottom: 0px;
-  right: 15rem;
+  right: 1rem;
   z-index: 999;
   display: flex;
   gap: 1rem;
@@ -121,18 +78,30 @@ const ContainerFixed = styled.div`
 
 const ChatBox = styled.div`
   position: fixed;
-  right: 230px;
+  right: 280px;
   bottom: 0;
+  background: white;
   min-height: 50px;
-  min-width: 200px;
+  min-width: 400px;
+  max-width: 500px;
   //padding: 0 0.5rem;
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  max-height: 600px;
   ${({ theme }) => theme.down(theme.breakpoint.m)} {
     right: 70px;
+  }
+  ${({ theme }) => theme.down('550px')} {
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: none;
+    //height: 600px;
+    //justify-content: space-between;
   }
   > div:first-child {
     display: flex;
@@ -167,25 +136,27 @@ const ChatBox = styled.div`
   }
 
   > div:nth-child(2) {
-    max-height: 300px;
-    min-width: 300px;
-    max-width: 450px;
+    //max-height: 300px;
+    //min-width: 300px;
+    //max-width: 450px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-self: center;
+    //align-self: center;
     gap: 0.1rem;
-    overflow-y: scroll;
+    overflow: auto;
     overscroll-behavior: contain;
     ${({ theme }) => theme.down(theme.breakpoint.m)} {
       min-width: 200px;
-      max-width: 250px;
+      //max-width: 250px;
+      max-height: none;
     }
   }
 `;
 
 const ChatBoxSmall = styled.div`
   position: fixed;
-  right: 230px;
+  right: 280px;
   bottom: 0;
   height: 50px;
   min-width: 200px;
@@ -429,6 +400,7 @@ function GlobalMessage() {
                 height="40px"
                 img={actuallyClient[0].avatar}
                 alt="avatar"
+                name={actuallyClient[0].name}
               />
               <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
             </div>
@@ -471,6 +443,7 @@ function GlobalMessage() {
                 height="40px"
                 img={actuallyClient[0].avatar}
                 alt="avatar"
+                name={actuallyClient[0].name}
               />
               <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
             </div>
@@ -483,14 +456,26 @@ function GlobalMessage() {
       {isOpenContactList ? (
         <ContainerOpenContactList>
           <div onClick={handleOpenContactListChat}>
-            <RoundedPhoto width="40px" height="40px" img={userData.avatar} alt="avatar" />
+            <RoundedPhoto
+              width="40px"
+              height="40px"
+              img={userData.avatar}
+              alt="avatar"
+              name={userData.name}
+            />
             <p>Messages</p>
           </div>
           <div>
             <ContactList>
               {clientsGlobal.map((clientData: any) => (
                 <Contact key={clientData._id} onClick={() => handleOpenChatBox(clientData._id)}>
-                  <RoundedPhoto img={clientData.avatar} alt="face" width="40px" height="40px" />
+                  <RoundedPhoto
+                    img={clientData.avatar}
+                    alt="face"
+                    width="40px"
+                    height="40px"
+                    name={clientData.name}
+                  />
                   <div>
                     <p>{clientData.name}</p>
                     {/* {console.log(clientData)} */}

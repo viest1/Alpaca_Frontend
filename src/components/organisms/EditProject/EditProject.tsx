@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CgPlayListAdd, CgRemove } from 'react-icons/cg';
 import { BsImage } from 'react-icons/bs';
 import { AiOutlineFileText } from 'react-icons/ai';
@@ -11,8 +11,8 @@ import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
 import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
 import Button from '../../atoms/Button/Button';
-import TitleWithLines from '../../atoms/TitleWithLines/TitleWithLines';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
+import PageHead from '../../molecules/PageHead/PageHead';
 
 const Container = styled.form`
   max-width: 950px;
@@ -231,6 +231,7 @@ function EditProject() {
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
   const [showPreviews, setShowPreviews] = useState(false);
   const { handleError } = useError();
+  const navigate = useNavigate();
 
   const fetchProject = async () => {
     try {
@@ -379,10 +380,25 @@ function EditProject() {
     setInputs({ ...inputs });
   };
 
+  const handleNavigateToViewClient = () => {
+    navigate(`/client/${project.ownerUser}`);
+  };
+
+  const PageHeadInfo = [
+    {
+      id: 1,
+      titleOfPage: `Edit Project`,
+      threeDotButton: {
+        button1: 'View Client',
+        onClickEvent: handleNavigateToViewClient
+      }
+    }
+  ];
+
   if (isLoading) return <LoadingSpin />;
   return (
     <Container onSubmit={handleSubmitEditProject}>
-      <TitleWithLines text="Edit Project" />
+      <PageHead pageHeadInfo={PageHeadInfo} />
       {data.map((item: any) => (
         <InputWithLabel
           key={item._id}
@@ -434,7 +450,7 @@ function EditProject() {
       {!inputs.services.length && <CgPlayListAdd size={30} onClick={handleServiceAddFirst} />}
       <ContainerInputAndPhoto>
         <InputWithLabel label="Avatar" name="avatar" onChange={handleChange} type="file" />
-        <RoundedPhoto img={inputs.avatar || ''} alt="avatar" />
+        <RoundedPhoto img={inputs.avatar || ''} alt="avatar" name={project?.clientName} />
       </ContainerInputAndPhoto>
       <Button
         text={showPreviews ? 'Hide Previews' : 'Show Previews Files/Images'}

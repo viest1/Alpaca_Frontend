@@ -96,7 +96,7 @@ function LanguageMenu({ background, top }: Lang) {
               key={item.id}
               onClick={() => {
                 i18next.changeLanguage(item.code);
-                setIsOpenMenuLanguage(false);
+                // setIsOpenMenuLanguage(false);
                 setActuallyLng(item.code);
               }}
               width="70px"

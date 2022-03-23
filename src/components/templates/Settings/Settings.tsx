@@ -21,7 +21,7 @@ const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 3rem 1rem;
+  padding: 0 1rem 3rem 1rem;
 
   h4 {
     text-align: left;
@@ -39,7 +39,9 @@ const FormContainer = styled.form`
 `;
 const ContainerDiv = styled.div`
   box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
-
+  padding: 1rem;
+  border: 2px solid black;
+  border-radius: 0.6rem;
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     background: ${({ theme }) => theme.color.main1};
     display: flex;
@@ -92,6 +94,7 @@ const DivThree = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1rem;
   max-width: 350px;
 `;
 
@@ -220,6 +223,7 @@ function Settings() {
                 alt="face"
                 width="250px"
                 height="250px"
+                name={userData.name}
               />
             </div>
             <ContainerButton>

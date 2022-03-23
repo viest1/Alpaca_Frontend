@@ -15,7 +15,7 @@ const ContainerPhoto = styled.div<PhotoStyled>`
   border-radius: 50%;
   width: ${({ width }) => width || '90px'};
   height: ${({ height }) => height || '90px'};
-  /* border: 1px solid black; */
+  border: ${({ border }) => border || '1px solid black;'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,6 +99,7 @@ interface Photo {
   icon?: any;
   handleChange?: any;
   onClick?: any;
+  name?: string;
 }
 
 function RoundedPhoto({
@@ -113,8 +114,25 @@ function RoundedPhoto({
   outlineOffset,
   icon,
   handleChange,
-  onClick
+  onClick,
+  name
 }: Photo) {
+  // let acronym: string;
+  // if (name) {
+  //   acronym = name[0].toUpperCase();
+  //   console.log(acronym);
+  // }
+
+  const getAcronym = (nameToAcronym: string) => {
+    const splittedArray = nameToAcronym.split(' ');
+    console.log({ splittedArray });
+    let finishedAcronym = '';
+    for (let i = 0; i < splittedArray.length; i++) {
+      finishedAcronym += splittedArray[i][0].toUpperCase();
+    }
+    return finishedAcronym.slice(0, 2);
+  };
+
   return (
     <Container>
       {RoundedPhotoWithButton ? (
@@ -137,6 +155,7 @@ function RoundedPhoto({
               </div>
             )}
             {icon && !img && <div>{icon}</div>}
+            {!img && !icon && name && <div>{getAcronym(name)}</div>}
           </ContainerPhoto>
         </PhotoWithButton>
       ) : (
@@ -150,6 +169,7 @@ function RoundedPhoto({
         >
           {img && <img src={img} alt={alt} />}
           {icon && !img && icon}
+          {!img && !icon && name && <div>{getAcronym(name)}</div>}
         </ContainerPhoto>
       )}
     </Container>
@@ -166,7 +186,8 @@ RoundedPhoto.defaultProps = {
   RoundedPhotoWithButton: false,
   icon: undefined,
   handleChange: undefined,
-  onClick: undefined
+  onClick: undefined,
+  name: undefined
 };
 
 export default RoundedPhoto;

@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
 import CardClientDetails from '../../molecules/CardClientDetails/CardClientDetails';
 import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
+import PageHead from '../../molecules/PageHead/PageHead';
 
 const Container = styled.div`
   display: flex;
@@ -12,21 +13,18 @@ const Container = styled.div`
   margin: auto;
   padding: 1rem;
 `;
-const Title = styled.h2`
-  margin: auto;
-  text-align: center;
-  padding-top: 4rem;
-`;
+
 const ContainerClientDetails = styled.div`
   margin: auto;
 `;
+
 function ClientDetails() {
   const [client, setClient] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { userData } = useContext(Context);
   const { handleError } = useError();
   const { clientId } = useParams();
-  console.log('clientId', clientId);
+  const navigate = useNavigate();
 
   const fetchClientDetails = async () => {
     try {
@@ -56,11 +54,25 @@ function ClientDetails() {
     fetchClientDetails();
   }, [clientId]);
 
+  const handleNavigateToCreateNewProject = () => {
+    navigate(`/newProject/${clientId}`);
+  };
+
+  const PageHeadInfo = [
+    {
+      id: 1,
+      titleOfPage: `${userData.role === 'Freelancer' ? 'Client' : 'Freelancer'} Details`,
+      threeDotButton: {
+        button1: 'New Project',
+        onClickEvent: handleNavigateToCreateNewProject
+      }
+    }
+  ];
+
   if (isLoading) return <LoadingSpin />;
   return (
     <div>
-      <Title>{userData.role === 'Freelancer' ? 'Client' : 'Freelancer'} Details</Title>
-
+      <PageHead pageHeadInfo={PageHeadInfo} />
       <Container>
         <ContainerClientDetails>
           {client && <CardClientDetails clientData={client} />}
