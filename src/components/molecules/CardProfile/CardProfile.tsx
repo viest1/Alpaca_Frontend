@@ -437,7 +437,6 @@ const MainContainer = styled.div`
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      overflow-y: scroll;
 
       .details {
         letter-spacing: 0.1rem;

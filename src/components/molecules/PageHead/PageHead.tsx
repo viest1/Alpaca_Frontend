@@ -13,10 +13,10 @@ const Wrap = styled.div`
 
 const Container = styled.div`
   /* border: 2px solid blue; */
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+  //margin: 1rem;
   padding: 1rem;
 `;
 
@@ -52,7 +52,8 @@ function PageHead({ pageHeadInfo, children, intro }: Head) {
     <Wrap>
       <Container>
         <H3>{pageHeadInfo[0].titleOfPage}</H3>
-        <div className="intro">{intro}</div>
+        {/* Remember on this condition {intro && ...} */}
+        {intro && <div className="intro">{intro}</div>}
         <ThreeDotMenu>
           <div>{children}</div>
           <IconClickable icon={<BsThreeDots fontSize={40} color="#001523" />}>
