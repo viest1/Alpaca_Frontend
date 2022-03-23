@@ -150,7 +150,7 @@ function ClientsOrProjects() {
       id: 1,
       titleOfPage: 'Clients & Projects',
       threeDotButton: {
-        button1: 'New Project',
+        button1: 'New Client',
         onClickEvent: handleNavigateToCreateNewClient
       }
     }
