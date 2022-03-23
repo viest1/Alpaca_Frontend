@@ -158,7 +158,37 @@ const ContainerForm = styled.div<ContainerProp>`
     color: black;
     width: 100%;
     letter-spacing: 1px;
+    margin: ${({ margin }) => margin || '0 0 1rem 0'};
+
+    &:focus {
+      border-bottom: 2px solid #e76f51;
+      outline: none;
+      background: white;
+    }
+  }
+
+  label {
+    font-family: 'Inter';
+    font-weight: 500;
+  }
+`;
+
+const ContainerTxtArea = styled.div<ContainerProp>`
+  textarea {
+    position: relative;
+    background: ${({ theme }) => theme.color.main1};
+    border: none;
+    border-bottom: 2px solid #001523;
+    font-size: 1em;
+    height: ${({ height }) => height || '45px'};
+    transition: border-color 0.3s;
+    font: 15px/24px 'Open Sans', sans-serif;
+    color: black;
+    width: 100%;
+    letter-spacing: 1px;
     margin-bottom: ${({ margin }) => margin} || '1rem';
+    resize: vertical;
+    border-radius: 0 0 10px 0;
 
     &:focus {
       border-bottom: 2px solid #e76f51;
@@ -189,6 +219,11 @@ interface FormInput {
   id?: string;
   label?: string | undefined | any;
   form?: boolean;
+  textArea?: boolean;
+  rows?: number;
+  cols?: number;
+  onBlur?: any;
+  ref?: any;
 }
 function Input({
   name,
@@ -205,15 +240,18 @@ function Input({
   border,
   label,
   id,
-  form
+  form,
+  textArea,
+  rows,
+  cols,
+  onBlur,
+  ref
 }: FormInput) {
   const [inputName, setInputName] = useState('undefined');
   const getValue = (e: any) => {
     const target = e.target.name;
     setInputName(target.charAt(0).toUpperCase() + target.slice(1));
   };
-  console.log(inputName);
-  console.log(label);
 
   return (
     <div>
@@ -247,6 +285,38 @@ function Input({
             </span>
             <span className="focus-bg" />
           </Container>
+        </div>
+      ) : textArea ? (
+        <div>
+          <ContainerTxtArea
+            value={value}
+            label={label}
+            inputName={inputName}
+            color={color}
+            width={width}
+            height={height}
+            margin={margin}
+            border={border}
+            onBlur={onBlur}
+            ref={ref}
+          >
+            <label htmlFor={id || name}>{label}</label>
+            <textarea
+              rows={rows}
+              cols={cols}
+              maxLength={1000}
+              minLength={20}
+              name={name}
+              placeholder={placeholder}
+              id={name}
+              value={value}
+              required={required}
+              onChange={onChange}
+              wrap="soft"
+              autoCapitalize="sentences"
+              autoComplete="off"
+            />
+          </ContainerTxtArea>
         </div>
       ) : (
         <div>
@@ -293,7 +363,12 @@ Input.defaultProps = {
   border: undefined,
   id: undefined,
   label: undefined,
-  form: true
+  form: true,
+  textArea: false,
+  cols: undefined,
+  rows: undefined,
+  onBlur: undefined,
+  ref: undefined
 };
 
 export default Input;

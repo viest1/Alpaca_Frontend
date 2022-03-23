@@ -74,11 +74,12 @@ const Form = styled.form`
 //
 const ContactList = styled.div`
   padding: 0 0 3rem 0;
-  overflow: auto;
+  overflow-y: scroll;
   overscroll-behavior: contain;
   border-left: 1px solid white;
   border-right: 1px solid white;
   border-top: 1px solid white;
+  max-height: 300px;
 `;
 
 const Contact = styled.div`
@@ -408,6 +409,7 @@ function GlobalMessage() {
       // SpeechRecognitionEvent type
       const speechToText = event.results[0][0].transcript;
       console.log(speechToText);
+
       setInputs({
         ...inputs,
         message: `${inputs.message.trim()} ${speechToText}`
