@@ -41,7 +41,6 @@ const Form = styled.form`
     width: 100%;
   }
   > div:last-child {
-
     width: 100%;
   }
 `;
@@ -66,7 +65,7 @@ const ContactList = styled.div`
   max-width: 250px;
   overscroll-behavior: contain;
   // TODO Not good - to FIX
-  max-height: 566px;
+  max-height: 510px;
 
   ${({ theme }) => theme.down(theme.breakpoint.sm)} {
     min-width: 50px;
@@ -75,8 +74,6 @@ const ContactList = styled.div`
 `;
 
 const WrapperBoxMessage = styled.div`
-  width: auto;
-  min-width: auto;
   //border: 2px solid red;
   ${({ theme }) => theme.down(theme.breakpoint.sm)} {
     width: 100%;
@@ -106,14 +103,19 @@ const Contact = styled.div<Props>`
   }
   ${({ theme }) => theme.down(theme.breakpoint.sm)} {
     padding: 0.2rem;
+    gap: 0;
+    display: block;
+    > div:first-child {
+      display: none;
+    }
   }
 `;
 
 const WrapperMessages = styled.div`
   //padding: 1rem;
   //border: 2px solid black;
-  max-height: 100%;
-  height: 400px;
+  height: 100%;
+  max-height: 400px;
   width: auto;
   max-width: 700px;
   display: flex;
@@ -149,7 +151,7 @@ const PContainer = styled.div`
 
 const Microphone = styled(FaMicrophone)`
   position: absolute;
-  top: 24px;
+  top: 12px;
   right: 8px;
   &:hover {
     cursor: pointer;
@@ -345,6 +347,7 @@ function Messages() {
                 width="40px"
                 height="40px"
                 outline="2px solid black"
+                name={clientData.name}
               />
             </Contact>
           ))}
@@ -391,6 +394,7 @@ function Messages() {
               background="#001523"
               color="white"
               height="4.4rem"
+              width="100%"
             />
           </Form>
         </WrapperBoxMessage>

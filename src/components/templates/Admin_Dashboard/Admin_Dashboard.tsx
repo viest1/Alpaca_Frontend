@@ -188,7 +188,7 @@ function AdminDashboard() {
       id: 1,
       titleOfPage: 'Dashboard',
       threeDotButton: {
-        button1: 'New Project',
+        button1: 'New Client',
         onClickEvent: handleNavigateToCreateNewClient
       }
     }
@@ -204,9 +204,7 @@ function AdminDashboard() {
           <TitleWithLines text="Recent Clients" />
           <ContainerClients>
             {clients.length ? (
-              clients.map((item: any) => (
-                <CardProfile client key={item._id} clientData={item} projectData={projects} />
-              ))
+              clients.map((item: any) => <CardProfile client key={item._id} clientData={item} />)
             ) : (
               <NoItemsFound text="Clients" />
             )}
@@ -215,9 +213,7 @@ function AdminDashboard() {
           <TitleWithLines text="Recent Projects" />
           <ContainerProjects>
             {projects.length ? (
-              projects.map((item: any) => (
-                <CardProfile key={item._id} projectData={item} clientData={clients} />
-              ))
+              projects.map((item: any) => <CardProfile key={item._id} projectData={item} />)
             ) : (
               <NoItemsFound text="Projects" />
             )}

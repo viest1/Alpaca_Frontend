@@ -8,35 +8,27 @@ import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import useError from '../../../hooks/useError';
 import { InputFileStyle } from '../SignUp/SignUp';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
+import PageHead from '../../molecules/PageHead/PageHead';
 // import useError from '../../../hooks/useError';
 
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 3rem 1rem;
-  h3,
-  h4 {
-    text-align: left;
-    margin: 1rem 0 0 0;
-  }
-
-  h3 {
-    max-width: 450px;
-    text-align: center;
-  }
+  padding: 1rem;
 
   > div:first-child {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    h4 {
-      margin-bottom: 1rem;
-    }
   }
 `;
 const ContainerDiv = styled.div`
+  h4 {
+    text-align: left;
+    margin: 1rem 0;
+  }
   ${({ theme }) => theme.up(theme.breakpoint.m)} {
     background: ${({ theme }) => theme.color.main1};
     display: flex;
@@ -119,7 +111,7 @@ function NewClient() {
     taxNumber: '',
     image: ''
   };
-  const { inputs, handleChange } = useForm(initialValue);
+  const { inputs, handleChange, clearForm } = useForm(initialValue);
   const { handleError } = useError();
   const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e: SyntheticEvent) => {
@@ -136,6 +128,7 @@ function NewClient() {
       });
       const resJSON = await res.json();
       if (res.status === 201) {
+        clearForm();
         handleError('You created user', true);
       } else {
         handleError(resJSON.message);
@@ -147,11 +140,23 @@ function NewClient() {
       setIsLoading(false);
     }
   };
+
+  const pageHeadInfo = [
+    {
+      id: 1,
+      titleOfPage: 'Create New Client',
+      threeDotButton: {
+        button1: 'No Action',
+        onClickEvent: 'undefined'
+      }
+    }
+  ];
+
   return (
     <div>
       <FormContainer onSubmit={handleSubmit}>
         <div>
-          <h3>CREATE NEW CUSTOMER ACCOUNT</h3>
+          <PageHead pageHeadInfo={pageHeadInfo} />
           <ContainerDiv>
             <DivOne>
               <div>
@@ -172,6 +177,7 @@ function NewClient() {
                 name="name"
                 placeholder="Give your Name"
                 onChange={handleChange}
+                value={inputs.name}
                 required
               />
               <InputWithLabel
@@ -179,6 +185,7 @@ function NewClient() {
                 name="email"
                 type="email"
                 onChange={handleChange}
+                value={inputs.email}
                 required
               />
               <InputWithLabel
@@ -186,6 +193,7 @@ function NewClient() {
                 name="password"
                 type="password"
                 onChange={handleChange}
+                value={inputs.password}
                 required
               />
               <InputWithLabel
@@ -193,6 +201,7 @@ function NewClient() {
                 name="phoneNumber"
                 type="tel"
                 onChange={handleChange}
+                value={inputs.phoneNumber}
               />
             </DivTwo>
             <DivThree>
@@ -202,8 +211,14 @@ function NewClient() {
                   label="Identity Card Number"
                   name="identityCardNumber"
                   onChange={handleChange}
+                  value={inputs.identityCardNumber}
                 />
-                <InputWithLabel label="Tax Number" name="taxNumber" onChange={handleChange} />
+                <InputWithLabel
+                  label="Tax Number"
+                  name="taxNumber"
+                  onChange={handleChange}
+                  value={inputs.taxNumber}
+                />
                 <ParagraphAdd>
                   <p>Lquia nisi corrupti voluptatibus?</p>
                 </ParagraphAdd>
@@ -212,7 +227,7 @@ function NewClient() {
                 <Button
                   type="submit"
                   background="#9e0059"
-                  text={isLoading ? 'Loading...' : 'Save Changes'}
+                  text={isLoading ? 'Loading...' : 'Create New Client'}
                 />
               </ContainerButton>
             </DivThree>
