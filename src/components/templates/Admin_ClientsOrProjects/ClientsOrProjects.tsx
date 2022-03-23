@@ -73,7 +73,7 @@ const Wrap = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin: 1rem;
+  padding: 1rem;
 `;
 
 function ClientsOrProjects() {

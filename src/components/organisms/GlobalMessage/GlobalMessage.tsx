@@ -1,9 +1,9 @@
 // import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
 import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { GrContact } from 'react-icons/gr';
 import { MdOutlineClose } from 'react-icons/md';
 import { FaMicrophone } from 'react-icons/fa';
+import { TiMessages } from 'react-icons/ti';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
@@ -31,7 +31,7 @@ const Form = styled.form`
 
 const ContactList = styled.div`
   padding: 0 0 3rem 0;
-  height: 500px;
+  height: 620px;
   overflow: auto;
   overscroll-behavior: contain;
   border-left: 1px solid white;
@@ -80,7 +80,7 @@ const ChatBox = styled.div`
   position: fixed;
   right: 280px;
   bottom: 0;
-  background: white;
+  background: #e7e7e7;
   min-height: 50px;
   min-width: 400px;
   max-width: 500px;
@@ -91,9 +91,11 @@ const ChatBox = styled.div`
   flex-direction: column;
   gap: 0.6rem;
   max-height: 600px;
+
   ${({ theme }) => theme.down(theme.breakpoint.m)} {
     right: 70px;
   }
+
   ${({ theme }) => theme.down('550px')} {
     right: 0;
     left: 0;
@@ -103,6 +105,7 @@ const ChatBox = styled.div`
     //height: 600px;
     //justify-content: space-between;
   }
+
   > div:first-child {
     display: flex;
     justify-content: space-between;
@@ -110,6 +113,7 @@ const ChatBox = styled.div`
     border-bottom: 1px solid grey;
     border-top-left-radius: 0.6rem;
     border-top-right-radius: 0.6rem;
+    background: ${({ theme }) => theme.color.main2};
 
     &:hover {
       cursor: pointer;
@@ -146,6 +150,7 @@ const ChatBox = styled.div`
     gap: 0.1rem;
     overflow: auto;
     overscroll-behavior: contain;
+
     ${({ theme }) => theme.down(theme.breakpoint.m)} {
       min-width: 200px;
       //max-width: 250px;
@@ -166,6 +171,7 @@ const ChatBoxSmall = styled.div`
   border-top-right-radius: 0.6rem;
   display: flex;
   justify-content: space-between;
+
   > div:first-child {
     display: flex;
     align-items: center;
@@ -227,8 +233,8 @@ const Container = styled.div`
 
 const ContainerOpenContactList = styled.div`
   > div:first-child {
-    border: 2px solid red;
     display: flex;
+    justify-content: space-between;
     padding: 1rem;
     gap: 2rem;
     align-items: center;
@@ -264,6 +270,10 @@ const Microphone = styled(FaMicrophone)`
     cursor: pointer;
     transform: scale(1.1);
   }
+`;
+
+const PWhite = styled.p`
+  color: white;
 `;
 
 interface Message {
@@ -402,10 +412,14 @@ function GlobalMessage() {
                 alt="avatar"
                 name={actuallyClient[0].name}
               />
-              <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
+              <PWhite>{actuallyClient.length > 0 && actuallyClient[0].name}</PWhite>
             </div>
             <div>
-              <MdOutlineClose fontSize={18} onClick={handleCloseChatBoxWithMessages} />
+              <MdOutlineClose
+                color="white"
+                fontSize={18}
+                onClick={handleCloseChatBoxWithMessages}
+              />
             </div>
           </div>
           <div>
@@ -445,10 +459,14 @@ function GlobalMessage() {
                 alt="avatar"
                 name={actuallyClient[0].name}
               />
-              <p>{actuallyClient.length > 0 && actuallyClient[0].name}</p>
+              <PWhite>{actuallyClient.length > 0 && actuallyClient[0].name}</PWhite>
             </div>
             <div>
-              <MdOutlineClose fontSize={18} onClick={handleCloseChatBoxWithMessages} />
+              <MdOutlineClose
+                color="white"
+                fontSize={18}
+                onClick={handleCloseChatBoxWithMessages}
+              />
             </div>
           </ChatBoxSmall>
         )
@@ -464,6 +482,7 @@ function GlobalMessage() {
               name={userData.name}
             />
             <p>Messages</p>
+            <TiMessages fontSize={28} />
           </div>
           <div>
             <ContactList>
@@ -489,7 +508,7 @@ function GlobalMessage() {
       ) : (
         <Container onClick={handleOpenContactListChat}>
           <p>Messages</p>
-          <GrContact fontSize={28} />
+          <TiMessages fontSize={28} />
         </Container>
       )}
     </ContainerFixed>

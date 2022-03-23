@@ -81,11 +81,14 @@ export const GlobalStyle = createGlobalStyle`
   /* Track */
   ::-webkit-scrollbar-track {
     background: #eae2b7;
+    background: #001523;
+    width: 10px;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #1F313E;
+    width: 10px;
   }
 
   /* Handle on hover */
