@@ -39,11 +39,12 @@ const Container = styled.div`
 `;
 
 const PhotoWithButton = styled.div`
-  /*  border: 2px solid black; */
+  border: 2px solid black;
   display: flex;
   position: relative;
   justify-content: center;
   margin-bottom: 2.5rem;
+  border-radius: 50%;
 `;
 
 const ButtonForPhoto = styled.button`

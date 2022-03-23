@@ -380,6 +380,7 @@ function GlobalMessage() {
       // SpeechRecognitionEvent type
       const speechToText = event.results[0][0].transcript;
       console.log(speechToText);
+
       setInputs({
         ...inputs,
         message: `${inputs.message.trim()} ${speechToText}`

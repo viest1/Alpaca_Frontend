@@ -9,7 +9,6 @@ const Wrap = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 1rem;
 `;
 
 const Container = styled.div`
@@ -18,37 +17,42 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1rem;
+  padding: 1rem;
 `;
 
 const H3 = styled.h3`
   text-align: left;
   font-weight: 400;
-  line-height: 1rem;
+  margin-bottom: 1rem;
   width: 100%;
   color: ${({ theme }) => theme.color.main2};
-  text-shadow: 1px 2px 1px #ffffff;
+  text-shadow: -1px 2px 5px #ffffff;
 `;
 
 const ThreeDotMenu = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-inline: 1rem;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   align-items: center;
+  background-color: #fcbf49;
+  border: 1px solid black;
+  border-radius: 10px;
 `;
 
 interface Head {
   pageHeadInfo: any;
   children?: any;
+  intro?: HTMLParagraphElement | HTMLElement | any;
 }
 
-function PageHead({ pageHeadInfo, children }: Head) {
-  console.log(pageHeadInfo.threeDotButton);
-
+function PageHead({ pageHeadInfo, children, intro }: Head) {
   return (
     <Wrap>
       <Container>
         <H3>{pageHeadInfo[0].titleOfPage}</H3>
+        <div className="intro">{intro}</div>
         <ThreeDotMenu>
           <div>{children}</div>
           <IconClickable icon={<BsThreeDots fontSize={40} color="#001523" />}>
@@ -72,7 +76,8 @@ function PageHead({ pageHeadInfo, children }: Head) {
 }
 
 PageHead.defaultProps = {
-  children: undefined
+  children: undefined,
+  intro: undefined
 };
 
 export default PageHead;
