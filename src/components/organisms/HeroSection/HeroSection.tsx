@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { MdCheckCircleOutline } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { t } from 'i18next';
 import Button from '../../atoms/Button/Button';
 import womenOnTheWay from '../../../assets/illustrations/WomanOnTheWay.png';
 import waveMobile from '../../../assets/illustrations/wave.svg';
