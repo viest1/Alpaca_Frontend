@@ -118,7 +118,7 @@ function LogIn() {
       <Input
         label="Password"
         type="password"
-        name={t('signUpBoxContactInformationPassword')}
+        name="password"
         placeholder={t('signUpBoxContactInformationPassword')}
         onChange={handleChange}
         margin="50px 0 0.1rem 0"

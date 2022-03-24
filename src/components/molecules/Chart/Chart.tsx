@@ -151,14 +151,16 @@ function Chart({ data, options, type, type2 }: ChartTypes) {
       <ContainerDoughnut>
         {type === 'doughnut' && <Line data={config || data} options={myOptions || options} />}
       </ContainerDoughnut>
-      <ContainerDoughnut>
-        {type2 === 'statistics' && (
+      {type2 === 'statistics' && (
+        <ContainerDoughnut>
           <Doughnut data={config || data} options={myOptions || options} />
-        )}
-      </ContainerDoughnut>
-      <ContainerDoughnut>
-        {type2 === 'statistics' && <Bar data={config || data} options={myOptions || options} />}
-      </ContainerDoughnut>
+        </ContainerDoughnut>
+      )}
+      {type2 === 'statistics' && (
+        <ContainerDoughnut>
+          <Bar data={config || data} options={myOptions || options} />
+        </ContainerDoughnut>
+      )}
     </>
   );
 }
