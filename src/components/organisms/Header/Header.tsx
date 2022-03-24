@@ -490,12 +490,7 @@ function Header() {
                 {dataHeaderAdmin.map((item) => (
                   <NavLink key={item.id} path={item.path} text={item.text} color="white" />
                 ))}
-                <NavLink
-                  path="/statistics"
-                  text="Statistics"
-                  onClick={handleOpenMenu}
-                  color="white"
-                />
+                <NavLink path="/statistics" text="Statistics" color="white" />
               </StyledMenuDesktopAdmin>
               <CountryFlagClient>
                 <LanguageMenu />
