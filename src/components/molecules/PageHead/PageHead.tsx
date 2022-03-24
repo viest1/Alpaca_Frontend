@@ -13,10 +13,10 @@ const Wrap = styled.div`
 
 const Container = styled.div`
   /* border: 2px solid blue; */
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
-  //margin: 1rem;
+  margin: 1rem;
   padding: 1rem;
 `;
 
