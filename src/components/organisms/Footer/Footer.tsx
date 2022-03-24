@@ -77,6 +77,7 @@ const StyledSpan = styled.span`
 const MyFooter = styled.div`
   width: 100%;
   position: relative;
+  margin-top: 5rem;
 `;
 
 // Desktop Styles

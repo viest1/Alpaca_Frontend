@@ -5,7 +5,7 @@ import { CgPlayListAdd, CgRemove } from 'react-icons/cg';
 import { BsImage } from 'react-icons/bs';
 import { AiOutlineFileText } from 'react-icons/ai';
 import { MdDelete, MdFullscreen } from 'react-icons/md';
-import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
+import Input from '../../atoms/Input/Input';
 import useForm from '../../../hooks/useForm';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
@@ -400,7 +400,8 @@ function EditProject() {
     <Container onSubmit={handleSubmitEditProject}>
       <PageHead pageHeadInfo={PageHeadInfo} />
       {data.map((item: any) => (
-        <InputWithLabel
+        <Input
+          form
           key={item._id}
           label={item.label}
           name={item.name}
@@ -420,13 +421,15 @@ function EditProject() {
           </NumberServiceOnMobile>
           <ContainerServices>
             <div>
-              <InputWithLabel
+              <Input
+                form
                 label="Service Name"
                 name="serviceName"
                 value={inputs?.services[i]?.serviceName}
                 onChange={(e: any) => handleServiceChange(e, i)}
               />
-              <InputWithLabel
+              <Input
+                form
                 label="Price"
                 name="price"
                 value={inputs?.services[i]?.price}
@@ -434,7 +437,8 @@ function EditProject() {
                 type="number"
               />
             </div>
-            <InputWithLabel
+            <Input
+              form
               label="Description"
               name="description"
               value={inputs?.services[i]?.description}
@@ -449,7 +453,7 @@ function EditProject() {
       ))}
       {!inputs.services.length && <CgPlayListAdd size={30} onClick={handleServiceAddFirst} />}
       <ContainerInputAndPhoto>
-        <InputWithLabel label="Avatar" name="avatar" onChange={handleChange} type="file" />
+        <Input form label="Avatar" name="avatar" onChange={handleChange} type="file" />
         <RoundedPhoto img={inputs.avatar || ''} alt="avatar" name={project?.clientName} />
       </ContainerInputAndPhoto>
       <Button

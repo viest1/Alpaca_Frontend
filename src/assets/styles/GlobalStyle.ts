@@ -38,6 +38,10 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
   }
+
+  input, textarea {
+    padding-left: 15px;
+ }
   
   p {
     margin:0;

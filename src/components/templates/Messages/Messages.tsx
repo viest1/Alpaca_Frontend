@@ -379,7 +379,8 @@ function Messages() {
           <Form onSubmit={handleSubmitMessage}>
             <div>
               <Input
-                margin="50px 0 0.1rem 0"
+                form
+                margin="0 0.1rem 0 0"
                 placeholder="Write a Message..."
                 name="message"
                 onChange={handleChange}

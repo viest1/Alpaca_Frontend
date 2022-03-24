@@ -55,6 +55,7 @@ const Text = styled.span`
 const Bla = styled.div`
   display: flex;
   flex-direction: column;
+  z-index: 500;
 `;
 const languages = [
   { id: 1, code: 'de', name: 'Deutsch', country_code: 'de' },
