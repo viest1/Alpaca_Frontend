@@ -98,25 +98,6 @@ const Wave = styled.img`
   }
 `;
 
-// Here outside the jsx (return) we dont need {}to invoke the function t, so just t('text')is enough
-const dataHeroSection = [
-  {
-    text: t('landingPageMainText'),
-    icon: <MdCheckCircleOutline fontSize={36} />,
-    id: 1
-  },
-  {
-    text: t('landingPageSmallMainTextOne'),
-    icon: <MdCheckCircleOutline fontSize={36} />,
-    id: 2
-  },
-  {
-    text: t('landingPageSmallMainTextTwo') + t('landingPageSmallMainTextThree'),
-    icon: <MdCheckCircleOutline fontSize={36} />,
-    id: 3
-  }
-];
-
 // because inside the return we are inside the jsx and here we need to invoke the function t the {}
 // Without {} the function would not run, { } means JS
 function HeroSection() {
@@ -127,6 +108,24 @@ function HeroSection() {
   // t comes from inside the useTranslation Hook (more details in the Hook description),
   // with {} we extract the t function from useTranslation
   const { t } = useTranslation();
+  // Here outside the jsx (return) we dont need {}to invoke the function t, so just t('text')is enough
+  const dataHeroSection = [
+    {
+      text: t('landingPageMainText'),
+      icon: <MdCheckCircleOutline fontSize={36} />,
+      id: 1
+    },
+    {
+      text: t('landingPageSmallMainTextOne'),
+      icon: <MdCheckCircleOutline fontSize={36} />,
+      id: 2
+    },
+    {
+      text: t('landingPageSmallMainTextTwo') + t('landingPageSmallMainTextThree'),
+      icon: <MdCheckCircleOutline fontSize={36} />,
+      id: 3
+    }
+  ];
   return (
     <Background>
       <Container style={{ position: 'relative' }}>
