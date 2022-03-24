@@ -41,7 +41,6 @@ const Form = styled.form`
     width: 100%;
   }
   > div:last-child {
-
     width: 100%;
   }
 `;
