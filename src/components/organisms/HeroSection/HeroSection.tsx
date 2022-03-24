@@ -98,37 +98,40 @@ const Wave = styled.img`
   }
 `;
 
+// Here outside the jsx (return) we dont need {}to invoke the function t, so just t('text')is enough
 const dataHeroSection = [
   {
-    text: 'Take your business everywhere you goand feel safe that all your data is at one place',
+    text: t('landingPageMainText'),
     icon: <MdCheckCircleOutline fontSize={36} />,
     id: 1
   },
   {
-    text: 'You can manage your clients, appointments and messages in one place',
+    text: t('landingPageSmallMainTextOne'),
     icon: <MdCheckCircleOutline fontSize={36} />,
     id: 2
   },
   {
-    text:
-      'We know that it takes time until you make a life out of it. So try it for ' +
-      'free and grow until you decide to take your next step',
+    text: t('landingPageSmallMainTextTwo') + t('landingPageSmallMainTextThree'),
     icon: <MdCheckCircleOutline fontSize={36} />,
     id: 3
   }
 ];
 
+// because inside the return we are inside the jsx and here we need to invoke the function t the {}
+// Without {} the function would not run, { } means JS
 function HeroSection() {
   const navigate = useNavigate();
   const handleNavigateToServices = () => {
     navigate('/services');
   };
+  // t comes from inside the useTranslation Hook (more details in the Hook description),
+  // with {} we extract the t function from useTranslation
   const { t } = useTranslation();
   return (
     <Background>
       <Container style={{ position: 'relative' }}>
         <div>
-          <h3 style={{ position: 'relative', zIndex: 1 }}>{t('mainText')}</h3>
+          <h3 style={{ position: 'relative', zIndex: 1 }}>{t('landingPageMainText')}</h3>
           <div>
             <img src={womenOnTheWay} alt="women on the way" />
           </div>
@@ -143,7 +146,7 @@ function HeroSection() {
             ))}
           </ContainerList>
           <div>
-            <Button text="LETS TRY IT!" onClick={handleNavigateToServices} />
+            <Button text={t('landingPageMainTextButton')} onClick={handleNavigateToServices} />
           </div>
         </div>
       </Container>
