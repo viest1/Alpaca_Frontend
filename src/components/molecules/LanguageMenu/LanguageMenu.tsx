@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import i18next from 'i18next';
-
 import Button from '../../atoms/Button/Button';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import AvatarWithMenu from '../AvatarWithMenu/AvatarWithMenu';
