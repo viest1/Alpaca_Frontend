@@ -91,6 +91,9 @@ const ChatBox = styled.div`
   flex-direction: column;
   gap: 0.6rem;
   max-height: 600px;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
 
   ${({ theme }) => theme.down(theme.breakpoint.m)} {
     right: 70px;
@@ -171,6 +174,9 @@ const ChatBoxSmall = styled.div`
   border-top-right-radius: 0.6rem;
   display: flex;
   justify-content: space-between;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
 
   > div:first-child {
     display: flex;
