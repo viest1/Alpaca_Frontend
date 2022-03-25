@@ -172,7 +172,7 @@ function AdminDashboard() {
   return (
     <Container>
       <PageHead pageHeadInfo={PageHeadInfo} />
-      <Chart />
+      <Chart data={undefined} options={undefined} />
       <ContainerDataAndStats>
         <Data>
           <TitleWithLines text="Recent Clients" />

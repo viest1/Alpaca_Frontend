@@ -109,7 +109,7 @@ function LogIn() {
     <Container onSubmit={handleSubmit}>
       <h3>LOGIN</h3>
       <Input
-        margin="50px 0 0.1rem 0"
+        margin="0 0rem 1rem 0"
         label="Email"
         name="email"
         onChange={handleChange}
@@ -121,7 +121,7 @@ function LogIn() {
         name="password"
         placeholder={t('signUpBoxContactInformationPassword')}
         onChange={handleChange}
-        margin="50px 0 0.1rem 0"
+        margin="0 0.1rem 0"
       />
       <ContainerP>
         <p onClick={handleNavigateToForgotPassword}>{t('loginPassword')}</p>

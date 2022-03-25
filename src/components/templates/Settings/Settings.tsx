@@ -200,11 +200,7 @@ function Settings() {
   const PageHeadInfo = [
     {
       id: 1,
-      titleOfPage: 'Settings',
-      threeDotButton: {
-        button1: 'New Project',
-        onClickEvent: 'no action'
-      }
+      titleOfPage: 'Settings'
     }
   ];
 

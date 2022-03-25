@@ -2,63 +2,65 @@ import React, { SyntheticEvent } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
+import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import { RedSpan } from '../../atoms/RedSpan/RedSpan';
 import useError from '../../../hooks/useError';
 import useForm from '../../../hooks/useForm';
 
 const PageContainer = styled.div`
+  //border: 2px solid red;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  align-content: center;
   padding: 2rem;
-  
-  
 
-  ${({ theme }) => theme.up(theme.breakpoint.m)} {
-    {
-     justify-content: flex-end
+  ${({ theme }) => theme.down(theme.breakpoint.m)} {
+     {
+      padding: 0;
+    }
   }
 `;
 
 export const TextContainer = styled.div`
+  //border: 2px solid red;
   padding: 0 1.5rem 1.5rem 1.5rem;
   max-width: 800px;
   margin: 0 auto;
 
   h2 {
-    text-align: center;
-    -webkit-text-stroke: 1px ${({ theme }) => theme.color.main2};
+    text-align: left;
+    font-size: clamp(
+      ${({ theme }) => theme.fontSizeInter.m},
+      8vw,
+      ${({ theme }) => theme.fontSizeInter.xl}
+    );
 
-    ${({ theme }) => theme.up(theme.breakpoint.l)} {
-      {
-        font-size: ${({ theme }) => theme.fontSizeInter.xl};
-        text-align: start;
+    ${({ theme }) => theme.down(theme.breakpoint.m)} {
+       {
+        text-align: center;
       }
-  }
-
-  p {
-    padding: 0 2rem 1.5rem 2rem;
+    }
   }
 `;
 
 const FormContainer = styled.form`
+  /* border: 5px solid red; */
   display: block;
-  margin: 0px auto;
   padding: 2rem;
+  margin: 0 auto;
   min-width: 250px;
   max-width: 600px;
   flex-grow: 2;
-  border: solid 3px black;
-  box-shadow:${({ theme }) => theme.boxShadow.mainShadow};
+  box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
   border-radius: 10px;
-  background: black;
+  background: #001523;
 
-
-  ${({ theme }) => theme.up(theme.breakpoint.m)} {
-    margin-right: 10rem;
-    flex-grow: 3;
+  ${({ theme }) => theme.down(theme.breakpoint.m)} {
+     {
+      margin: 0 auto;
+      flex-grow: 3;
     }
   }
 `;
@@ -118,34 +120,36 @@ function Contact(): JSX.Element {
       </TextContainer>
       <FormContainer onSubmit={handleSubmit}>
         {' '}
-        <InputWithLabel
+        <Input
+          form
           name="name"
+          color="white"
           label={t('contactChatName')}
           placeholder={t('contactChatName')}
-          color="#ffffff"
           onChange={handleChange}
           value={inputs.name}
           /* value */ required
         />
-        <InputWithLabel
+        <Input
+          form
           name="email"
           label="E-mail"
           type="email"
-          placeholder="E-Mail Address"
           color="white"
+          placeholder="E-Mail Address"
           onChange={handleChange}
           value={inputs.email}
           /* value */ required
         />
-        <InputWithLabel
-          TextAreaWithLabel
+        <Input
+          textArea
           label={t('contactChatText')}
           name="message"
           placeholder={t('contactChatInnerText')}
           rows={10}
-          maxlength={120}
-          color="white"
           required
+          height="100%"
+          color="white"
           onChange={handleChange}
           value={inputs.message}
         />
