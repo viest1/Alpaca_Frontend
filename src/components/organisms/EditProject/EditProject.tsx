@@ -413,6 +413,8 @@ function EditProject() {
   return (
     <>
       <PageHead pageHeadInfo={PageHeadInfo} />
+      <Container onSubmit={handleSubmitEditProject}>
+        <ContainerInputs>
       {data.map((item: any) => (
         <Input
           form
