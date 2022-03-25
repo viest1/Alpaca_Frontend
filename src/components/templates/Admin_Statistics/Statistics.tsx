@@ -78,11 +78,7 @@ function Statistics() {
   const pageHeadInfo = [
     {
       id: 1,
-      titleOfPage: t('headerAdminStatistics'),
-      threeDotButton: {
-        button1: 'No Action',
-        onClickEvent: 'undefined'
-      }
+      titleOfPage: t('headerAdminStatistics')
     }
   ];
   if (isLoading) return <LoadingSpin />;

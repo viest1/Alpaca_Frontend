@@ -90,11 +90,7 @@ function UserDashboard() {
   const PageHeadInfo = [
     {
       id: 1,
-      titleOfPage: 'Dashboard',
-      threeDotButton: {
-        button1: t('userDashboardButton'),
-        onClickEvent: 'no action'
-      }
+      titleOfPage: 'Dashboard'
     }
   ];
 

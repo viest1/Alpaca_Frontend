@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import Button from '../../atoms/Button/Button';
 import { Context } from '../../../providers/GeneralProvider';
 import useForm from '../../../hooks/useForm';
-import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import useError from '../../../hooks/useError';
 import { InputFileStyle } from '../SignUp/SignUp';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import PageHead from '../../molecules/PageHead/PageHead';
+import Input from '../../atoms/Input/Input';
 // import useError from '../../../hooks/useError';
 
 const FormContainer = styled.form`
@@ -145,11 +145,7 @@ function NewClient() {
   const pageHeadInfo = [
     {
       id: 1,
-      titleOfPage: t('adminCreateNewClient'),
-      threeDotButton: {
-        button1: 'No Action',
-        onClickEvent: 'undefined'
-      }
+      titleOfPage: t('adminCreateNewClient')
     }
   ];
 
@@ -173,7 +169,7 @@ function NewClient() {
             </DivOne>
             <DivTwo>
               <h4>{t('adminCreateNewClientContact')}</h4>
-              <InputWithLabel
+              <Input
                 label="Name*"
                 name="name"
                 placeholder={t('contactChatName')}
@@ -181,7 +177,7 @@ function NewClient() {
                 value={inputs.name}
                 required
               />
-              <InputWithLabel
+              <Input
                 label="Email*"
                 name="email"
                 type="email"
@@ -189,7 +185,7 @@ function NewClient() {
                 value={inputs.email}
                 required
               />
-              <InputWithLabel
+              <Input
                 label={t('signUpBoxContactInformationPassword')}
                 name="password"
                 type="password"
@@ -197,7 +193,7 @@ function NewClient() {
                 value={inputs.password}
                 required
               />
-              <InputWithLabel
+              <Input
                 label={t('adminCreateNewClientPhoneNumber')}
                 name="phoneNumber"
                 type="tel"
@@ -208,13 +204,13 @@ function NewClient() {
             <DivThree>
               <div>
                 <h4>{t('adminCreateNewClientBilling')}</h4>
-                <InputWithLabel
-                  label={t('signUpBoxBillingInformationPassport')}
+                <Input
+                  {t('signUpBoxBillingInformationPassport')}
                   name="identityCardNumber"
                   onChange={handleChange}
                   value={inputs.identityCardNumber}
                 />
-                <InputWithLabel
+                <Input
                   label={t('signUpBoxBillingInformationTaxNumber')}
                   name="taxNumber"
                   onChange={handleChange}

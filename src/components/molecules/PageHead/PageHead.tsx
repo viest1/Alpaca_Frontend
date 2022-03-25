@@ -23,7 +23,7 @@ const Container = styled.div`
 const H3 = styled.h3`
   text-align: left;
   font-weight: 400;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   width: 100%;
   color: ${({ theme }) => theme.color.main2};
   text-shadow: -1px 2px 5px #ffffff;

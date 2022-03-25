@@ -341,11 +341,7 @@ function Messages() {
   const pageHeadInfo = [
     {
       id: 1,
-      titleOfPage: t('messages'),
-      threeDotButton: {
-        button1: 'No Action',
-        onClickEvent: 'undefined'
-      }
+      titleOfPage: t('messages')
     }
   ];
 

@@ -1,15 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import { Context } from '../../../providers/GeneralProvider';
-/* import CardClient from '../../molecules/CardClient/CardClient';
-import CardProject from '../../molecules/CardProject/CardProject'; */
 import useError from '../../../hooks/useError';
 import NoItemsFound from '../../atoms/NoItemsFound/NoItemsFound';
 import { LoadingSpin } from '../../atoms/LoadingSpin/LoadingSpin';
 import CardProfile from '../../molecules/CardProfile/CardProfile';
 import PageHead from '../../molecules/PageHead/PageHead';
+import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 
 const ContainerFilterBy = styled.div`
   display: flex;

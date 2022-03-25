@@ -503,23 +503,37 @@ function ProjectDetail() {
   const total = projectServices?.reduce((a: any, v: any) => a + +v.price, 0);
   console.log(`This is the total`, total);
 
-  const PageHeadInfo = [
-    {
-      id: 1,
-      titleOfPage: `Project Details`,
-      threeDotButton: {
-        button1: 'Edit Project',
-        onClickEvent: handleNavigateToEditProject
+  let PageHeadInfo;
+  if (userData.role === 'Client') {
+    PageHeadInfo = [
+      {
+        id: 1,
+        titleOfPage: `Project Details`,
+        threeDotButton: {
+          button1: 'View Client',
+          onClickEvent: handleNavigateToClient
+        }
       }
-    },
-    {
-      id: 2,
-      threeDotButton: {
-        button1: 'View Client',
-        onClickEvent: handleNavigateToClient
+    ];
+  } else if (userData.role === 'Freelancer') {
+    PageHeadInfo = [
+      {
+        id: 1,
+        titleOfPage: `Project Details`,
+        threeDotButton: {
+          button1: 'Edit Project',
+          onClickEvent: handleNavigateToEditProject
+        }
+      },
+      {
+        id: 2,
+        threeDotButton: {
+          button1: 'View Client',
+          onClickEvent: handleNavigateToClient
+        }
       }
-    }
-  ];
+    ];
+  }
 
   if (isLoading) return <LoadingSpin />;
   return (
@@ -538,8 +552,8 @@ function ProjectDetail() {
                     <GrClose onClick={handleModal} cursor="pointer" fontSize={18} />
                   </div>
                   <ModalText>
-                    <p>Description of {serviceToModal.serviceName}:</p>
-                    <p>{serviceToModal.description}</p>
+                    <p>Description of {serviceToModal.serviceName || 'No Data'}:</p>
+                    <p>{serviceToModal.description || 'No Data'}</p>
                   </ModalText>
                 </ModalContainerDesktop>
               </ModalBackgroundDesktop>
@@ -571,8 +585,11 @@ function ProjectDetail() {
               {project.services.length > 0 &&
                 project.services.map((item: any, i: number) => (
                   <ContainerServiceAndPrice onClick={() => handleModalIndex(i)}>
-                    <p>{item.serviceName}</p>
-                    <p>{item.price}€</p>
+                    <p>{item.serviceName || 'No Data'}</p>
+                    <p>
+                      {item.price || 'No Data'}
+                      {item.price ? '€' : ''}
+                    </p>
                   </ContainerServiceAndPrice>
                 ))}
               <ContainerTotal>
@@ -702,8 +719,8 @@ function ProjectDetail() {
                         <GrClose onClick={handleModal} cursor="pointer" fontSize={18} />
                       </div>
                       <ModalText>
-                        <p>Description of {serviceToModal.serviceName}:</p>
-                        <p>{serviceToModal.description}</p>
+                        <p>Description of {serviceToModal.serviceName || 'No Data'}:</p>
+                        <p>{serviceToModal.description || 'No Data'}</p>
                       </ModalText>
                     </ModalContainerDesktop>
                   </ModalBackgroundDesktop>
@@ -717,9 +734,12 @@ function ProjectDetail() {
                   {project.services.length > 0 &&
                     project.services.map((item: any, i: number) => (
                       <ContainerServiceAndPrice onClick={() => handleModalIndex(i)}>
-                        <p>{item.serviceName}</p>
-                        <p>{item.price}€</p>
-                        <p>{item.description}</p>
+                        <p>{item.serviceName || 'No Data'}</p>
+                        <p>
+                          {item.price || 'No Data'}
+                          {item.price ? '€' : ''}
+                        </p>
+                        <p>{item.description || 'No Data'}</p>
                       </ContainerServiceAndPrice>
                     ))}
                 </WrapperServicesDesktop>

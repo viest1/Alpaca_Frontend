@@ -15,6 +15,7 @@ const PageContainer = styled.div`
   align-items: center;
   align-content: center;
   padding: 2rem;
+  margin-bottom: 4rem;
 
   ${({ theme }) => theme.down(theme.breakpoint.m)} {
      {

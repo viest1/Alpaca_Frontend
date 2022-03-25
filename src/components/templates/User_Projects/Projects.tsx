@@ -89,11 +89,7 @@ function Projects() {
   const PageHeadInfo = [
     {
       id: 1,
-      titleOfPage: t('projectsHeadline1'),
-      threeDotButton: {
-        button1: 'New Project',
-        onClickEvent: 'no action'
-      }
+      titleOfPage: t('projectsHeadline1')
     }
   ];
 
