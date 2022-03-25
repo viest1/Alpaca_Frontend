@@ -222,17 +222,7 @@ function NewProject(): JSX.Element {
       threeDotButton: {
         button1: t('newProject'),
         onClickEvent: 'noation'
-      },
-      intro: (
-        <Intro>
-          <p className="left">
-            How this Works:
-            <br /> - Inputs marqued with a (*) symbol are required.
-            <br /> - Use the right side of the page to write down up to 10 services.
-            <br />- Description box is resizable from the bottom-right corner
-          </p>
-        </Intro>
-      )
+      }
     }
   ];
 
