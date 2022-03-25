@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import GlobalMessage from '../../organisms/GlobalMessage/GlobalMessage';
 import TitleWithLines from '../../atoms/TitleWithLines/TitleWithLines';
 import { Context } from '../../../providers/GeneralProvider';
@@ -53,6 +54,7 @@ const ContainerProjects = styled.div`
 // ];
 
 function UserDashboard() {
+  const { t } = useTranslation();
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { userData } = useContext(Context);
@@ -90,16 +92,17 @@ function UserDashboard() {
       id: 1,
       titleOfPage: 'Dashboard',
       threeDotButton: {
-        button1: 'New Project',
+        button1: t('userDashboardButton'),
         onClickEvent: 'no action'
       }
     }
   ];
+
   if (isLoading) return <LoadingSpin />;
   return (
     <Container>
       <PageHead pageHeadInfo={PageHeadInfo} />
-      <TitleWithLines text="Recent/Actually Projects" />
+      <TitleWithLines text={t('userDashboard')} />
       <ContainerProjects>
         {projects.length ? (
           projects.map((item: any) => <CardProfile key={item._id} projectData={item} />)

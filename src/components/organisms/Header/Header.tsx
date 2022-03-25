@@ -213,25 +213,27 @@ const ContainerSearchBar = styled.div`
   // }
 `;
 
+const { t } = useTranslation();
+
 const dataDesktop = [
   {
     path: '/aboutUs',
-    text: 'About Us',
+    text: t('headerAboutUs'),
     id: 1
   },
   {
     path: '/services',
-    text: 'Services',
+    text: t('headerServices'),
     id: 2
   },
   {
     path: '/contact',
-    text: 'Contact',
+    text: t('headerContact'),
     id: 3
   },
   {
     path: '/login',
-    text: 'Login',
+    text: t('headerLogin'),
     id: 4
   }
 ];
@@ -243,12 +245,12 @@ const dataHeaderAdmin = [
   },
   {
     path: '/clients',
-    text: 'Clients/Projects',
+    text: t('headerAdminProjects'),
     id: 2
   },
   {
     path: '/messages',
-    text: 'Messages',
+    text: t('headerAdminMessages'),
     id: 3
   }
 ];
@@ -261,18 +263,17 @@ const dataHeaderClient = [
   },
   {
     path: '/projects',
-    text: 'Projects',
+    text: t('headerClientProjects'),
     id: 2
   },
   {
     path: '/messages',
-    text: 'Messages',
+    text: t('headerClientMessages'),
     id: 3
   }
 ];
 
 function Header() {
-  const { t } = useTranslation();
   const data = [
     {
       path: '/aboutUs',

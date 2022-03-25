@@ -1,6 +1,7 @@
 import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { FaMicrophone } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import Button from '../../atoms/Button/Button';
 import CardMessage from '../../molecules/CardMessage/CardMessage';
 import { Context } from '../../../providers/GeneralProvider';
@@ -188,6 +189,7 @@ const initialValue: Message = {
 };
 
 function Messages() {
+  const { t } = useTranslation();
   const { messages, userData } = useContext(Context);
   const [isLoading, setIsLoading] = useState(false);
   const [clientMessages, setClientMessages] = useState([]);
@@ -339,7 +341,7 @@ function Messages() {
   const pageHeadInfo = [
     {
       id: 1,
-      titleOfPage: 'Messages',
+      titleOfPage: t('messages'),
       threeDotButton: {
         button1: 'No Action',
         onClickEvent: 'undefined'

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import Input from '../../atoms/Input/Input';
 import { Context } from '../../../providers/GeneralProvider';
 import Button from '../../atoms/Button/Button';
@@ -171,7 +172,7 @@ const projectInfo: initial = {
 };
 
 function NewProject(): JSX.Element {
-  const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
   const { userData } = useContext(Context);
   const { inputs, handleChange } = useForm(projectInfo);
   const { handleError } = useError();
@@ -216,7 +217,21 @@ function NewProject(): JSX.Element {
   const pageHeadInfo = [
     {
       id: 1,
-      titleOfPage: 'New Project'
+      titleOfPage: t('newProject'),
+      threeDotButton: {
+        button1: t('newProject'),
+        onClickEvent: 'noation'
+      },
+      intro: (
+        <Intro>
+          <p className="left">
+            How this Works:
+            <br /> - Inputs marqued with a (*) symbol are required.
+            <br /> - Use the right side of the page to write down up to 10 services.
+            <br />- Description box is resizable from the bottom-right corner
+          </p>
+        </Intro>
+      )
     }
   ];
 
@@ -240,7 +255,7 @@ function NewProject(): JSX.Element {
               <Input
                 form
                 margin="0 0 1.8rem 0"
-                label="Start Date*"
+                label={t('newProjectStartDate')}
                 type="date"
                 name="startDate"
                 onChange={handleChange}
@@ -249,7 +264,7 @@ function NewProject(): JSX.Element {
               <Input
                 form
                 margin="0 0 1.8rem 0"
-                label="End Date*"
+                label={t('newProjectEndDate')}
                 type="date"
                 name="dueDate"
                 required
@@ -260,7 +275,7 @@ function NewProject(): JSX.Element {
               <Input
                 form
                 margin="0 0 1.8rem 0"
-                label="Company Name*"
+                label={t('newProjectCompanyName')}
                 name="companyName"
                 placeholder="enter the name of the company"
                 onChange={handleChange}
@@ -278,7 +293,7 @@ function NewProject(): JSX.Element {
               <Input
                 form
                 margin="0 0 1.8rem 0"
-                label="Tax Number"
+                label={t('signUpBoxBillingInformationTaxNumber')}
                 name="taxNumber"
                 placeholder="enter a tax ID"
                 onChange={handleChange}
@@ -286,7 +301,7 @@ function NewProject(): JSX.Element {
               <Input
                 form
                 margin="0 0 1.8rem 0"
-                label="Description"
+                label={t('newProjectCDescription')}
                 name="description"
                 placeholder="enter a description"
                 onChange={handleChange}

@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useContext, useState } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import Button from '../../atoms/Button/Button';
-
 import { Context } from '../../../providers/GeneralProvider';
 import useForm from '../../../hooks/useForm';
 import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
@@ -91,6 +91,7 @@ const DivThree = styled.div`
 `;
 
 function NewClient() {
+  const { t } = useTranslation();
   const { userData } = useContext(Context);
   interface initial {
     name: string;
@@ -144,7 +145,7 @@ function NewClient() {
   const pageHeadInfo = [
     {
       id: 1,
-      titleOfPage: 'Create New Client',
+      titleOfPage: t('adminCreateNewClient'),
       threeDotButton: {
         button1: 'No Action',
         onClickEvent: 'undefined'
@@ -166,16 +167,16 @@ function NewClient() {
                 <RoundedPhoto img={inputs.image || ''} alt="face" width="250px" height="250px" />
               </div>
               <ContainerButton>
-                <Button background="#1F313E" text="Upload Photo" />
+                <Button background="#1F313E" text={t('adminCreateNewClientUploadPhoto')} />
                 <InputFileStyle name="image" type="file" onChange={handleChange} />
               </ContainerButton>
             </DivOne>
             <DivTwo>
-              <h4>Contact</h4>
+              <h4>{t('adminCreateNewClientContact')}</h4>
               <InputWithLabel
                 label="Name*"
                 name="name"
-                placeholder="Give your Name"
+                placeholder={t('contactChatName')}
                 onChange={handleChange}
                 value={inputs.name}
                 required
@@ -189,7 +190,7 @@ function NewClient() {
                 required
               />
               <InputWithLabel
-                label="Password*"
+                label={t('signUpBoxContactInformationPassword')}
                 name="password"
                 type="password"
                 onChange={handleChange}
@@ -197,7 +198,7 @@ function NewClient() {
                 required
               />
               <InputWithLabel
-                label="Phone Number"
+                label={t('adminCreateNewClientPhoneNumber')}
                 name="phoneNumber"
                 type="tel"
                 onChange={handleChange}
@@ -206,15 +207,15 @@ function NewClient() {
             </DivTwo>
             <DivThree>
               <div>
-                <h4>Billing</h4>
+                <h4>{t('adminCreateNewClientBilling')}</h4>
                 <InputWithLabel
-                  label="Identity Card Number"
+                  label={t('signUpBoxBillingInformationPassport')}
                   name="identityCardNumber"
                   onChange={handleChange}
                   value={inputs.identityCardNumber}
                 />
                 <InputWithLabel
-                  label="Tax Number"
+                  label={t('signUpBoxBillingInformationTaxNumber')}
                   name="taxNumber"
                   onChange={handleChange}
                   value={inputs.taxNumber}
