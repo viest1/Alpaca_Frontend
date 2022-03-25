@@ -76,11 +76,7 @@ function Statistics() {
   const pageHeadInfo = [
     {
       id: 1,
-      titleOfPage: 'Statistics',
-      threeDotButton: {
-        button1: 'No Action',
-        onClickEvent: 'undefined'
-      }
+      titleOfPage: 'Statistics'
     }
   ];
   if (isLoading) return <LoadingSpin />;

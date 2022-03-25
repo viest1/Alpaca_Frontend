@@ -88,11 +88,7 @@ function UserDashboard() {
   const PageHeadInfo = [
     {
       id: 1,
-      titleOfPage: 'Dashboard',
-      threeDotButton: {
-        button1: 'New Project',
-        onClickEvent: 'no action'
-      }
+      titleOfPage: 'Dashboard'
     }
   ];
   if (isLoading) return <LoadingSpin />;

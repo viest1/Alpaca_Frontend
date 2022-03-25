@@ -1,14 +1,13 @@
 import React, { SyntheticEvent, useContext, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/Button/Button';
-
 import { Context } from '../../../providers/GeneralProvider';
 import useForm from '../../../hooks/useForm';
-import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import useError from '../../../hooks/useError';
 import { InputFileStyle } from '../SignUp/SignUp';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import PageHead from '../../molecules/PageHead/PageHead';
+import Input from '../../atoms/Input/Input';
 // import useError from '../../../hooks/useError';
 
 const FormContainer = styled.form`
@@ -144,11 +143,7 @@ function NewClient() {
   const pageHeadInfo = [
     {
       id: 1,
-      titleOfPage: 'Create New Client',
-      threeDotButton: {
-        button1: 'No Action',
-        onClickEvent: 'undefined'
-      }
+      titleOfPage: 'Create New Client'
     }
   ];
 
@@ -172,7 +167,7 @@ function NewClient() {
             </DivOne>
             <DivTwo>
               <h4>Contact</h4>
-              <InputWithLabel
+              <Input
                 label="Name*"
                 name="name"
                 placeholder="Give your Name"
@@ -180,7 +175,7 @@ function NewClient() {
                 value={inputs.name}
                 required
               />
-              <InputWithLabel
+              <Input
                 label="Email*"
                 name="email"
                 type="email"
@@ -188,7 +183,7 @@ function NewClient() {
                 value={inputs.email}
                 required
               />
-              <InputWithLabel
+              <Input
                 label="Password*"
                 name="password"
                 type="password"
@@ -196,7 +191,7 @@ function NewClient() {
                 value={inputs.password}
                 required
               />
-              <InputWithLabel
+              <Input
                 label="Phone Number"
                 name="phoneNumber"
                 type="tel"
@@ -207,13 +202,13 @@ function NewClient() {
             <DivThree>
               <div>
                 <h4>Billing</h4>
-                <InputWithLabel
+                <Input
                   label="Identity Card Number"
                   name="identityCardNumber"
                   onChange={handleChange}
                   value={inputs.identityCardNumber}
                 />
-                <InputWithLabel
+                <Input
                   label="Tax Number"
                   name="taxNumber"
                   onChange={handleChange}

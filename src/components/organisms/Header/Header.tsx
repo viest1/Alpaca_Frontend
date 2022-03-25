@@ -351,7 +351,10 @@ function Header() {
                 <div style={{ position: 'relative' }}>
                   <NavLink path="/" image={NSLogo} alt="Logo" />
                 </div>
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <CountryFlagAdmin>
+                    <LanguageMenu />
+                  </CountryFlagAdmin>
                   {!isOpenMenu && (
                     <GiHamburgerMenu fontSize={48} cursor="pointer" onClick={handleOpenMenu} />
                   )}
@@ -377,6 +380,7 @@ function Header() {
                       onClick={handleOpenMenu}
                     />
                   ))}
+                  <NavLink path="/settings" text="Settings" onClick={handleOpenMenu} />
                   <ButtonLogoutMobil onClick={handleLogout}>Logout</ButtonLogoutMobil>
                 </StyledMenu>
                 <StyledLogoSlogan>
@@ -439,7 +443,10 @@ function Header() {
                     <NavLink path="/" image={NSLogo} alt="Logo" />
                   </div>
                   {/* Do we need searchBar here? */}
-                  <div>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <CountryFlagAdmin>
+                      <LanguageMenu />
+                    </CountryFlagAdmin>
                     {!isOpenMenu && (
                       <GiHamburgerMenu fontSize={48} cursor="pointer" onClick={handleOpenMenu} />
                     )}
@@ -567,7 +574,10 @@ function Header() {
               <div>
                 <NavLink path="/" image={NSLogo} alt="Logo" />
               </div>
-              <div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <CountryFlagAdmin>
+                  <LanguageMenu />
+                </CountryFlagAdmin>
                 {!isOpenMenu && (
                   <GiHamburgerMenu fontSize={48} cursor="pointer" onClick={handleOpenMenu} />
                 )}

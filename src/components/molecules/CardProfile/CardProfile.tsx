@@ -630,14 +630,14 @@ function CardProfile({ clientData, projectData, client }: client) {
               </p>
             </div>
             <div className="phone">
-              <div>{clientData.phone}</div>
+              <div>{clientData.phone || 'No Data'}</div>
             </div>
           </MainDetails>
           <div className="social">
             <div className="socialInfo">
               <div className="details">
                 <p>Email:</p>
-                <div>{clientData.email}</div>
+                <div>{clientData.email || 'No Data'}</div>
               </div>
               <div className="details">
                 <p>Projects:</p>
@@ -689,25 +689,25 @@ function CardProfile({ clientData, projectData, client }: client) {
           </div>
           <MainDetails>
             <div className="name">
-              <p>{projectData.clientName}</p>
+              <p>{projectData.clientName || 'No Data'}</p>
             </div>
             <div className="phone">
-              <p>{projectData.websiteName || 'example.com'}</p>
+              <p>{projectData.websiteName || 'No Data'}</p>
             </div>
           </MainDetails>
           <div className="social">
             <div className="socialInfo">
               <div className="details">
                 <p>Company:</p>
-                <div>{projectData.companyName}</div>
+                <div>{projectData.companyName || 'No Data'}</div>
               </div>
               <div className="details">
                 <p>Start:</p>
-                <div>{projectData.startDate}</div>
+                <div>{projectData.startDate || 'No Data'}</div>
               </div>
               <div className="details">
                 <p>Due:</p>
-                <div>{projectData.dueDate}</div>
+                <div>{projectData.dueDate || 'No Data'}</div>
               </div>
             </div>
           </div>
