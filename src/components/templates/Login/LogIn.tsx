@@ -115,7 +115,7 @@ function LogIn() {
         placeholder="Email"
       />
       <Input
-        label="Password"
+        label={t('signUpBoxContactInformationPassword')}
         type="password"
         name="password"
         placeholder={t('signUpBoxContactInformationPassword')}

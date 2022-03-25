@@ -213,67 +213,65 @@ const ContainerSearchBar = styled.div`
   // }
 `;
 
-
-
 function Header() {
-const { t } = useTranslation();
-const dataDesktop = [
-  {
-    path: '/aboutUs',
-    text: t('headerAboutUs'),
-    id: 1
-  },
-  {
-    path: '/services',
-    text: t('headerServices'),
-    id: 2
-  },
-  {
-    path: '/contact',
-    text: t('headerContact'),
-    id: 3
-  },
-  {
-    path: '/login',
-    text: t('headerLogin'),
-    id: 4
-  }
-];
-const dataHeaderAdmin = [
-  {
-    path: '/',
-    text: 'Dashboard',
-    id: 1
-  },
-  {
-    path: '/clients',
-    text: t('headerAdminProjects'),
-    id: 2
-  },
-  {
-    path: '/messages',
-    text: t('headerAdminMessages'),
-    id: 3
-  }
-];
+  const { t } = useTranslation();
+  const dataDesktop = [
+    {
+      path: '/aboutUs',
+      text: t('headerAboutUs'),
+      id: 1
+    },
+    {
+      path: '/services',
+      text: t('headerServices'),
+      id: 2
+    },
+    {
+      path: '/contact',
+      text: t('headerContact'),
+      id: 3
+    },
+    {
+      path: '/login',
+      text: t('headerLogin'),
+      id: 4
+    }
+  ];
+  const dataHeaderAdmin = [
+    {
+      path: '/',
+      text: 'Dashboard',
+      id: 1
+    },
+    {
+      path: '/clients',
+      text: t('headerAdminProjects'),
+      id: 2
+    },
+    {
+      path: '/messages',
+      text: t('headerAdminMessages'),
+      id: 3
+    }
+  ];
 
-const dataHeaderClient = [
-  {
-    path: '/',
-    text: 'Dashboard',
-    id: 1
-  },
-  {
-    path: '/projects',
-    text: t('headerClientProjects'),
-    id: 2
-  },
-  {
-    path: '/messages',
-    text: t('headerClientMessages'),
-    id: 3
-  }
-];
+  const dataHeaderClient = [
+    {
+      path: '/',
+      text: 'Dashboard',
+      id: 1
+    },
+    {
+      path: '/projects',
+      text: t('headerClientProjects'),
+      id: 2
+    },
+    {
+      path: '/messages',
+      text: t('headerClientMessages'),
+      id: 3
+    }
+  ];
   const data = [
     {
       path: '/aboutUs',

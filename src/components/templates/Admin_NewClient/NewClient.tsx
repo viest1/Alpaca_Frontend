@@ -205,7 +205,7 @@ function NewClient() {
               <div>
                 <h4>{t('adminCreateNewClientBilling')}</h4>
                 <Input
-                  {t('signUpBoxBillingInformationPassport')}
+                  label={t('signUpBoxBillingInformationPassport')}
                   name="identityCardNumber"
                   onChange={handleChange}
                   value={inputs.identityCardNumber}
