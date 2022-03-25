@@ -12,7 +12,7 @@ import face6 from '../../../assets/images/face6small.jpg';
 
 const Container = styled.div`
   padding: 0 2rem 2rem 2rem;
-  display: flex;-
+  display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
   gap: 2rem;
