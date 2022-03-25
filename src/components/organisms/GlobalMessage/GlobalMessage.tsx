@@ -82,7 +82,7 @@ const ChatBox = styled.div`
   bottom: 0;
   background: #e7e7e7;
   min-height: 50px;
-  min-width: 400px;
+  min-width: 300px;
   max-width: 500px;
   //padding: 0 0.5rem;
   border-top-left-radius: 0.6rem;

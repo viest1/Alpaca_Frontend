@@ -31,6 +31,7 @@ const Container = styled.div<StyledDivProps>`
   min-height: ${({ isOpenMenu }) => (isOpenMenu ? '100vh' : 'auto')};
   /* border: 2px solid red; */
   position: relative;
+  z-index: 9999;
   //top: 0;
   //left: 0;
   //z-index: 0;
