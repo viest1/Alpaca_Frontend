@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { BsThreeDots } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import IconClickable from '../../atoms/IconClickable/IconClickable';
 import RoundedPhoto from '../../atoms/RoundedPhoto/RoundedPhoto';
 import Button from '../../atoms/Button/Button';
@@ -589,7 +590,7 @@ function CardProfile({ clientData, projectData, client }: client) {
       onClickEvent: handleNavigateToChatBoxMessage
     }
   ];
-
+  const { t } = useTranslation();
   return (
     <Wrap>
       {client ? (
@@ -698,15 +699,15 @@ function CardProfile({ clientData, projectData, client }: client) {
           <div className="social">
             <div className="socialInfo">
               <div className="details">
-                <p>Company:</p>
+                <p>{t('cardProfileCompany')}</p>
                 <div>{projectData.companyName || 'No Data'}</div>
               </div>
               <div className="details">
-                <p>Start:</p>
+                <p>{t('cardProfileStart')}</p>
                 <div>{projectData.startDate || 'No Data'}</div>
               </div>
               <div className="details">
-                <p>Due:</p>
+                <p>{t('cardProfileDue')}</p>
                 <div>{projectData.dueDate || 'No Data'}</div>
               </div>
             </div>
