@@ -12,11 +12,11 @@ const Wrap = styled.div`
 `;
 
 const Container = styled.div`
-  /* border: 2px solid blue; */
-  width: 80%;
+  //border: 2px solid blue;
+  width: 88%;
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+  //margin: 1rem;
   padding: 1rem;
 `;
 
@@ -36,9 +36,12 @@ const ThreeDotMenu = styled.div`
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   align-items: center;
-  background-color: #fcbf49;
+  //background-color: #fcbf49;
+  //background: ${({ theme }) => theme.color.main5};
+  box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
   border: 1px solid black;
   border-radius: 10px;
+  min-height: 42px;
 `;
 
 interface Head {
@@ -54,22 +57,25 @@ function PageHead({ pageHeadInfo, children, intro }: Head) {
         <H3>{pageHeadInfo[0].titleOfPage}</H3>
         {/* Remember on this condition {intro && ...} */}
         {intro && <div className="intro">{intro}</div>}
+
         <ThreeDotMenu>
           <div>{children}</div>
-          <IconClickable icon={<BsThreeDots fontSize={40} color="#001523" />}>
-            {pageHeadInfo.map((item: any) => (
-              <Button
-                dropMenu
-                key={item.id}
-                text={item.threeDotButton.button1}
-                width="200px"
-                fontSize="1rem"
-                padding="0.1rem 1rem"
-                onClick={item.threeDotButton.onClickEvent}
-                color="white"
-              />
-            ))}
-          </IconClickable>
+          {pageHeadInfo[0].threeDotButton ? (
+            <IconClickable icon={<BsThreeDots fontSize={40} color="#001523" />}>
+              {pageHeadInfo.map((item: any) => (
+                <Button
+                  dropMenu
+                  key={item.id}
+                  text={item.threeDotButton.button1}
+                  width="200px"
+                  fontSize="1rem"
+                  padding="0.1rem 1rem"
+                  onClick={item.threeDotButton.onClickEvent}
+                  color="white"
+                />
+              ))}
+            </IconClickable>
+          ) : null}
         </ThreeDotMenu>
       </Container>
     </Wrap>

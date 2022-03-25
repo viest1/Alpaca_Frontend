@@ -31,6 +31,7 @@ const Container = styled.div<StyledDivProps>`
   min-height: ${({ isOpenMenu }) => (isOpenMenu ? '100vh' : 'auto')};
   /* border: 2px solid red; */
   position: relative;
+  z-index: 9999;
   //top: 0;
   //left: 0;
   //z-index: 0;
@@ -314,6 +315,9 @@ function Header() {
   const handleOpenMenu = () => {
     setIsOpenMenu((prev) => !prev);
   };
+  const handleCloseMenu = () => {
+    setIsOpenMenu(false);
+  };
   // useMediaQuery
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
 
@@ -359,7 +363,7 @@ function Header() {
               <>
                 <FlexOpen>
                   <div style={{ position: 'relative' }}>
-                    <NavLink path="/" image={NSLogo} alt="Logo" />
+                    <NavLink path="/" image={NSLogo} alt="Logo" onClick={handleCloseMenu} />
                   </div>
                   <div>
                     <GrClose onClick={handleOpenMenu} cursor="pointer" fontSize={48} />
@@ -377,7 +381,7 @@ function Header() {
                   <ButtonLogoutMobil onClick={handleLogout}>Logout</ButtonLogoutMobil>
                 </StyledMenu>
                 <StyledLogoSlogan>
-                  <NavLink path="/" bigLogo image={NSLogo} alt="Logo" />
+                  <NavLink path="/" bigLogo image={NSLogo} alt="Logo" onClick={handleCloseMenu} />
                 </StyledLogoSlogan>
                 <Contact />
               </>
@@ -447,7 +451,7 @@ function Header() {
                 <>
                   <FlexOpen>
                     <div style={{ position: 'relative' }}>
-                      <NavLink path="/" image={NSLogo} alt="Logo" />
+                      <NavLink path="/" image={NSLogo} alt="Logo" onClick={handleCloseMenu} />
                     </div>
                     <div>
                       <GrClose onClick={handleOpenMenu} cursor="pointer" fontSize={48} />
@@ -468,7 +472,7 @@ function Header() {
                     <ButtonLogoutMobilAdmin onClick={handleLogout}>Logout</ButtonLogoutMobilAdmin>
                   </StyledMenu>
                   <StyledLogoSlogan>
-                    <NavLink path="/" bigLogo image={NSLogo} alt="Logo" />
+                    <NavLink path="/" bigLogo image={NSLogo} alt="Logo" onClick={handleCloseMenu} />
                   </StyledLogoSlogan>
                   <Contact />
                 </>
@@ -575,7 +579,7 @@ function Header() {
             <>
               <FlexOpen>
                 <div>
-                  <NavLink path="/" image={NSLogo} alt="Logo" />
+                  <NavLink path="/" image={NSLogo} alt="Logo" onClick={handleCloseMenu} />
                 </div>
                 <div>
                   <GrClose onClick={handleOpenMenu} cursor="pointer" fontSize={48} />
@@ -592,7 +596,7 @@ function Header() {
                 ))}
               </StyledMenu>
               <StyledLogoSlogan>
-                <NavLink path="/" bigLogo image={NSLogo} alt="Logo" />
+                <NavLink path="/" bigLogo image={NSLogo} alt="Logo" onClick={handleCloseMenu} />
               </StyledLogoSlogan>
               <Contact />
             </>

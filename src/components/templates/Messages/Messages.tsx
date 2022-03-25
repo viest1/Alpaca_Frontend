@@ -43,17 +43,22 @@ const Form = styled.form`
   }
   > div:last-child {
     width: 100%;
+    > button {
+      border-bottom-right-radius: 0.4rem;
+    }
   }
 `;
 
 const ContainerContactListAndMessages = styled.div`
   display: flex;
   border: 2px solid #1f313e;
+  margin: 3rem 0;
+  border-radius: 0.6rem;
   box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
   //margin: 0 auto;
   justify-content: space-between;
   ${({ theme }) => theme.up(theme.breakpoint.sm)} {
-    margin: 0 auto;
+    margin: 3rem auto 3rem auto;
   }
   //gap: 3rem;
 `;
@@ -66,20 +71,28 @@ const ContactList = styled.div`
   max-width: 250px;
   overscroll-behavior: contain;
   // TODO Not good - to FIX
-  max-height: 510px;
+  max-height: 610px;
+  border-top-left-radius: 0.4rem;
+  border-bottom-left-radius: 0.4rem;
 
   ${({ theme }) => theme.down(theme.breakpoint.sm)} {
-    min-width: 50px;
-    max-width: 50px;
+    min-width: 70px;
+    max-width: 70px;
   }
 `;
 
 const WrapperBoxMessage = styled.div`
   //border: 2px solid red;
-  ${({ theme }) => theme.down(theme.breakpoint.sm)} {
-    width: 100%;
-    min-width: 300px;
-  }
+  // ${({ theme }) => theme.down(theme.breakpoint.sm)} {
+  //   width: 100%;
+  //   min-width: 300px;
+  // }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top-right-radius: 0.4rem;
+  border-bottom-right-radius: 0.4rem;
 `;
 
 const Contact = styled.div<Props>`
@@ -116,7 +129,7 @@ const WrapperMessages = styled.div`
   //padding: 1rem;
   //border: 2px solid black;
   height: 100%;
-  max-height: 400px;
+  max-height: 500px;
   width: auto;
   max-width: 700px;
   display: flex;
@@ -127,7 +140,7 @@ const WrapperMessages = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    overflow-y: scroll;
+    overflow: auto;
     overscroll-behavior: contain;
     height: 100%;
     padding-top: 0.4rem;
@@ -140,6 +153,10 @@ const WrapperMessages = styled.div`
     min-width: 700px;
     max-width: 700px;
   }
+  ${({ theme }) => theme.up(theme.breakpoint.l)} {
+    min-width: 1000px;
+    max-width: 1000px;
+  }
 `;
 
 const PContainer = styled.div`
@@ -148,6 +165,7 @@ const PContainer = styled.div`
   padding: 1rem;
   font-family: 'Inter';
   font-size: ${({ theme }) => theme.fontSizeInter.ms};
+  border-top-right-radius: 0.4rem;
 `;
 
 const Microphone = styled(FaMicrophone)`
@@ -332,6 +350,16 @@ function Messages() {
   ];
 
   if (isLoading) return <LoadingSpin />;
+  if (!clients.length) {
+    return (
+      <Container>
+        <PageHead pageHeadInfo={pageHeadInfo} />
+        <div style={{ padding: '1rem' }}>
+          <NoItemsFound text="Clients" />
+        </div>
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -363,25 +391,22 @@ function Messages() {
               </PContainer>
             )}
             <div>
-              {!clients.length && <NoItemsFound text="Messages" />}
               {clientMessages.map((item: any, i) => (
                 <CardMessage
-                  // style={{ marginLeft: item.creator === userData.userId ? 'auto' : null }}
                   marginLeft={item.creator === userData.userId}
                   key={item._id}
                   message={item}
                   idName={i === clientMessages.length - 1 ? 'lastMessage' : undefined}
-                  // ref={i === clientMessages.length - 1 ? ref : null}
                 />
               ))}
-              {/* <div ref={lastRef} /> */}
               <AlwaysScrollToBottom />
             </div>
           </WrapperMessages>
           <Form onSubmit={handleSubmitMessage}>
             <div>
               <Input
-                margin="0 0 0.1rem 0"
+                form
+                margin="0 0.1rem 0 0"
                 placeholder="Write a Message..."
                 name="message"
                 onChange={handleChange}

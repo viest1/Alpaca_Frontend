@@ -17,19 +17,27 @@ const PageContainer = styled.div`
 `;
 
 const FormContainer = styled.form`
-  /* border: 2px solid red; */
+  //border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 70px 2fr 70px;
   margin: 2rem auto;
   column-gap: 5px;
   max-width: 1400px;
-  /* padding-left: 5rem;
-  padding-right: 5rem;
-  margin-bottom: 5rem; */
+  padding: 2rem;
+  margin-bottom: 5rem;
+  b ${({ theme }) => theme.down(theme.breakpoint.m)} {
+     {
+      grid-column: 1;
+      grid-row: 2;
+      padding: 0;
+    }
+  }
 `;
 
-const Intro = styled.div`
+/* const Intro = styled.div`
   //border: 2px solid green;
   display: flex;
   flex-wrap: wrap;
@@ -46,7 +54,7 @@ const Intro = styled.div`
   .left {
     max-width: 700px;
   }
-`;
+`; */
 
 const BasicInfoContainer = styled.div`
   /*  border: 2px solid green; */
@@ -57,16 +65,20 @@ const BasicInfoContainer = styled.div`
   gap: 4rem;
 
   ${({ theme }) => theme.down(theme.breakpoint.m)} {
-    grid-template-columns: minmax(450px, 2fr);
-    grid-template-rows: 1fr 1fr;
+     {
+      grid-template-columns: minmax(400px, 2fr);
+      grid-template-rows: 1fr 1fr;
+    }
   }
 
   .listOfServices {
     /* border: 2px solid red; */
 
     ${({ theme }) => theme.down(theme.breakpoint.m)} {
-      grid-column: 1;
-      grid-row: 2;
+       {
+        grid-column: 1;
+        grid-row: 2;
+      }
     }
   }
 `;
@@ -79,28 +91,62 @@ const LeftContainer = styled.div`
   grid-template-rows: 1fr 50px;
   column-gap: 10px;
   border-radius: 10px;
-  border: 3px solid black;
+  border: 1px solid black;
   box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
+
+  ${({ theme }) => theme.down(theme.breakpoint.sm)} {
+     {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 50px;
+    }
+  }
 
   .left {
     /* border: 5px solid yellow; */
     display: flex;
     flex-direction: column;
     align-items: center;
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+
+    ${({ theme }) => theme.down(theme.breakpoint.sm)} {
+       {
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+      }
+    }
   }
 
   .right {
     /* border: 5px solid purple; */
     display: flex;
     flex-direction: column;
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+
+    ${({ theme }) => theme.down(theme.breakpoint.sm)} {
+       {
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+    }
   }
 `;
 
 const ButtonWrapper = styled.div`
-  grid-row: 2;
+  grid-row: -1;
   grid-column: 2 / span 1;
   justify-self: end;
   align-self: center;
+  ${({ theme }) => theme.down(theme.breakpoint.sm)} {
+    {
+     grid-row: -1;
+     grid-column: 1/-1;
+   }
+ }
+}
 `;
 
 interface initial {
@@ -191,7 +237,7 @@ function NewProject(): JSX.Element {
 
   return (
     <PageContainer>
-      <PageHead pageHeadInfo={pageHeadInfo} intro={pageHeadInfo[0].intro} />
+      <PageHead pageHeadInfo={pageHeadInfo} />
 
       <FormContainer onSubmit={handleSubmitNewProject}>
         <BasicInfoContainer>
