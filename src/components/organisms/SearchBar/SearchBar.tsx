@@ -20,7 +20,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 20%;
 `;
 
 const ContainerMicrophone = styled.div`
@@ -112,7 +111,6 @@ function SearchBar({ top }: SearchBarI) {
     <Container ref={ref}>
       <Input
         margin="0"
-        width="300px"
         name="searchBar"
         value={inputs.searchBar}
         onChange={handleChange}
