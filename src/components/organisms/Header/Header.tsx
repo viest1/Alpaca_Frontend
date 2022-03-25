@@ -213,8 +213,10 @@ const ContainerSearchBar = styled.div`
   // }
 `;
 
-const { t } = useTranslation();
 
+
+function Header() {
+const { t } = useTranslation();
 const dataDesktop = [
   {
     path: '/aboutUs',
@@ -272,8 +274,6 @@ const dataHeaderClient = [
     id: 3
   }
 ];
-
-function Header() {
   const data = [
     {
       path: '/aboutUs',
