@@ -145,9 +145,9 @@ function HeroSection() {
       <Container style={{ position: 'relative' }}>
         <div>
           <h1 style={{ position: 'relative', zIndex: 1 }}>{t('landingPageMainText')}</h1>
- <!--      <h3 style={{ width: '500px', position: 'relative', zIndex: 1 }}>
-            // {t('landingPageMainText')}
-          </h3> -->
+          {/* <h3 style={{ width: '500px', position: 'relative', zIndex: 1 }}> */}
+          {/*        {t('landingPageMainText')} */}
+          {/*      </h3>  */}
 
           <div>
             <img src={womenOnTheWay} alt="women on the way" />
