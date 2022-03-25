@@ -36,7 +36,9 @@ const ThreeDotMenu = styled.div`
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   align-items: center;
-  background-color: #fcbf49;
+  //background-color: #fcbf49;
+  //background: ${({ theme }) => theme.color.main5};
+  box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
   border: 1px solid black;
   border-radius: 10px;
   min-height: 42px;

@@ -87,10 +87,15 @@ const ContainerIconAndText = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
-
-  p {
-    font-size: 17px;
-  }
+//   David
+//   p {
+//     font-size: 17px;
+// }
+  > p {
+    font-size: ${({ theme }) => theme.fontSizeOpenSans.ms};
+    ${({ theme }) => theme.down(theme.breakpoint.sm)} {
+      font-size: ${({ theme }) => theme.fontSizeOpenSans.xs};
+    }
 `;
 
 const Wave = styled.img`
@@ -116,17 +121,17 @@ function HeroSection() {
   const dataHeroSection = [
     {
       text: t('landingPageMainText'),
-      icon: <MdCheckCircleOutline fontSize={36} />,
+      icon: <MdCheckCircleOutline color="#FF0054" fontSize={36} />,
       id: 1
     },
     {
       text: t('landingPageSmallMainTextOne'),
-      icon: <MdCheckCircleOutline fontSize={36} />,
+      icon: <MdCheckCircleOutline color="#FF0054" fontSize={36} />,
       id: 2
     },
     {
       text: t('landingPageSmallMainTextTwo') + t('landingPageSmallMainTextThree'),
-      icon: <MdCheckCircleOutline fontSize={36} />,
+      icon: <MdCheckCircleOutline color="#FF0054" fontSize={36} />,
       id: 3
     }
   ];
