@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-x: hidden;
   }
 
   html {
@@ -100,13 +101,11 @@ export const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar-track {
     background: #eae2b7;
     background: #001523;
-    width: 10px;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #3a5d74;
-    width: 10px;
   }
 
   /* Handle on hover */
