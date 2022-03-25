@@ -43,6 +43,10 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
   }
 
+  input, textarea {
+    padding-left: 15px;
+ }
+  
   p {
     margin: 0;
   }

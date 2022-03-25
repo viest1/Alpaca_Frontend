@@ -87,12 +87,15 @@ const ContainerIconAndText = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
+//   David
+//   p {
+//     font-size: 17px;
+// }
   > p {
     font-size: ${({ theme }) => theme.fontSizeOpenSans.ms};
     ${({ theme }) => theme.down(theme.breakpoint.sm)} {
       font-size: ${({ theme }) => theme.fontSizeOpenSans.xs};
     }
-  }
 `;
 
 const Wave = styled.img`
@@ -136,7 +139,9 @@ function HeroSection() {
     <Background>
       <Container style={{ position: 'relative' }}>
         <div>
-          <h3 style={{ position: 'relative', zIndex: 1 }}>{t('landingPageMainText')}</h3>
+          <h3 style={{ width: '500px', position: 'relative', zIndex: 1 }}>
+            {t('landingPageMainText')}
+          </h3>
           <div>
             <img src={womenOnTheWay} alt="women on the way" />
           </div>

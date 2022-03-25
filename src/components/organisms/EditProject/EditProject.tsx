@@ -5,7 +5,7 @@ import { CgPlayListAdd, CgRemove } from 'react-icons/cg';
 import { BsImage } from 'react-icons/bs';
 import { AiOutlineFileText } from 'react-icons/ai';
 import { MdDelete, MdFullscreen } from 'react-icons/md';
-import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
+import Input from '../../atoms/Input/Input';
 import useForm from '../../../hooks/useForm';
 import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
@@ -415,15 +415,50 @@ function EditProject() {
       <PageHead pageHeadInfo={PageHeadInfo} />
       <Container onSubmit={handleSubmitEditProject}>
         <ContainerInputs>
-          {data.map((item: any) => (
-            <InputWithLabel
-              key={item._id}
-              label={item.label}
-              name={item.name}
-              onChange={handleChange}
-              value={inputs[item.name]}
-              type={item.type}
-              required={item.required}
+      {data.map((item: any) => (
+        <Input
+          form
+          key={item._id}
+          label={item.label}
+          name={item.name}
+          onChange={handleChange}
+          value={inputs[item.name]}
+          type={item.type}
+          required={item.required}
+        />
+      ))}
+      {inputs.services.map((_item: any, i: number) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <div key={i}>
+          <NumberServiceOnMobile>
+            <p>Service {i + 1}</p>
+            <CgRemove size={20} onClick={() => handleServiceRemove(i)} />
+            <CgPlayListAdd size={30} onClick={() => handleServiceAdd(i)} />
+          </NumberServiceOnMobile>
+          <ContainerServices>
+            <div>
+              <Input
+                form
+                label="Service Name"
+                name="serviceName"
+                value={inputs?.services[i]?.serviceName}
+                onChange={(e: any) => handleServiceChange(e, i)}
+              />
+              <Input
+                form
+                label="Price"
+                name="price"
+                value={inputs?.services[i]?.price}
+                onChange={(e: any) => handleServiceChange(e, i)}
+                type="number"
+              />
+            </div>
+            <Input
+              form
+              label="Description"
+              name="description"
+              value={inputs?.services[i]?.description}
+              onChange={(e: any) => handleServiceChange(e, i)}
             />
           ))}
         </ContainerInputs>
@@ -434,139 +469,112 @@ function EditProject() {
               <p>Service {i + 1}</p>
               <CgRemove size={20} onClick={() => handleServiceRemove(i)} />
               <CgPlayListAdd size={30} onClick={() => handleServiceAdd(i)} />
-            </NumberServiceOnMobile>
-            <ContainerServices>
-              <div>
-                <InputWithLabel
-                  label="Service Name"
-                  name="serviceName"
-                  value={inputs?.services[i]?.serviceName}
-                  onChange={(e: any) => handleServiceChange(e, i)}
-                />
-                <InputWithLabel
-                  label="Price"
-                  name="price"
-                  value={inputs?.services[i]?.price}
-                  onChange={(e: any) => handleServiceChange(e, i)}
-                  type="number"
-                />
-              </div>
-              <InputWithLabel
-                label="Description"
-                name="description"
-                value={inputs?.services[i]?.description}
-                onChange={(e: any) => handleServiceChange(e, i)}
-              />
-              <ContainerIcons>
-                <CgRemove size={20} onClick={() => handleServiceRemove(i)} />
-                <CgPlayListAdd size={30} onClick={() => handleServiceAdd(i)} />
-              </ContainerIcons>
-            </ContainerServices>
-          </div>
-        ))}
-        {!inputs.services.length && <CgPlayListAdd size={30} onClick={handleServiceAddFirst} />}
-        <ContainerInputAndPhoto>
-          <InputWithLabel label="Avatar" name="avatar" onChange={handleChange} type="file" />
-          <RoundedPhoto img={inputs.avatar || ''} alt="avatar" name={project?.clientName} />
-        </ContainerInputAndPhoto>
-        <Button
-          text={showPreviews ? 'Hide Previews' : 'Show Previews Files/Images'}
-          onClick={() => setShowPreviews((prev) => !prev)}
-        />
-        {!showPreviews ? (
-          <>
-            <p>Images</p>
-            <ContainerUploadedImages>
-              {inputs.images.length > 0 &&
-                inputs.images.map((item: any, i: number) => (
-                  <div key={item.key}>
-                    <a href={item.url} target="_blank" rel="noreferrer">
-                      <BsImage fontSize={36} />
-                    </a>
-                    <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveImage(e, i)} />
-                  </div>
-                ))}
-            </ContainerUploadedImages>
-            <p>Files</p>
-            <ContainerUploadedFiles>
-              {inputs.files.length > 0 &&
-                inputs.files.map((item: any, i: number) => (
-                  <div key={item.key}>
-                    <a href={item.url} target="_blank" rel="noreferrer">
-                      <AiOutlineFileText fontSize={40} />
-                    </a>
-                    <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveFile(e, i)} />
-                  </div>
-                ))}
-            </ContainerUploadedFiles>
-          </>
-        ) : (
-          <>
-            <p>Images</p>
-            <ContainerPreviewImg>
-              {inputs.images.length > 0 &&
-                inputs.images.map((item: any, i: number) => (
-                  <div key={item.key}>
-                    {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
-                    <img src={`${item.url}`} height="100%" width="100%" alt="idea" />
-                    <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveImage(e, i)} />
-                  </div>
-                ))}
-            </ContainerPreviewImg>
-            <p>Files</p>
-            <ContainerIframesFiles>
-              {inputs.files.length > 0 &&
-                inputs.files.map((item: any, i: number) => (
-                  <div key={item.key}>
-                    {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
-                    <iframe
-                      // src={`https://drive.google.com/viewerng/viewer?url=${item.url}&embedded=true`}
-                      // src={`https://drive.google.com/gview?url=${item.url}&embedded=true`}
-                      // src={`https://docs.google.com/gview?url=${item.url}&embedded=true`}
-                      src={`${item.url}`}
-                      height="100%"
-                      width="100%"
-                      loading="lazy"
-                      frameBorder="0"
-                      style={{ border: 0 }}
-                    />
-                    {/* eslint-disable-next-line jsx-a11y/alt-text */}
-                    {/* <object data={item.url} type="application/pdf" width="100%" height="100%"> */}
-                    {/*   <p> */}
-                    {/*     Your browser does not support PDFs. */}
-                    {/*     <a href={item.url}>Download the PDF</a>. */}
-                    {/*   </p> */}
-                    {/* </object> */}
-                    <AOpen href={item.url} target="_blank" rel="noreferrer">
-                      <MdFullscreen fontSize={32} />
-                    </AOpen>
-                    <DeleteIcon fontSize={24} onClick={(e: any) => handleRemoveFile(e, i)} />
-                  </div>
-                ))}
-            </ContainerIframesFiles>
-          </>
-        )}
-        {/* <iframe */}
-        {/*   src={`https://docs.google.com/gview?url=${url}&embedded=true`} */}
-        {/*   style={{ width: '200px', height: '200px' }} */}
-        {/*   frameBorder="0" */}
-        {/* /> */}
-        {/* <iframe */}
-        {/*   src={`${url}#view=fitH`} */}
-        {/*   height="100%" */}
-        {/*   width="100%" */}
-        {/*   allowFullScreen */}
-        {/*   loading="lazy" */}
-        {/* /> */}
+            </ContainerIcons>
+          </ContainerServices>
+        </div>
+      ))}
+      {!inputs.services.length && <CgPlayListAdd size={30} onClick={handleServiceAddFirst} />}
+      <ContainerInputAndPhoto>
+        <Input form label="Avatar" name="avatar" onChange={handleChange} type="file" />
+        <RoundedPhoto img={inputs.avatar || ''} alt="avatar" name={project?.clientName} />
+      </ContainerInputAndPhoto>
+      <Button
+        text={showPreviews ? 'Hide Previews' : 'Show Previews Files/Images'}
+        onClick={() => setShowPreviews((prev) => !prev)}
+      />
+      {!showPreviews ? (
+        <>
+          <p>Images</p>
+          <ContainerUploadedImages>
+            {inputs.images.length > 0 &&
+              inputs.images.map((item: any, i: number) => (
+                <div key={item.key}>
+                  <a href={item.url} target="_blank" rel="noreferrer">
+                    <BsImage fontSize={36} />
+                  </a>
+                  <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveImage(e, i)} />
+                </div>
+              ))}
+          </ContainerUploadedImages>
+          <p>Images</p>
+          <ContainerUploadedFiles>
+            {inputs.files.length > 0 &&
+              inputs.files.map((item: any, i: number) => (
+                <div key={item.key}>
+                  <a href={item.url} target="_blank" rel="noreferrer">
+                    <AiOutlineFileText fontSize={40} />
+                  </a>
+                  <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveFile(e, i)} />
+                </div>
+              ))}
+          </ContainerUploadedFiles>
+        </>
+      ) : (
+        <>
+          <p>Files</p>
+          <ContainerIframesFiles>
+            {inputs.files.length > 0 &&
+              inputs.files.map((item: any, i: number) => (
+                <div key={item.key}>
+                  {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
+                  <iframe
+                    // src={`https://drive.google.com/viewerng/viewer?url=${item.url}&embedded=true`}
+                    // src={`https://drive.google.com/gview?url=${item.url}&embedded=true`}
+                    // src={`https://docs.google.com/gview?url=${item.url}&embedded=true`}
+                    src={`${item.url}`}
+                    height="100%"
+                    width="100%"
+                    loading="lazy"
+                    frameBorder="0"
+                    style={{ border: 0 }}
+                  />
+                  {/* eslint-disable-next-line jsx-a11y/alt-text */}
+                  {/* <object data={item.url} type="application/pdf" width="100%" height="100%"> */}
+                  {/*   <p> */}
+                  {/*     Your browser does not support PDFs. */}
+                  {/*     <a href={item.url}>Download the PDF</a>. */}
+                  {/*   </p> */}
+                  {/* </object> */}
+                  <AOpen href={item.url} target="_blank" rel="noreferrer">
+                    <MdFullscreen fontSize={32} />
+                  </AOpen>
+                  <DeleteIcon fontSize={24} onClick={(e: any) => handleRemoveFile(e, i)} />
+                </div>
+              ))}
+          </ContainerIframesFiles>
+          <p>Images</p>
+          <ContainerPreviewImg>
+            {inputs.images.length > 0 &&
+              inputs.images.map((item: any, i: number) => (
+                <div key={item.key}>
+                  {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
+                  <img src={`${item.url}`} height="100%" width="100%" alt="idea" />
+                  <DeleteIcon fontSize={22} onClick={(e: any) => handleRemoveImage(e, i)} />
+                </div>
+              ))}
+          </ContainerPreviewImg>
+        </>
+      )}
+      {/* <iframe */}
+      {/*   src={`https://docs.google.com/gview?url=${url}&embedded=true`} */}
+      {/*   style={{ width: '200px', height: '200px' }} */}
+      {/*   frameBorder="0" */}
+      {/* /> */}
+      {/* <iframe */}
+      {/*   src={`${url}#view=fitH`} */}
+      {/*   height="100%" */}
+      {/*   width="100%" */}
+      {/*   allowFullScreen */}
+      {/*   loading="lazy" */}
+      {/* /> */}
 
-        {/* FOR NOW */}
-        {/* <p>Files/Images Upload</p> */}
-        {/* <FileUploader projectId={projectId} /> */}
-        <ContainerButton>
-          <Button type="submit" text={isLoadingSubmit ? 'Loading...' : 'Edit Project'} />
-        </ContainerButton>
-      </Container>
-    </>
+      {/* FOR NOW */}
+      {/* <p>Files/Images Upload</p> */}
+      {/* <FileUploader projectId={projectId} /> */}
+      <ContainerButton>
+        <Button type="submit" text={isLoadingSubmit ? 'Loading...' : 'Edit Project'} />
+      </ContainerButton>
+    </Container>
   );
 }
 

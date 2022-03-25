@@ -28,7 +28,7 @@ const FormContainer = styled.form`
   margin-bottom: 5rem; */
 `;
 
-const Intro = styled.div`
+/* const Intro = styled.div`
   //border: 2px solid green;
   display: flex;
   flex-wrap: wrap;
@@ -45,7 +45,7 @@ const Intro = styled.div`
   .left {
     max-width: 700px;
   }
-`;
+`; */
 
 const BasicInfoContainer = styled.div`
   /*  border: 2px solid green; */
@@ -174,23 +174,13 @@ function NewProject(): JSX.Element {
       threeDotButton: {
         button1: 'New Project',
         onClickEvent: 'noation'
-      },
-      intro: (
-        <Intro>
-          <p className="left">
-            How this Works:
-            <br /> - Inputs marqued with a (*) symbol are required.
-            <br /> - Use the right side of the page to write down up to 10 services.
-            <br />- Description box is resizable from the bottom-right corner
-          </p>
-        </Intro>
-      )
+      }
     }
   ];
 
   return (
     <PageContainer>
-      <PageHead pageHeadInfo={pageHeadInfo} intro={pageHeadInfo[0].intro} />
+      <PageHead pageHeadInfo={pageHeadInfo} />
 
       <FormContainer onSubmit={handleSubmitNewProject}>
         <BasicInfoContainer>

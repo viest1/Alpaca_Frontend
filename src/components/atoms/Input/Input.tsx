@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 interface ContainerProp {
-  width: string | undefined;
+  width?: string | undefined;
   height: string | undefined;
   margin: string | undefined;
   border: string | undefined;
@@ -21,16 +21,19 @@ to {
 `;
 
 const Container = styled.div<ContainerProp>`
-  color: ${({ color }) => color || 'black'};
   width: 100%;
-  margin: ${({ margin }) => margin || '50px 3%;'};
+  margin: ${({ margin }) => margin || '5px 3%;'};
   height: ${({ height }) => height};
   position: relative;
 
+  label {
+    color: ${({ color }) => color || 'black'};
+  }
+
   input {
+    width: ${({ width }) => width || '100%'};
     font: 15px/24px 'Open Sans', sans-serif;
     color: black;
-    width: 100%;
     letter-spacing: 1px;
 
     :focus {
@@ -155,7 +158,6 @@ const ContainerForm = styled.div<ContainerProp>`
     height: 40px;
     transition: border-color 0.3s;
     font: 15px/24px 'Open Sans', sans-serif;
-    color: black;
     width: 100%;
     letter-spacing: 1px;
     margin: ${({ margin }) => margin || '0 0 1rem 0'};
@@ -170,6 +172,7 @@ const ContainerForm = styled.div<ContainerProp>`
   label {
     font-family: 'Inter';
     font-weight: 500;
+    color: ${({ color }) => color || 'black'};
   }
 `;
 
@@ -200,6 +203,7 @@ const ContainerTxtArea = styled.div<ContainerProp>`
   label {
     font-family: 'Inter';
     font-weight: 500;
+    color: ${({ color }) => color || 'black'};
   }
 `;
 
@@ -261,11 +265,10 @@ function Input({
             value={value}
             label={label}
             inputName={inputName}
-            color={color}
-            width={width}
             height={height}
             margin={margin}
             border={border}
+            width={width}
           >
             <input
               className="effect"
@@ -278,6 +281,7 @@ function Input({
               onChange={onChange}
               multiple={multiple}
               onBlur={getValue}
+              color={color}
             />
             {label === inputName && <label htmlFor={id || name}>{label}</label>}
             <span className="focus-border">
@@ -292,13 +296,13 @@ function Input({
             value={value}
             label={label}
             inputName={inputName}
-            color={color}
             width={width}
             height={height}
             margin={margin}
             border={border}
             onBlur={onBlur}
             ref={ref}
+            color={color}
           >
             <label htmlFor={id || name}>{label}</label>
             <textarea
@@ -324,11 +328,11 @@ function Input({
             value={value}
             label={label}
             inputName={inputName}
-            color={color}
             width={width}
             height={height}
             margin={margin}
             border={border}
+            color={color}
           >
             <label htmlFor={id || name}>{label}</label>
             <input
