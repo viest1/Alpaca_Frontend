@@ -334,6 +334,7 @@ const MainContainer = styled.div`
       animation-fill-mode: forwards;
       animation-timing-function: ease-in-out;
       animation-delay: 0.2s;
+      font-size: ${({ theme }) => theme.fontSizeOpenSans.xs};
     }
     ::before {
     }
@@ -691,7 +692,7 @@ function CardProfile({ clientData, projectData, client }: client) {
               <p>{projectData.clientName}</p>
             </div>
             <div className="phone">
-              <div>{projectData.websiteName || 'example.com'}</div>
+              <p>{projectData.websiteName || 'example.com'}</p>
             </div>
           </MainDetails>
           <div className="social">

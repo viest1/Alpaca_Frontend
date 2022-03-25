@@ -22,7 +22,6 @@ const Container = styled.div`
   flex-direction: column;
   flex: 1;
   max-width: 350px;
-
   ${({ theme }) => theme.down(theme.breakpoint.m)} {
      {
       max-width: none;

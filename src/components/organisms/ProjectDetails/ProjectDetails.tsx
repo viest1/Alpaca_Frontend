@@ -415,7 +415,8 @@ function ProjectDetail() {
   const [project, setProject]: any = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [showPreviews, setShowPreviews] = useState(false);
-  const { userData, filesAreUploaded, setFilesAreUploaded } = useContext(Context);
+  const { userData, filesAreUploaded, setFilesAreUploaded, setOpenChatBoxWithThisUser } =
+    useContext(Context);
   const { handleError } = useError();
   const { projectId } = useParams();
 
@@ -486,8 +487,14 @@ function ProjectDetail() {
   const handleNavigateToEditProject = () => {
     navigate(`/editProject/${projectId}`);
   };
-  // const [total, setTotal] = useState([]);
-  // const handleTotal = project.price.reduce((sum: number, value: number) => sum + value);
+  const handleNavigateToChatBoxMessage = () => {
+    if (userData.role === 'Client') {
+      setOpenChatBoxWithThisUser(project.ownerFreelancer);
+    }
+    if (userData.role === 'Freelancer') {
+      setOpenChatBoxWithThisUser(project.ownerUser);
+    }
+  };
 
   // Total of the services
   console.log(`This is the project`, project.services);
@@ -582,7 +589,7 @@ function ProjectDetail() {
                 padding="0.5rem 1rem"
                 onClick={handleNavigateToEditProject}
               />
-              <GeneratePdf />
+              <GeneratePdf project={project} />
             </ContainerButtonAndGenerate>
             <ContainerButtonAndFiles>
               <Button
@@ -681,6 +688,7 @@ function ProjectDetail() {
                 text={`Send Message To ${userData.role === 'Freelancer' ? 'Client' : 'Freelancer'}`}
                 width="100%"
                 padding="1.5rem 2rem"
+                onClick={handleNavigateToChatBoxMessage}
               />
             </ContainerDetailsDesktop>
             <ProjectInvoicesFilesDesktop>
@@ -754,7 +762,7 @@ function ProjectDetail() {
                     padding="0.5rem 1rem"
                     onClick={handleNavigateToEditProject}
                   />
-                  <GeneratePdf />
+                  <GeneratePdf project={project} />
                   {/* <Button */}
                   {/*   text="+ Add note" */}
                   {/*   height="50px" */}

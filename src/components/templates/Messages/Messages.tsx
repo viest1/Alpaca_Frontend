@@ -42,17 +42,22 @@ const Form = styled.form`
   }
   > div:last-child {
     width: 100%;
+    > button {
+      border-bottom-right-radius: 0.4rem;
+    }
   }
 `;
 
 const ContainerContactListAndMessages = styled.div`
   display: flex;
   border: 2px solid #1f313e;
+  margin: 3rem 0;
+  border-radius: 0.6rem;
   box-shadow: ${({ theme }) => theme.boxShadow.mainShadow};
   //margin: 0 auto;
   justify-content: space-between;
   ${({ theme }) => theme.up(theme.breakpoint.sm)} {
-    margin: 0 auto;
+    margin: 3rem auto 3rem auto;
   }
   //gap: 3rem;
 `;
@@ -65,20 +70,28 @@ const ContactList = styled.div`
   max-width: 250px;
   overscroll-behavior: contain;
   // TODO Not good - to FIX
-  max-height: 510px;
+  max-height: 610px;
+  border-top-left-radius: 0.4rem;
+  border-bottom-left-radius: 0.4rem;
 
   ${({ theme }) => theme.down(theme.breakpoint.sm)} {
-    min-width: 50px;
-    max-width: 50px;
+    min-width: 70px;
+    max-width: 70px;
   }
 `;
 
 const WrapperBoxMessage = styled.div`
   //border: 2px solid red;
-  ${({ theme }) => theme.down(theme.breakpoint.sm)} {
-    width: 100%;
-    min-width: 300px;
-  }
+  // ${({ theme }) => theme.down(theme.breakpoint.sm)} {
+  //   width: 100%;
+  //   min-width: 300px;
+  // }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top-right-radius: 0.4rem;
+  border-bottom-right-radius: 0.4rem;
 `;
 
 const Contact = styled.div<Props>`
@@ -115,7 +128,7 @@ const WrapperMessages = styled.div`
   //padding: 1rem;
   //border: 2px solid black;
   height: 100%;
-  max-height: 400px;
+  max-height: 500px;
   width: auto;
   max-width: 700px;
   display: flex;
@@ -126,7 +139,7 @@ const WrapperMessages = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    overflow-y: scroll;
+    overflow: auto;
     overscroll-behavior: contain;
     height: 100%;
     padding-top: 0.4rem;
@@ -139,6 +152,10 @@ const WrapperMessages = styled.div`
     min-width: 700px;
     max-width: 700px;
   }
+  ${({ theme }) => theme.up(theme.breakpoint.l)} {
+    min-width: 1000px;
+    max-width: 1000px;
+  }
 `;
 
 const PContainer = styled.div`
@@ -147,6 +164,7 @@ const PContainer = styled.div`
   padding: 1rem;
   font-family: 'Inter';
   font-size: ${({ theme }) => theme.fontSizeInter.ms};
+  border-top-right-radius: 0.4rem;
 `;
 
 const Microphone = styled(FaMicrophone)`

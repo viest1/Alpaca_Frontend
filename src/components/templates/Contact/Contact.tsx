@@ -114,7 +114,7 @@ function Contact(): JSX.Element {
     <PageContainer>
       <TextContainer>
         <h2 style={{ WebkitTextStroke: '0' }}>
-          {t('contact1')} <br /> {t('contact2')} <br /> <RedSpan>{t('contact3')}</RedSpan>
+          {t('contact1')} <br /> {t('contact2')} <br /> <RedSpan>{t('contact3')} </RedSpan>
           {t('contact4')}
         </h2>
       </TextContainer>
