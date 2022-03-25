@@ -173,6 +173,7 @@ const projectInfo: initial = {
 
 function NewProject(): JSX.Element {
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
   const { userData } = useContext(Context);
   const { inputs, handleChange } = useForm(projectInfo);
   const { handleError } = useError();
