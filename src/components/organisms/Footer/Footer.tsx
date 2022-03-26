@@ -26,7 +26,7 @@ const FooterBody = styled.div`
   font-size: 14px;
   padding-bottom: 30px;
   z-index: -1;
-  margin-top: -30px;
+  margin-top: 0px;
   position: absolute;
   bottom: 0;
 `;
@@ -35,6 +35,7 @@ const FooterBody = styled.div`
 
 const FooterWave = styled.div`
   background-image: url(${mobileFooterWave});
+  background-color: #ffffff;
   background-position: top;
   position: relative;
   background-size: 100% 100px;
@@ -78,6 +79,8 @@ const StyledSpan = styled.span`
 const MyFooter = styled.div`
   width: 100%;
   position: relative;
+  z-index: 500;
+  //margin-top: 5rem;
 `;
 
 // Desktop Styles

@@ -28,7 +28,7 @@ const FormContainer = styled.form`
   max-width: 1400px;
   padding: 2rem;
   margin-bottom: 5rem;
-  b ${({ theme }) => theme.down(theme.breakpoint.m)} {
+  ${({ theme }) => theme.down(theme.breakpoint.m)} {
      {
       grid-column: 1;
       grid-row: 2;
