@@ -9,10 +9,10 @@ import { Context } from '../../../providers/GeneralProvider';
 import useError from '../../../hooks/useError';
 import CardMessage from '../../molecules/CardMessage/CardMessage';
 import { AlwaysScrollToBottom } from '../../templates/Messages/Messages';
-import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel';
 import Button from '../../atoms/Button/Button';
 import useForm from '../../../hooks/useForm';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
+import Input from '../../atoms/Input/Input';
 
 const Form = styled.form`
   padding: 1rem;
@@ -443,7 +443,7 @@ function GlobalMessage() {
           </div>
           <Form onSubmit={handleSubmitMessage}>
             <div>
-              <InputWithLabel
+              <Input
                 placeholder="Write a Message..."
                 name="message"
                 onChange={handleChange}

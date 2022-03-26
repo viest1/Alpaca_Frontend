@@ -1,7 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-/* import InputWithLabel from '../../atoms/InputWithLabel/InputWithLabel'; */
 import { FaMicrophone } from 'react-icons/fa';
 import Input from '../../atoms/Input/Input';
 import useForm from '../../../hooks/useForm';
@@ -22,7 +21,6 @@ const Container = styled.div`
   flex-direction: column;
   flex: 1;
   max-width: 350px;
-
   ${({ theme }) => theme.down(theme.breakpoint.m)} {
      {
       max-width: none;

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'; // Link to create the
 // import Contact from '../../molecules/Contact/Contact';
+import { useTranslation } from 'react-i18next';
 import { MdLocalPhone, MdEmail, MdOutlineFacebook } from 'react-icons/md';
 import { SiTwitter } from 'react-icons/si';
 import { IoLogoInstagram } from 'react-icons/io';
@@ -164,6 +165,7 @@ const LogoAndCopyrights = styled.div`
 // contact wurde importiert und kann deshalb im return zurückgegeben werden
 // ract returned nur ein element, deshalb muss ein allumschließendes element gegeben sein, kann auch div oder leerer tag sein
 function Footer() {
+  const { t } = useTranslation();
   const desktopVersion = useMediaQuery('(min-width: 1060px)');
   return (
     <MyFooter>
@@ -192,16 +194,16 @@ function Footer() {
             <StyledCol>
               <Contact>
                 <div>
-                  <NavLink path="/aboutUs" text="About Us" color="white" />
-                  <NavLink path="/services" text="Services" color="white" />
-                  <NavLink path="/contact" text="Contact" color="white" />
+                  <NavLink path="/aboutUs" text={t('footerAboutUs')} color="white" />
+                  <NavLink path="/services" text={t('footerServices')} color="white" />
+                  <NavLink path="/contact" text={t('footerContact')} color="white" />
                   <NavLink path="/impressum" text="Impressum" color="white" />
                   <NavLink path="/faq" text="FAQ" color="white" />
                 </div>
               </Contact>
             </StyledCol>
             <StyledCol>
-              <p>CONTACT US : </p>
+              <p>{t('footerContactUs')}</p>
               <FooterRow>
                 <MdLocalPhone color="white" size={28} />
                 <StyledSpan>+49 1234 6666666</StyledSpan>
@@ -216,7 +218,7 @@ function Footer() {
             <Link to="/">
               <CompanyLogo src={NS3wht} />
             </Link>
-            <p>&copy; All rights Reserved to Nomad Studio</p>
+            <p>&copy; {t('footerCopyright')}</p>
           </LogoAndCopyrights>
         </DesktopFooter>
       ) : (

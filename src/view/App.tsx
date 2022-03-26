@@ -58,6 +58,7 @@ function App(): JSX.Element {
           if (+userData.exp - Date.now() < 30000 && !messageDisplay) {
             handleError('For Your Safety We Will Logout You in a 30 seconds :)');
             setMessageDisplayed(true);
+            clearInterval(interval);
           }
           // If Token expired Clear UserData and Logout User/Admin
           if (Date.now() > userData.exp) {
