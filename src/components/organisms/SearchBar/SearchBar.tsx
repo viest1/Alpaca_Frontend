@@ -51,7 +51,7 @@ const ContainerFilteredList = styled.div<{ top: string | undefined }>`
   top: ${({ top }) => top || '60px'};
   width: 100%;
   min-width: 160px;
-  z-index: 5;
+  z-index: 500;
   max-height: 500px;
   overflow: auto;
   & > p {

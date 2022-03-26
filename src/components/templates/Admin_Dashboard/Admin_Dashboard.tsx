@@ -163,7 +163,10 @@ function AdminDashboard() {
       threeDotButton: {
         button1: 'New Client',
         onClickEvent: handleNavigateToCreateNewClient
-      }
+      },
+      helpButton:
+        // eslint-disable-next-line max-len
+        '- Here you will find the most recent customers, projects and statistics of your perfomrnace as freelancer'
     }
   ];
 
