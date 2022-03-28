@@ -23,6 +23,11 @@ const Container = styled.div`
 const H3 = styled.h3`
   text-align: left;
   font-weight: 400;
+  font-size: clamp(
+    ${({ theme }) => theme.fontSizeInter.ms},
+    5vw + 0.5rem,
+    ${({ theme }) => theme.fontSizeInter.ml}
+  );
   margin: 1rem 0;
   width: 100%;
   color: ${({ theme }) => theme.color.main2};
