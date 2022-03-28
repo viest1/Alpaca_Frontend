@@ -692,8 +692,12 @@ function CardProfile({ clientData, projectData, client }: client) {
             <div className="name">
               <p>{projectData.clientName || 'No Data'}</p>
             </div>
+            {/* What to display here? Website Name too long anyway i think - Patryk :-) */}
+            {/* <div className="phone"> */}
+            {/*   <p>{projectData.websiteName || 'No Data'}</p> */}
+            {/* </div> */}
             <div className="phone">
-              <p>{projectData.websiteName || 'No Data'}</p>
+              <p>{`Due: ${projectData.dueDate}` || 'No Data'}</p>
             </div>
           </MainDetails>
           <div className="social">
@@ -703,11 +707,15 @@ function CardProfile({ clientData, projectData, client }: client) {
                 <div>{projectData.companyName || 'No Data'}</div>
               </div>
               <div className="details">
-                <p>{t('cardProfileStart')}</p>
+                <p>Website</p>
+                <div>{projectData.websiteName || 'No Data'}</div>
+              </div>
+              <div className="details">
+                <p>{t('cardProfileStart')} Date</p>
                 <div>{projectData.startDate || 'No Data'}</div>
               </div>
               <div className="details">
-                <p>{t('cardProfileDue')}</p>
+                <p>{t('cardProfileDue')} Date</p>
                 <div>{projectData.dueDate || 'No Data'}</div>
               </div>
             </div>

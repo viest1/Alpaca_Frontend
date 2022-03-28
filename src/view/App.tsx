@@ -179,7 +179,9 @@ function App(): JSX.Element {
         body: JSON.stringify({ code })
       });
       const resJSON = await res.json();
-      if (res.status === 200) {
+      console.log(resJSON);
+      if (res.status >= 200 && res.status < 300) {
+        console.log('in OK', resJSON);
         setUserData(resJSON);
         navigate('/');
         handleError('You are correctly logged in', true);
