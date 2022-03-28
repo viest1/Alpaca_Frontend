@@ -128,6 +128,7 @@ const ChatBox = styled.div`
     display: flex;
     align-items: center;
     gap: 0.6rem;
+    color: white;
   }
 
   > div:first-child > div:nth-child(2) > svg:hover {
@@ -182,6 +183,7 @@ const ChatBoxSmall = styled.div`
     display: flex;
     align-items: center;
     gap: 0.6rem;
+    color: white;
   }
   > div:last-child > svg:hover {
     cursor: pointer;
@@ -270,7 +272,7 @@ const ContainerOpenContactList = styled.div`
 
 const Microphone = styled(FaMicrophone)`
   position: absolute;
-  top: 24px;
+  top: 11px;
   right: 8px;
   &:hover {
     cursor: pointer;
