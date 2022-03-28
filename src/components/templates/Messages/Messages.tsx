@@ -128,8 +128,8 @@ const Contact = styled.div<Props>`
 const WrapperMessages = styled.div`
   //padding: 1rem;
   //border: 2px solid black;
-  height: 100%;
-  max-height: 500px;
+  max-height: 100%;
+  height: 500px;
   width: auto;
   max-width: 700px;
   display: flex;
@@ -299,13 +299,15 @@ function Messages() {
 
   // Assign actually client on begin and set client messages
   useEffect(() => {
-    if (actuallyClient.length < 1 && clients.length > 0 && messages.length > 0) {
+    if (actuallyClient.length < 1 && clients.length > 0) {
       setActuallyClient([clients[0]]);
-      setClientMessages(() =>
-        messages.filter(
-          (item: any) => item.creator === clients[0]._id || item.receiver === clients[0]._id
-        )
-      );
+      if (messages.length > 0) {
+        setClientMessages(() =>
+          messages.filter(
+            (item: any) => item.creator === clients[0]._id || item.receiver === clients[0]._id
+          )
+        );
+      }
     }
     if (actuallyClient.length > 0) {
       inputs.receiverId = actuallyClient[0]._id;
