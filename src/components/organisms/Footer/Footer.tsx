@@ -35,7 +35,6 @@ const FooterBody = styled.div`
 
 const FooterWave = styled.div`
   background-image: url(${mobileFooterWave});
-  background-color: #ffffff;
   background-position: top;
   position: relative;
   background-size: 100% 100px;
