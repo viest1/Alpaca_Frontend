@@ -31,7 +31,7 @@ function ForgotPassword() {
   const { inputs, handleChange } = useForm(initialValue);
   const handleSendLinkToResetPassword = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log('You want have email with link to reset password on this email', inputs.email);
+
     const sendLinkToResetPassword = async () => {
       try {
         const res = await fetch(`${process.env.REACT_APP_BACKEND}/resetPassword`, {
@@ -42,7 +42,7 @@ function ForgotPassword() {
           body: JSON.stringify(inputs)
         });
         const resJSON = await res.json();
-        console.log(resJSON);
+
         if (res.status === 200) {
           navigate('/login');
           handleError('You got a email with link to reset password', true);
@@ -50,7 +50,6 @@ function ForgotPassword() {
           handleError(resJSON.message, false);
         }
       } catch (error: any) {
-        console.log('FETCHING ERROR', error);
         handleError();
       }
     };

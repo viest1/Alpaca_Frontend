@@ -120,12 +120,12 @@ function RoundedPhoto({
   // let acronym: string;
   // if (name) {
   //   acronym = name[0].toUpperCase();
-  //   console.log(acronym);
+
   // }
 
   const getAcronym = (nameToAcronym: string) => {
     const splittedArray = nameToAcronym.split(' ');
-    console.log({ splittedArray });
+
     let finishedAcronym = '';
     for (let i = 0; i < splittedArray.length; i++) {
       finishedAcronym += splittedArray[i][0].toUpperCase();
