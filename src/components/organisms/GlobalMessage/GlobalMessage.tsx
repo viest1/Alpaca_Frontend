@@ -133,8 +133,8 @@ const ChatBox = styled.div`
 
   > div:first-child > div:nth-child(2) > svg:hover {
     cursor: pointer;
-    background: white;
     border-radius: 50%;
+    transform: scale(1.2);
   }
 
   > div:first-child > div:nth-child(2) > svg {
@@ -187,7 +187,7 @@ const ChatBoxSmall = styled.div`
   }
   > div:last-child > svg:hover {
     cursor: pointer;
-    background: white;
+    transform: scale(1.2);
     border-radius: 50%;
   }
   ${({ theme }) => theme.down(theme.breakpoint.m)} {
