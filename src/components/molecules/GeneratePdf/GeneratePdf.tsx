@@ -11,7 +11,8 @@ function GeneratePdf({ project }: any) {
     email: 'company@gmail.com',
     website: project.websiteName || '-',
     addressCity: undefined,
-    addressStreet: undefined
+    addressStreet: undefined,
+    taxNumber: project.taxNumber || '-'
   };
   // const servicesData = [
   //   {
@@ -164,8 +165,7 @@ function GeneratePdf({ project }: any) {
 
 								<td>
 									${dataClient.companyName || 'Sparksuite, Inc.'}<br />
-									${`${dataClient.addressCity}${dataClient.addressStreet}` || '32453 Chicago'}<br /> 
-									${dataClient.website}
+									Tax Number: ${dataClient.taxNumber || 'T-1268334862'}<br />
 									${dataClient.email || 'Moon Street, US 32453'}
 								</td>
 							</tr>
