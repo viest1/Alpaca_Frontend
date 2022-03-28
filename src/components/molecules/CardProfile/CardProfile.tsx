@@ -613,7 +613,7 @@ function CardProfile({ clientData, projectData, client }: client) {
           <div className="picture">
             {/* <Cover /> */}
             <NewRoundedPhoto
-              img={clientData.avatar || clientData.google.picture}
+              img={clientData.avatar || clientData.google?.picture}
               width="110px"
               height="110px"
               alt="face"
