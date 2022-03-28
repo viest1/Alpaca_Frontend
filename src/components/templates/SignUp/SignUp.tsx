@@ -141,7 +141,7 @@ function SignUp() {
           body: JSON.stringify(inputs)
         });
         const resJSON = await res.json();
-        console.log(resJSON);
+
         if (res.status === 201) {
           handleError(
             resJSON.message || 'You created account correctly, now verify your email',
@@ -152,7 +152,6 @@ function SignUp() {
           handleError(resJSON.message);
         }
       } catch (error: any) {
-        console.log('FETCHING ERROR', error);
         handleError();
       } finally {
         setIsLoading(false);
