@@ -364,7 +364,7 @@ function Messages() {
                 <h5>{clientData.name}</h5>
               </div>
               <RoundedPhoto
-                img={clientData.avatar || clientData.google.picture}
+                img={clientData.avatar || clientData.google?.picture}
                 alt="face"
                 width="40px"
                 height="40px"
