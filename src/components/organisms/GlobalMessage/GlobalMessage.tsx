@@ -414,7 +414,7 @@ function GlobalMessage() {
               <RoundedPhoto
                 width="40px"
                 height="40px"
-                img={actuallyClient[0].avatar || actuallyClient[0].google.picture}
+                img={actuallyClient[0].avatar || actuallyClient[0].google?.picture}
                 alt="avatar"
                 name={actuallyClient[0].name}
               />
@@ -461,7 +461,7 @@ function GlobalMessage() {
               <RoundedPhoto
                 width="40px"
                 height="40px"
-                img={actuallyClient[0].avatar || actuallyClient[0].google.picture}
+                img={actuallyClient[0].avatar || actuallyClient[0].google?.picture}
                 alt="avatar"
                 name={actuallyClient[0].name}
               />
@@ -495,7 +495,7 @@ function GlobalMessage() {
               {clientsGlobal.map((clientData: any) => (
                 <Contact key={clientData._id} onClick={() => handleOpenChatBox(clientData._id)}>
                   <RoundedPhoto
-                    img={clientData.avatar || clientData.google.picture}
+                    img={clientData.avatar || clientData.google?.picture}
                     alt="face"
                     width="40px"
                     height="40px"

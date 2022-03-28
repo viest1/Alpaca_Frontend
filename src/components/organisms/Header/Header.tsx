@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import NSLogo from '../../../assets/images/Logos/newLogos/53x161/NSLogo.png';
+import NSLogo from '../../../assets/images/Logos/53x161/NSLogo.png';
 import AvatarWithMenu from '../../molecules/AvatarWithMenu/AvatarWithMenu';
 import NavLink from '../../atoms/NavLink/NavLink';
 import Contact from '../../molecules/Contact/Contact';
