@@ -26,7 +26,10 @@ export const OpeningTextContainer = styled.div`
   }
 
   p {
-    padding: 0 2rem 1.5rem 2rem;
+    padding: 0 1rem 1rem 1rem;
+    ${({ theme }) => theme.up(theme.breakpoint.sm)} {
+      padding: 0 2rem 1rem 2rem;
+    }
   }
 `;
 const TheTeamContainer = styled.div`

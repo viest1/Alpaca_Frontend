@@ -61,12 +61,12 @@ const ContainerDiv = styled.div`
   }
 `;
 
-const ParagraphAdd = styled.div`
-  display: none;
-  ${({ theme }) => theme.up(theme.breakpoint.m)} {
-    display: block;
-  }
-`;
+// const ParagraphAdd = styled.div`
+//   display: none;
+//   ${({ theme }) => theme.up(theme.breakpoint.m)} {
+//     display: block;
+//   }
+// `;
 
 const ContainerButton = styled.div`
   display: flex;
@@ -228,9 +228,9 @@ function SignUp() {
                 onChange={handleChange}
                 value={inputs.taxNumber}
               />
-              <ParagraphAdd>
-                <p>Lorem isi corrupti voluptatibus?</p>
-              </ParagraphAdd>
+              {/* <ParagraphAdd> */}
+              {/*   <p>Lorem isi corrupti voluptatibus?</p> */}
+              {/* </ParagraphAdd> */}
             </div>
             <ContainerButton>
               <Button
