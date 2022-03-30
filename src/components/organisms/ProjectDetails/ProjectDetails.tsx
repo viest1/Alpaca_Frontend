@@ -614,7 +614,7 @@ function ProjectDetail() {
                   <p>Images</p>
                   <ContainerUploadedImages>
                     {project.images.length > 0 &&
-                      project.images.slice(0, 7).map((item: any) => (
+                      project.images.map((item: any) => (
                         <div key={item.key}>
                           <a href={item.url} target="_blank" rel="noreferrer">
                             <BsImage fontSize={36} />
@@ -639,7 +639,7 @@ function ProjectDetail() {
                   <p>Images</p>
                   <ContainerPreviewImg>
                     {project.images.length > 0 &&
-                      project.images.slice(0, 7).map((item: any) => (
+                      project.images.map((item: any) => (
                         <div key={item.key}>
                           <a href={item.url} target="_blank" rel="noreferrer">
                             {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
@@ -805,7 +805,7 @@ function ProjectDetail() {
                 <p>Images({project?.images?.length})</p>
                 <ContainerUploadedImages>
                   {project.images.length > 0 &&
-                    project.images.slice(0, 7).map((item: any) => (
+                    project.images.map((item: any) => (
                       <div key={item.key}>
                         <a href={item.url} target="_blank" rel="noreferrer">
                           <BsImage fontSize={36} />
@@ -830,7 +830,7 @@ function ProjectDetail() {
                 <p>Images({project?.images?.length})</p>
                 <ContainerPreviewImg>
                   {project.images.length > 0 &&
-                    project.images.slice(0, 7).map((item: any) => (
+                    project.images.map((item: any) => (
                       <div key={item.key}>
                         <a href={item.url} target="_blank" rel="noreferrer">
                           {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
