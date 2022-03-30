@@ -121,7 +121,7 @@ const cardPhoneReverse = keyframes`
         top:-140px;
         left: 110px; */
         font-weight: 600;
-        opacity: 100%;
+        opacity: 0;
     }
 
     100%{

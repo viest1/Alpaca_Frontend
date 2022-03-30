@@ -395,10 +395,21 @@ function EditProject() {
     navigate(`/client/${project.ownerUser}`);
   };
 
+  const handleNavigateToViewProject = () => {
+    navigate(`/project/${project._id}`);
+  };
+
   const PageHeadInfo = [
     {
       id: 1,
       titleOfPage: `Edit Project`,
+      threeDotButton: {
+        button1: 'View Project',
+        onClickEvent: handleNavigateToViewProject
+      }
+    },
+    {
+      id: 2,
       threeDotButton: {
         button1: 'View Client',
         onClickEvent: handleNavigateToViewClient
