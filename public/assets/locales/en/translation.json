@@ -108,5 +108,13 @@
   "8":"- All the conversations related to the project in one place.",
   "9":"- Upload of files/photos related to the project.",
   "10":"- Manage username and password for more privacy.",
-  "11":"- Access to project details."
+  "11":"- Access to project details.",
+  "faqQuestion1":"Do you have a problem with your account or another service?",
+  "faqAnswer1":"Please contact our customer support by our free hotline +49 1234 6666666 or info@blabla.de ",
+  "faqQuestion2":"How much time needs the customer service to respond my E-Mail?",
+  "faqAnswer2":"Normally we answer in between 12 to 24 hours",
+  "faqQuestion3":"What are the available service times of the telephone hotline? ",
+  "faqAnswer3":"Monday till Friday from 9 a.m. to 6 p.m and Saturday 9 a.m to 12 p.m.",
+  "faqQuestion": "Plase click on the questions below",
+  "faqHeadline":"Our FAQ´s for you"
 }
