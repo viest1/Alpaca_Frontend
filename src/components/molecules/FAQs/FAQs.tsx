@@ -1,23 +1,41 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-const Container = styled.div``;
+const Container = styled.div`
+  text-align: center;
+`;
+
+const Title = styled.div`
+  margin: 20px;
+  font-weight: bold;
+`;
+
+const Description = styled.div``;
+
+const Headline = styled.div`
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-size: 40px;
+`;
+
+const Info = styled.p`
+  color: orange;
+`;
 
 export function Faq() {
+  const { t } = useTranslation();
+
   const data = [
+    { title: t('faqQuestion1'), description: t('faqAnswer1'), id: 1 },
     {
-      title: 'Alpaca',
-      description: 'Alpaca Description',
-      id: 1
-    },
-    {
-      title: 'Alpaca2',
-      description: 'Alpaca Description2',
+      title: t('faqQuestion2'),
+      description: t('faqAnswer2'),
       id: 2
     },
     {
-      title: 'Alpaca3',
-      description: 'Alpaca Description3',
+      title: t('faqQuestion3'),
+      description: t('faqAnswer3'),
       id: 3
     }
   ];
@@ -25,6 +43,8 @@ export function Faq() {
   return (
     <Container>
       <div>
+        <Headline> {t('faqHeadline')} </Headline>
+        <Info> {t('faqQuestion')}</Info>
         {data.map((item) => (
           <AccordionItem key={item.id} itemToDisplay={item} />
         ))}
@@ -43,8 +63,8 @@ function AccordionItem({ itemToDisplay }: any) {
   return (
     <Container>
       <div>
-        <p onClick={handleOpenDescription}>{itemToDisplay.title}</p>
-        {showDescription && <p>{itemToDisplay.description}</p>}
+        <Title onClick={handleOpenDescription}>{itemToDisplay.title}</Title>
+        {showDescription && <Description>{itemToDisplay.description}</Description>}
       </div>
     </Container>
   );
